@@ -12,10 +12,15 @@
   "devDependencies": {
     "axios": "^0.15.3",
     "bootstrap-sass": "^3.3.7",
-    "cross-env": "^3.2.3",
-    "jquery": "^3.1.1",
-    "laravel-mix": "0.*",
+    "cross-env": "^3.2.4",
+    "jquery": "^3.2.1",
+    "laravel-mix": "^1.0.0",
     "lodash": "^4.17.4",
-    "vue": "^2.1.10"
+    "vue": "^2.3.4",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  },
+  "dependencies": {
+    "node-sass": "^4.5.3"
   }
 }
