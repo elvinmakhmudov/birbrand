@@ -26,7 +26,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="javascript:void(0)">{{ config('app.name', 'BirBrand') }}</a>
+                        <a class="navbar-brand" href="{{ route('main') }}">{{ config('app.name', 'BirBrand') }}</a>
                     </div>
                     <div class="navbar-collapse collapse navbar-responsive-collapse">
                         <form class="navbar-form navbar-left ">
@@ -78,7 +78,6 @@
             </div>
         </div>
     </div>
-</div>
 <div class="categories-header">
     <div class="nav-header">
         <div class="navbar navbar-inverse">
