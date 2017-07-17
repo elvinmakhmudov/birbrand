@@ -27,8 +27,8 @@
                 description: this.description
             }
         },
-        mounted() {
-            console.log('Product card mounted.')
+        created() {
+            console.log('Product card created.')
             this.price = 10;
             this.description = "description";
         }
