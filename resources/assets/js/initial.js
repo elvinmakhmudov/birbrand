@@ -27,5 +27,22 @@ Vue.component('container', require('./components/Container.vue'));
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data: {
+        isLogged: false
+    },
+    methods: {
+        authenticated: function() {
+            console.log('login');
+            this.isLogged= true;
+        },
+        logout: function () {
+            console.log('logout');
+            axios.post('/logout').then(function () {
+                this.isLogged= false;
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
 });

@@ -176,7 +176,6 @@ return [
         // BirBrand\Providers\BroadcastServiceProvider::class,
         BirBrand\Providers\EventServiceProvider::class,
         BirBrand\Providers\RouteServiceProvider::class,
-
     ],
 
     /*

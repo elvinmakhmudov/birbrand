@@ -780,8 +780,25 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('container', __webpack_req
 // Vue.component('home-view', require('./views/Home.vue'));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
-  el: '#app',
-  router: __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */]
+    el: '#app',
+    router: __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */],
+    data: {
+        isLogged: false
+    },
+    methods: {
+        authenticated: function authenticated() {
+            console.log('login');
+            this.isLogged = true;
+        },
+        logout: function logout() {
+            console.log('logout');
+            axios.post('/logout').then(function () {
+                this.isLogged = false;
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }
 });
 
 /***/ }),
@@ -27289,8 +27306,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            number: '',
+            password: ''
+        };
+    },
+
+    methods: {
+        submitIt: function submitIt() {
+            axios.post('/login', {
+                number: this.number,
+                password: this.password
+            }).then(function (response) {
+                //                    window.location.href = "#/";
+                this.$emit('logged');
+                console.log("emitted");
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            });
+            console.log('submitted');
+        }
+    },
     created: function created() {
         console.log('login vue created');
     }
@@ -27301,8 +27341,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
   }, [_c('div', {
@@ -27320,7 +27358,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "role": "form",
       "method": "POST",
-      "action": "login.php"
+      "action": "login"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.submitIt($event)
+      }
     }
   }, [_c('div', {
     staticClass: "form-group"
@@ -27332,6 +27376,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Phone number")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.number),
+      expression: "number"
+    }],
     staticClass: "form-control",
     attrs: {
       "id": "number",
@@ -27339,6 +27389,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "number",
       "required": "",
       "autofocus": ""
+    },
+    domProps: {
+      "value": (_vm.number)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.number = $event.target.value
+      }
     }
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
@@ -27350,14 +27409,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password),
+      expression: "password"
+    }],
     staticClass: "form-control",
     attrs: {
       "id": "password",
       "type": "password",
       "name": "password",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.password)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password = $event.target.value
+      }
     }
-  })])]), _vm._v(" "), _c('div', {
+  })])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-md-6 col-md-offset-4"
@@ -27368,7 +27444,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "checkbox",
       "name": "remember"
     }
-  }), _vm._v(" Remember Me\n                                    ")])])])]), _vm._v(" "), _c('div', {
+  }), _vm._v(" Remember Me\n                                    ")])])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-md-8 col-md-offset-4"
@@ -27382,7 +27460,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "href": ""
     }
-  }, [_vm._v("\n                                    Forgot Your Password?\n                                ")])])])])])])])])])
+  }, [_vm._v("\n                                    Forgot Your Password?\n                                ")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -27524,7 +27602,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "role": "form",
       "method": "POST",
-      "action": "register.php"
+      "action": "register"
     }
   }, [_c('div', {
     staticClass: "form-group"
