@@ -5,7 +5,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" v-on:submit.prevent="submitIt" role="form" method="POST"
+                        <form class="form-horizontal" v-on:submit.prevent="login" role="form" method="POST"
                               action="login">
 
                             <div class="form-group">
@@ -62,19 +62,18 @@
             }
         },
         methods: {
-            submitIt(){
+            login(){
                 axios.post('/login', {
                     number: this.number,
                     password: this.password
                 }).then(function(response) {
-//                    window.location.href = "#/";
+                    window.location.href = "/";
                     this.$emit('logged');
                     console.log("emitted");
                 }.bind(this)).
                 catch(function(error) {
                     console.log(error)
                 });
-                console.log('submitted');
             }
         },
         created() {

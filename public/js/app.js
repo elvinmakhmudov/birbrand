@@ -27317,18 +27317,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        submitIt: function submitIt() {
+        login: function login() {
             axios.post('/login', {
                 number: this.number,
                 password: this.password
             }).then(function (response) {
-                //                    window.location.href = "#/";
+                window.location.href = "/";
                 this.$emit('logged');
                 console.log("emitted");
             }.bind(this)).catch(function (error) {
                 console.log(error);
             });
-            console.log('submitted');
         }
     },
     created: function created() {
@@ -27363,7 +27362,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "submit": function($event) {
         $event.preventDefault();
-        _vm.submitIt($event)
+        _vm.login($event)
       }
     }
   }, [_c('div', {
@@ -27563,18 +27562,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            name: '',
+            number: '',
+            password: ''
+        };
+    },
+
+    methods: {
+        register: function register() {
+            axios.post('/register', {
+                name: this.number,
+                number: this.number,
+                password: this.password
+            }).then(function (response) {
+                window.location.href = "/";
+                this.$emit('registered');
+                console.log("registered");
+            }.bind(this)).catch(function (error) {
+                console.log(error);
+            });
+        }
+    },
     created: function created() {
-        console.log('Register vue created');
+        console.log('register vue created');
     }
 });
 
@@ -27583,8 +27597,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
   }, [_c('div', {
@@ -27603,6 +27615,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "role": "form",
       "method": "POST",
       "action": "register"
+    },
+    on: {
+      "submit": function($event) {
+        $event.preventDefault();
+        _vm.register($event)
+      }
     }
   }, [_c('div', {
     staticClass: "form-group"
@@ -27614,6 +27632,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Name")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.name),
+      expression: "name"
+    }],
     staticClass: "form-control",
     attrs: {
       "id": "name",
@@ -27621,6 +27645,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "name",
       "required": "",
       "autofocus": ""
+    },
+    domProps: {
+      "value": (_vm.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.name = $event.target.value
+      }
     }
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
@@ -27632,12 +27665,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Phone number")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.number),
+      expression: "number"
+    }],
     staticClass: "form-control",
     attrs: {
       "id": "number",
       "type": "text",
       "name": "number",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.number)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.number = $event.target.value
+      }
     }
   })])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
@@ -27649,31 +27697,31 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.password),
+      expression: "password"
+    }],
     staticClass: "form-control",
     attrs: {
       "id": "password",
       "type": "password",
       "name": "password",
       "required": ""
+    },
+    domProps: {
+      "value": (_vm.password)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.password = $event.target.value
+      }
     }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
-  }, [_c('label', {
-    staticClass: "col-md-4 control-label",
-    attrs: {
-      "for": "password-confirm"
-    }
-  }, [_vm._v("Confirm Password")]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-6"
-  }, [_c('input', {
-    staticClass: "form-control",
-    attrs: {
-      "id": "password-confirm",
-      "type": "password",
-      "name": "password_confirmation",
-      "required": ""
-    }
-  })])]), _vm._v(" "), _c('div', {
+  })])]), _vm._v(" "), _vm._m(0)])])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-md-6 col-md-offset-4"
@@ -27682,7 +27730,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("\n                                    Register\n                                ")])])])])])])])])])
+  }, [_vm._v("\n                                    Register\n                                ")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
