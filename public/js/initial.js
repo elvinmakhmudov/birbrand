@@ -779,6 +779,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('product-card', __webpack_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('container', __webpack_require__(45));
 // Vue.component('home-view', require('./views/Home.vue'));
 
+
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
     router: __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */],
@@ -27252,6 +27253,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Errors__ = __webpack_require__(59);
 //
 //
 //
@@ -27307,17 +27309,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             number: '',
-            password: ''
+            password: '',
+            errors: new __WEBPACK_IMPORTED_MODULE_0__classes_Errors__["a" /* default */]()
         };
     },
 
     methods: {
         login: function login() {
+            var _this = this;
+
             axios.post('/login', {
                 number: this.number,
                 password: this.password
@@ -27325,8 +27335,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 window.location.href = "/";
                 this.$emit('logged');
                 console.log("emitted");
+                console.log(this.errors);
             }.bind(this)).catch(function (error) {
-                console.log(error);
+                _this.errors.record(error.response.data);
             });
         }
     },
@@ -27363,10 +27374,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "submit": function($event) {
         $event.preventDefault();
         _vm.login($event)
+      },
+      "keydown": function($event) {
+        _vm.errors.clear($event.target.name)
       }
     }
   }, [_c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.errors.get('number')
+    }
   }, [_c('label', {
     staticClass: "col-md-4 control-label",
     attrs: {
@@ -27384,9 +27401,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "id": "number",
-      "type": "text",
+      "type": "number",
       "name": "number",
-      "required": "",
       "autofocus": ""
     },
     domProps: {
@@ -27396,10 +27412,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.number = $event.target.value
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
       }
     }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }), _vm._v(" "), (_vm.errors.has('number')) ? _c('label', {
+    staticClass: "control-label",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('number'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.errors.get('password')
+    }
   }, [_c('label', {
     staticClass: "col-md-4 control-label",
     attrs: {
@@ -27418,8 +27445,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "password",
       "type": "password",
-      "name": "password",
-      "required": ""
+      "name": "password"
     },
     domProps: {
       "value": (_vm.password)
@@ -27430,7 +27456,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.password = $event.target.value
       }
     }
-  })])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._m(1)])])])])])])
+  }), _vm._v(" "), (_vm.errors.has('password')) ? _c('label', {
+    staticClass: "control-label",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('password'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-md-8 col-md-offset-4"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit",
+      "disabled": _vm.errors.any()
+    }
+  }, [_vm._v("\n                                    Login\n                                ")]), _vm._v(" "), _c('a', {
+    staticClass: "btn btn-link",
+    attrs: {
+      "href": ""
+    }
+  }, [_vm._v("\n                                    Forgot Your Password?\n                                ")])])])])])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -27444,22 +27490,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "name": "remember"
     }
   }), _vm._v(" Remember Me\n                                    ")])])])])
-},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "form-group"
-  }, [_c('div', {
-    staticClass: "col-md-8 col-md-offset-4"
-  }, [_c('button', {
-    staticClass: "btn btn-primary",
-    attrs: {
-      "type": "submit"
-    }
-  }, [_vm._v("\n                                    Login\n                                ")]), _vm._v(" "), _c('a', {
-    staticClass: "btn btn-link",
-    attrs: {
-      "href": ""
-    }
-  }, [_vm._v("\n                                    Forgot Your Password?\n                                ")])])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -27515,6 +27545,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Errors__ = __webpack_require__(59);
 //
 //
 //
@@ -27562,18 +27593,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             name: '',
             number: '',
-            password: ''
+            password: '',
+            errors: new __WEBPACK_IMPORTED_MODULE_0__classes_Errors__["a" /* default */]()
         };
     },
 
     methods: {
         register: function register() {
+            var _this = this;
+
             axios.post('/register', {
                 name: this.number,
                 number: this.number,
@@ -27583,7 +27621,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.$emit('registered');
                 console.log("registered");
             }.bind(this)).catch(function (error) {
-                console.log(error);
+                _this.errors.record(error.response.data);
             });
         }
     },
@@ -27620,10 +27658,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "submit": function($event) {
         $event.preventDefault();
         _vm.register($event)
+      },
+      "keydown": function($event) {
+        _vm.errors.clear($event.target.name)
       }
     }
   }, [_c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.errors.get('name')
+    }
   }, [_c('label', {
     staticClass: "col-md-4 control-label",
     attrs: {
@@ -27643,7 +27687,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "id": "name",
       "type": "text",
       "name": "name",
-      "required": "",
       "autofocus": ""
     },
     domProps: {
@@ -27655,8 +27698,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.name = $event.target.value
       }
     }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }), _vm._v(" "), (_vm.errors.has('number')) ? _c('label', {
+    staticClass: "control-label",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('name'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.errors.get('number')
+    }
   }, [_c('label', {
     staticClass: "col-md-4 control-label",
     attrs: {
@@ -27674,9 +27725,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "form-control",
     attrs: {
       "id": "number",
-      "type": "text",
-      "name": "number",
-      "required": ""
+      "type": "number",
+      "name": "number"
     },
     domProps: {
       "value": (_vm.number)
@@ -27685,10 +27735,21 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "input": function($event) {
         if ($event.target.composing) { return; }
         _vm.number = $event.target.value
+      },
+      "blur": function($event) {
+        _vm.$forceUpdate()
       }
     }
-  })])]), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+  }), _vm._v(" "), (_vm.errors.has('number')) ? _c('label', {
+    staticClass: "control-label",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('number'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group",
+    class: {
+      'has-error': _vm.errors.get('password')
+    }
   }, [_c('label', {
     staticClass: "col-md-4 control-label",
     attrs: {
@@ -27707,8 +27768,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "id": "password",
       "type": "password",
-      "name": "password",
-      "required": ""
+      "name": "password"
     },
     domProps: {
       "value": (_vm.password)
@@ -27719,19 +27779,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.password = $event.target.value
       }
     }
-  })])]), _vm._v(" "), _vm._m(0)])])])])])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
+  }), _vm._v(" "), (_vm.errors.has('number')) ? _c('label', {
+    staticClass: "control-label",
+    domProps: {
+      "textContent": _vm._s(_vm.errors.get('password'))
+    }
+  }) : _vm._e()])]), _vm._v(" "), _c('div', {
     staticClass: "form-group"
   }, [_c('div', {
     staticClass: "col-md-6 col-md-offset-4"
   }, [_c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "type": "submit"
+      "type": "submit",
+      "disabled": _vm.errors.any()
     }
-  }, [_vm._v("\n                                    Register\n                                ")])])])
-}]}
+  }, [_vm._v("\n                                    Register\n                                ")])])])])])])])])])
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -27739,6 +27803,57 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-3f5000a8", module.exports)
   }
 }
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    _createClass(Errors, [{
+        key: "get",
+        value: function get(field) {
+            if (Array.isArray(this.errors[field])) {
+                return this.errors[field][0];
+            }
+            return this.errors[field];
+        }
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors;
+        }
+    }, {
+        key: "clear",
+        value: function clear(field) {
+            delete this.errors[field];
+        }
+    }, {
+        key: "has",
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
+    }, {
+        key: "any",
+        value: function any() {
+            return Object.keys(this.errors).length > 0;
+        }
+    }]);
+
+    return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
 
 /***/ })
 /******/ ]);

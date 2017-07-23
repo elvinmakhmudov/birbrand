@@ -6,21 +6,24 @@
                     <div class="panel-heading">Login</div>
                     <div class="panel-body">
                         <form class="form-horizontal" v-on:submit.prevent="login" role="form" method="POST"
-                              action="login">
+                              action="login" @keydown="errors.clear($event.target.name)">
 
-                            <div class="form-group">
+                            <div class="form-group" v-bind:class="{'has-error': errors.get('number')}">
                                 <label for="number" class="col-md-4 control-label">Phone number</label>
 
                                 <div class="col-md-6">
-                                    <input id="number" type="text" class="form-control" name="number" v-model="number" required autofocus>
+                                    <input id="number" type="number" class="form-control" name="number" v-model="number" autofocus>
+                                    <label class="control-label" v-if="errors.has('number')" v-text="errors.get('number')"></label>
                                 </div>
+
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
                                 <label for="password" class="col-md-4 control-label">Password</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" v-model="password" required>
+                                    <input id="password" type="password" class="form-control" name="password" v-model="password">
+                                    <label class="control-label" v-if="errors.has('password')"  v-text="errors.get('password')"></label>
                                 </div>
                             </div>
 
@@ -36,7 +39,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" :disabled="errors.any()">
                                         Login
                                     </button>
 
@@ -54,25 +57,28 @@
 </template>
 
 <script>
+    import Errors from '../classes/Errors';
+
     export default {
         data() {
             return {
                 number: '',
                 password: '',
+                errors: new Errors()
             }
         },
         methods: {
             login(){
                 axios.post('/login', {
                     number: this.number,
-                    password: this.password
-                }).then(function(response) {
+                    password: this.password,
+                }).then(function (response) {
                     window.location.href = "/";
                     this.$emit('logged');
                     console.log("emitted");
-                }.bind(this)).
-                catch(function(error) {
-                    console.log(error)
+                    console.log(this.errors)
+                }.bind(this)).catch(error => {
+                    this.errors.record(error.response.data);
                 });
             }
         },

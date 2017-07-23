@@ -25,6 +25,7 @@ Vue.component('product-card', require('./components/Product-card.vue'));
 Vue.component('container', require('./components/Container.vue'));
 // Vue.component('home-view', require('./views/Home.vue'));
 
+
 const app = new Vue({
     el: '#app',
     router,
