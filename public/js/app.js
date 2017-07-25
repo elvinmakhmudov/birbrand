@@ -27335,7 +27335,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 window.location.href = "/";
                 this.$emit('logged');
                 console.log("emitted");
-                console.log(this.errors);
             }.bind(this)).catch(function (error) {
                 _this.errors.record(error.response.data);
             });

@@ -76,7 +76,6 @@
                     window.location.href = "/";
                     this.$emit('logged');
                     console.log("emitted");
-                    console.log(this.errors)
                 }.bind(this)).catch(error => {
                     this.errors.record(error.response.data);
                 });

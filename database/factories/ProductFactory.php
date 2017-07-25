@@ -12,13 +12,14 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(BirBrand\User::class, function (Faker\Generator $faker) {
+$factory->define(BirBrand\Product::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->firstName,
-        'number' => $faker->unique()->randomNumber(7),
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'title' => $faker->sentence(),
+        'description' => $faker->paragraph(),
+        'price' => $faker->numberBetween(4,400),
+        'user_id' => 1,
+        'image_url' => 'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',
     ];
 });
