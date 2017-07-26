@@ -3,10 +3,10 @@
         <div class="col-md-12">
             <h2>{{ title }}</h2>
         </div>
-        <product-card></product-card>
-        <product-card></product-card>
-        <product-card></product-card>
-        <product-card></product-card>
+        <category-card></category-card>
+        <category-card></category-card>
+        <category-card></category-card>
+        <category-card></category-card>
     </div>
 </template>
 
@@ -14,12 +14,12 @@
     export default {
         data() {
             return {
-                title: this.title
+                title: ''
             };
         },
         created() {
             console.log('Container created.');
-            this.title = "moe";
+            this.title = "Category title";
         }
     }
 </script>

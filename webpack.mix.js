@@ -14,7 +14,8 @@ let mix = require('laravel-mix');
 // .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.js('resources/assets/js/initial.js', 'public/js')
-    .scripts(['public/js/initial.js', 'resources/assets/js/material.min.js', 'resources/assets/js/ripples.min.js', 'resources/assets/js/app.js'], 'public/js/app.js');
+    .scripts(['public/js/initial.js', 'resources/assets/js/material.min.js', 'resources/assets/js/ripples.min.js', 'resources/assets/js/app.js'], 'public/js/app.js')
+    .version();
     mix.sass('resources/assets/sass/app.scss', 'public/css').
     styles(['public/css/app.css', 'resources/assets/css/bootstrap.min.css',
         'resources/assets/css/bootstrap-material-design.min.css',

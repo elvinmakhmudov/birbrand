@@ -22,6 +22,7 @@ import router from './routes';
  */
 
 Vue.component('product-card', require('./components/Product-card.vue'));
+Vue.component('category-card', require('./components/Category-card.vue'));
 Vue.component('container', require('./components/Container.vue'));
 // Vue.component('home-view', require('./views/Home.vue'));
 

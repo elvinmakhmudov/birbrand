@@ -12,6 +12,10 @@ var routes = [
     {
         path: '/register',
         component: require('./views/Register')
+    },
+    {
+        path: '/subcategory',
+        component: require('./views/Subcategory')
     }
 ];
 export default new VueRouter({

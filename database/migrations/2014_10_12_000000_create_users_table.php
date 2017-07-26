@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('number')->unique();
             $table->string('password');
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
