@@ -14,7 +14,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(BirBrand\Product::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->sentence(),
+        'title' => $faker->sentence(3),
         'description' => $faker->paragraph(),
         'price' => $faker->numberBetween(4,400),
         'category_id' => $faker->numberBetween(1,10),

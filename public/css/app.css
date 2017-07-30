@@ -191,7 +191,28 @@ h2 {
 }
 
 .card * {
-    pointer-events: none;
+    /*pointer-events: none;*/
+}
+
+.product-card {
+    position:relative;
+    min-height: 312px;
+}
+
+.btn-buy {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 90%;
+}
+
+.category-card {
+    padding-right: 10px;
+}
+
+.category-title {
+    text-align: center;
 }
 
 .card-container:hover {
@@ -517,7 +538,28 @@ h2 {
 }
 
 .card * {
-    pointer-events: none;
+    /*pointer-events: none;*/
+}
+
+.product-card {
+    position:relative;
+    min-height: 312px;
+}
+
+.btn-buy {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 90%;
+}
+
+.category-card {
+    padding-right: 10px;
+}
+
+.category-title {
+    text-align: center;
 }
 
 .card-container:hover {
@@ -843,7 +885,28 @@ h2 {
 }
 
 .card * {
-    pointer-events: none;
+    /*pointer-events: none;*/
+}
+
+.product-card {
+    position:relative;
+    min-height: 312px;
+}
+
+.btn-buy {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 90%;
+}
+
+.category-card {
+    padding-right: 10px;
+}
+
+.category-title {
+    text-align: center;
 }
 
 .card-container:hover {

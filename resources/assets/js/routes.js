@@ -3,7 +3,8 @@ import VueRouter from 'vue-router';
 var routes = [
     {
         path: '/',
-        component: require('./views/Home')
+        component: require('./views/Home'),
+        
     },
     {
         path: '/login',
@@ -14,8 +15,8 @@ var routes = [
         component: require('./views/Register')
     },
     {
-        path: '/subcategory',
-        component: require('./views/Subcategory')
+        path: '/category/:slug',
+        component: require('./views/Category')
     }
 ];
 export default new VueRouter({

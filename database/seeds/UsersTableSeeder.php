@@ -1,5 +1,6 @@
 <?php
 
+use BirBrand\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -11,6 +12,10 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\BirBrand\User::class, 50)->create();
+        User::create(['name' => '123456789',
+            'password' => bcrypt(123456789),
+            'number' => '123456789'
+        ]);
+        factory(User::class, 50)->create();
     }
 }

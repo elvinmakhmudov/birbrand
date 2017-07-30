@@ -10,7 +10,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     {{--<a class="navbar-brand" href="{{ route('main') }}">{{ config('app.name', 'BirBrand') }}</a>--}}
-                    <a class="navbar-brand" href="#/">{{ config('app.name', 'BirBrand') }}</a>
+                    <a class="navbar-brand" href="#">{{ config('app.name', 'BirBrand') }}</a>
                 </div>
                 <div class="navbar-collapse collapse navbar-responsive-collapse">
                     <form class="navbar-form navbar-left ">
@@ -21,41 +21,11 @@
                             </div>
                         </div>
                     </form>
-                    <!-- Right Side Of Navbar -->
-                    {{--<ul class="nav navbar-nav navbar-right navbar-login" v-if="isLogged">--}}
-                    {{--<li class="dropdown">--}}
-                    {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"--}}
-                    {{--aria-expanded="false">--}}
-                    {{--Name <span class="caret"></span>--}}
-                    {{--</a>--}}
-
-                    {{--<ul class="dropdown-menu" role="menu">--}}
-                    {{--<li>--}}
-                    {{--<a href="{{ route('logout') }}"--}}
-                    {{--onclick="event.preventDefault();--}}
-                    {{--document.getElementById('logout-form').submit();">--}}
-                    {{--Logout--}}
-                    {{--</a>--}}
-
-                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
-                    {{--style="display: none;">--}}
-                    {{--{{ csrf_field() }}--}}
-                    {{--</form>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--</ul>--}}
-                    {{--<ul class="nav navbar-nav navbar-right navbar-login" v-else>--}}
-                    {{--<li><a href="#/login">Login</a></li>--}}
-                    {{--<li><a href="#/register">Register</a></li>--}}
-                    {{--</ul>--}}
                             <!-- Authentication Links -->
                     <ul class="nav navbar-nav navbar-right navbar-login">
                         @if (Auth::guest())
-                            {{--<li><a href="{{ route('login') }}">Login</a></li>--}}
-                            <li><a href="#/login">Login</a></li>
+                            <li><a href="#/login" >Login</a></li>
                             <li><a href="#/register">Register</a></li>
-                            {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"

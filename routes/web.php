@@ -11,10 +11,18 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('home');
 })->name('main');
 
-Auth::routes();
-
+//
+//
 Route::get('/home', 'HomeController@index')->name('home');
+//
+Route::resource('category', 'CategoriesController');
+
+Route::get('/{vue_capture?}', function () {
+    return view('home');
+})->where('vue_capture', '[\/\w\.-]*');

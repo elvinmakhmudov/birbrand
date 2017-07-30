@@ -1,4 +1,3 @@
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -6,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('./material.min')
+require('./ripples.min')
 
 // window.Vue = require('vue');
 // VueRouter = require('vue-router');
@@ -24,27 +25,24 @@ import router from './routes';
 Vue.component('product-card', require('./components/Product-card.vue'));
 Vue.component('category-card', require('./components/Category-card.vue'));
 Vue.component('container', require('./components/Container.vue'));
-// Vue.component('home-view', require('./views/Home.vue'));
+import event from './classes/Event';
 
 
 const app = new Vue({
     el: '#app',
     router,
     data: {
-        isLogged: false
+        categories: []
     },
-    methods: {
-        authenticated: function() {
-            console.log('login');
-            this.isLogged= true;
-        },
-        logout: function () {
-            console.log('logout');
-            axios.post('/logout').then(function () {
-                this.isLogged= false;
-            }.bind(this)).catch(function (error) {
-                console.log(error);
-            });
-        }
+    created: function () {
+        axios.get('/category').then(function (response) {
+            this.categories = response.data;
+            event.$emit('gotCategories', this.categories);
+            Vue.nextTick(function () {
+                $.material.init();
+            })
+        }.bind(this))
+        console.log('home vue created');
     }
 });
+

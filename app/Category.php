@@ -21,7 +21,7 @@ class Category extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id'
+        'user_id', 'parent_id','created_at', 'updated_at'
     ];
     
     /**
@@ -32,11 +32,27 @@ class Category extends Model
     public function parent() {
         return $this->belongsTo(Category::class);
     }
-    
+
+    /**
+     * A category may have multiple categories
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function categories() {
+        return $this->hasMany(Category::class, 'parent_id');
+    }
+
     /*
-     * Product belongs to a user
+     * Category belongs to a user
      */
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    /*
+     * Category has many products
+     */
+    public function products() {
+        return $this->hasMany(Product::class);
     }
 }

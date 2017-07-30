@@ -12,9 +12,9 @@
                 </div>
                 <div class="navbar-collapse collapse categories-navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="javascript:void(0)">Man</a></li>
-                        <li class="active"><a href="javascript:void(0)">Woman</a></li>
-                        <li><a href="javascript:void(0)">Children</a></li>
+                        <li class="" v-for="category in categories">
+                            <a :href="'#/category/'+category.slug">@{{ category.title}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
