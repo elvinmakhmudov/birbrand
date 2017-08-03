@@ -2,10 +2,9 @@
     <div class="content">
         <div class="slideshow">
         </div>
-        <div class="categories">
+        <div class="layout">
             <div class="category" v-for="category in categories">
-                <container :title="category.title" :subcategories="category.categories"
-                           :slug="category.slug"></container>
+                <container :category="category"></container>
             </div>
         </div>
     </div>

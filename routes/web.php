@@ -22,6 +22,7 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 //
 Route::resource('category', 'CategoriesController');
+Route::resource('product', 'ProductsController');
 
 Route::get('/{vue_capture?}', function () {
     return view('home');

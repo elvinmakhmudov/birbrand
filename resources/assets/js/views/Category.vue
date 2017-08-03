@@ -1,12 +1,12 @@
 <template>
     <div class="content">
-        <div class="categories">
+        <div class="layout">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{ $route.params.title}}</h2>
+                    <h2>{{ slug }}</h2>
                 </div>
                 <div class="products" v-for="product in products">
-                    <product-card :price="product.price" :title="product.title"></product-card>
+                    <product-card :product="product" :slug="slug"></product-card>
                 </div>
             </div>
         </div>
@@ -15,6 +15,9 @@
 
 <script>
     export default {
+        props: {
+            slug: ''
+        },
         data() {
             return {
                 products: []
@@ -32,6 +35,7 @@
                 axios.get(window.location.hash.substr(2)).then(response => this.products = response.data
             )
                 console.log('Products fetched');
+                console.log(this.$route.params)
             }
         }
     }

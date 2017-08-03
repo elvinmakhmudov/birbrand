@@ -11,7 +11,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return Category::with('categories')->get();
+        return Category::with('descendants')->get();
+//        return Category::with('categories.categories')->get();
     }
 
 

@@ -3,16 +3,20 @@
 namespace BirBrand;
 
 use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NodeTrait;
+
 
 class Category extends Model
 {
+    use NodeTrait;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'image_url'
+        'title', 'description', 'image_url', 'slug', 'user_id'
     ];
 
     /**
@@ -21,7 +25,7 @@ class Category extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id', 'parent_id','created_at', 'updated_at'
+        'user_id', 'created_at', 'updated_at'
     ];
     
     /**
@@ -40,6 +44,13 @@ class Category extends Model
      */
     public function categories() {
         return $this->hasMany(Category::class, 'parent_id');
+    }
+
+    /**
+     * Get all categories
+     */
+    public function allCategories() {
+        return $this->categories()->with('allCategories');
     }
 
     /*

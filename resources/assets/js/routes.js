@@ -4,7 +4,7 @@ var routes = [
     {
         path: '/',
         component: require('./views/Home'),
-        
+
     },
     {
         path: '/login',
@@ -16,9 +16,17 @@ var routes = [
     },
     {
         path: '/category/:slug',
-        component: require('./views/Category')
-    }
+        component: require('./views/Category'),
+        props: true
+    },
+    {
+        path: '/product/:product_id',
+        component: require('./views/Product'),
+        props: true
+    },
 ];
+
+
 export default new VueRouter({
     routes
 });

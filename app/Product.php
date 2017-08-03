@@ -29,6 +29,13 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+    
+    /**
+     * Get all categories
+     */
+    public function allCategories() {
+        return $this->category()->with('allCategories');
+    }
 
     /*
      * Product belongs to a user
