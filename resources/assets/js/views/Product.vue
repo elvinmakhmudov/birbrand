@@ -6,9 +6,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ol class="breadcrumb">
-                                <li><a href="#">Home</a></li>
-                                <li><a href="#">Library</a></li>
-                                <li><a href="#">{{ product.category.title }}</a></li>
+                                <li v-for="ancestor in ancestors"><a href="#">{{ ancestor }}</a></li>
+                                <li><a href="#">{{ product.title }}</a></li>
                             </ol>
                         </div>
                     </div>
@@ -22,7 +21,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 col-xs-6">
-                                <h2>{{ product.price }} AZN </h2><br>
+                            <h2>{{ product.price }} AZN </h2><br>
                             <div class="product-options">
                                 <span>Sechimler </span><br>
                                 <a href="javascript:void(0)" class="btn btn-raised btn-primary">İndi al</a>
@@ -40,7 +39,8 @@
                                 <div class="item-shipping-payment-box">
                                     <p class="text-title">Ödəniş</p>
                                     <div class="text">
-                                        <p>Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>
+                                        <p>
+                                            Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>
                                     </div>
                                 </div>
                                 <div class="item-shipping-payment-box">
@@ -48,7 +48,8 @@
                                     <div class="text">
                                         <p>Qaytarış yerində hər bir məhsula görə
                                             <br><b>2 AZN</b></p>
-                                        <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.</p>
+                                        <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.
+                                        </p>
                                         <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.
                                         </p>
                                     </div>
@@ -75,7 +76,12 @@
         },
         data() {
             return {
-                product: {}
+                product: {
+                    category: {
+                        title: ''
+                    }
+                },
+                ancestors: []
             }
         },
         watch: {
@@ -87,12 +93,32 @@
             console.log('product vue created')
         },
         methods: {
+            getAncestors() {
+                console.log(this.product.category);
+                var ancestors = this.getValuesByKey(this.product.category, 'title');
+                console.log(ancestors);
+//                ancestors.unshift(this.product.category.title);
+                return ancestors.reverse();
+            },
             fetchData() {
 //                var productUrl = window.location.hash.substr(2);
                 console.log(this.product_id);
                 var productUrl = 'product/' + this.product_id;
-                axios.get(productUrl).then(response => this.product = response.data)
+                axios.get(productUrl).then(function (response) {
+                    this.product = response.data;
+                    this.ancestors = this.getAncestors();
+                }.bind(this));
                 console.log('Product fetched');
+            },
+            getValuesByKey(object, key) {
+
+                var values = [];
+                JSON.stringify(object, function (k, v) {
+                    if (k === key) values.push(v);
+                    return v;
+                });
+                console.log(values);
+                return values;
             }
         }
     }
