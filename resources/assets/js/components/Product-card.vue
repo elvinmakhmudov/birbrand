@@ -32,7 +32,6 @@
         },
         props: {
             product: {},
-            slug: ''
         },
         created() {
         },

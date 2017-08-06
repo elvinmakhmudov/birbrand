@@ -1705,8 +1705,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     props: {
-        product: {},
-        slug: ''
+        product: {}
     },
     created: function created() {}
 });
@@ -1718,6 +1717,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Event__ = __webpack_require__("./resources/assets/js/classes/Event.js");
 //
 //
 //
@@ -1734,12 +1734,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        slug: ''
-    },
     data: function data() {
         return {
+            category: {},
             products: []
         };
     },
@@ -1754,13 +1753,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         fetchData: function fetchData() {
-            var _this = this;
-
             axios.get(window.location.hash.substr(2)).then(function (response) {
-                return _this.products = response.data;
-            });
+                this.category = response.data;
+                this.products = response.data.products;
+            }.bind(this));
             console.log('Products fetched');
-            console.log(this.$route.params);
         }
     }
 });
@@ -15337,13 +15334,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v(_vm._s(_vm.slug))])]), _vm._v(" "), _vm._l((_vm.products), function(product) {
+  }, [_c('h2', [_vm._v(_vm._s(_vm.category.title))])]), _vm._v(" "), _vm._l((_vm.products), function(product) {
     return _c('div', {
       staticClass: "products"
     }, [_c('product-card', {
       attrs: {
-        "product": product,
-        "slug": _vm.slug
+        "product": product
       }
     })], 1)
   })], 2)])])
@@ -15374,7 +15370,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', [_c('category-card', {
       attrs: {
         "title": subcategory.title,
-        "slug": subcategory.slug
+        "slug": subcategory.slug,
+        "click": _vm.CategoryClick(_vm.$event)
       }
     })], 1)
   })], 2)

@@ -12,7 +12,6 @@ class CategoriesController extends Controller
     public function index()
     {
         return Category::with('descendants')->get();
-//        return Category::with('categories.categories')->get();
     }
 
 
@@ -21,7 +20,7 @@ class CategoriesController extends Controller
      */
     public function show($slug) {
         $category = Category::where('slug', $slug)->with('products')->first();
-        
-        return $category->products;
+
+        return $category;
     }
 }
