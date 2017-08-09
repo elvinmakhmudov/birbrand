@@ -23,6 +23,14 @@ class Product extends Model
         'user_id'
     ];
 
+    /**
+     * Cast values automatically
+     * @var array
+     */
+    protected $casts = [
+        'images' => 'array'
+    ];
+
     /*
      * Product belongs to a category
      */

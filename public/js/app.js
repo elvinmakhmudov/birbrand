@@ -1997,6 +1997,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2006,6 +2008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     data: function data() {
         return {
             product: {
+                images: '',
                 category: {
                     title: ''
                 }
@@ -15625,25 +15628,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-4 col-xs-6"
   }, [_c('div', {
     staticClass: "sp-wrap product-img"
-  }, [_c('a', {
-    attrs: {
-      "href": _vm.product.image_url
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm.product.image_url,
-      "alt": "Card image cap"
-    }
-  })]), _vm._v(" "), _c('a', {
-    attrs: {
-      "href": _vm.product.image_url
-    }
-  }, [_c('img', {
-    attrs: {
-      "src": _vm.product.image_url,
-      "alt": "Card image cap"
-    }
-  })])])]), _vm._v(" "), _c('div', {
+  }, _vm._l((_vm.product.images), function(image) {
+    return _c('div', {}, [_c('a', {
+      attrs: {
+        "href": image
+      }
+    }, [_c('img', {
+      attrs: {
+        "src": image,
+        "alt": "Card image cap"
+      }
+    })])])
+  }))]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4 col-xs-6"
   }, [_c('h2', [_vm._v(_vm._s(_vm.product.price) + " AZN ")]), _c('br'), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"

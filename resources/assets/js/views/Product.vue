@@ -18,8 +18,9 @@
                         </div>
                         <div class="col-md-4 col-xs-6">
                             <div class="sp-wrap product-img">
-                                <a :href="product.image_url"><img :src="product.image_url" alt="Card image cap"></a>
-                                <a :href="product.image_url"><img :src="product.image_url" alt="Card image cap"></a>
+                                <div class="" v-for="image in product.images">
+                                    <a :href="image"><img :src="image" alt="Card image cap"></a>
+                                </div>
                             </div>
                             <!--<div class="product-img">-->
                             <!--<img :src="product.image_url" alt="Card image cap">-->
@@ -76,6 +77,7 @@
 
 <script>
     import Vue from 'vue';
+
     export default {
         props: {
             product_id: ''
@@ -83,6 +85,7 @@
         data() {
             return {
                 product: {
+                    images: '',
                     category: {
                         title: ''
                     }
