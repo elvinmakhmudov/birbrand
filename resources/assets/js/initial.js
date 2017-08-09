@@ -8,6 +8,7 @@ require('./bootstrap');
 require('./material.min');
 require('./ripples.min');
 require('./smoothproducts.min');
+require('./slick.min');
 
 // window.Vue = require('vue');
 // VueRouter = require('vue-router');
@@ -41,9 +42,8 @@ const app = new Vue({
             event.$emit('gotCategories', this.categories);
             Vue.nextTick(function () {
                 $.material.init();
-            })
-        }.bind(this))
-        console.log('home vue created');
+            }.bind(this))
+        }.bind(this));
     }
 });
 

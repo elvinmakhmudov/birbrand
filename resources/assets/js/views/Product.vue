@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-md-4 col-xs-6">
                             <div class="sp-wrap product-img">
-                                <div class="" v-for="image in product.images">
+                                <div v-for="image in product.images">
                                     <a :href="image"><img :src="image" alt="Card image cap"></a>
                                 </div>
                             </div>
