@@ -6,7 +6,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <ol class="breadcrumb">
-                                <li v-for="ancestor in ancestors"><a href="#">{{ ancestor }}</a></li>
+                                <li v-for="ancestor in ancestors"><a
+                                        :href="'#/category/' + ancestor.slug">{{ ancestor.title }}</a></li>
                                 <li><a href="#">{{ product.title }}</a></li>
                             </ol>
                         </div>
@@ -16,9 +17,13 @@
                             <h2>{{ product.title }}</h2>
                         </div>
                         <div class="col-md-4 col-xs-6">
-                            <div class="product-img">
-                                <img :src="product.image_url" alt="Card image cap">
+                            <div class="sp-wrap product-img">
+                                <a :href="product.image_url"><img :src="product.image_url" alt="Card image cap"></a>
+                                <a :href="product.image_url"><img :src="product.image_url" alt="Card image cap"></a>
                             </div>
+                            <!--<div class="product-img">-->
+                            <!--<img :src="product.image_url" alt="Card image cap">-->
+                            <!--</div>-->
                         </div>
                         <div class="col-md-4 col-xs-6">
                             <h2>{{ product.price }} AZN </h2><br>
@@ -70,6 +75,7 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     export default {
         props: {
             product_id: ''
@@ -96,30 +102,43 @@
             getAncestors() {
                 console.log(this.product.category);
                 var ancestors = this.getValuesByKey(this.product.category, 'title');
-                console.log(ancestors);
-//                ancestors.unshift(this.product.category.title);
                 return ancestors.reverse();
             },
             fetchData() {
-//                var productUrl = window.location.hash.substr(2);
                 console.log(this.product_id);
                 var productUrl = 'product/' + this.product_id;
                 axios.get(productUrl).then(function (response) {
                     this.product = response.data;
-                    this.ancestors = this.getAncestors();
+                    this.ancestors = this.getAncestors(this.product);
+                    Vue.nextTick(function () {
+                        $('.sp-wrap').smoothproducts();
+                    });
                 }.bind(this));
                 console.log('Product fetched');
             },
+            getAncestors(product) {
+                var ancestors = [];
+                var categoryAncestors = this.getValuesByKey(product.category, 'ancestors');
+                if (Array.isArray(categoryAncestors) && categoryAncestors.length !== 0) {
+                    for (var i = 0; i < categoryAncestors.length; i++) {
+                        ancestors = ancestors.concat(categoryAncestors[i]);
+                    }
+                }
+                ancestors.push(product.category);
+                return ancestors;
+            },
             getValuesByKey(object, key) {
-
                 var values = [];
                 JSON.stringify(object, function (k, v) {
-                    if (k === key) values.push(v);
+                    if (k === key && v.length > 0) {
+                        console.log(v);
+                        values.push(v)
+                    }
+                    ;
                     return v;
                 });
-                console.log(values);
-                return values;
-            }
+                return values[0];
+            },
         }
     }
 </script>

@@ -4,7 +4,7 @@
             <h2 v-text="category.title"></h2>
         </div>
         <div v-for="subcategory in category.descendants">
-            <category-card :title="subcategory.title" :slug="subcategory.slug" :click="CategoryClick($event)"></category-card>
+            <category-card :title="subcategory.title" :slug="subcategory.slug"></category-card>
         </div>
     </div>
 </template>

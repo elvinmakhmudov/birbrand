@@ -33,9 +33,9 @@ class Category extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function parent() {
-        return $this->belongsTo(Category::class);
-    }
+//    public function parent() {
+//        return $this->belongsTo(Category::class);
+//    }
 
     /**
      * A category may have multiple categories
@@ -43,7 +43,7 @@ class Category extends Model
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function categories() {
-        return $this->hasMany(Category::class, 'parent_id');
+        return $this->belongs_to(Category::class, 'parent_id');
     }
 
     /**

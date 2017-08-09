@@ -19,7 +19,7 @@ mix.js('resources/assets/js/initial.js', 'public/js/app.js').version();
 mix.sass('resources/assets/sass/app.scss', 'public/css').
     styles(['public/css/app.css', 'resources/assets/css/bootstrap.min.css',
         'resources/assets/css/bootstrap-material-design.min.css',
-            'resources/assets/css/ripples.min.css',
+            'resources/assets/css/ripples.min.css', 'resources/assets/css/smoothproducts.css',
         'resources/assets/css/app.css'],
-        'public/css/app.css');
+        'public/css/app.css').version();
 

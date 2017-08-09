@@ -196,6 +196,7 @@ h2 {
 
 .category-card {
     padding-right: 10px;
+    min-height: 256px;
 }
 
 .category-title {
