@@ -2,6 +2,7 @@
 
 namespace BirBrand\Http\Controllers;
 
+use BirBrand\Carousel;
 use BirBrand\Category;
 
 class CategoriesController extends Controller
@@ -11,7 +12,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        return Category::with('descendants')->get();
+        $categories = Category::with('descendants')->get();
+        $carousels = Carousel::where('is_shown', true)->get();
+        return ['categories' => $categories, 'carousels' => $carousels];
     }
 
 

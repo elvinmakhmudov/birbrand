@@ -14,9 +14,11 @@ require('./slick.min');
 // VueRouter = require('vue-router');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 Vue.use(VueRouter);
 
 import router from './routes';
+import store from './store';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -33,17 +35,22 @@ import event from './classes/Event';
 const app = new Vue({
     el: '#app',
     router,
-    data: {
-        categories: []
+    store,
+    computed: {
+        categories() {
+            return this.$store.state.categories
+        }
     },
     created: function () {
-        axios.get('/category').then(function (response) {
-            this.categories = response.data;
-            event.$emit('gotCategories', this.categories);
+        this.$store.dispatch('getHomeData').then(response => {
             Vue.nextTick(function () {
                 $.material.init();
+                $('.slider').slick({
+                    arrows: false
+                });
+                this.$store.state.carousel_shown =false;
             }.bind(this))
-        }.bind(this));
+        });
     }
 });
 

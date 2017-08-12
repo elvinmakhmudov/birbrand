@@ -1,18 +1,9 @@
 <template>
     <div class="content">
         <div class="slideshow slider">
-            <div><img
-                    src="https://aldim.az/uploads/banner/218/photo/light_resize/1444x800_crop_118af64bd984ce1ec1816025e4622dde.png"
-                    alt=""></div>
-            <div><img
-                    src="https://aldim.az/uploads/banner/218/photo/light_resize/1444x800_crop_118af64bd984ce1ec1816025e4622dde.png"
-                    alt=""></div>
-            <div><img
-                    src="https://aldim.az/uploads/banner/218/photo/light_resize/1444x800_crop_118af64bd984ce1ec1816025e4622dde.png"
-                    alt=""></div>
-            <div><img
-                    src="https://aldim.az/uploads/banner/218/photo/light_resize/1444x800_crop_118af64bd984ce1ec1816025e4622dde.png"
-                    alt=""></div>
+            <div v-for="slide in carousels">
+                <img alt="" :src="slide.image">
+            </div>
         </div>
         <div class="layout">
             <div class="category" v-for="category in categories">
@@ -26,28 +17,38 @@
     import event from '../classes/Event';
 
     export default {
-        data() {
-            return {
-                categories: []
+        computed: {
+            categories() {
+                return this.$store.state.categories
+            },
+            carousels() {
+                return this.$store.state.carousels
             }
         },
         watch: {
             // call again the method if the route changes
-            '$route': 'fetchData'
+            '$route': 'fetchData',
         },
         mounted() {
             this.fetchData();
+            console.log('mounted home');
         },
         methods: {
             fetchData: function () {
-                this.categories = this.$root.$data.categories;
-                event.$on('gotCategories', function (categories) {
-                    this.categories = categories;
-                }.bind(this));
+                if(!this.$store.state.carousel_shown) {
+                    this.mountCarousel();
+                    this.$store.state.carousel_shown =true;
+                    console.log('in home vue carousel shown was false')
+                }
+//                event.$on('gotCarousel',function () {
+//                    this.mountCarousel();
+//                    console.log('slider');
+//                }.bind(this));
+            },
+            mountCarousel: function () {
                 $('.slider').slick({
                     arrows: false
                 });
-                console.log('slider');
             }
         }
     }
