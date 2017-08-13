@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'price', 'image_url', 'options'
+        'title', 'description', 'price', 'image_url', 'options','old_price', 'sale_percent'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -50,5 +50,12 @@ class Product extends Model
      */
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    /*
+     * Product belongs to orders
+     */
+    public function orders() {
+        return $this->belongsToMany(Order::class)->withPivot('option', 'price', 'amount');
     }
 }

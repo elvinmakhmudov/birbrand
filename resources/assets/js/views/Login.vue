@@ -73,9 +73,8 @@
                     number: this.number,
                     password: this.password,
                 }).then(function (response) {
+                    this.$store.state.user = response.data;
                     window.location.href = "/";
-                    this.$emit('logged');
-                    console.log("emitted");
                 }.bind(this)).catch(error => {
                     this.errors.record(error.response.data);
                 });

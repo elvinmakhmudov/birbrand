@@ -17,7 +17,9 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->integer('old_price')->nullable();
             $table->integer('price');
+            $table->integer('sale_percent')->nullable();
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('user_id')->unsigned();

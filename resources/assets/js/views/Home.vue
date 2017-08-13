@@ -37,7 +37,7 @@
             fetchData: function () {
                 if(!this.$store.state.carousel_shown) {
                     this.mountCarousel();
-                    this.$store.state.carousel_shown =true;
+                    this.$store.state.carousel_shown =false;
                     console.log('in home vue carousel shown was false')
                 }
 //                event.$on('gotCarousel',function () {

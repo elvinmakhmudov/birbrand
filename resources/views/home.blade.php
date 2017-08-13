@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-    <router-view v-on:logged="authenticated()"></router-view>
+    <router-view></router-view>
 @endsection

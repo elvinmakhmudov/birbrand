@@ -35,6 +35,12 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="#/profile">
+                                            Səhifəm
+                                        </a>
+                                        <a href="#/order">
+                                            Sifarişlərim
+                                        </a>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

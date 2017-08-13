@@ -24,6 +24,14 @@ var routes = [
         component: require('./views/Product'),
         props: true
     },
+    {
+        path: '/profile',
+        component: require('./views/Profile'),
+    },
+    {
+        path: '/order',
+        component: require('./views/Order'),
+    },
 ];
 
 

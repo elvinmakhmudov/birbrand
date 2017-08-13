@@ -18,11 +18,13 @@ Route::get('/', function () {
 })->name('main');
 
 //
-//
 Route::get('/home', 'HomeController@index')->name('home');
 //
 Route::resource('category', 'CategoriesController');
 Route::resource('product', 'ProductsController');
+Route::resource('order', 'OrdersController');
+Route::resource('user', 'UsersController');
+Route::post('/currentUser', 'UsersController@current');
 
 Route::get('/{vue_capture?}', function () {
     return view('home');

@@ -30,37 +30,24 @@
                             <h2>{{ product.price }} AZN </h2><br>
                             <div class="product-options">
                                 <span>Sechimler </span><br>
-                                <a href="javascript:void(0)" class="btn btn-raised btn-primary">İndi al</a>
+                                <form @submit.prevent="buyIt()">
+                                    <div class="form-group">
+                                        <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
+                                        <div class="col-sm-10">
+                                            <label class="control-label text-danger" v-if="errors.has('amount')"  v-text="errors.get('amount')"></label>
+                                            <input type="number" class="form-control" id="i5ps" value="1" min="1" max="100" v-model="amount">
+                                        </div>
+                                        <button class="btn btn-raised btn-primary" data-toggle="modal"
+                                           >İndi al</button>
+                                        <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#complete-dialog">Səbətə at
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <div class="col-md-4 col-xs-6">
-                            <div class="item-shipping-payment">
-                                <div class="item-shipping-payment-box">
-                                    <p class="text-title">Çatdırılma</p>
-                                    <div class="text">
-                                        <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>
-                                        <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>
-                                    </div>
-                                </div>
-                                <div class="item-shipping-payment-box">
-                                    <p class="text-title">Ödəniş</p>
-                                    <div class="text">
-                                        <p>
-                                            Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>
-                                    </div>
-                                </div>
-                                <div class="item-shipping-payment-box">
-                                    <p class="text-title ">Müştəri məmnuniyyəti</p>
-                                    <div class="text">
-                                        <p>Qaytarış yerində hər bir məhsula görə
-                                            <br><b>2 AZN</b></p>
-                                        <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.
-                                        </p>
-                                        <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                            <shippingInfo></shippingInfo>
                         </div>
                         <div class="col-md-12">
                             <h4>Xususiyyetler</h4>
@@ -72,25 +59,43 @@
                 </div>
             </div>
         </div>
+        <buyit></buyit>
+        <buyitguest></buyitguest>
+        <flashmessage :messages="messages" :errors="errors"></flashmessage>
     </div>
+
 </template>
 
 <script>
+    import Errors from '../classes/Errors';
     import Vue from 'vue';
+    import FlashMessage from '../components/product/flash-message.vue';
+    import BuyIt from '../components/product/buyIt.vue';
+    import BuyItGuest from '../components/product/buyItGuest.vue';
+    import ShippingInfo from '../components/product/shippingInfo.vue';
 
     export default {
+        components: {
+            'buyit': BuyIt,
+            'flashmessage': FlashMessage,
+            'buyitguest': BuyItGuest,
+            'shippingInfo': ShippingInfo
+        },
         props: {
             product_id: ''
         },
         data() {
             return {
+                errors: new Errors(),
+                amount: 1,
                 product: {
                     images: '',
                     category: {
                         title: ''
                     }
                 },
-                ancestors: []
+                ancestors: [],
+                messages: {}
             }
         },
         watch: {
@@ -102,6 +107,23 @@
             console.log('product vue created')
         },
         methods: {
+            buyIt() {
+                var isLoggedIn = $("meta[name=login-status]").attr('content');
+                if (isLoggedIn) {
+                    axios.post('order', {
+                        productId: this.product.id,
+                        amount: this.amount
+                    }).then(function (response) {
+                        this.messages = response.data;
+                        $('#flash-message').modal('toggle');
+                    }.bind(this)).catch(error => {
+                        this.errors.record(error.response.data);
+//                        $('#flash-message').modal('toggle');
+                    });
+                } else {
+
+                }
+            },
             getAncestors() {
                 console.log(this.product.category);
                 var ancestors = this.getValuesByKey(this.product.category, 'title');

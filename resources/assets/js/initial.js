@@ -39,7 +39,7 @@ const app = new Vue({
     computed: {
         categories() {
             return this.$store.state.categories
-        }
+        },
     },
     created: function () {
         this.$store.dispatch('getHomeData').then(response => {
@@ -51,6 +51,7 @@ const app = new Vue({
                 this.$store.state.carousel_shown =false;
             }.bind(this))
         });
-    }
+        this.$store.dispatch('getUser');
+    },
 });
 
