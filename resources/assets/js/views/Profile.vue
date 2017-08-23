@@ -9,54 +9,54 @@
                     <h3>Ümumi</h3>
                 </div>
                 <form class="form-horizontal" v-on:submit.prevent="update" role="form" method="POST"
-                      action="register" @keydown="errors.clear($event.target.name)">
-                    <div class="form-group" v-bind:class="{'has-error': errors.get('name')}">
+                      action="register" @keydown="form1.errors.clear($event.target.name)">
+                    <div class="form-group" v-bind:class="{'has-error': form1.errors.get('name')}">
                         <label for="name" class="col-md-4 control-label">Ad</label>
 
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control" name="name" autofocus
-                                   v-model="name">
-                            <label class="control-label" v-if="errors.has('number')"
-                                   v-text="errors.get('name')"></label>
+                                   v-model="$store.state.user.name">
+                            <label class="control-label" v-if="form1.errors.has('number')"
+                                   v-text="form1.errors.get('name')"></label>
                         </div>
                     </div>
 
-                    <div class="form-group" v-bind:class="{'has-error': errors.get('number')}">
+                    <div class="form-group" v-bind:class="{'has-error': form1.errors.get('number')}">
                         <label for="number" class="col-md-4 control-label">Nömrə</label>
 
                         <div class="col-md-6">
                             <input id="number" type="number" class="form-control" name="number"
-                                   v-model="number">
-                            <label class="control-label" v-if="errors.has('number')"
-                                   v-text="errors.get('number')"></label>
+                                   v-model="$store.state.user.number">
+                            <label class="control-label" v-if="form1.errors.has('number')"
+                                   v-text="form1.errors.get('number')"></label>
                         </div>
                     </div>
 
-                    <div class="form-group" v-bind:class="{'has-error': errors.get('address')}">
+                    <div class="form-group" v-bind:class="{'has-error': form1.errors.get('address')}">
                         <label for="address" class="col-md-4 control-label">Ünvan (əlavə)</label>
 
                         <div class="col-md-6">
                             <input id="address" type="text" class="form-control" name="address"
-                                   v-model="address">
-                            <label class="control-label" v-if="errors.has('address')"
-                                   v-text="errors.get('address')"></label>
+                                   v-model="$store.state.user.address">
+                            <label class="control-label" v-if="form1.errors.has('address')"
+                                   v-text="form1.errors.get('address')"></label>
                         </div>
                     </div>
 
-                    <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
+                    <div class="form-group" v-bind:class="{'has-error': form1.errors.get('password')}">
                         <label for="password" class="col-md-4 control-label">Şifrə</label>
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control" name="password"
-                                   v-model="password">
-                            <label class="control-label" v-if="errors.has('number')"
-                                   v-text="errors.get('password')"></label>
+                                   v-model="form1.password">
+                            <label class="control-label" v-if="form1.errors.has('password')"
+                                   v-text="form1.errors.get('password')"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary" :disabled="errors.any()">
+                            <button type="submit" class="btn btn-primary" :disabled="form1.errors.any()">
                                 Yadda saxla
                             </button>
                         </div>
@@ -65,31 +65,31 @@
                 <div class="col-md-12">
                     <h3>Şifrəni dəyişmək</h3>
                 </div>
-                <form class="form-horizontal" v-on:submit.prevent="update" role="form" method="POST"
-                      action="register" @keydown="errors.clear($event.target.name)">
-                    <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
+                <form class="form-horizontal" v-on:submit.prevent="updatePassword" role="form" method="POST"
+                      action="register" @keydown="form2.errors.clear($event.target.name)">
+                    <div class="form-group" v-bind:class="{'has-error': form2.errors.get('password')}">
                         <label for="password" class="col-md-4 control-label">Köhnə Şifrə</label>
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control" name="password"
-                                   v-model="password">
-                            <label class="control-label" v-if="errors.has('number')"
-                                   v-text="errors.get('password')"></label>
+                                   v-model="form2.password">
+                            <label class="control-label" v-if="form2.errors.has('password')"
+                                   v-text="form2.errors.get('password')"></label>
                         </div>
                     </div>
-                    <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
-                        <label for="password" class="col-md-4 control-label">Yeni Şifrə</label>
+                    <div class="form-group" v-bind:class="{'has-error': form2.errors.get('new_password')}">
+                        <label for="new_password" class="col-md-4 control-label">Yeni Şifrə</label>
 
                         <div class="col-md-6">
-                            <input id="password" type="password" class="form-control" name="password"
-                                   v-model="password">
-                            <label class="control-label" v-if="errors.has('number')"
-                                   v-text="errors.get('password')"></label>
+                            <input id="password_confirmation" type="password" class="form-control" name="new_password"
+                                   v-model="form2.new_password">
+                            <label class="control-label" v-if="form2.errors.has('new_password')"
+                                   v-text="form2.errors.get('new_password')"></label>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary" :disabled="errors.any()">
+                            <button type="submit" class="btn btn-primary" :disabled="form2.errors.any()">
                                 Şifrəni dəyiş
                             </button>
                         </div>
@@ -106,11 +106,15 @@
     export default {
         data() {
             return {
-//                name: '',
-//                number: '',
-                password: '',
-//                address: '',
-                errors: new Errors()
+                form1: {
+                    password: '',
+                    errors: new Errors()
+                },
+                form2: {
+                    password: '',
+                    new_password: '',
+                    errors: new Errors()
+                },
             }
         },
         computed: {
@@ -126,16 +130,30 @@
         },
         watch: {
             // call again the method if the route changes
-            '$route': 'fetchData'
-        },
-        created() {
-            this.fetchData();
         },
         methods: {
             update() {
-                axios.post('user').then(function (response) {
-                    }.bind(this)
-                )
+                axios.put('user/'+this.$store.state.user.id, {
+                    name: this.name,
+                    number: this.number,
+                    address: this.address,
+                    password: this.form1.password
+                }).then(function (response) {
+                    console.log(response.data);
+                }.bind(this)).catch(error => {
+                    this.form1.errors.record(error.response.data);
+                });
+                console.log('Products fetched');
+            },
+            updatePassword() {
+                axios.put('user/password', {
+                    password: this.form2.password,
+                    new_password: this.form2.new_password
+                }).then(function (response) {
+                    console.log(response.data);
+                }.bind(this)).catch(error => {
+                    this.form2.errors.record(error.response.data);
+                });
                 console.log('Products fetched');
             }
         }

@@ -1,6 +1,8 @@
 import Vuex from 'vuex';
 import axios from 'axios';
 import Vue from 'vue';
+import Messages from './classes/Messages';
+import Errors from './classes/Errors';
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -8,7 +10,9 @@ export default new Vuex.Store({
         categories: [],
         carousels: [],
         user: {},
-        carousel_shown: true
+        carousel_shown: true,
+        messages: new Messages(),
+        errors: new Errors()
     },
     mutations: {
         setCategories(state, categories) {

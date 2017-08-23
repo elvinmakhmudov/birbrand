@@ -7,10 +7,8 @@
                     <h4 class="modal-title"> Cavab </h4>
                 </div>
                 <div class="modal-body">
-                        <!--<p class="text-danger" v-for="error in errors" v-text="error[1]"></p>-->
-                        <p class="text-danger" v-if="errors.has('price')" :v-text="errors.get('price')"></p>
-                        <p class="text-danger" v-if="errors.has('amount')" :v-text="errors.get('amount')"></p>
                         <p class="text-info" v-for="message in messages" v-text="message"></p>
+                        <p class="text-info" v-for="error in errors" v-text="error"></p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
@@ -22,12 +20,19 @@
 
 <script>
     export default {
-        props: {
-            errors: {},
-            messages: {}
+        computed: {
+            messages: function() {
+                return this.$store.state.messages.all();
+            },
+            errors: function() {
+                return this.$store.state.errors.all();
+            }
         },
-        created() {
-            console.log(this.errors);
+        mounted() {
+            $('#flash-message').on('hidden.bs.modal', function () {
+                this.$store.state.errors.purge();
+                this.$store.state.messages.purge();
+            }.bind(this))
         }
-    }
+    };
 </script>

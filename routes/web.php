@@ -23,6 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('category', 'CategoriesController');
 Route::resource('product', 'ProductsController');
 Route::resource('order', 'OrdersController');
+Route::put('/user/password', 'UsersController@updatePassword');
 Route::resource('user', 'UsersController');
 Route::post('/currentUser', 'UsersController@current');
 

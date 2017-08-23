@@ -29,6 +29,7 @@ import store from './store';
 Vue.component('product-card', require('./components/Product-card.vue'));
 Vue.component('category-card', require('./components/Category-card.vue'));
 Vue.component('container', require('./components/Container.vue'));
+Vue.component('flashmessage', require('./components/flash-message.vue'));
 import event from './classes/Event';
 
 

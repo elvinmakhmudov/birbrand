@@ -35,7 +35,7 @@
                                         <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
                                         <div class="col-sm-10">
                                             <label class="control-label text-danger" v-if="errors.has('amount')"  v-text="errors.get('amount')"></label>
-                                            <input type="number" class="form-control" id="i5ps" value="1" min="1" max="100" v-model="amount">
+                                            <input type="number" @keydown="errors.purge()" class="form-control" id="i5ps" value="1" min="1" max="100" v-model="amount">
                                         </div>
                                         <button class="btn btn-raised btn-primary" data-toggle="modal"
                                            >İndi al</button>
@@ -61,7 +61,6 @@
         </div>
         <buyit></buyit>
         <buyitguest></buyitguest>
-        <flashmessage :messages="messages" :errors="errors"></flashmessage>
     </div>
 
 </template>
@@ -69,7 +68,6 @@
 <script>
     import Errors from '../classes/Errors';
     import Vue from 'vue';
-    import FlashMessage from '../components/product/flash-message.vue';
     import BuyIt from '../components/product/buyIt.vue';
     import BuyItGuest from '../components/product/buyItGuest.vue';
     import ShippingInfo from '../components/product/shippingInfo.vue';
@@ -77,7 +75,6 @@
     export default {
         components: {
             'buyit': BuyIt,
-            'flashmessage': FlashMessage,
             'buyitguest': BuyItGuest,
             'shippingInfo': ShippingInfo
         },
@@ -95,7 +92,6 @@
                     }
                 },
                 ancestors: [],
-                messages: {}
             }
         },
         watch: {
@@ -114,13 +110,23 @@
                         productId: this.product.id,
                         amount: this.amount
                     }).then(function (response) {
-                        this.messages = response.data;
+                        this.$store.state.errors.record(response.data.errors);
+                        this.$store.state.messages.record(response.data.messages);
                         $('#flash-message').modal('toggle');
                     }.bind(this)).catch(error => {
                         this.errors.record(error.response.data);
-//                        $('#flash-message').modal('toggle');
                     });
                 } else {
+                    axios.post('order', {
+                        productId: this.product.id,
+                        amount: this.amount
+                    }).then(function (response) {
+                        this.$store.state.errors.record(response.data.errors);
+                        this.$store.state.messages.record(response.data.messages);
+                        $('#flash-message').modal('toggle');
+                    }.bind(this)).catch(error => {
+                        this.errors.record(error.response.data);
+                    });
 
                 }
             },

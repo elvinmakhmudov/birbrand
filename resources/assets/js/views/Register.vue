@@ -84,6 +84,7 @@
                 axios.post('/register', {
                     name: this.number,
                     number: this.number,
+                    address: this.address,
                     password: this.password
                 }).then(function (response) {
                     window.location.href = "/";

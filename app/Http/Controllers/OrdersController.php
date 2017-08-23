@@ -23,9 +23,9 @@ class OrdersController extends Controller
             $order = Order::create([]);
             $order->user()->associate(Auth::user())->save();
             $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
-            return ['Sifaşiniz qeydə alındı.'];
+            return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } else {
-
+            return ['errors' => ['Sef bash verdi.']];
         }
     }
 }

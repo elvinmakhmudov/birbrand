@@ -23,6 +23,9 @@ class Errors {
     purge() {
         this.errors = {}
     }
+    all() {
+        return this.errors;
+    }
 }
 
 export default Errors;

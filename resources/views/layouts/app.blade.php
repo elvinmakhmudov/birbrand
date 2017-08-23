@@ -17,6 +17,7 @@
 </head>
 <body>
 <div id="app">
+    <flashmessage></flashmessage>
     @include('layouts.nav.main')
     @include('layouts.nav.categories')
     @yield('content')
