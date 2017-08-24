@@ -560,6 +560,11 @@ a:hover {
     color: #03a9f4;
 }
 
+.table-order-link {
+    padding: 10px;
+    vertical-align: text-top;
+}
+
 
 /* Medium devices (desktops, 992px and up) */
 
@@ -1210,6 +1215,11 @@ a:hover {
     color: #03a9f4;
 }
 
+.table-order-link {
+    padding: 10px;
+    vertical-align: text-top;
+}
+
 
 /* Medium devices (desktops, 992px and up) */
 
@@ -1858,6 +1868,11 @@ a,
 a:focus,
 a:hover {
     color: #03a9f4;
+}
+
+.table-order-link {
+    padding: 10px;
+    vertical-align: text-top;
 }
 
 

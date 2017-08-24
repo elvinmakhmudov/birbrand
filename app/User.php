@@ -31,6 +31,6 @@ class User extends Authenticatable
      * User has many orders
      */
     public function orders() {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class)->with('products');
     }
 }

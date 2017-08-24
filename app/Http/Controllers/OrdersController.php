@@ -19,6 +19,7 @@ class OrdersController extends Controller
 
     public function __construct(OrdersRepository $repository) {
         $this->orders= $repository;
+        $this->middleware('auth')->except('store');
     }
     public function store(Request $request)
     {
@@ -37,5 +38,10 @@ class OrdersController extends Controller
             ]);
             return $this->orders->createByRequest($request);
         }
+    }
+
+    public function index() {
+        $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->get();
+        return $orders;
     }
 }
