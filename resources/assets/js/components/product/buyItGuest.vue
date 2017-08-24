@@ -7,7 +7,7 @@
                     <h4 class="modal-title">Indi al</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" v-on:submit.prevent="register" role="form" method="POST" action="register" @keydown="errors.clear($event.target.name)">
+                    <form class="form-horizontal" v-on:submit.prevent="buy" role="form" method="POST" action="register" @keydown="errors.clear($event.target.name)">
                         <div class="form-group" v-bind:class="{'has-error': errors.get('name')}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary" :disabled="errors.any()">
-                                    Register
+                                    Indi al
                                 </button>
                             </div>
                         </div>
@@ -46,11 +46,32 @@
 <script>
     import Errors from '../../classes/Errors';
     export default {
+        props: {
+            productId: '',
+            amount: ''
+        },
         data() {
             return {
                 name: '',
                 number: '',
                 errors: new Errors()
+            }
+        },
+        methods: {
+            buy() {
+                axios.post('order', {
+                    productId: this.productId,
+                    amount: this.amount,
+                    name: this.name,
+                    number: this.number,
+                }).then(function (response) {
+                    this.$store.state.errors.record(response.data.errors);
+                    this.$store.state.messages.record(response.data.messages);
+                    $('#buy-it-guest').modal('toggle');
+                    $('#flash-message').modal('toggle');
+                }.bind(this)).catch(error => {
+                    this.errors.record(error.response.data);
+                });
             }
         }
     }

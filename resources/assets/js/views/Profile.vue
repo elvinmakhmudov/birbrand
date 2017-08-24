@@ -108,6 +108,7 @@
             return {
                 form1: {
                     password: '',
+                    prevNumber : '',
                     errors: new Errors()
                 },
                 form2: {
@@ -139,6 +140,9 @@
                     address: this.address,
                     password: this.form1.password
                 }).then(function (response) {
+                    this.$store.state.errors.record(response.data.errors);
+                    this.$store.state.messages.record(response.data.messages);
+                    $('#flash-message').modal('toggle');
                     console.log(response.data);
                 }.bind(this)).catch(error => {
                     this.form1.errors.record(error.response.data);
@@ -150,6 +154,9 @@
                     password: this.form2.password,
                     new_password: this.form2.new_password
                 }).then(function (response) {
+                    this.$store.state.errors.record(response.data.errors);
+                    this.$store.state.messages.record(response.data.messages);
+                    $('#flash-message').modal('toggle');
                     console.log(response.data);
                 }.bind(this)).catch(error => {
                     this.form2.errors.record(error.response.data);

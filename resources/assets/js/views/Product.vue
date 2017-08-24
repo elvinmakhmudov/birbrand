@@ -59,8 +59,7 @@
                 </div>
             </div>
         </div>
-        <buyit></buyit>
-        <buyitguest></buyitguest>
+        <buyitguest :productId="product.id" :amount="amount"></buyitguest>
     </div>
 
 </template>
@@ -68,13 +67,11 @@
 <script>
     import Errors from '../classes/Errors';
     import Vue from 'vue';
-    import BuyIt from '../components/product/buyIt.vue';
     import BuyItGuest from '../components/product/buyItGuest.vue';
     import ShippingInfo from '../components/product/shippingInfo.vue';
 
     export default {
         components: {
-            'buyit': BuyIt,
             'buyitguest': BuyItGuest,
             'shippingInfo': ShippingInfo
         },
@@ -117,17 +114,7 @@
                         this.errors.record(error.response.data);
                     });
                 } else {
-                    axios.post('order', {
-                        productId: this.product.id,
-                        amount: this.amount
-                    }).then(function (response) {
-                        this.$store.state.errors.record(response.data.errors);
-                        this.$store.state.messages.record(response.data.messages);
-                        $('#flash-message').modal('toggle');
-                    }.bind(this)).catch(error => {
-                        this.errors.record(error.response.data);
-                    });
-
+                    $('#buy-it-guest').modal('toggle');
                 }
             },
             getAncestors() {

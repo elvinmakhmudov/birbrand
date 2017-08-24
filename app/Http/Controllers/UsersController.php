@@ -35,19 +35,22 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
+        $user = Auth::user();
         $this->validate($request, [
             'name' => 'required|string|max:255',
-            'number' => 'required|string|max:255|unique:users',
-            'address' => 'string',
+            'number' => [
+                'required', 'string', 'max:255',
+                Rule::unique('users')->ignore($user->number, 'number')
+                ],
+            'address' => 'nullable|string',
             'password' => 'required|string|min:6',
         ]);
-        $user = Auth::user();
         if (Hash::check($request->get('password'), $user->getAuthPassword())) {
             $user->name = $request->get('name');
             $user->number = $request->get('number');
             $user->address = $request->get('address');
             $user->save();
-            return $user;
+            return ['messages' => ['Sehifeniz yenilendi.']];
         }
 
         return response()->json(['password' => ['Şifrə yalnışdır']], 422);
@@ -63,7 +66,7 @@ class UsersController extends Controller
         if (Hash::check($request->get('password'), $user->getAuthPassword())) {
             $user->password= bcrypt($request->get('new_password'));
             $user->save();
-            return $user;
+            return ['messages' => ['Shifreniz yenilendi.']];
         }
         return response()->json(['password' => ['Şifrə yalnışdır']], 422);
     }
