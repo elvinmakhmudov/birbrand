@@ -3,13 +3,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
+                    <div class="panel-heading">Giriş</div>
                     <div class="panel-body">
                         <form class="form-horizontal" v-on:submit.prevent="login" role="form" method="POST"
                               action="login" @keydown="errors.clear($event.target.name)">
-
                             <div class="form-group" v-bind:class="{'has-error': errors.get('number')}">
-                                <label for="number" class="col-md-4 control-label">Phone number</label>
+                                <label for="number" class="col-md-4 control-label">Nömrə</label>
 
                                 <div class="col-md-6">
                                     <input id="number" type="number" class="form-control" name="number" v-model="number" autofocus>
@@ -19,7 +18,7 @@
                             </div>
 
                             <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
-                                <label for="password" class="col-md-4 control-label">Password</label>
+                                <label for="password" class="col-md-4 control-label">Şifrə</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password" v-model="password">
@@ -40,7 +39,7 @@
                             <div class="form-group">
                                 <div class="col-md-8 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary" :disabled="errors.any()">
-                                        Login
+                                        Giriş
                                     </button>
 
                                     <a class="btn btn-link" href="">

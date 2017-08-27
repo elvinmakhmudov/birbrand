@@ -32,6 +32,10 @@ var routes = [
         path: '/order',
         component: require('./views/Order'),
     },
+    {
+        path: '/about',
+        component: require('./views/About'),
+    },
 ];
 
 

@@ -24,8 +24,8 @@
                             <!-- Authentication Links -->
                     <ul class="nav navbar-nav navbar-right navbar-login">
                         @if (Auth::guest())
-                            <li><a href="#/login" >Login</a></li>
-                            <li><a href="#/register">Register</a></li>
+                            <li><a href="#/login" >Giriş</a></li>
+                            <li><a href="#/register">Qeydiyyat</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -38,6 +38,12 @@
                                         <a href="#/profile">
                                             Səhifəm
                                         </a>
+                                        @if(\Illuminate\Support\Facades\Auth::user()->is_admin == true)
+
+                                        <a href="/admin665">
+                                            Admin panel
+                                        </a>
+                                        @endif
                                         <a href="#/order">
                                             Sifarişlərim
                                         </a>
@@ -60,7 +66,7 @@
                         <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-earphone"
                                                                aria-hidden="true"></span> +994 51 855 01 05</a>
                         </li>
-                        <li><a href="javascript:void(0)">Haqqimizda</a></li>
+                        <li><a href="#/about">Haqqimizda</a></li>
                     </ul>
                 </div>
             </div>

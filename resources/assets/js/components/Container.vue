@@ -3,8 +3,8 @@
         <div class="col-md-12">
             <h2 v-text="category.title"></h2>
         </div>
-        <div v-for="subcategory in category.descendants">
-            <category-card :title="subcategory.title" :slug="subcategory.slug"></category-card>
+        <div v-for="subcategory in category.children">
+            <category-card :subcategory="subcategory"></category-card>
         </div>
     </div>
 </template>

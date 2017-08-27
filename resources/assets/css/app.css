@@ -198,8 +198,12 @@ h2 {
 }
 
 .category-card {
-    padding-right: 10px;
+    margin-top: 0;
     min-height: 256px;
+}
+
+.card-container {
+    margin-bottom: 15px;
 }
 
 .category-title {
@@ -252,7 +256,6 @@ a:hover {
     padding: 10px;
     vertical-align: text-top;
 }
-
 
 /* Medium devices (desktops, 992px and up) */
 

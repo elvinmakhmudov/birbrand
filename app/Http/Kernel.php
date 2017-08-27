@@ -56,5 +56,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \BirBrand\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin' => \BirBrand\Http\Middleware\IsAdmin::class,
     ];
 }

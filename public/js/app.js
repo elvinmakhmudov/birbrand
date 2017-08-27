@@ -1626,8 +1626,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        title: '',
-        slug: ''
+        subcategory: {
+            title: '',
+            slug: '',
+            image_url: ''
+        }
     },
     created: function created() {
         console.log('Category card created.');
@@ -1846,6 +1849,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/views/About.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Event__ = __webpack_require__("./resources/assets/js/classes/Event.js");
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: {
+        categories: function categories() {
+            return this.$store.state.categories;
+        },
+        carousels: function carousels() {
+            return this.$store.state.carousels;
+        }
+    },
+    watch: {
+        // call again the method if the route changes
+        '$route': 'fetchData'
+    },
+    mounted: function mounted() {
+        this.fetchData();
+        console.log('mounted home');
+    },
+
+    methods: {
+        fetchData: function fetchData() {
+            if (!this.$store.state.carousel_shown) {
+                this.mountCarousel();
+                this.$store.state.carousel_shown = false;
+                console.log('in home vue carousel shown was false');
+            }
+            //                event.$on('gotCarousel',function () {
+            //                    this.mountCarousel();
+            //                    console.log('slider');
+            //                }.bind(this));
+        },
+        mountCarousel: function mountCarousel() {
+            $('.slider').slick({
+                arrows: false
+            });
+        }
+    }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/views/Category.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1867,13 +1927,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             category: {},
-            products: []
+            products: [],
+            subcategories: []
         };
     },
 
@@ -1889,9 +1956,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchData: function fetchData() {
             axios.get(window.location.hash.substr(2)).then(function (response) {
                 this.category = response.data;
+                this.subcategories = response.data.children;
                 this.products = response.data.products;
+                console.log(this.subcategories);
             }.bind(this));
             console.log('Products fetched');
+        },
+        subcategoryExists: function subcategoryExists() {
+            return category.children.size > 0;
         }
     }
 });
@@ -1968,7 +2040,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Errors__ = __webpack_require__("./resources/assets/js/classes/Errors.js");
-//
 //
 //
 //
@@ -31840,18 +31911,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card category-card"
   }, [_c('a', {
     attrs: {
-      "href": '#/category/' + _vm.slug
+      "href": '#/category/' + _vm.subcategory.slug
     }
   }, [_c('img', {
     staticClass: "card-img-top",
     attrs: {
-      "src": "https://aldim.az/uploads/item_gallery_photo/14471/image/light_resize/230x230_2.png"
+      "src": 'storage/' + _vm.subcategory.image_url
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "card-block"
   }, [_c('h4', {
     staticClass: "card-title category-title"
-  }, [_vm._v(" " + _vm._s(_vm.title))])])])])])])
+  }, [_vm._v(" " + _vm._s(_vm.subcategory.title))])])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -31916,7 +31987,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "button",
       "data-dismiss": "modal"
     }
-  }, [_vm._v("Dismiss")])])
+  }, [_vm._v("Bağla")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -31942,7 +32013,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Register")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Qeydiyyat")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('form', {
     staticClass: "form-horizontal",
@@ -32151,7 +32222,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v(_vm._s(_vm.category.title))])]), _vm._v(" "), _vm._l((_vm.products), function(product) {
+  }, [_c('h2', [_vm._v(_vm._s(_vm.category.title))])]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
+    return _c('div', [_c('category-card', {
+      attrs: {
+        "subcategory": subcategory
+      }
+    })], 1)
+  }), _vm._v(" "), (_vm.subcategories.length > 0) ? _c('div', {
+    staticClass: "col-md-12"
+  }, [_c('h2', [_vm._v("Dəbbdə")])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.products), function(product) {
     return _c('div', {
       staticClass: "products"
     }, [_c('product-card', {
@@ -32183,11 +32262,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "textContent": _vm._s(_vm.category.title)
     }
-  })]), _vm._v(" "), _vm._l((_vm.category.descendants), function(subcategory) {
+  })]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
     return _c('div', [_c('category-card', {
       attrs: {
-        "title": subcategory.title,
-        "slug": subcategory.slug
+        "subcategory": subcategory
       }
     })], 1)
   })], 2)
@@ -32254,7 +32332,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }, [_vm._v("Login")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Giriş")]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
   }, [_c('form', {
     staticClass: "form-horizontal",
@@ -32282,7 +32360,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "number"
     }
-  }, [_vm._v("Phone number")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Nömrə")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
     directives: [{
@@ -32322,7 +32400,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "for": "password"
     }
-  }, [_vm._v("Password")]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Şifrə")]), _vm._v(" "), _c('div', {
     staticClass: "col-md-6"
   }, [_c('input', {
     directives: [{
@@ -32361,7 +32439,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "type": "submit",
       "disabled": _vm.errors.any()
     }
-  }, [_vm._v("\n                                    Login\n                                ")]), _vm._v(" "), _c('a', {
+  }, [_vm._v("\n                                    Giriş\n                                ")]), _vm._v(" "), _c('a', {
     staticClass: "btn btn-link",
     attrs: {
       "href": ""
@@ -32754,6 +32832,28 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-ce73f414", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-f160e558\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/About.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "layout"
+  }, [_vm._v("\n        Bizim haqqımızda\n    ")])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-f160e558", module.exports)
   }
 }
 
@@ -46939,6 +47039,9 @@ var routes = [{
 }, {
     path: '/order',
     component: __webpack_require__("./resources/assets/js/views/Order.vue")
+}, {
+    path: '/about',
+    component: __webpack_require__("./resources/assets/js/views/About.vue")
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
@@ -47497,7 +47600,11 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
     },
     mutations: {
         setCategories: function setCategories(state, categories) {
-            state.categories = categories;
+            for (var i = 0; i < categories.length; i++) {
+                if (categories[i].parent_id == undefined) {
+                    state.categories.push(categories[i]);
+                }
+            }
         },
         setCarousels: function setCarousels(state, carousels) {
             state.carousels = carousels;
@@ -47530,6 +47637,47 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         }
     }
 }));
+
+/***/ }),
+
+/***/ "./resources/assets/js/views/About.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/views/About.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-f160e558\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/About.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\elvis\\Project\\Code\\project\\resources\\assets\\js\\views\\About.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] About.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f160e558", Component.options)
+  } else {
+    hotAPI.reload("data-v-f160e558", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
 
 /***/ }),
 

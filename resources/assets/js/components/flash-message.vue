@@ -11,7 +11,7 @@
                         <p class="text-info" v-for="error in errors" v-text="error"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Dismiss</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Bağla</button>
                 </div>
             </div>
         </div>

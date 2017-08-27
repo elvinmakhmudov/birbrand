@@ -27,6 +27,20 @@ Route::put('/user/password', 'UsersController@updatePassword');
 Route::resource('user', 'UsersController');
 Route::post('/currentUser', 'UsersController@current');
 
-Route::get('/{vue_capture?}', function () {
-    return view('home');
-})->where('vue_capture', '[\/\w\.-]*');
+//admin controller
+Route::prefix('admin665')->group(function (){
+    Route::get('/', 'AdminsController@index');
+    Route::get('categories', 'AdminsController@getCategoriesIndex')->name('admin.categories.index');
+    Route::post('categories', 'AdminsController@postCategoriesStore')->name('admin.categories.store');
+    Route::get('categories/create', 'AdminsController@getCategoriesCreate')->name('admin.categories.create');
+    Route::post('categories/{id}/update', 'AdminsController@postCategoriesUpdate')->name('admin.categories.update');
+    Route::get('categories/{id}', 'AdminsController@getCategoriesEdit')->name('admin.categories.edit');
+
+    Route::get('products', 'AdminsController@getProducts')->name('admin.products');
+    Route::post('products', 'AdminsController@postProducts')->name('admin.products');
+    Route::get('products/{id}', 'AdminsController@getProductsEdit')->name('admin.products.edit');
+});
+
+//Route::get('/{vue_capture?}', function () {
+//    return view('home');
+//})->where('vue_capture', '[\/\w\.-]*');

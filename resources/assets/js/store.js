@@ -16,7 +16,11 @@ export default new Vuex.Store({
     },
     mutations: {
         setCategories(state, categories) {
-            state.categories = categories;
+            for(var i=0;i<categories.length;i++) {
+                if(categories[i].parent_id == undefined) {
+                    state.categories.push(categories[i]);
+                }
+            }
         },
         setCarousels(state, carousels) {
             state.carousels = carousels;
