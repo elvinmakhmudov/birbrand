@@ -14,6 +14,7 @@
                             <th>Ad</th>
                             <th>Təsviri</th>
                             <th>Valideyin</th>
+                            <th>Shekil</th>
                             <th>Yaranma tarixi</th>
                             <th>Kim yaradib</th>
                         </tr>
@@ -22,7 +23,7 @@
                         @foreach($categories as $category)
                             <tr>
                                 <td>{{ $category->id }}</td>
-                                <td>{{ $category->title  }}</td>
+                                <td><a href="{{route('admin.products.index', ['id' =>$category->id])}}">{{ $category->title  }}</a></td>
                                 <td>
                                     <a href="{{ route('admin.categories.edit', ['id' => $category->id ]) }}">{{ $category->description}}</a>
                                 </td>
@@ -31,6 +32,7 @@
                                 @else
                                     <td></td>
                                 @endif
+                                <td><img style="display:block"  width="100%" src="/storage/{{$category->image_url}}" alt=""></td>
                                 <td>{{ $category->created_at}}</td>
                                 <td>{{ $category->user->name }}</td>
                             </tr>

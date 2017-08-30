@@ -7,8 +7,8 @@
 require('./bootstrap');
 require('./material.min');
 require('./ripples.min');
-require('./smoothproducts.min');
 require('./slick.min');
+require('./xzoom');
 
 // window.Vue = require('vue');
 // VueRouter = require('vue-router');

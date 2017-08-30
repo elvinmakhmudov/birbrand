@@ -257,6 +257,19 @@ a:hover {
     vertical-align: text-top;
 }
 
+img.xzoom-gallery {
+    width: 20%;
+    display: block;
+    float: left;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+xzoom-thumbs {
+    background-color: gray;
+    position: border-box;
+}
+
 /* Medium devices (desktops, 992px and up) */
 
 @media (min-width: 760px) {

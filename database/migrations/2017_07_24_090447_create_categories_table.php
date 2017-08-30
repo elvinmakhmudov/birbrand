@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->unique();
+            $table->string('folder')->unique();
             $table->string('slug')->unique()->index();
             $table->text('description')->nullable();
             $table->integer('user_id')->unsigned();

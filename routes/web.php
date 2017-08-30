@@ -30,15 +30,21 @@ Route::post('/currentUser', 'UsersController@current');
 //admin controller
 Route::prefix('admin665')->group(function (){
     Route::get('/', 'AdminsController@index');
+
+    //admin categories controller
     Route::get('categories', 'AdminsController@getCategoriesIndex')->name('admin.categories.index');
     Route::post('categories', 'AdminsController@postCategoriesStore')->name('admin.categories.store');
     Route::get('categories/create', 'AdminsController@getCategoriesCreate')->name('admin.categories.create');
     Route::post('categories/{id}/update', 'AdminsController@postCategoriesUpdate')->name('admin.categories.update');
     Route::get('categories/{id}', 'AdminsController@getCategoriesEdit')->name('admin.categories.edit');
 
-    Route::get('products', 'AdminsController@getProducts')->name('admin.products');
+    //admin products controller
+    Route::get('categories/{id}/products/create', 'AdminsController@getProductsCreate')->name('admin.products.create');
+    Route::post('categories/{id}/products/store', 'AdminsController@postProductsStore')->name('admin.products.store');
+    Route::get('categories/{id}/products/{productId}', 'AdminsController@getProductsEdit')->name('admin.products.edit');
+    Route::post('categories/{id}/products/{productId}', 'AdminsController@postProductsUpdate')->name('admin.products.update');
+    Route::get('categories/{id}/products', 'AdminsController@getProductsIndex')->name('admin.products.index');
     Route::post('products', 'AdminsController@postProducts')->name('admin.products');
-    Route::get('products/{id}', 'AdminsController@getProductsEdit')->name('admin.products.edit');
 });
 
 //Route::get('/{vue_capture?}', function () {

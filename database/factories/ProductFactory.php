@@ -13,12 +13,16 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 $factory->define(BirBrand\Product::class, function (Faker\Generator $faker) {
+    $folder= 'products/'.str_random(20);
+    Storage::makeDirectory($folder);
     return [
         'title' => $faker->sentence(3),
         'description' => $faker->paragraph(),
         'price' => $faker->numberBetween(4,400),
         'category_id' => $faker->numberBetween(1,10),
+        'folder' => $folder,
         'user_id' => 1,
+        'thumbnail' => 'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',
         'images' =>['https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',
             'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',
             'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',

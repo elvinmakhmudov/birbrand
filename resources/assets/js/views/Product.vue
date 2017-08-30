@@ -17,9 +17,22 @@
                             <h2>{{ product.title }}</h2>
                         </div>
                         <div class="col-md-4 col-xs-6">
-                            <div class="sp-wrap product-img">
-                                <div v-for="image in product.images">
-                                    <a :href="image"><img :src="image" alt="Card image cap"></a>
+                            <!--<div class="sp-wrap product-img">-->
+                            <!--<a :href="'/storage/'+product.thumbnail"><img :src="'/storage/'+product.thumbnail"-->
+                            <!--alt="Card image cap"></a>-->
+                            <!--<div v-for="image in product.images">-->
+                            <!--<a :href="'/storage/'+image"><img :src="'/storage/'+ image"-->
+                            <!--alt="Card image cap"></a>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <div class="product-img">
+                                <img class="xzoom" :src="'/storage/'+product.thumbnail"
+                                     :xoriginal="'/storage/'+product.thumbnail"/>
+                                <div class="xzoom-thumbs">
+                                    <a v-for="image in product.images " :href="'/storage/'+image">
+
+                                        <img class="xzoom-gallery" :src="'/storage/'+image">
+                                    </a>
                                 </div>
                             </div>
                             <!--<div class="product-img">-->
@@ -34,11 +47,14 @@
                                     <div class="form-group">
                                         <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
                                         <div class="col-sm-10">
-                                            <label class="control-label text-danger" v-if="errors.has('amount')"  v-text="errors.get('amount')"></label>
-                                            <input type="number" @keydown="errors.purge()" class="form-control" id="i5ps" value="1" min="1" max="100" v-model="amount">
+                                            <label class="control-label text-danger" v-if="errors.has('amount')"
+                                                   v-text="errors.get('amount')"></label>
+                                            <input type="number" @keydown="errors.purge()" class="form-control"
+                                                   id="i5ps" value="1" min="1" max="100" v-model="amount">
                                         </div>
                                         <button class="btn btn-raised btn-primary" data-toggle="modal"
-                                           >İndi al</button>
+                                        >İndi al
+                                        </button>
                                         <button type="submit" class="btn btn-primary" data-toggle="modal"
                                                 data-target="#complete-dialog">Səbətə at
                                         </button>
@@ -129,7 +145,9 @@
                     this.product = response.data;
                     this.ancestors = this.getAncestors(this.product);
                     Vue.nextTick(function () {
-                        $('.sp-wrap').smoothproducts();
+                        $(".xzoom, .xzoom-gallery").xzoom({
+                            scroll: false
+                        });
                     });
                 }.bind(this));
                 console.log('Product fetched');

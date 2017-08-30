@@ -1,0 +1,91 @@
+<?php
+
+namespace BirBrand\Http\Controllers\Repositories;
+
+use BirBrand\Category;
+use BirBrand\Order;
+use BirBrand\Product;
+use Exception;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class CategoriesRepository
+{
+    use ValidatesRequests;
+
+    public function index()
+    {
+        $categories = Category::with(['user', 'parent'])->get();
+        return view('admin.categories.index')->with('categories', $categories);
+    }
+
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        $categories = Category::all();
+
+        return view('admin.categories.edit')->with(['category' => $category, 'categories' => $categories]);
+    }
+
+    public function update($id, $request)
+    {
+        //Validate the request
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|file',
+            'parent' => 'nullable|exists:categories,id',
+        ]);
+
+        //update the category
+        $category = Category::findOrFail($id);
+        $category->title = $request->get('title');
+        $category->slug = str_slug($request->get('title'), '-');
+        $category->description = $request->get('description');
+        //if image exists, update it
+        if ($request->get('image')) {
+            Storage::delete($category->image_url);
+            $category->image_url = $request->file('image') ? $request->file('image')->store($category->folder) : '';
+        }
+        $category->parent_id = $request->get('parent');
+        $category->save();
+        return redirect()->route('admin.categories.index');
+    }
+
+    public function create()
+    {
+        $categories = Category::all();
+
+        return view('admin.categories.create')->with('categories', $categories);
+    }
+
+    public function store(Request $request)
+    {
+        //Validate the request
+        $this->validate($request, [
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|file',
+            'parent' => 'nullable|exists:categories,id',
+        ]);
+
+        //create a category
+        $category = new Category;
+        $category->title = $request->get('title');
+        $category->description = $request->get('description');
+        $category->slug = str_slug($request->get('title'), '-');
+
+        //create a folder for images
+        $folder = str_random(20);
+        $path = 'categories/' . $folder;
+        Storage::makeDirectory($path);
+        $category->folder = $path;
+
+        $category->image_url = $request->file('image') ? $request->file('image')->store($path) : '';
+        $category->parent_id = $request->get('parent');
+        $category->user()->associate(Auth::user());
+        $category->save();
+        return redirect()->route('admin.categories.index');
+    }
+}

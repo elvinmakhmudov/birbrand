@@ -9,7 +9,7 @@
                         </div>
                     </div>
                     <img class="card-img-top"
-                         src="https://aldim.az/uploads/item_gallery_photo/14471/image/light_resize/230x230_2.png"
+                         :src="'storage/'+product.thumbnail"
                          alt="Card image cap">
                     <div class="card-block">
                         <h4 class="card-title">{{ product.title }}</h4>
@@ -27,7 +27,8 @@
             return {
                 id: '',
                 title: '',
-                price: ''
+                price: '',
+                thumbnail: ''
             }
         },
         props: {
