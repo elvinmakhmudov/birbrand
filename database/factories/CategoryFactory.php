@@ -23,6 +23,7 @@ $factory->define(BirBrand\Category::class, function (Faker\Generator $faker) {
         'title' => $title,
         'slug' => str_slug($title,'-'),
         'description' => $faker->paragraph(),
+        'is_shown' => true,
         'folder' => $folder,
         'user_id' => 1,
         'image_url' => 'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',

@@ -8,6 +8,6 @@ class ProductsController extends Controller
 {
     public function show($productId)
     {
-        return Product::with('category.ancestors')->findOrFail($productId);
+        return Product::isShown()->with('category.ancestors')->findOrFail($productId);
     }
 }

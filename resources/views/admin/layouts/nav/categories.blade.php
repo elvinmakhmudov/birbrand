@@ -12,9 +12,10 @@
                 </div>
                 <div class="navbar-collapse collapse categories-navbar-responsive-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{  route('admin.categories.index') }}">Categories</a></li>
-                        <li><a href="admin/products">Products</a></li>
-                        <li><a href="admin/users">Users</a></li>
+                        <li><a href="{{  route('admin.categories.index') }}">Bölmələr</a></li>
+                        <li><a href="{{  route('admin.users.index') }}">İstifadəçilər</a></li>
+                        <li><a href="{{  route('admin.orders.home') }}">Sifarişlər</a></li>
+                        <li><a href="{{  route('admin.carousels.index') }}">Karusel</a></li>
                     </ul>
                 </div>
             </div>

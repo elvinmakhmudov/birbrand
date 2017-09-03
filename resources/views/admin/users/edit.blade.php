@@ -5,57 +5,54 @@
         <div class="layout">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Yeni kateqoriya əlavə etmək</h2>
+                    <h2>{{$user->name}}</h2>
                     <form class="form-horizontal" role="form" method="POST"
-                          action="{{ route('admin.categories.store') }}"
+                          action="{{ route('admin.users.update', ['id' => $user->id]) }}"
                           enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        @if($errors)
+                            @foreach ($errors->all() as $error)
+                                <div>{{ $error }}</div>
+                            @endforeach
+                        @endif
                         <div class="form-group">
-                            <label for="title" class="col-md-2 control-label">Ad</label>
+                            <label for="name" class="col-md-2 control-label">Ad</label>
 
                             <div class="col-md-8">
-                                <input id="title" type="text" class="form-control" name="title" autofocus>
+                                <input id="name" type="text" class="form-control" name="name" autofocus
+                                       value="{{ $user->name }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="description" class="col-md-2 control-label">Təsviri</label>
+                            <label for="number" class="col-md-2 control-label">Nömrə</label>
 
                             <div class="col-md-8">
-                                <textarea name="description" id="description" cols="30" rows="10"
-                                          class="form-control"></textarea>
+                                <input type="number" id="number" class="form-control" name="number" value="{{ $user->number }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-md-2 control-label">Ünvan</label>
+
+                            <div class="col-md-8">
+                                <input id="address" type="text" class="form-control" name="address" autofocus value="{{ $user->address }}">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="image" class="col-md-2 control-label">Şəkil</label>
+                            <label for="password" class="col-md-2 control-label">Şifrə</label>
 
                             <div class="col-md-8">
-                                <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image" multiple="" name="image">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="select" class="col-md-2 control-label">Valideyin</label>
-
-                            <div class="col-md-8">
-                                <select id="select" class="form-control" name="parent">
-                                    <option value selected> Yoxdu</option>
-                                    @foreach($categories as $oneCategory)
-                                        <option value="{{ $oneCategory->id }}"> {{ $oneCategory->title }}</option>
-                                    @endforeach
-                                </select>
+                                <input id="password" type="password" class="form-control" name="password" autofocus>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="is_shown" class="col-md-2 control-label">Kateqoriyanı göstərmək</label>
+                            <label for="is_admin" class="col-md-2 control-label">Admin etmək</label>
                             <div class="col-md-5">
                                 <div class="checkbox">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="is_shown" >
+                                        <input type="checkbox" name="is_admin" {{ $user->is_admin ? 'checked' : '' }}>
                                     </label>
                                 </div>
                             </div>

@@ -2,15 +2,139 @@
 
 namespace BirBrand\Http\Controllers\Repositories;
 
+use BirBrand\Category;
 use BirBrand\Order;
 use BirBrand\Product;
+use BirBrand\User;
 use Exception;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
-class OrdersRepository {
+class OrdersRepository
+{
+    use ValidatesRequests;
 
-    public function createByAuthUser(Request $request) {
+    public function home()
+    {
+        $orders = Order::with('user')->get()->reverse();
+
+        return view('admin.orders.home')->with('orders', $orders);
+    }
+
+    public function index($id)
+    {
+        $user = User::findOrFail($id);
+
+        $orders = $user->orders;
+
+        return view('admin.orders.index')->with(['user' => $user, 'orders' => $orders]);
+    }
+
+    public function edit($id)
+    {
+        $order = Order::with('products', 'user')->findOrFail($id);
+
+        $products = Product::isShown()->get();
+
+        $users = User::all();
+
+        return view('admin.orders.edit')->with(['order' => $order, 'products' => $products, 'users' => $users ]);
+    }
+
+    public function update($orderId, $request)
+    {
+        //Validate the request
+        $this->validate($request, [
+            'name' => 'nullable|string|max:255',
+            'number' => 'nullable|integer',
+            'status' => 'nullable|string|max:255',
+            'user' => 'nullable|integer',
+            'products' => 'required',
+            'created_at' => 'nullable|date',
+        ]);
+
+        //update the order
+        $order = Order::findOrFail($orderId);
+
+        //if delete was clicked, delete the order
+        if (!empty($request->get('delete'))) {
+            $order->products()->detach();
+            $order->delete();
+            return redirect()->route('admin.users.index');
+        }
+
+
+        $order->name= $request->get('name');
+        $order->number= $request->get('number');
+        $order->status= $request->get('status');
+        $order->user_id = $request->get('user');
+        $order->created_at = $request->get('created_at');
+
+        //detach all existing products and attach new ones
+        $order->products()->detach();
+        $products = Product::find($request->get('products'));
+        foreach ($products as $product) {
+            $order->products()->attach($product, ['price' => $product->price, 'amount' => 1]);
+        }
+
+        $order->save();
+        return redirect()->route('admin.users.index');
+    }
+
+    public function create($userId)
+    {
+        $users = User::all();
+
+        $products = Product::isShown()->get();
+
+        return view('admin.orders.create')->with(['userId' => $userId, 'users' => $users, 'products' => $products]);
+    }
+
+    public function store($categoryId, Request $request)
+    {
+        //Validate the request
+        $this->validate($request, [
+            'name' => 'nullable|string|max:255',
+            'number' => 'nullable|integer',
+            'status' => 'nullable|string|max:255',
+            'user' => 'nullable|integer',
+            'products' => 'required',
+        ]);
+
+        //update the order
+        $order = Order::create([]);
+
+        $order->name= $request->get('name');
+        $order->number= $request->get('number');
+        $order->status= $request->get('status');
+        $order->user_id = $request->get('user');
+
+        $products = Product::find($request->get('products'));
+        foreach ($products as $product) {
+            $order->products()->attach($product, ['price' => $product->price, 'amount' => 1]);
+        }
+
+        $order->save();
+        return redirect()->route('admin.orders.index', ['id' => Auth::user()->id ]);
+    }
+
+    public function saveImages(Request $request, $path)
+    {
+        $images = [];
+        $requestImages = $request->file('images');
+        if ($requestImages) {
+            foreach ($requestImages as $image) {
+                $imageUrl = $image->store($path);
+                array_push($images, $imageUrl);
+            }
+        }
+        return $images;
+    }
+
+    public function createByAuthUser(Request $request)
+    {
         try {
             $productId = $request->get('productId');
             $amount = $request->get('amount');
@@ -20,12 +144,13 @@ class OrdersRepository {
             $order->user()->associate(Auth::user())->save();
             $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return ['errors' => ['Sef bash verdi.']];
         }
     }
 
-    public function createByRequest(Request $request) {
+    public function createByRequest(Request $request)
+    {
         try {
             $productId = $request->get('productId');
             $amount = $request->get('amount');
@@ -37,9 +162,9 @@ class OrdersRepository {
             ]);
             $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return ['errors' => ['Sef bash verdi.']];
         }
-
     }
+
 }

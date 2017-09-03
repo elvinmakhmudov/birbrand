@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->boolean('is_shown')->default(false);
             $table->integer('old_price')->nullable();
             $table->integer('price');
             $table->string('folder')->unique();

@@ -17,14 +17,6 @@
                             <h2>{{ product.title }}</h2>
                         </div>
                         <div class="col-md-4 col-xs-6">
-                            <!--<div class="sp-wrap product-img">-->
-                            <!--<a :href="'/storage/'+product.thumbnail"><img :src="'/storage/'+product.thumbnail"-->
-                            <!--alt="Card image cap"></a>-->
-                            <!--<div v-for="image in product.images">-->
-                            <!--<a :href="'/storage/'+image"><img :src="'/storage/'+ image"-->
-                            <!--alt="Card image cap"></a>-->
-                            <!--</div>-->
-                            <!--</div>-->
                             <div class="product-img">
                                 <img class="xzoom" :src="'/storage/'+product.thumbnail"
                                      :xoriginal="'/storage/'+product.thumbnail"/>

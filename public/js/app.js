@@ -2172,6 +2172,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2221,14 +2232,6 @@ var _methods;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -32500,21 +32503,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v("Mənim sifarishlerim")]), _vm._v(" "), _c('table', {
-    staticClass: "table table-striped table-hover "
+  }, [_c('h2', [_vm._v("Mənim sifarişlərim")]), _vm._v(" "), _c('table', {
+    staticClass: "table table-hover"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.orders), function(order) {
-    return _c('tr', [_c('td', [_vm._v(_vm._s(order.id))]), _vm._v(" "), _c('td', [_c('a', {
-      attrs: {
-        "href": '#/product/' + order.products[0].id
-      }
-    }, [_c('img', {
-      attrs: {
-        "src": order.products[0].images[0],
-        "width": "20%"
-      }
-    }), _c('span', {
-      staticClass: "table-order-link"
-    }, [_vm._v(_vm._s(order.products[0].title))])])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(order.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.fromNow(order.created_at)))])])
+    return _c('tr', [_c('td', [_vm._v(_vm._s(order.id))]), _vm._v(" "), _c('td', [_c('table', {
+      staticClass: "table table-hover"
+    }, [_c('tbody', _vm._l((order.products), function(product) {
+      return _c('tr', [_c('td', [_c('a', {
+        attrs: {
+          "href": '#/product/' + product.id
+        }
+      }, [_c('img', {
+        attrs: {
+          "src": product.thumbnail,
+          "width": "20%"
+        }
+      }), _c('span', {
+        staticClass: "table-order-link"
+      }, [_vm._v(_vm._s(product.title))])])]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.pivot.price) + " AZN")]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.pivot.amount) + " ədəd")])])
+    }))])]), _vm._v(" "), _c('td', [_vm._v(_vm._s(order.status))]), _vm._v(" "), _c('td', [_vm._v(_vm._s(_vm.fromNow(order.created_at)))])])
   }))])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("#")]), _vm._v(" "), _c('th', [_vm._v("Məhsul")]), _vm._v(" "), _c('th', [_vm._v("Status")]), _vm._v(" "), _c('th', [_vm._v("Sifariş tarixi")])])])
@@ -32697,7 +32704,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('div', [_c('img', {
       attrs: {
         "alt": "",
-        "src": slide.image
+        "src": '/storage/' + slide.image_url
       }
     })])
   })), _vm._v(" "), _c('div', {

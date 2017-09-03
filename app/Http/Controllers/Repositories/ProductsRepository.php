@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 class ProductsRepository
 {
     use ValidatesRequests;
+
     public function index($id, Request $request)
     {
         $category = Category::findOrFail($id);
@@ -23,7 +24,7 @@ class ProductsRepository
         return view('admin.products.index')->with(['category' => $category, 'products' => $products]);
     }
 
-    public function edit($id, $productId)
+    public function edit($productId)
     {
         $product = Product::findOrFail($productId);
 
@@ -44,33 +45,60 @@ class ProductsRepository
             'old_price' => 'nullable|integer',
             'sale_percent' => 'nullable|integer',
             'price' => 'required|integer',
-            'images' => 'nullable|file',
+            'imagesToDelete' => 'nullable',
+            'images' => 'nullable|array',
             'options' => 'nullable|json',
             'category' => 'nullable|exists:categories,id'
         ]);
 
+
         //update the category
         $product = Product::findOrFail($productId);
+
+        //if delete was clicked, delete the product
+        if (!empty($request->get('delete'))){
+            Storage::deleteDirectory($product->folder);
+            $product->delete();
+            return redirect()->route('admin.products.index', ['id' => $categoryId]);
+        }
+
+
         $product->title = $request->get('title');
         $product->description = $request->get('description');
-        $product->price= $request->get('price');
+        $product->old_price = $request->get('old_price');
+        $product->sale_percent = $request->get('sale_percent');
+        $product->price = $request->get('price');
 
         //if image exists, update it
-        if ($request->get('thumbnail')) {
+        if ($request->file('thumbnail')) {
             Storage::delete($product->thumbnail);
             $product->thumbnail = $request->file('thumbnail') ? $request->file('thumbnail')->store($product->folder) : '';
         }
 
+        //delete images if required
+        $images = $request->get('imagesToDelete');
+        if ($images) {
+            Storage::delete($images);
+            $product->images = array_diff($product->images, $images);
+        }
+
+        //save additional images
+        $product->images = array_merge($product->images, $this->saveImages($request, $product->folder));
+
         $product->category_id = $request->get('category');
+
+        //is product shown?
+        $product->is_shown = $request->get('is_shown') ? true : false;
+
         $product->save();
         return redirect()->route('admin.products.index', ['id' => $categoryId]);
     }
 
     public function create($categoryId)
     {
-        $categories =Category::all();
+        $categories = Category::all();
 
-        return view('admin.products.create')->with(['categories' => $categories, 'categoryId' =>$categoryId]);
+        return view('admin.products.create')->with(['categories' => $categories, 'categoryId' => $categoryId]);
     }
 
     public function store($categoryId, Request $request)
@@ -83,11 +111,7 @@ class ProductsRepository
             'old_price' => 'nullable|integer',
             'sale_percent' => 'nullable|integer',
             'price' => 'required|integer',
-            'image1' => 'nullable|file',
-            'image2' => 'nullable|file',
-            'image3' => 'nullable|file',
-            'image4' => 'nullable|file',
-            'image5' => 'nullable|file',
+            'images' => 'nullable|array',
             'options' => 'nullable|json',
             'category' => 'nullable|exists:categories,id'
         ]);
@@ -95,7 +119,7 @@ class ProductsRepository
         $product = new Product;
         $product->title = $request->get('title');
         $product->description = $request->get('description');
-        $product->price= $request->get('price');
+        $product->price = $request->get('price');
 
         //create a folder for images
         $folder = str_random(20);
@@ -104,8 +128,7 @@ class ProductsRepository
         $product->folder = $path;
 
         //save additional images
-        $product->images = $this->saveImages($request,$path);
-
+        $product->images = $this->saveImages($request, $path);
 
         $product->thumbnail = $request->file('thumbnail') ? $request->file('thumbnail')->store($path) : '';
         $product->category_id = $request->get('category');
@@ -117,10 +140,9 @@ class ProductsRepository
     public function saveImages(Request $request, $path)
     {
         $images = [];
-        for($i =1;$i<6;$i++) {
-            $image = $request->file('image' . $i);
-            // if image exists save and add to array
-            if($image){
+        $requestImages = $request->file('images');
+        if ($requestImages) {
+            foreach ($requestImages as $image) {
                 $imageUrl = $image->store($path);
                 array_push($images, $imageUrl);
             }

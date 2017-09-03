@@ -5,17 +5,25 @@
         <div class="layout">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>{{$category->title}}</h2>
+                    <h2>{{$carousel->title}}</h2>
                     <form class="form-horizontal" role="form" method="POST"
-                          action="{{ route('admin.categories.update', ['id' => $category->id]) }}"
+                          action="{{ route('admin.carousels.update', ['id' => $carousel->id]) }}"
                           enctype="multipart/form-data">
+
+                        @if (count($errors) > 0)
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <div class="form-group">
                             <label for="title" class="col-md-2 control-label">Ad</label>
 
                             <div class="col-md-8">
                                 <input id="title" type="text" class="form-control" name="title" autofocus
-                                       value="{{ $category->title }}">
+                                       value="{{ $carousel->title }}">
                             </div>
                         </div>
 
@@ -24,7 +32,16 @@
 
                             <div class="col-md-8">
                                 <textarea name="description" id="description" cols="30" rows="10"
-                                          class="form-control">{{ $category->description }}</textarea>
+                                          class="form-control">{{ $carousel->description }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="url" class="col-md-2 control-label">Link</label>
+
+                            <div class="col-md-8">
+                                <input id="url" type="text" class="form-control" name="url" autofocus
+                                       value="{{ $carousel->url}}">
                             </div>
                         </div>
 
@@ -36,35 +53,16 @@
                                 <input type="file" id="image" multiple="" name="image">
                             </div>
                             <div class="col-md-5">
-                                <img src="/storage/{{$category->image_url}}" alt="" width="100%">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="select" class="col-md-2 control-label">Valideyin</label>
-
-                            <div class="col-md-8">
-                                <select id="select" class="form-control" name="parent">
-                                    <option value> Yoxdu </option>
-                                    @foreach($categories as $oneCategory)
-                                        @if($oneCategory->id == $category->parent_id)
-                                            <option value="{{ $oneCategory->id }}"
-                                                    selected> {{ $oneCategory->title }}</option>
-                                        @else
-                                            <option value="{{ $oneCategory->id }}"> {{ $oneCategory->title }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
+                                <img src="/storage/{{$carousel->image_url}}" alt="" width="100%">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="is_shown" class="col-md-2 control-label">Kateqoriyanı göstərmək</label>
+                            <label for="is_shown" class="col-md-2 control-label">Karuseli göstərmək</label>
                             <div class="col-md-5">
                                 <div class="checkbox">
                                     <label class="checkbox">
-                                        <input type="checkbox" name="is_shown" {{ $category->is_shown? 'checked':'' }}>
+                                        <input type="checkbox" name="is_shown" {{ $carousel->is_shown? 'checked':'' }}>
                                     </label>
                                 </div>
                             </div>

@@ -12,7 +12,7 @@ class Carousel extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description','image', 'url', 'is_shown'
+        'title', 'description','image_url', 'url', 'is_shown'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -27,5 +27,16 @@ class Carousel extends Model
      */
     public function user() {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Is shown scope
+     *
+     * @param $query
+     * @return mixedkk
+     */
+    public function scopeIsShown($query)
+    {
+        return $query->where('is_shown', true);
     }
 }

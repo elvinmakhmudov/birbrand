@@ -3,8 +3,8 @@
         <div class="layout">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Mənim sifarishlerim</h2>
-                    <table class="table table-striped table-hover ">
+                    <h2>Mənim sifarişlərim</h2>
+                    <table class="table table-hover">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -16,9 +16,20 @@
                         <tbody>
                         <tr v-for="order in orders">
                             <td>{{ order.id }}</td>
-                            <td><a :href="'#/product/'+order.products[0].id"><img :src="order.products[0].images[0]"
-                                                                                  width="20%"><span
-                                    class="table-order-link">{{ order.products[0].title }}</span></a></td>
+                            <td>
+                                <table class="table table-hover">
+                                    <tbody>
+                                    <tr v-for="product in order.products">
+                                        <td><a :href="'#/product/'+product.id"><img
+                                                :src="product.thumbnail" width="20%"><span
+                                                class="table-order-link">{{ product.title }}</span></a></td>
+                                        <td> {{ product.pivot.price }} AZN</td>
+                                        <td> {{ product.pivot.amount }} ədəd</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </td>
                             <td>{{ order.status }}</td>
 
                             <td>{{ fromNow(order.created_at) }}</td>

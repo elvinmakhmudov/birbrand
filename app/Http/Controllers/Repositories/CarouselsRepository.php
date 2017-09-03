@@ -2,6 +2,7 @@
 
 namespace BirBrand\Http\Controllers\Repositories;
 
+use BirBrand\Carousel;
 use BirBrand\Category;
 use BirBrand\Order;
 use BirBrand\Product;
@@ -11,22 +12,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class CategoriesRepository
+class CarouselsRepository
 {
     use ValidatesRequests;
 
     public function index()
     {
-        $categories = Category::with(['user', 'parent'])->get();
-        return view('admin.categories.index')->with('categories', $categories);
+        $carousels = Carousel::with('user')->get();
+        return view('admin.carousels.index')->with('carousels', $carousels);
     }
 
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        $categories = Category::all();
+        $carousel = Carousel::findOrFail($id);
 
-        return view('admin.categories.edit')->with(['category' => $category, 'categories' => $categories]);
+        return view('admin.carousels.edit')->with('carousel', $carousel);
     }
 
     public function update($id, $request)
@@ -36,34 +36,35 @@ class CategoriesRepository
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'image' => 'nullable|file',
-            'parent' => 'nullable|exists:categories,id',
+            'url' => 'nullable|string',
         ]);
 
         //update the category
-        $category = Category::findOrFail($id);
+        $carousel = Carousel::findOrFail($id);
 
         //if delete was clicked, delete the product
         if (!empty($request->get('delete'))){
-            Storage::deleteDirectory($category->folder);
-            $category->delete();
-            return redirect()->route('admin.categories.index');
+            Storage::delete($carousel->image_url);
+            $carousel->delete();
+            return redirect()->route('admin.carousels.index');
         }
 
-        $category->title = $request->get('title');
-        $category->slug = str_slug($request->get('title'), '-');
-        $category->description = $request->get('description');
+        $carousel->title = $request->get('title');
+        $carousel->description = $request->get('description');
+
         //if image exists, update it
         if ($request->file('image')) {
-            Storage::delete($category->image_url);
-            $category->image_url = $request->file('image') ? $request->file('image')->store($category->folder) : '';
+            Storage::delete($carousel->image_url);
+            $carousel->image_url = $request->file('image') ? $request->file('image')->store('carousels') : '';
         }
-        $category->parent_id = $request->get('parent');
 
-        //is category shown?
-        $category->is_shown = $request->get('is_shown') ? true : false;
+        $carousel->user_id = Auth::user()->id;
 
-        $category->save();
-        return redirect()->route('admin.categories.index');
+        //is  carousel shown?
+        $carousel->is_shown = $request->get('is_shown') ? true : false;
+
+        $carousel->save();
+        return redirect()->route('admin.carousels.index');
     }
 
     public function create()

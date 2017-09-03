@@ -16,7 +16,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'image_url', 'slug', 'user_id'
+        'title', 'description', 'image_url', 'slug', 'user_id','is_shown'
     ];
 
     /**
@@ -65,5 +65,17 @@ class Category extends Model
      */
     public function products() {
         return $this->hasMany(Product::class);
+    }
+
+
+    /**
+     * Is shown scope
+     *
+     * @param $query
+     * @return mixedkk
+     */
+    public function scopeIsShown($query)
+    {
+        return $query->where('is_shown', true);
     }
 }

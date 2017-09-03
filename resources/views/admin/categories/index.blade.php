@@ -22,11 +22,9 @@
                         <tbody>
                         @foreach($categories as $category)
                             <tr>
-                                <td>{{ $category->id }}</td>
+                                <td><a href="{{ route('admin.categories.edit', ['id' => $category->id]) }}">{{ $category->id }}</a></td>
                                 <td><a href="{{route('admin.products.index', ['id' =>$category->id])}}">{{ $category->title  }}</a></td>
-                                <td>
-                                    <a href="{{ route('admin.categories.edit', ['id' => $category->id ]) }}">{{ $category->description}}</a>
-                                </td>
+                                <td>{{ $category->description}}</td>
                                 @if(count($category->parent))
                                     <td>{{ $category->parent->title }}</tdjl>
                                 @else

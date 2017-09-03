@@ -22,6 +22,7 @@ $factory->define(BirBrand\Product::class, function (Faker\Generator $faker) {
         'category_id' => $faker->numberBetween(1,10),
         'folder' => $folder,
         'user_id' => 1,
+        'is_shown' => true,
         'thumbnail' => 'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',
         'images' =>['https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',
             'https://aldim.az/uploads/item_gallery_photo/20612/image/710715.jpg',

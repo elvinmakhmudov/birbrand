@@ -23,11 +23,9 @@
                         <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <td>{{ $product->id }}</td>
+                                <td><a href="{{ route('admin.products.edit', ['id' => $product->id]) }}">{{ $product->id }}</a></td>
                                 <td>{{ $product->title  }}</td>
-                                <td>
-                                    <a href="{{ route('admin.products.edit', ['id' => $category->id, 'productId' => $product->id]) }}">{{ $product->description}}</a>
-                                </td>
+                                <td>{{ $product->description }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>
                                     <img width="100%" src="/storage/{{$product->thumbnail}}" alt="">

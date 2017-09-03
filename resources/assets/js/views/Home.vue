@@ -2,7 +2,7 @@
     <div class="content">
         <div class="slideshow slider">
             <div v-for="slide in carousels">
-                <img alt="" :src="slide.image">
+                <img alt="" :src="'/storage/'+slide.image_url">
             </div>
         </div>
         <div class="layout">

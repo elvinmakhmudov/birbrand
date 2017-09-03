@@ -44,4 +44,5 @@ class OrdersController extends Controller
         $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->get();
         return $orders;
     }
+
 }

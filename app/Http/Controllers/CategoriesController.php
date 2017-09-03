@@ -12,8 +12,8 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('children')->get();
-        $carousels = Carousel::where('is_shown', true)->get();
+        $categories = Category::isShown()->with('children')->get();
+        $carousels = Carousel::isShown()->get();
         return ['categories' => $categories, 'carousels' => $carousels];
     }
 
@@ -22,7 +22,7 @@ class CategoriesController extends Controller
      * Show products of the category
      */
     public function show($slug) {
-        $category = Category::where('slug', $slug)->with('products', 'children')->first();
+        $category = Category::where('slug', $slug)->isShown()->with('products', 'children')->first();
 
         return $category;
     }

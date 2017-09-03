@@ -12,7 +12,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'price', 'image_url', 'options','old_price', 'sale_percent'
+        'title', 'description', 'price', 'image_url', 'options','old_price', 'sale_percent','is_shown'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -57,5 +57,16 @@ class Product extends Model
      */
     public function orders() {
         return $this->belongsToMany(Order::class)->withPivot('option', 'price', 'amount');
+    }
+
+    /**
+     * Is shown scope
+     *
+     * @param $query
+     * @return mixedkk
+     */
+    public function scopeIsShown($query)
+    {
+        return $query->where('is_shown', true);
     }
 }

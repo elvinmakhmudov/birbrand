@@ -17,8 +17,8 @@ $factory->define(BirBrand\Carousel::class, function (Faker\Generator $faker) {
     return [
         'title' => $title,
         'description' => $faker->paragraph(),
-        'user_id' => 1,
         'is_shown' => true,
-        'image' => 'https://aldim.az/uploads/banner/218/photo/light_resize/1444x800_crop_118af64bd984ce1ec1816025e4622dde.png',
+        'user_id' => 1,
+        'image_url' => 'https://aldim.az/uploads/banner/218/photo/light_resize/1444x800_crop_118af64bd984ce1ec1816025e4622dde.png',
     ];
 });

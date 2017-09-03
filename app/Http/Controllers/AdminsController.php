@@ -2,14 +2,12 @@
 
 namespace BirBrand\Http\Controllers;
 
-use BirBrand\Category;
+use BirBrand\Http\Controllers\Repositories\CarouselsRepository;
 use BirBrand\Http\Controllers\Repositories\CategoriesRepository;
+use BirBrand\Http\Controllers\Repositories\OrdersRepository;
 use BirBrand\Http\Controllers\Repositories\ProductsRepository;
-use BirBrand\Product;
+use BirBrand\Http\Controllers\Repositories\UsersRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Symfony\Component\Routing\Matcher\RedirectableUrlMatcher;
 
 class AdminsController extends Controller
 {
@@ -21,12 +19,27 @@ class AdminsController extends Controller
      * @var CategoriesRepository
      */
     private $categories;
+    /**
+     * @var UsersRepository
+     */
+    private $users;
+    /**
+     * @var OrdersRepository
+     */
+    private $orders;
+    /**
+     * @var CarouselsRepository
+     */
+    private $carousels;
 
-    public function __construct(ProductsRepository $products, CategoriesRepository $categories)
+    public function __construct(ProductsRepository $products, CategoriesRepository $categories, UsersRepository $users, OrdersRepository $orders, CarouselsRepository $carousels)
     {
         $this->middleware('admin');
         $this->products = $products;
         $this->categories = $categories;
+        $this->users = $users;
+        $this->orders = $orders;
+        $this->carousels = $carousels;
     }
 
     public function index()
@@ -65,9 +78,9 @@ class AdminsController extends Controller
         return $this->products->index($id, $request);
     }
 
-    public function getProductsEdit($id, $productId)
+    public function getProductsEdit($id)
     {
-        return $this->products->edit($id, $productId);
+        return $this->products->edit($id);
     }
 
 
@@ -85,5 +98,85 @@ class AdminsController extends Controller
     public function postProductsStore($categoryId, Request $request)
     {
         return $this->products->store($categoryId,$request);
+    }
+
+    public function getUsersIndex()
+    {
+        return $this->users->index();
+    }
+
+    public function getUsersEdit($id)
+    {
+        return $this->users->edit($id);
+    }
+
+    public function postUsersUpdate($id, Request $request)
+    {
+        return $this->users->update($id, $request);
+    }
+
+    public function getUsersCreate()
+    {
+        return $this->users->create();
+    }
+
+    public function postUsersStore(Request $request)
+    {
+        return $this->users->store($request);
+    }
+
+    public function getOrdersHome()
+    {
+        return $this->orders->home();
+    }
+
+    public function getOrdersIndex($userId)
+    {
+        return $this->orders->index($userId);
+    }
+
+    public function getOrdersEdit($id)
+    {
+        return $this->orders->edit($id);
+    }
+
+    public function postOrdersUpdate($id, Request $request)
+    {
+        return $this->orders->update($id, $request);
+    }
+
+    public function getOrdersCreate($userId)
+    {
+        return $this->orders->create($userId);
+    }
+
+    public function postOrdersStore($userId, Request $request)
+    {
+        return $this->orders->store($userId, $request);
+    }
+
+    public function getCarouselsIndex()
+    {
+        return $this->carousels->index();
+    }
+
+    public function getCarouselsEdit($id)
+    {
+        return $this->carousels->edit($id);
+    }
+
+    public function postCarouselsUpdate($id, Request $request)
+    {
+        return $this->carousels->update($id, $request);
+    }
+
+    public function getCarouselsCreate()
+    {
+        return $this->carousels->create();
+    }
+
+    public function postCarouselsStore(Request $request)
+    {
+        return $this->carousels->store($request);
     }
 }

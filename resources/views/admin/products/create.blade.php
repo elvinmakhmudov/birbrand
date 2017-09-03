@@ -61,52 +61,16 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image1" class="col-md-2 control-label">Elave shekil 1</label>
+                            <label for="images" class="col-md-2 control-label">Əlavə şəkillər</label>
 
                             <div class="col-md-8">
                                 <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image1" multiple="" name="image1">
+                                <input type="file" id="images" multiple="" name="images[]">
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="image2" class="col-md-2 control-label">Elave shekil 2</label>
-
-                            <div class="col-md-8">
-                                <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image2" multiple="" name="image2">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image3" class="col-md-2 control-label">Elave shekil 3</label>
-
-                            <div class="col-md-8">
-                                <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image3" multiple="" name="image3">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image4" class="col-md-2 control-label">Elave shekil 4</label>
-
-                            <div class="col-md-8">
-                                <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image4" multiple="" name="image4">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image5" class="col-md-2 control-label">Elave shekil 5</label>
-
-                            <div class="col-md-8">
-                                <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image5" multiple="" name="image5">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="select" class="col-md-2 control-label">Valideyin</label>
+                            <label for="select" class="col-md-2 control-label">Kategoriya</label>
 
                             <div class="col-md-8">
                                 <select id="select" class="form-control" name="category">
@@ -114,6 +78,17 @@
                                             <option value="{{ $oneCategory->id }}"> {{ $oneCategory->title }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="is_shown" class="col-md-2 control-label">Produktu göstərmək</label>
+                            <div class="col-md-5">
+                                <div class="checkbox">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="is_shown" >
+                                    </label>
+                                </div>
                             </div>
                         </div>
 

@@ -15,11 +15,11 @@ class CreateCarouselsTable extends Migration
     {
         Schema::create('carousels', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('image');
+            $table->string('image_url');
+            $table->boolean('is_shown')->default(false);
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->string('url')->nullable();
-            $table->boolean('is_shown')->default(false);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
