@@ -69,9 +69,7 @@ class CarouselsRepository
 
     public function create()
     {
-        $categories = Category::all();
-
-        return view('admin.categories.create')->with('categories', $categories);
+        return view('admin.carousels.create');
     }
 
     public function store(Request $request)
@@ -80,26 +78,27 @@ class CarouselsRepository
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'nullable|file',
-            'parent' => 'nullable|exists:categories,id',
+            'image' => 'required|file',
+            'url' => 'nullable|string',
         ]);
 
-        //create a category
-        $category = new Category;
-        $category->title = $request->get('title');
-        $category->description = $request->get('description');
-        $category->slug = str_slug($request->get('title'), '-');
+        //update the category
+        $carousel = new Carousel();
 
-        //create a folder for images
-        $folder = str_random(20);
-        $path = 'categories/' . $folder;
-        Storage::makeDirectory($path);
-        $category->folder = $path;
+        $carousel->title = $request->get('title');
+        $carousel->description = $request->get('description');
 
-        $category->image_url = $request->file('image') ? $request->file('image')->store($path) : '';
-        $category->parent_id = $request->get('parent');
-        $category->user()->associate(Auth::user());
-        $category->save();
-        return redirect()->route('admin.categories.index');
+        //if image exists, update it
+        if ($request->file('image')) {
+            $carousel->image_url = $request->file('image') ? $request->file('image')->store('carousels') : '';
+        }
+
+        $carousel->user_id = Auth::user()->id;
+
+        //is  carousel shown?
+        $carousel->is_shown = $request->get('is_shown') ? true : false;
+
+        $carousel->save();
+        return redirect()->route('admin.carousels.index');
     }
 }
