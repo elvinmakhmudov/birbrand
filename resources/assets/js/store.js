@@ -12,9 +12,13 @@ export default new Vuex.Store({
         user: {},
         carousel_shown: true,
         messages: new Messages(),
-        errors: new Errors()
+        errors: new Errors(),
+        banners: []
     },
     mutations: {
+        setBanners(state, banners) {
+            return state.banners = banners;
+        },
         setCategories(state, categories) {
             for(var i=0;i<categories.length;i++) {
                 if(categories[i].parent_id == undefined) {
@@ -35,6 +39,7 @@ export default new Vuex.Store({
                 axios.get('/category').then(function (response) {
                     context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
+                    context.commit('setBanners', response.data.banners);
                     resolve(response);
                 }).catch(function (response) {
                     reject(response);

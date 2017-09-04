@@ -16,6 +16,7 @@
                         <li><a href="{{  route('admin.users.index') }}">İstifadəçilər</a></li>
                         <li><a href="{{  route('admin.orders.home') }}">Sifarişlər</a></li>
                         <li><a href="{{  route('admin.carousels.index') }}">Karusel</a></li>
+                        <li><a href="{{  route('admin.banners.index') }}">Reklam</a></li>
                     </ul>
                 </div>
             </div>

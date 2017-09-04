@@ -21,7 +21,7 @@
                                     <tbody>
                                     <tr v-for="product in order.products">
                                         <td><a :href="'#/product/'+product.id"><img
-                                                :src="product.thumbnail" width="20%"><span
+                                                :src="'/storage/'+product.thumbnail" width="20%"><span
                                                 class="table-order-link">{{ product.title }}</span></a></td>
                                         <td> {{ product.pivot.price }} AZN</td>
                                         <td> {{ product.pivot.amount }} ədəd</td>

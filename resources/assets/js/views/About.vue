@@ -1,4 +1,5 @@
 <template>
+
     <div class="content">
         <div class="layout">
             Bizim haqqımızda
@@ -33,10 +34,6 @@
                     this.$store.state.carousel_shown =false;
                     console.log('in home vue carousel shown was false')
                 }
-//                event.$on('gotCarousel',function () {
-//                    this.mountCarousel();
-//                    console.log('slider');
-//                }.bind(this));
             },
             mountCarousel: function () {
                 $('.slider').slick({

@@ -2,6 +2,7 @@
 
 namespace BirBrand\Http\Controllers;
 
+use BirBrand\Http\Controllers\Repositories\BannersRepository;
 use BirBrand\Http\Controllers\Repositories\CarouselsRepository;
 use BirBrand\Http\Controllers\Repositories\CategoriesRepository;
 use BirBrand\Http\Controllers\Repositories\OrdersRepository;
@@ -31,8 +32,12 @@ class AdminsController extends Controller
      * @var CarouselsRepository
      */
     private $carousels;
+    /**
+     * @var BannersRepository
+     */
+    private $banners;
 
-    public function __construct(ProductsRepository $products, CategoriesRepository $categories, UsersRepository $users, OrdersRepository $orders, CarouselsRepository $carousels)
+    public function __construct(ProductsRepository $products, CategoriesRepository $categories, UsersRepository $users, OrdersRepository $orders, CarouselsRepository $carousels, BannersRepository $banners)
     {
         $this->middleware('admin');
         $this->products = $products;
@@ -40,6 +45,7 @@ class AdminsController extends Controller
         $this->users = $users;
         $this->orders = $orders;
         $this->carousels = $carousels;
+        $this->banners = $banners;
     }
 
     public function index()
@@ -178,5 +184,30 @@ class AdminsController extends Controller
     public function postCarouselsStore(Request $request)
     {
         return $this->carousels->store($request);
+    }
+
+    public function getBannersIndex()
+    {
+        return $this->banners->index();
+    }
+
+    public function getBannersEdit($id)
+    {
+        return $this->banners->edit($id);
+    }
+
+    public function postBannersUpdate($id, Request $request)
+    {
+        return $this->banners->update($id, $request);
+    }
+
+    public function getBannersCreate()
+    {
+        return $this->banners->create();
+    }
+
+    public function postBannersStore(Request $request)
+    {
+        return $this->banners->store($request);
     }
 }

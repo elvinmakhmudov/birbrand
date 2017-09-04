@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-3 col-xs-6">
+    <div class="col-md-3 col-xs-4">
         <div class="card-container">
             <div class="card product-card">
                 <a :href="'#/product/'+product.id">
@@ -13,7 +13,7 @@
                          alt="Card image cap">
                     <div class="card-block">
                         <h4 class="card-title">{{ product.title }}</h4>
-                        <a href="#" class="btn btn-raised btn-primary center-block btn-buy">Almaq</a>
+                        <!--<a href="#" class="btn btn-raised btn-primary center-block btn-buy">Almaq</a>-->
                     </div>
                 </a>
             </div>

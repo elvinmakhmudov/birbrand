@@ -30,6 +30,13 @@ Vue.component('product-card', require('./components/Product-card.vue'));
 Vue.component('category-card', require('./components/Category-card.vue'));
 Vue.component('container', require('./components/Container.vue'));
 Vue.component('flashmessage', require('./components/flash-message.vue'));
+
+
+//register banners
+Vue.component('top-banner', require('./components/banners/top-banner.vue'));
+Vue.component('left-banner', require('./components/banners/left-banner.vue'));
+Vue.component('right-banner', require('./components/banners/right-banner.vue'));
+
 import event from './classes/Event';
 
 
@@ -49,10 +56,31 @@ const app = new Vue({
                 $('.slider').slick({
                     arrows: false
                 });
-                this.$store.state.carousel_shown =false;
+                this.$store.state.carousel_shown = false;
+
+                //fix the banners on scroll and resize
+                var elementPosition = $('.left-banner').offset();
+                $(window).resize(function () {
+                    if ($(this).scrollTop() > elementPosition.top) {
+                        var p = $('.main-container').offset();
+                        $('.left-banner').css({left: p.left-200});
+                        $('.right-banner').css({left: p.left+1100});
+                    }
+                });
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > elementPosition.top) {
+                        var p = $('.main-container').offset();
+                        $('.left-banner').addClass('fixed').css({left: p.left-200});
+                        $('.right-banner').addClass('fixed').css({left: p.left+1100});
+                    } else {
+                        $('.left-banner').removeClass('fixed').css({left: '-200px'});
+                        $('.right-banner').removeClass('fixed').css({left: '1100px'});
+                    }
+                });
             }.bind(this))
         });
         this.$store.dispatch('getUser');
     },
 });
+
 

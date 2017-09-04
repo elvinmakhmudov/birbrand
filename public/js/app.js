@@ -1716,6 +1716,174 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/banners/left-banner.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentBanner: {}
+        };
+    },
+
+    computed: {
+        banners: function banners() {
+            var banners = this.$store.state.banners;
+            var topBanners = [];
+
+            for (var i = 0; i < banners.length; i++) {
+                if (banners[i].type == 'left-banner') {
+                    topBanners.push(banners[i]);
+                }
+            }
+            return topBanners;
+        },
+        url: function url() {
+            return typeof this.currentBanner.url !== 'undefined' ? this.currentBanner.url : '';
+        }
+    },
+    mounted: function mounted() {
+        var i = 0;
+        setInterval(function () {
+            this.changeImages(i);
+            i++;
+            var max = this.banners.length;
+            if (i == max) i = 0;
+        }.bind(this), 5000);
+    },
+
+    methods: {
+        changeImages: function changeImages(i) {
+            if (typeof this.banners[i] !== 'undefined') {
+                this.currentBanner = this.banners[i];
+            }
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/banners/right-banner.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentBanner: {}
+        };
+    },
+
+    computed: {
+        banners: function banners() {
+            var banners = this.$store.state.banners;
+            var topBanners = [];
+
+            for (var i = 0; i < banners.length; i++) {
+                if (banners[i].type == 'right-banner') {
+                    topBanners.push(banners[i]);
+                }
+            }
+            return topBanners;
+        },
+        url: function url() {
+            return typeof this.currentBanner.url !== 'undefined' ? this.currentBanner.url : '';
+        }
+    },
+    mounted: function mounted() {
+        var i = 0;
+        setInterval(function () {
+            this.changeImages(i);
+            i++;
+            var max = this.banners.length;
+            if (i == max) i = 0;
+        }.bind(this), 5000);
+    },
+
+    methods: {
+        changeImages: function changeImages(i) {
+            if (typeof this.banners[i] !== 'undefined') {
+                this.currentBanner = this.banners[i];
+            }
+        }
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/banners/top-banner.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            currentBanner: {}
+        };
+    },
+
+    computed: {
+        banners: function banners() {
+            var banners = this.$store.state.banners;
+            var topBanners = [];
+
+            for (var i = 0; i < banners.length; i++) {
+                if (banners[i].type == 'top-banner') {
+                    topBanners.push(banners[i]);
+                }
+            }
+            return topBanners;
+        },
+        url: function url() {
+            return typeof this.currentBanner.url !== 'undefined' ? this.currentBanner.url : '';
+        }
+    },
+    mounted: function mounted() {
+        var i = 0;
+        setInterval(function () {
+            this.changeImages(i);
+            i++;
+            var max = this.banners.length;
+            if (i == max) i = 0;
+        }.bind(this), 5000);
+    },
+
+    methods: {
+        changeImages: function changeImages(i) {
+            if (typeof this.banners[i] !== 'undefined') {
+                this.currentBanner = this.banners[i];
+            }
+        }
+    }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/flash-message.vue":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1864,6 +2032,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -1892,10 +2061,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.$store.state.carousel_shown = false;
                 console.log('in home vue carousel shown was false');
             }
-            //                event.$on('gotCarousel',function () {
-            //                    this.mountCarousel();
-            //                    console.log('slider');
-            //                }.bind(this));
         },
         mountCarousel: function mountCarousel() {
             $('.slider').slick({
@@ -1934,6 +2099,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1992,6 +2160,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -2020,10 +2190,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.$store.state.carousel_shown = false;
                 console.log('in home vue carousel shown was false');
             }
-            //                event.$on('gotCarousel',function () {
-            //                    this.mountCarousel();
-            //                    console.log('slider');
-            //                }.bind(this));
         },
         mountCarousel: function mountCarousel() {
             $('.slider').slick({
@@ -2232,6 +2398,8 @@ var _methods;
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -31881,7 +32049,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-md-3 col-xs-6"
+    staticClass: "col-md-3 col-xs-4"
   }, [_c('div', {
     staticClass: "card-container"
   }, [_c('div', {
@@ -31904,18 +32072,67 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "card-block"
   }, [_c('h4', {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.product.title))]), _vm._v(" "), _c('a', {
-    staticClass: "btn btn-raised btn-primary center-block btn-buy",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Almaq")])])])])])])
+  }, [_vm._v(_vm._s(_vm.product.title))])])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-07a50a22", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-09044366\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/banners/right-banner.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "right-banner"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.url
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": 'storage/' + _vm.currentBanner.image_url,
+      "alt": ""
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-09044366", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2f89504e\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/banners/left-banner.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "left-banner"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.url
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": 'storage/' + _vm.currentBanner.image_url,
+      "alt": ""
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-2f89504e", module.exports)
   }
 }
 
@@ -32237,6 +32454,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "layout"
@@ -32260,7 +32479,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "product": product
       }
     })], 1)
-  })], 2)])])
+  })], 2)])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -32515,7 +32734,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }, [_c('img', {
         attrs: {
-          "src": product.thumbnail,
+          "src": '/storage/' + product.thumbnail,
           "width": "20%"
         }
       }), _c('span', {
@@ -32531,6 +32750,33 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
      require("vue-hot-reload-api").rerender("data-v-805baed6", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9fa35266\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/banners/top-banner.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "top-banner"
+  }, [_c('a', {
+    attrs: {
+      "href": _vm.url
+    }
+  }, [_c('img', {
+    attrs: {
+      "src": 'storage/' + _vm.currentBanner.image_url,
+      "alt": ""
+    }
+  })])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-9fa35266", module.exports)
   }
 }
 
@@ -32697,6 +32943,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "slideshow slider"
@@ -32717,7 +32965,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "category": category
       }
     })], 1)
-  }))])
+  }))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -32734,6 +32982,8 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    staticClass: "container"
+  }, [_c('div', {
     staticClass: "content"
   }, [_c('div', {
     staticClass: "layout"
@@ -32841,25 +33091,25 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "data-toggle": "modal"
     }
-  }, [_vm._v("İndi al\n                                    ")]), _vm._v(" "), _c('button', {
+  }, [_vm._v("İndi al\n                                        ")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
       "type": "submit",
       "data-toggle": "modal",
       "data-target": "#complete-dialog"
     }
-  }, [_vm._v("Səbətə at\n                                    ")])])])])]), _vm._v(" "), _c('div', {
+  }, [_vm._v("Səbətə at\n                                        ")])])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4 col-xs-6"
   }, [_c('shippingInfo')], 1), _vm._v(" "), _c('div', {
     staticClass: "col-md-12"
   }, [_c('h4', [_vm._v("Xususiyyetler")]), _vm._v(" "), _c('div', {
     staticClass: "product-description"
-  }, [_vm._v("\n                            " + _vm._s(_vm.product.description) + "\n                        ")])])])])])]), _vm._v(" "), _c('buyitguest', {
+  }, [_vm._v("\n                                " + _vm._s(_vm.product.description) + "\n                            ")])])])])])]), _vm._v(" "), _c('buyitguest', {
     attrs: {
       "productId": _vm.product.id,
       "amount": _vm.amount
     }
-  })], 1)
+  })], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -46686,6 +46936,129 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/assets/js/components/banners/left-banner.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/banners/left-banner.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-2f89504e\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/banners/left-banner.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\elvis\\Project\\Code\\project\\resources\\assets\\js\\components\\banners\\left-banner.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] left-banner.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2f89504e", Component.options)
+  } else {
+    hotAPI.reload("data-v-2f89504e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/banners/right-banner.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/banners/right-banner.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-09044366\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/banners/right-banner.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\elvis\\Project\\Code\\project\\resources\\assets\\js\\components\\banners\\right-banner.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] right-banner.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-09044366", Component.options)
+  } else {
+    hotAPI.reload("data-v-09044366", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/components/banners/top-banner.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/components/banners/top-banner.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-9fa35266\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/components/banners/top-banner.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\elvis\\Project\\Code\\project\\resources\\assets\\js\\components\\banners\\top-banner.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] top-banner.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-9fa35266", Component.options)
+  } else {
+    hotAPI.reload("data-v-9fa35266", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
 /***/ "./resources/assets/js/components/flash-message.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -46853,6 +47226,12 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('category-card', __webpack
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('container', __webpack_require__("./resources/assets/js/components/Container.vue"));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('flashmessage', __webpack_require__("./resources/assets/js/components/flash-message.vue"));
 
+//register banners
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('top-banner', __webpack_require__("./resources/assets/js/components/banners/top-banner.vue"));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('left-banner', __webpack_require__("./resources/assets/js/components/banners/left-banner.vue"));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('right-banner', __webpack_require__("./resources/assets/js/components/banners/right-banner.vue"));
+
+
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
@@ -46873,6 +47252,26 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                     arrows: false
                 });
                 this.$store.state.carousel_shown = false;
+
+                //fix the banners on scroll and resize
+                var elementPosition = $('.left-banner').offset();
+                $(window).resize(function () {
+                    if ($(this).scrollTop() > elementPosition.top) {
+                        var p = $('.main-container').offset();
+                        $('.left-banner').css({ left: p.left - 200 });
+                        $('.right-banner').css({ left: p.left + 1100 });
+                    }
+                });
+                $(window).scroll(function () {
+                    if ($(this).scrollTop() > elementPosition.top) {
+                        var p = $('.main-container').offset();
+                        $('.left-banner').addClass('fixed').css({ left: p.left - 200 });
+                        $('.right-banner').addClass('fixed').css({ left: p.left + 1100 });
+                    } else {
+                        $('.left-banner').removeClass('fixed').css({ left: '-200px' });
+                        $('.right-banner').removeClass('fixed').css({ left: '1100px' });
+                    }
+                });
             }.bind(_this));
         });
         this.$store.dispatch('getUser');
@@ -47543,9 +47942,13 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         user: {},
         carousel_shown: true,
         messages: new __WEBPACK_IMPORTED_MODULE_3__classes_Messages__["a" /* default */](),
-        errors: new __WEBPACK_IMPORTED_MODULE_4__classes_Errors__["a" /* default */]()
+        errors: new __WEBPACK_IMPORTED_MODULE_4__classes_Errors__["a" /* default */](),
+        banners: []
     },
     mutations: {
+        setBanners: function setBanners(state, banners) {
+            return state.banners = banners;
+        },
         setCategories: function setCategories(state, categories) {
             for (var i = 0; i < categories.length; i++) {
                 if (categories[i].parent_id == undefined) {
@@ -47566,6 +47969,7 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
                 __WEBPACK_IMPORTED_MODULE_1_axios___default.a.get('/category').then(function (response) {
                     context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
+                    context.commit('setBanners', response.data.banners);
                     resolve(response);
                 }).catch(function (response) {
                     reject(response);

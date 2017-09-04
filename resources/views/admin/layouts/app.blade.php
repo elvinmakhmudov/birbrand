@@ -19,11 +19,12 @@
 <div id="app">
     @include('layouts.nav.main')
     @include('admin.layouts.nav.categories')
-    @yield('content')
+    <div class="container">
+        @yield('content')
+    </div>
 </div>
 <!-- Scripts -->
 @include('layouts.footer')
-<script src="{{ mix('js/app.js') }}"></script>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>

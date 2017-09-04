@@ -1,73 +1,75 @@
 <template>
-    <div class="content">
-        <div class="layout">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <ol class="breadcrumb">
-                                <li v-for="ancestor in ancestors"><a
-                                        :href="'#/category/' + ancestor.slug">{{ ancestor.title }}</a></li>
-                                <li><a href="#">{{ product.title }}</a></li>
-                            </ol>
+    <div class="container">
+        <div class="content">
+            <div class="layout">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ol class="breadcrumb">
+                                    <li v-for="ancestor in ancestors"><a
+                                            :href="'#/category/' + ancestor.slug">{{ ancestor.title }}</a></li>
+                                    <li><a href="#">{{ product.title }}</a></li>
+                                </ol>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h2>{{ product.title }}</h2>
-                        </div>
-                        <div class="col-md-4 col-xs-6">
-                            <div class="product-img">
-                                <img class="xzoom" :src="'/storage/'+product.thumbnail"
-                                     :xoriginal="'/storage/'+product.thumbnail"/>
-                                <div class="xzoom-thumbs">
-                                    <a v-for="image in product.images " :href="'/storage/'+image">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>{{ product.title }}</h2>
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <div class="product-img">
+                                    <img class="xzoom" :src="'/storage/'+product.thumbnail"
+                                         :xoriginal="'/storage/'+product.thumbnail"/>
+                                    <div class="xzoom-thumbs">
+                                        <a v-for="image in product.images " :href="'/storage/'+image">
 
-                                        <img class="xzoom-gallery" :src="'/storage/'+image">
-                                    </a>
+                                            <img class="xzoom-gallery" :src="'/storage/'+image">
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--<div class="product-img">-->
+                                <!--<img :src="product.image_url" alt="Card image cap">-->
+                                <!--</div>-->
+                            </div>
+                            <div class="col-md-4 col-xs-6">
+                                <h2>{{ product.price }} AZN </h2><br>
+                                <div class="product-options">
+                                    <span>Sechimler </span><br>
+                                    <form @submit.prevent="buyIt()">
+                                        <div class="form-group">
+                                            <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
+                                            <div class="col-sm-10">
+                                                <label class="control-label text-danger" v-if="errors.has('amount')"
+                                                       v-text="errors.get('amount')"></label>
+                                                <input type="number" @keydown="errors.purge()" class="form-control"
+                                                       id="i5ps" value="1" min="1" max="100" v-model="amount">
+                                            </div>
+                                            <button class="btn btn-raised btn-primary" data-toggle="modal"
+                                            >İndi al
+                                            </button>
+                                            <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                                    data-target="#complete-dialog">Səbətə at
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <!--<div class="product-img">-->
-                            <!--<img :src="product.image_url" alt="Card image cap">-->
-                            <!--</div>-->
-                        </div>
-                        <div class="col-md-4 col-xs-6">
-                            <h2>{{ product.price }} AZN </h2><br>
-                            <div class="product-options">
-                                <span>Sechimler </span><br>
-                                <form @submit.prevent="buyIt()">
-                                    <div class="form-group">
-                                        <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
-                                        <div class="col-sm-10">
-                                            <label class="control-label text-danger" v-if="errors.has('amount')"
-                                                   v-text="errors.get('amount')"></label>
-                                            <input type="number" @keydown="errors.purge()" class="form-control"
-                                                   id="i5ps" value="1" min="1" max="100" v-model="amount">
-                                        </div>
-                                        <button class="btn btn-raised btn-primary" data-toggle="modal"
-                                        >İndi al
-                                        </button>
-                                        <button type="submit" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#complete-dialog">Səbətə at
-                                        </button>
-                                    </div>
-                                </form>
+                            <div class="col-md-4 col-xs-6">
+                                <shippingInfo></shippingInfo>
                             </div>
-                        </div>
-                        <div class="col-md-4 col-xs-6">
-                            <shippingInfo></shippingInfo>
-                        </div>
-                        <div class="col-md-12">
-                            <h4>Xususiyyetler</h4>
-                            <div class="product-description">
-                                {{ product.description }}
+                            <div class="col-md-12">
+                                <h4>Xususiyyetler</h4>
+                                <div class="product-description">
+                                    {{ product.description }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <buyitguest :productId="product.id" :amount="amount"></buyitguest>
         </div>
-        <buyitguest :productId="product.id" :amount="amount"></buyitguest>
     </div>
 
 </template>

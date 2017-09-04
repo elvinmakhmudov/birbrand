@@ -43,7 +43,7 @@ class CarouselsRepository
         $carousel = Carousel::findOrFail($id);
 
         //if delete was clicked, delete the product
-        if (!empty($request->get('delete'))){
+        if (!empty($request->get('delete'))) {
             Storage::delete($carousel->image_url);
             $carousel->delete();
             return redirect()->route('admin.carousels.index');
@@ -51,6 +51,7 @@ class CarouselsRepository
 
         $carousel->title = $request->get('title');
         $carousel->description = $request->get('description');
+        $carousel->url = $request->get('url');
 
         //if image exists, update it
         if ($request->file('image')) {
@@ -82,16 +83,14 @@ class CarouselsRepository
             'url' => 'nullable|string',
         ]);
 
-        //update the category
+        //create a carousel
         $carousel = new Carousel();
 
         $carousel->title = $request->get('title');
         $carousel->description = $request->get('description');
+        $carousel->url = $request->get('url');
 
-        //if image exists, update it
-        if ($request->file('image')) {
-            $carousel->image_url = $request->file('image') ? $request->file('image')->store('carousels') : '';
-        }
+        $carousel->image_url = $request->file('image') ? $request->file('image')->store('carousels') : '';
 
         $carousel->user_id = Auth::user()->id;
 

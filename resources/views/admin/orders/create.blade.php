@@ -43,6 +43,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="select" class="col-md-2 control-label">Produkt</label>
+
+                            <div class="col-md-8">
+                                <select id="select" class="form-control" name="products[]" multiple>
+                                    <option value> Yoxdu</option>
+                                    @foreach($products as $oneProduct)
+                                        <option value="{{ $oneProduct->id }}"> {{ $oneProduct->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="select" class="col-md-2 control-label">İstifadəçi</label>
 
                             <div class="col-md-8">
@@ -58,19 +71,6 @@
                                                 ({{$oneUser->name}})
                                             </option>
                                         @endif
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="select" class="col-md-2 control-label">Produkt</label>
-
-                            <div class="col-md-8">
-                                <select id="select" class="form-control" name="products[]" multiple>
-                                    <option value> Yoxdu</option>
-                                    @foreach($products as $oneProduct)
-                                        <option value="{{ $oneProduct->id }}"> {{ $oneProduct->title }}</option>
                                     @endforeach
                                 </select>
                             </div>

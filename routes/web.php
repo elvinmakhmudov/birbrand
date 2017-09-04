@@ -66,6 +66,13 @@ Route::prefix('admin665')->group(function (){
     Route::get('carousels/create', 'AdminsController@getCarouselsCreate')->name('admin.carousels.create');
     Route::post('carousels/{id}/update', 'AdminsController@postCarouselsUpdate')->name('admin.carousels.update');
     Route::get('carousels/{id}', 'AdminsController@getCarouselsEdit')->name('admin.carousels.edit');
+    
+    //admin banners controller
+    Route::get('banners', 'AdminsController@getBannersIndex')->name('admin.banners.index');
+    Route::post('banners', 'AdminsController@postBannersStore')->name('admin.banners.store');
+    Route::get('banners/create', 'AdminsController@getBannersCreate')->name('admin.banners.create');
+    Route::post('banners/{id}/update', 'AdminsController@postBannersUpdate')->name('admin.banners.update');
+    Route::get('banners/{id}', 'AdminsController@getBannersEdit')->name('admin.banners.edit');
 });
 
 //Route::get('/{vue_capture?}', function () {

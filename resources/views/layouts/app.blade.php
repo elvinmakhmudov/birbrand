@@ -18,6 +18,7 @@
 <body>
 <div id="app">
     <flashmessage></flashmessage>
+    <top-banner></top-banner>
     @include('layouts.nav.main')
     @include('layouts.nav.categories')
     @yield('content')
