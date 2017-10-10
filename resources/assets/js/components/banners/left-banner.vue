@@ -1,5 +1,5 @@
 <template>
-    <div class="left-banner">
+    <div class="left-banner" v-show="imageUrl">
         <a :href="url"><img :src="'storage/'+currentBanner.image_url" alt=""></a>
     </div>
 </template>
@@ -25,16 +25,20 @@
             },
             url() {
                 return ((typeof this.currentBanner.url !== 'undefined') ? this.currentBanner.url : '');
+            },
+            imageUrl() {
+                return ((typeof this.currentBanner.image_url!== 'undefined') ? ('storage/'+ this.currentBanner.image_url) : '');
             }
         },
         mounted() {
             var i = 0;
+                this.changeImages(i);
             setInterval(function () {
                 this.changeImages(i);
                 i++;
                 var max = this.banners.length;
                 if (i == max) i = 0;
-            }.bind(this), 5000);
+            }.bind(this), 0);
         },
         methods: {
             changeImages(i) {

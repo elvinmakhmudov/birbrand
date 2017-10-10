@@ -48,7 +48,7 @@
                                             <button class="btn btn-raised btn-primary" data-toggle="modal"
                                             >İndi al
                                             </button>
-                                            <button type="submit" class="btn btn-primary" data-toggle="modal"
+                                            <button @click.prevent="addToCart()" class="btn btn-primary" data-toggle="modal"
                                                     data-target="#complete-dialog">Səbətə at
                                             </button>
                                         </div>
@@ -110,11 +110,28 @@
             console.log('product vue created')
         },
         methods: {
+            addToCart() {
+                axios.post('cart', {
+                    productId: this.product.id,
+                    options: this.product.options,
+                    amount: this.amount
+                }).then(function (response) {
+                    this.$store.state.errors.record(response.data.errors);
+                    this.$store.state.messages.record(response.data.messages);
+                    this.$store.commit('setCart', response.data.cart);
+                    $('#flash-message').modal('toggle');
+                    console.log(response.data.cart)
+                }.bind(this)).catch(error => {
+                    this.errors.record(error.response.data);
+                });
+
+            },
             buyIt() {
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
                 if (isLoggedIn) {
                     axios.post('order', {
                         productId: this.product.id,
+                        options: this.product.options,
                         amount: this.amount
                     }).then(function (response) {
                         this.$store.state.errors.record(response.data.errors);

@@ -145,7 +145,7 @@ class OrdersRepository
             $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } catch (Exception $e) {
-            return ['errors' => ['Sef bash verdi.']];
+            return ['errors' => ['Səf baş verdi.']];
         }
     }
 

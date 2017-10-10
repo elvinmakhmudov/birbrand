@@ -36,6 +36,10 @@ var routes = [
         path: '/about',
         component: require('./views/About'),
     },
+    {
+        path: '/cart',
+        component: require('./views/Shopping-cart'),
+    },
 ];
 
 

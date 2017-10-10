@@ -2,9 +2,10 @@
 
 namespace BirBrand;
 
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Product extends Model implements Buyable
 {
     /**
      * The attributes that are mass assignable.
@@ -68,5 +69,38 @@ class Product extends Model
     public function scopeIsShown($query)
     {
         return $query->where('is_shown', true);
+    }
+
+    /**
+     * Get the identifier of the Buyable item.
+     *
+     * @return int|string
+     */
+    public function getBuyableIdentifier($options = null)
+    {
+        return $this->id;
+        // TODO: Implement getBuyableIdentifier() method.
+    }
+
+    /**
+     * Get the description or title of the Buyable item.
+     *
+     * @return string
+     */
+    public function getBuyableDescription($options = null)
+    {
+        return $this->title;
+        // TODO: Implement getBuyableDescription() method.
+    }
+
+    /**
+     * Get the price of the Buyable item.
+     *
+     * @return float
+     */
+    public function getBuyablePrice($options = null)
+    {
+        return $this->price;
+        // TODO: Implement getBuyablePrice() method.
     }
 }

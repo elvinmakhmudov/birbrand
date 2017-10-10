@@ -13,7 +13,9 @@ export default new Vuex.Store({
         carousel_shown: true,
         messages: new Messages(),
         errors: new Errors(),
-        banners: []
+        banners: [],
+        cartItems: [],
+        topBannerHeight: 0
     },
     mutations: {
         setBanners(state, banners) {
@@ -32,6 +34,9 @@ export default new Vuex.Store({
         setUser(state,user) {
             state.user = user;
         },
+        setCart(state,cart) {
+            state.cartItems= cart;
+        },
     },
     actions: {
         getHomeData(context) {
@@ -40,6 +45,7 @@ export default new Vuex.Store({
                     context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
                     context.commit('setBanners', response.data.banners);
+                    context.commit('setCart', response.data.cart);
                     resolve(response);
                 }).catch(function (response) {
                     reject(response);

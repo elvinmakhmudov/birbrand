@@ -1,5 +1,4 @@
 <template>
-
     <div class="content">
         <div class="layout">
             Bizim haqqımızda

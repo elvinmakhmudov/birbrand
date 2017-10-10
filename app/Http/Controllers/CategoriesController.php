@@ -5,6 +5,7 @@ namespace BirBrand\Http\Controllers;
 use BirBrand\Banner;
 use BirBrand\Carousel;
 use BirBrand\Category;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CategoriesController extends Controller
 {
@@ -19,7 +20,9 @@ class CategoriesController extends Controller
 
         $banners = Banner::isShown()->get();
 
-        return ['categories' => $categories, 'carousels' => $carousels, 'banners' => $banners];
+        $cart = Cart::content();
+
+        return ['categories' => $categories, 'carousels' => $carousels, 'banners' => $banners, 'cart' => $cart ];
     }
 
 

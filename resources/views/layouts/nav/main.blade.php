@@ -13,7 +13,7 @@
                     <a class="navbar-brand" href="#">{{ config('app.name', 'BirBrand') }}</a>
                 </div>
                 <div class="navbar-collapse collapse navbar-responsive-collapse">
-                    <form class="navbar-form navbar-left ">
+<!--                     <form class="navbar-form navbar-left ">
                         <div class="search-bar">
                             <div class="form-group">
                                 <input type="text" class="form-control col-sm-8" size="50"
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </form>
-                            <!-- Authentication Links -->
+ -->                            <!-- Authentication Links -->
                     <ul class="nav navbar-nav navbar-right navbar-login">
                         @if (Auth::guest())
                             <li><a href="#/login" >Giriş</a></li>
@@ -65,6 +65,9 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="javascript:void(0)"><span class="glyphicon glyphicon-earphone"
                                                                aria-hidden="true"></span> +994 51 855 01 05</a>
+                        </li>
+                        <li><a href="#/cart"><span class="glyphicon glyphicon-shopping-cart"
+                                                               aria-hidden="true"></span>
                         </li>
                         <li><a href="#/about">Haqqimizda</a></li>
                     </ul>

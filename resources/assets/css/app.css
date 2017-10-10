@@ -348,7 +348,8 @@ xzoom-thumbs {
 
 @media (max-width: 1199px) {
     .navbar .navbar-form {
-        margin-top: 16px;
+        /*margin-top: 16px;*/
+        height: 80px;
     }
 }
 

@@ -1749,16 +1749,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         url: function url() {
             return typeof this.currentBanner.url !== 'undefined' ? this.currentBanner.url : '';
+        },
+        imageUrl: function imageUrl() {
+            return typeof this.currentBanner.image_url !== 'undefined' ? 'storage/' + this.currentBanner.image_url : '';
         }
     },
     mounted: function mounted() {
         var i = 0;
+        this.changeImages(i);
         setInterval(function () {
             this.changeImages(i);
             i++;
             var max = this.banners.length;
             if (i == max) i = 0;
-        }.bind(this), 5000);
+        }.bind(this), 0);
     },
 
     methods: {
@@ -1805,6 +1809,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         url: function url() {
             return typeof this.currentBanner.url !== 'undefined' ? this.currentBanner.url : '';
+        },
+        imageUrl: function imageUrl() {
+            return typeof this.currentBanner.image_url !== 'undefined' ? 'storage/' + this.currentBanner.image_url : '';
         }
     },
     mounted: function mounted() {
@@ -1857,20 +1864,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     topBanners.push(banners[i]);
                 }
             }
+
             return topBanners;
         },
         url: function url() {
             return typeof this.currentBanner.url !== 'undefined' ? this.currentBanner.url : '';
+        },
+        imageUrl: function imageUrl() {
+            return typeof this.currentBanner.image_url !== 'undefined' ? 'storage/' + this.currentBanner.image_url : '';
         }
     },
     mounted: function mounted() {
         var i = 0;
+        this.changeImages(i);
+        this.$store.state.topBannerHeight = $('.top-banner img').height();
         setInterval(function () {
             this.changeImages(i);
             i++;
             var max = this.banners.length;
             if (i == max) i = 0;
-        }.bind(this), 5000);
+        }.bind(this), 0);
     },
 
     methods: {
@@ -2032,7 +2045,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -2180,7 +2192,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.fetchData();
-        console.log('mounted home');
     },
 
     methods: {
@@ -2188,7 +2199,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (!this.$store.state.carousel_shown) {
                 this.mountCarousel();
                 this.$store.state.carousel_shown = false;
-                console.log('in home vue carousel shown was false');
             }
         },
         mountCarousel: function mountCarousel() {
@@ -2512,20 +2522,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
 
     methods: (_methods = {
-        buyIt: function buyIt() {
+        addToCart: function addToCart() {
             var _this = this;
+
+            axios.post('cart', {
+                productId: this.product.id,
+                options: this.product.options,
+                amount: this.amount
+            }).then(function (response) {
+                this.$store.state.errors.record(response.data.errors);
+                this.$store.state.messages.record(response.data.messages);
+                this.$store.commit('setCart', response.data.cart);
+                $('#flash-message').modal('toggle');
+                console.log(response.data.cart);
+            }.bind(this)).catch(function (error) {
+                _this.errors.record(error.response.data);
+            });
+        },
+        buyIt: function buyIt() {
+            var _this2 = this;
 
             var isLoggedIn = $("meta[name=login-status]").attr('content');
             if (isLoggedIn) {
                 axios.post('order', {
                     productId: this.product.id,
+                    options: this.product.options,
                     amount: this.amount
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
                     $('#flash-message').modal('toggle');
                 }.bind(this)).catch(function (error) {
-                    _this.errors.record(error.response.data);
+                    _this2.errors.record(error.response.data);
                 });
             } else {
                 $('#buy-it-guest').modal('toggle');
@@ -2865,6 +2893,56 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         console.log('register vue created');
+    }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/views/Shopping-cart.vue":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    computed: {
+        cartItems: function cartItems() {
+            console.log("Cart items are: " + this.$cookie.get('cartItems'));
+            return this.$store.state.cartItems;
+        }
     }
 });
 
@@ -31625,6 +31703,221 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/tiny-cookie/tiny-cookie.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+ * tiny-cookie - A tiny cookie manipulation plugin
+ * https://github.com/Alex1990/tiny-cookie
+ * Under the MIT license | (c) Alex Chao
+ */
+
+!(function(root, factory) {
+
+  // Uses CommonJS, AMD or browser global to create a jQuery plugin.
+  // See: https://github.com/umdjs/umd
+  if (true) {
+    // Expose this plugin as an AMD module. Register an anonymous module.
+    !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else if (typeof exports === 'object') {
+    // Node/CommonJS module
+    module.exports = factory();
+  } else {
+    // Browser globals 
+    root.Cookie = factory();
+  }
+
+}(this, function() {
+
+  'use strict';
+
+  // The public function which can get/set/remove cookie.
+  function Cookie(key, value, opts) {
+    if (value === void 0) {
+      return Cookie.get(key);
+    } else if (value === null) {
+      Cookie.remove(key);
+    } else {
+      Cookie.set(key, value, opts);
+    }
+  }
+
+  // Check if the cookie is enabled.
+  Cookie.enabled = function() {
+    var key = '__test_key';
+    var enabled;
+
+    document.cookie = key + '=1';
+    enabled = !!document.cookie;
+
+    if (enabled) Cookie.remove(key);
+
+    return enabled;
+  };
+
+  // Get the cookie value by the key.
+  Cookie.get = function(key, raw) {
+    if (typeof key !== 'string' || !key) return null;
+
+    key = '(?:^|; )' + escapeRe(key) + '(?:=([^;]*?))?(?:;|$)';
+
+    var reKey = new RegExp(key);
+    var res = reKey.exec(document.cookie);
+
+    return res !== null ? (raw ? res[1] : decodeURIComponent(res[1])) : null;
+  };
+
+  // Get the cookie's value without decoding.
+  Cookie.getRaw = function(key) {
+    return Cookie.get(key, true);
+  };
+
+  // Set a cookie.
+  Cookie.set = function(key, value, raw, opts) {
+    if (raw !== true) {
+      opts = raw;
+      raw = false;
+    }
+    opts = opts ? convert(opts) : convert({});
+    var cookie = key + '=' + (raw ? value : encodeURIComponent(value)) + opts;
+    document.cookie = cookie;
+  };
+
+  // Set a cookie without encoding the value.
+  Cookie.setRaw = function(key, value, opts) {
+    Cookie.set(key, value, true, opts);
+  };
+
+  // Remove a cookie by the specified key.
+  Cookie.remove = function(key) {
+    Cookie.set(key, 'a', { expires: new Date() });
+  };
+
+  // Helper function
+  // ---------------
+
+  // Escape special characters.
+  function escapeRe(str) {
+    return str.replace(/[.*+?^$|[\](){}\\-]/g, '\\$&');
+  }
+
+  // Convert an object to a cookie option string.
+  function convert(opts) {
+    var res = '';
+
+    for (var p in opts) {
+      if (opts.hasOwnProperty(p)) {
+
+        if (p === 'expires') {
+          var expires = opts[p];
+          if (typeof expires !== 'object') {
+            expires += typeof expires === 'number' ? 'D' : '';
+            expires = computeExpires(expires);
+          }
+          opts[p] = expires.toUTCString();
+        }
+
+        if (p === 'secure') {
+          if (opts[p]) {
+            res += ';' + p;
+          }
+
+          continue;
+        }
+
+        res += ';' + p + '=' + opts[p];
+      }
+    }
+
+    if (!opts.hasOwnProperty('path')) {
+      res += ';path=/';
+    }
+
+    return res;
+  }
+
+  // Return a future date by the given string.
+  function computeExpires(str) {
+    var expires = new Date();
+    var lastCh = str.charAt(str.length - 1);
+    var value = parseInt(str, 10);
+
+    switch (lastCh) {
+      case 'Y': expires.setFullYear(expires.getFullYear() + value); break;
+      case 'M': expires.setMonth(expires.getMonth() + value); break;
+      case 'D': expires.setDate(expires.getDate() + value); break;
+      case 'h': expires.setHours(expires.getHours() + value); break;
+      case 'm': expires.setMinutes(expires.getMinutes() + value); break;
+      case 's': expires.setSeconds(expires.getSeconds() + value); break;
+      default: expires = new Date(str);
+    }
+
+    return expires;
+  }
+
+  return Cookie;
+
+}));
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-cookie/src/vue-cookie.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+(function () {
+    Number.isInteger = Number.isInteger || function (value) {
+        return typeof value === 'number' &&
+            isFinite(value) &&
+            Math.floor(value) === value;
+    };
+    var Cookie = __webpack_require__("./node_modules/tiny-cookie/tiny-cookie.js");
+
+    var VueCookie = {
+
+        install: function (Vue) {
+            Vue.prototype.$cookie = this;
+            Vue.cookie = this;
+        },
+        set: function (name, value, daysOrOptions) {
+            var opts = daysOrOptions;
+            if(Number.isInteger(daysOrOptions)) {
+                opts = {expires: daysOrOptions};
+            }
+            return Cookie.set(name, value, opts);
+        },
+
+        get: function (name) {
+            return Cookie.get(name);
+        },
+
+        delete: function (name, options) {
+            var opts = {expires: -1};
+            if(options !== undefined) {
+                opts = Object.assign(options, opts);
+            }
+            this.set(name, '', opts);
+        }
+    };
+
+    if (true) {
+        module.exports = VueCookie;
+    } else if (typeof define == "function" && define.amd) {
+        define([], function(){ return VueCookie; })
+    } else if (window.Vue) {
+        window.VueCookie = VueCookie;
+        Vue.use(VueCookie);
+    }
+
+})();
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/component-normalizer.js":
 /***/ (function(module, exports) {
 
@@ -32089,6 +32382,12 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.imageUrl),
+      expression: "imageUrl"
+    }],
     staticClass: "right-banner"
   }, [_c('a', {
     attrs: {
@@ -32116,6 +32415,12 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.imageUrl),
+      expression: "imageUrl"
+    }],
     staticClass: "left-banner"
   }, [_c('a', {
     attrs: {
@@ -32449,6 +32754,47 @@ if (false) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-46046b2c\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/Shopping-cart.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "content"
+  }, [_c('div', {
+    staticClass: "layout"
+  }, [_c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-md-12"
+  }, [_c('h2', [_vm._v("Mənim səbətim")]), _vm._v(" "), _c('table', {
+    staticClass: "table table-hover"
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.cartItems), function(product) {
+    return _c('tr', [_c('td', [_c('a', {
+      attrs: {
+        "href": '#/product/' + product.id
+      }
+    }, [_c('img', {
+      attrs: {
+        "src": '/storage/' + product.options.thumbnail,
+        "width": "20%"
+      }
+    }), _c('span', {
+      staticClass: "table-order-link"
+    }, [_vm._v(_vm._s(product.name))])])]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.options.details))]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.price) + " AZN")]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.qty) + " ədəd")])])
+  }))])])])])])
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Məhsul")]), _vm._v(" "), _c('th', [_vm._v("Seçim")]), _vm._v(" "), _c('th', [_vm._v("Qiymət")]), _vm._v(" "), _c('th', [_vm._v("Miqdar")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-46046b2c", module.exports)
+  }
+}
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-5f89e887\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/Category.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32728,7 +33074,9 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('tr', [_c('td', [_vm._v(_vm._s(order.id))]), _vm._v(" "), _c('td', [_c('table', {
       staticClass: "table table-hover"
     }, [_c('tbody', _vm._l((order.products), function(product) {
-      return _c('tr', [_c('td', [_c('a', {
+      return _c('tr', [_c('td', {
+        staticClass: "col-md-6 col-xs-6 col-lg-6"
+      }, [_c('a', {
         attrs: {
           "href": '#/product/' + product.id
         }
@@ -32760,6 +33108,12 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.imageUrl),
+      expression: "imageUrl"
+    }],
     staticClass: "top-banner"
   }, [_c('a', {
     attrs: {
@@ -32767,7 +33121,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('img', {
     attrs: {
-      "src": 'storage/' + _vm.currentBanner.image_url,
+      "src": _vm.imageUrl,
       "alt": ""
     }
   })])])
@@ -33094,9 +33448,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("İndi al\n                                        ")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-primary",
     attrs: {
-      "type": "submit",
       "data-toggle": "modal",
       "data-target": "#complete-dialog"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.addToCart()
+      }
     }
   }, [_vm._v("Səbətə at\n                                        ")])])])])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4 col-xs-6"
@@ -47190,9 +47549,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__("./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__routes__ = __webpack_require__("./resources/assets/js/routes.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__store__ = __webpack_require__("./resources/assets/js/store.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__classes_Event__ = __webpack_require__("./resources/assets/js/classes/Event.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_cookie__ = __webpack_require__("./node_modules/vue-cookie/src/vue-cookie.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_cookie__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__routes__ = __webpack_require__("./resources/assets/js/routes.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__("./resources/assets/js/store.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__classes_Event__ = __webpack_require__("./resources/assets/js/classes/Event.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -47210,7 +47571,9 @@ __webpack_require__("./resources/assets/js/xzoom.js");
 
 
 
+
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_cookie___default.a);
 
 
 
@@ -47235,8 +47598,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('right-banner', __webpack_
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app',
-    router: __WEBPACK_IMPORTED_MODULE_2__routes__["a" /* default */],
-    store: __WEBPACK_IMPORTED_MODULE_3__store__["a" /* default */],
+    router: __WEBPACK_IMPORTED_MODULE_3__routes__["a" /* default */],
+    store: __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */],
     computed: {
         categories: function categories() {
             return this.$store.state.categories;
@@ -47255,15 +47618,17 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
                 //fix the banners on scroll and resize
                 var elementPosition = $('.left-banner').offset();
+                console.log('banner postion ' + this.$store.state.topBannerHeight);
+                // var categoriesPosition = $('.categories-header').offset();
+                var p = $('.main-container').offset();
                 $(window).resize(function () {
-                    if ($(this).scrollTop() > elementPosition.top) {
-                        var p = $('.main-container').offset();
+                    if ($(this).scrollTop() > this.$store.state.topBannerHeight) {
                         $('.left-banner').css({ left: p.left - 200 });
                         $('.right-banner').css({ left: p.left + 1100 });
                     }
-                });
+                }.bind(this));
                 $(window).scroll(function () {
-                    if ($(this).scrollTop() > elementPosition.top) {
+                    if ($(this).scrollTop() > this.$store.state.topBannerHeight) {
                         var p = $('.main-container').offset();
                         $('.left-banner').addClass('fixed').css({ left: p.left - 200 });
                         $('.right-banner').addClass('fixed').css({ left: p.left + 1100 });
@@ -47271,7 +47636,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                         $('.left-banner').removeClass('fixed').css({ left: '-200px' });
                         $('.right-banner').removeClass('fixed').css({ left: '1100px' });
                     }
-                });
+                }.bind(this));
             }.bind(_this));
         });
         this.$store.dispatch('getUser');
@@ -47475,6 +47840,9 @@ var routes = [{
 }, {
     path: '/about',
     component: __webpack_require__("./resources/assets/js/views/About.vue")
+}, {
+    path: '/cart',
+    component: __webpack_require__("./resources/assets/js/views/Shopping-cart.vue")
 }];
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
@@ -47943,7 +48311,9 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         carousel_shown: true,
         messages: new __WEBPACK_IMPORTED_MODULE_3__classes_Messages__["a" /* default */](),
         errors: new __WEBPACK_IMPORTED_MODULE_4__classes_Errors__["a" /* default */](),
-        banners: []
+        banners: [],
+        cartItems: [],
+        topBannerHeight: 0
     },
     mutations: {
         setBanners: function setBanners(state, banners) {
@@ -47961,6 +48331,9 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         },
         setUser: function setUser(state, user) {
             state.user = user;
+        },
+        setCart: function setCart(state, cart) {
+            state.cartItems = cart;
         }
     },
     actions: {
@@ -47970,6 +48343,7 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
                     context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
                     context.commit('setBanners', response.data.banners);
+                    context.commit('setCart', response.data.cart);
                     resolve(response);
                 }).catch(function (response) {
                     reject(response);
@@ -48308,6 +48682,47 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-3f5000a8", Component.options)
   } else {
     hotAPI.reload("data-v-3f5000a8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ "./resources/assets/js/views/Shopping-cart.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var Component = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")(
+  /* script */
+  __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/assets/js/views/Shopping-cart.vue"),
+  /* template */
+  __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-46046b2c\",\"hasScoped\":false}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/assets/js/views/Shopping-cart.vue"),
+  /* styles */
+  null,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\elvis\\Project\\Code\\project\\resources\\assets\\js\\views\\Shopping-cart.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Shopping-cart.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-46046b2c", Component.options)
+  } else {
+    hotAPI.reload("data-v-46046b2c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true

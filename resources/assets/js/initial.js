@@ -14,8 +14,10 @@ require('./xzoom');
 // VueRouter = require('vue-router');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import VueCookie from 'vue-cookie';
 
 Vue.use(VueRouter);
+Vue.use(VueCookie);
 
 import router from './routes';
 import store from './store';
@@ -60,23 +62,25 @@ const app = new Vue({
 
                 //fix the banners on scroll and resize
                 var elementPosition = $('.left-banner').offset();
+                console.log('banner postion ' + this.$store.state.topBannerHeight);
+                // var categoriesPosition = $('.categories-header').offset();
+                var p = $('.main-container').offset();
                 $(window).resize(function () {
-                    if ($(this).scrollTop() > elementPosition.top) {
-                        var p = $('.main-container').offset();
-                        $('.left-banner').css({left: p.left-200});
-                        $('.right-banner').css({left: p.left+1100});
+                    if ($(this).scrollTop() > (this.$store.state.topBannerHeight)) {
+                        $('.left-banner').css({left: p.left - 200});
+                        $('.right-banner').css({left: p.left + 1100});
                     }
-                });
+                }.bind(this));
                 $(window).scroll(function () {
-                    if ($(this).scrollTop() > elementPosition.top) {
+                    if ($(this).scrollTop() > (this.$store.state.topBannerHeight)) {
                         var p = $('.main-container').offset();
-                        $('.left-banner').addClass('fixed').css({left: p.left-200});
-                        $('.right-banner').addClass('fixed').css({left: p.left+1100});
+                        $('.left-banner').addClass('fixed').css({left: p.left - 200});
+                        $('.right-banner').addClass('fixed').css({left: p.left + 1100});
                     } else {
                         $('.left-banner').removeClass('fixed').css({left: '-200px'});
                         $('.right-banner').removeClass('fixed').css({left: '1100px'});
                     }
-                });
+                }.bind(this));
             }.bind(this))
         });
         this.$store.dispatch('getUser');

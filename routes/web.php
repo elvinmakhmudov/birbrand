@@ -27,6 +27,10 @@ Route::put('/user/password', 'UsersController@updatePassword');
 Route::resource('user', 'UsersController');
 Route::post('/currentUser', 'UsersController@current');
 
+//shopping cart controller
+Route::post('cart', 'ShoppingCartController@store')->name('cart.store');
+Route::delete('cart', 'ShoppingCartController@destroy')->name('cart.destroy');
+
 //admin controller
 Route::prefix('admin665')->group(function (){
     Route::get('/', 'AdminsController@index');
@@ -73,6 +77,7 @@ Route::prefix('admin665')->group(function (){
     Route::get('banners/create', 'AdminsController@getBannersCreate')->name('admin.banners.create');
     Route::post('banners/{id}/update', 'AdminsController@postBannersUpdate')->name('admin.banners.update');
     Route::get('banners/{id}', 'AdminsController@getBannersEdit')->name('admin.banners.edit');
+
 });
 
 //Route::get('/{vue_capture?}', function () {

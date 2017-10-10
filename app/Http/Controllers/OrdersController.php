@@ -26,12 +26,14 @@ class OrdersController extends Controller
         if (Auth::check()) {
             $this->validate($request, [
                 'productId' => 'required|exists:products,id|integer',
+                'options' => 'nullable|json',
                 'amount' => 'required|integer|max:100'
             ]);
             return $this->orders->createByAuthUser($request);
         } else {
             $this->validate($request, [
                 'productId' => 'required|exists:products,id|integer',
+                'options' => 'nullable|json',
                 'amount' => 'required|integer|max:100',
                 'name' => 'required|string|max:255',
                 'number' => 'required|string|max:255',
