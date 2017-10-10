@@ -14,7 +14,8 @@ export default new Vuex.Store({
         messages: new Messages(),
         errors: new Errors(),
         banners: [],
-        cartItems: [],
+        cartTotal: 0,
+        cartItems: {},
         topBannerHeight: 0
     },
     mutations: {
@@ -34,8 +35,11 @@ export default new Vuex.Store({
         setUser(state,user) {
             state.user = user;
         },
-        setCart(state,cart) {
-            state.cartItems= cart;
+        setCartTotal(state,cartTotal) {
+            state.cartTotal= cartTotal;
+        },
+        setCartItems(state,cartItems) {
+            state.cartItems= cartItems;
         },
     },
     actions: {
@@ -45,7 +49,9 @@ export default new Vuex.Store({
                     context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
                     context.commit('setBanners', response.data.banners);
-                    context.commit('setCart', response.data.cart);
+                    context.commit('setCartTotal', response.data.cart.cartTotal);
+                    var items = Object.keys(response.data.cart.cartItems).map(function(k) { return response.data.cart.cartItems[k] });
+                    context.commit('setCartItems', items);
                     resolve(response);
                 }).catch(function (response) {
                     reject(response);

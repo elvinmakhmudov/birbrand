@@ -118,11 +118,13 @@
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
-                    this.$store.commit('setCart', response.data.cart);
+                    this.$store.commit('setCartTotal', response.data.cart.cartTotal);
+                    var items = Object.keys(response.data.cart.cartItems).map(function(k) { return response.data.cart.cartItems[k] });
+                    this.$store.commit('setCartItems', items);
                     $('#flash-message').modal('toggle');
                     console.log(response.data.cart)
                 }.bind(this)).catch(error => {
-                    this.errors.record(error.response.data);
+                    this.errors.record(error.response.data.errors);
                 });
 
             },

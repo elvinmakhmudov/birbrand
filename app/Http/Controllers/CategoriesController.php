@@ -20,7 +20,7 @@ class CategoriesController extends Controller
 
         $banners = Banner::isShown()->get();
 
-        $cart = Cart::content();
+        $cart = ['cartItems' =>Cart::content(), 'cartTotal' => Cart::total() ];
 
         return ['categories' => $categories, 'carousels' => $carousels, 'banners' => $banners, 'cart' => $cart ];
     }

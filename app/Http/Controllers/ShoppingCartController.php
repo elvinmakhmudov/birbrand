@@ -23,19 +23,30 @@ class ShoppingCartController extends Controller
             $amount = $request->get('amount');
             $product = Product::where('id', $productId)->first();
             $price = $product->price;
-            $options = [ 'thumbnail' => $product->thumbnail, 'details' => $request->get('options')];
 
-            $cartItem = Cart::add($product->id,  $product->title, $amount, $price, $options);
+            //add thumbnail field to the options
+            $options = ['thumbnail' => $product->thumbnail, 'details' => $request->get('options')];
 
-            return ['cart' => Cart::content(), 'messages' => ['Sifaşiniz səbətə əlavə olundu.']];
+            //add the product to the cart
+            Cart::add($product->id, $product->title, $amount, $price, $options);
+
+            $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
+
+            return ['cart' => $cart, 'messages' => ['Sifaşiniz səbətə əlavə olundu.']];
         } catch (Exception $e) {
             return ['errors' => ['Səf baş verdi.']];
         }
 
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
+        $this->validate($request, [
+            'rowId' => 'required|string']);
+        Cart::remove($request->rowId);
 
+        $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
+
+        return ['cart' => $cart, 'messages' => ['Sifaşiniz səbətə əlavə olundu.']];
     }
 }

@@ -2532,11 +2532,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             }).then(function (response) {
                 this.$store.state.errors.record(response.data.errors);
                 this.$store.state.messages.record(response.data.messages);
-                this.$store.commit('setCart', response.data.cart);
+                this.$store.commit('setCartTotal', response.data.cart.cartTotal);
+                var items = Object.keys(response.data.cart.cartItems).map(function (k) {
+                    return response.data.cart.cartItems[k];
+                });
+                this.$store.commit('setCartItems', items);
                 $('#flash-message').modal('toggle');
                 console.log(response.data.cart);
             }.bind(this)).catch(function (error) {
-                _this.errors.record(error.response.data);
+                _this.errors.record(error.response.data.errors);
             });
         },
         buyIt: function buyIt() {
@@ -2936,12 +2940,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: {
         cartItems: function cartItems() {
             console.log("Cart items are: " + this.$cookie.get('cartItems'));
             return this.$store.state.cartItems;
+        },
+        cartTotal: function cartTotal() {
+            return this.$store.state.cartTotal;
+        }
+    },
+    methods: {
+        deleteItem: function deleteItem(index, rowId) {
+            var _this = this;
+
+            return new Promise(function (resolve, reject) {
+                axios.delete('/cart', { params: { rowId: rowId } }).then(function (response) {
+                    //                        delete this.$store.state.cartItems[rowId];
+                    this.$store.state.cartItems.splice(index, 1);
+                    this.$store.commit('setCartTotal', response.data.cart.cartTotal);
+                    resolve(response);
+                }.bind(_this)).catch(function (response) {
+                    reject(response);
+                }.bind(_this));
+            });
         }
     }
 });
@@ -32768,7 +32803,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('h2', [_vm._v("Mənim səbətim")]), _vm._v(" "), _c('table', {
     staticClass: "table table-hover"
-  }, [_vm._m(0), _vm._v(" "), _c('tbody', _vm._l((_vm.cartItems), function(product) {
+  }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.cartItems), function(product, index) {
     return _c('tr', [_c('td', [_c('a', {
       attrs: {
         "href": '#/product/' + product.id
@@ -32780,10 +32815,23 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     }), _c('span', {
       staticClass: "table-order-link"
-    }, [_vm._v(_vm._s(product.name))])])]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.options.details))]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.price) + " AZN")]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.qty) + " ədəd")])])
-  }))])])])])])
+    }, [_vm._v(_vm._s(product.name))])])]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.options.details))]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.price) + " AZN")]), _vm._v(" "), _c('td', [_vm._v(" " + _vm._s(product.qty) + " ədəd")]), _vm._v(" "), _c('td', [_c('button', {
+      staticClass: "btn btn-danger",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": function($event) {
+          $event.preventDefault();
+          _vm.deleteItem(index, product.rowId)
+        }
+      }
+    }, [_vm._v("Sil\n                            ")])])])
+  }), _vm._v(" "), (_vm.cartItems) ? _c('tr', [_c('td'), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('td', [_c('b', [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])]), _vm._v(" "), _c('td')]) : _vm._e()], 2)])])])])])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('thead', [_c('tr', [_c('th', [_vm._v("Məhsul")]), _vm._v(" "), _c('th', [_vm._v("Seçim")]), _vm._v(" "), _c('th', [_vm._v("Qiymət")]), _vm._v(" "), _c('th', [_vm._v("Miqdar")])])])
+  return _c('thead', [_c('tr', [_c('th', [_vm._v("Məhsul")]), _vm._v(" "), _c('th', [_vm._v("Seçim")]), _vm._v(" "), _c('th', [_vm._v("Qiymət")]), _vm._v(" "), _c('th', [_vm._v("Miqdar")]), _vm._v(" "), _c('th', [_vm._v("Silmək")])])])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('td', [_c('b', [_vm._v("Cəmi")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -48312,7 +48360,8 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         messages: new __WEBPACK_IMPORTED_MODULE_3__classes_Messages__["a" /* default */](),
         errors: new __WEBPACK_IMPORTED_MODULE_4__classes_Errors__["a" /* default */](),
         banners: [],
-        cartItems: [],
+        cartTotal: 0,
+        cartItems: {},
         topBannerHeight: 0
     },
     mutations: {
@@ -48332,8 +48381,11 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         setUser: function setUser(state, user) {
             state.user = user;
         },
-        setCart: function setCart(state, cart) {
-            state.cartItems = cart;
+        setCartTotal: function setCartTotal(state, cartTotal) {
+            state.cartTotal = cartTotal;
+        },
+        setCartItems: function setCartItems(state, cartItems) {
+            state.cartItems = cartItems;
         }
     },
     actions: {
@@ -48343,7 +48395,11 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
                     context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
                     context.commit('setBanners', response.data.banners);
-                    context.commit('setCart', response.data.cart);
+                    context.commit('setCartTotal', response.data.cart.cartTotal);
+                    var items = Object.keys(response.data.cart.cartItems).map(function (k) {
+                        return response.data.cart.cartItems[k];
+                    });
+                    context.commit('setCartItems', items);
                     resolve(response);
                 }).catch(function (response) {
                     reject(response);
