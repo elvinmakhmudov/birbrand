@@ -67,7 +67,7 @@
                                                                aria-hidden="true"></span> +994 51 855 01 05</a>
                         </li>
                         <li><a href="#/cart"><span class="glyphicon glyphicon-shopping-cart"
-                                                               aria-hidden="true"></span>
+                                                               aria-hidden="true"></span><span class="badge badge-light">@{{Object.keys($store.state.cartItems).length}}</span>
                         </li>
                         <li><a href="#/about">Haqqimizda</a></li>
                     </ul>
