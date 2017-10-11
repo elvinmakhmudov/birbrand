@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <buyitguest :productId="product.id" :amount="amount"></buyitguest>
+            <buyitguest :products="products"></buyitguest>
         </div>
     </div>
 
@@ -99,6 +99,7 @@
                     }
                 },
                 ancestors: [],
+                products: []
             }
         },
         watch: {
@@ -122,19 +123,20 @@
                     var items = Object.keys(response.data.cart.cartItems).map(function(k) { return response.data.cart.cartItems[k] });
                     this.$store.commit('setCartItems', items);
                     $('#flash-message').modal('toggle');
-                    console.log(response.data.cart)
                 }.bind(this)).catch(error => {
                     this.errors.record(error.response.data.errors);
                 });
 
             },
             buyIt() {
+                this.products = [{productId: this.product.id, 
+                        options: this.product.options, 
+                        amount: this.amount
+                        }];
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
                 if (isLoggedIn) {
                     axios.post('order', {
-                        productId: this.product.id,
-                        options: this.product.options,
-                        amount: this.amount
+                        products: this.products
                     }).then(function (response) {
                         this.$store.state.errors.record(response.data.errors);
                         this.$store.state.messages.record(response.data.messages);

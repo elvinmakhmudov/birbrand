@@ -47,8 +47,7 @@
     import Errors from '../../classes/Errors';
     export default {
         props: {
-            productId: '',
-            amount: ''
+            products: {},
         },
         data() {
             return {
@@ -60,13 +59,13 @@
         methods: {
             buy() {
                 axios.post('order', {
-                    productId: this.productId,
-                    amount: this.amount,
-                    name: this.name,
-                    number: this.number,
+                        products: this.products,
+                        name: this.name,
+                        number: this.number,
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
+                        this.$store.state.cartItems=[];
                     $('#buy-it-guest').modal('toggle');
                     $('#flash-message').modal('toggle');
                 }.bind(this)).catch(error => {

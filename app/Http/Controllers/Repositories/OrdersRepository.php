@@ -136,13 +136,15 @@ class OrdersRepository
     public function createByAuthUser(Request $request)
     {
         try {
-            $productId = $request->get('productId');
-            $amount = $request->get('amount');
-            $product = Product::where('id', $productId)->first();
-            $price = $product->price;
+            $products = $request->get('products');
             $order = Order::create([]);
+            foreach($products as $key => $product) {
+            $amount = $products[$key]['amount'];
+            $product = Product::where('id', $products[$key]['productId'])->first();
+            $price = $product->price;
+            $order->products()->attach($product, ['price' => $price, 'amount' => $amount]);
+            }
             $order->user()->associate(Auth::user())->save();
-            $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } catch (Exception $e) {
             return ['errors' => ['Səf baş verdi.']];
@@ -152,19 +154,37 @@ class OrdersRepository
     public function createByRequest(Request $request)
     {
         try {
-            $productId = $request->get('productId');
-            $amount = $request->get('amount');
-            $product = Product::where('id', $productId)->first();
-            $price = $product->price;
+            $products = $request->get('products');
             $order = Order::create([
                 'name' => $request->get('name'),
                 'number' => $request->get('number')
             ]);
-            $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
+            foreach($products as $key => $product) {
+            $amount = $products[$key]['amount'];
+            $product = Product::where('id', $products[$key]['productId'])->first();
+            $price = $product->price;
+            $order->products()->attach($product, ['price' => $price, 'amount' => $amount]);
+            }
+            $order->user()->associate(Auth::user())->save();
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } catch (Exception $e) {
-            return ['errors' => ['Sef bash verdi.']];
+            return ['errors' => ['Səf baş verdi.']];
         }
+
+        // try {
+        //     $productId = $request->get('productId');
+        //     $amount = $request->get('amount');
+        //     $product = Product::where('id', $productId)->first();
+        //     $price = $product->price;
+        //     $order = Order::create([
+        //         'name' => $request->get('name'),
+        //         'number' => $request->get('number')
+        //     ]);
+        //     $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
+        //     return ['messages' => ['Sifaşiniz qeydə alındı.']];
+        // } catch (Exception $e) {
+        //     return ['errors' => ['Sef bash verdi.']];
+        // }
     }
 
 }

@@ -1997,8 +1997,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        productId: '',
-        amount: ''
+        products: {}
     },
     data: function data() {
         return {
@@ -2013,13 +2012,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('order', {
-                productId: this.productId,
-                amount: this.amount,
+                products: this.products,
                 name: this.name,
                 number: this.number
             }).then(function (response) {
                 this.$store.state.errors.record(response.data.errors);
                 this.$store.state.messages.record(response.data.messages);
+                this.$store.state.cartItems = [];
                 $('#buy-it-guest').modal('toggle');
                 $('#flash-message').modal('toggle');
             }.bind(this)).catch(function (error) {
@@ -2508,7 +2507,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     title: ''
                 }
             },
-            ancestors: []
+            ancestors: [],
+            products: []
         };
     },
 
@@ -2538,7 +2538,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 });
                 this.$store.commit('setCartItems', items);
                 $('#flash-message').modal('toggle');
-                console.log(response.data.cart);
             }.bind(this)).catch(function (error) {
                 _this.errors.record(error.response.data.errors);
             });
@@ -2546,12 +2545,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         buyIt: function buyIt() {
             var _this2 = this;
 
+            this.products = [{ productId: this.product.id,
+                options: this.product.options,
+                amount: this.amount
+            }];
             var isLoggedIn = $("meta[name=login-status]").attr('content');
             if (isLoggedIn) {
                 axios.post('order', {
-                    productId: this.product.id,
-                    options: this.product.options,
-                    amount: this.amount
+                    products: this.products
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
@@ -2907,6 +2908,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_product_buyItGuest_vue__ = __webpack_require__("./resources/assets/js/components/product/buyItGuest.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_product_buyItGuest_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_product_buyItGuest_vue__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2953,7 +2961,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        'buyitguest': __WEBPACK_IMPORTED_MODULE_0__components_product_buyItGuest_vue___default.a
+    },
+    data: function data() {
+        return {
+            products: []
+        };
+    },
+
     computed: {
         cartItems: function cartItems() {
             console.log("Cart items are: " + this.$cookie.get('cartItems'));
@@ -2964,8 +2982,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        deleteItem: function deleteItem(index, rowId) {
+        buyAll: function buyAll() {
             var _this = this;
+
+            for (var key in this.cartItems) {
+                if (this.cartItems.hasOwnProperty(key)) {
+                    var item = this.cartItems[key];
+                    var productId = item.id;
+                    var options = item.options.details;
+                    var amount = item.qty;
+                    this.products.push({
+                        productId: productId,
+                        options: options,
+                        amount: amount
+                    });
+                }
+            }
+            var isLoggedIn = $("meta[name=login-status]").attr('content');
+            if (isLoggedIn) {
+                axios.post('order', {
+                    products: this.products
+                }).then(function (response) {
+                    this.$store.state.errors.record(response.data.errors);
+                    this.$store.state.messages.record(response.data.messages);
+                    $('#flash-message').modal('toggle');
+                }.bind(this)).catch(function (error) {
+                    _this.errors.record(error.response.data);
+                });
+            } else {
+                $('#buy-it-guest').modal('toggle');
+            }
+        },
+        deleteItem: function deleteItem(index, rowId) {
+            var _this2 = this;
 
             return new Promise(function (resolve, reject) {
                 axios.delete('/cart', { params: { rowId: rowId } }).then(function (response) {
@@ -2973,9 +3022,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.$store.state.cartItems.splice(index, 1);
                     this.$store.commit('setCartTotal', response.data.cart.cartTotal);
                     resolve(response);
-                }.bind(_this)).catch(function (response) {
+                }.bind(_this2)).catch(function (response) {
                     reject(response);
-                }.bind(_this));
+                }.bind(_this2));
             });
         }
     }
@@ -32801,7 +32850,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v("Mənim səbətim")]), _vm._v(" "), _c('table', {
+  }, [_c('h2', [_vm._v("Mənim səbətim")]), _vm._v(" "), (Object.keys(_vm.cartItems).length !== 0) ? _c('div', [_c('table', {
     staticClass: "table table-hover"
   }, [_vm._m(0), _vm._v(" "), _c('tbody', [_vm._l((_vm.cartItems), function(product, index) {
     return _c('tr', [_c('td', [_c('a', {
@@ -32827,7 +32876,27 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }
     }, [_vm._v("Sil\n                            ")])])])
-  }), _vm._v(" "), (_vm.cartItems) ? _c('tr', [_c('td'), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('td', [_c('b', [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])]), _vm._v(" "), _c('td')]) : _vm._e()], 2)])])])])])
+  }), _vm._v(" "), _c('tr', [_c('td'), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('td', [_c('b', [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])]), _vm._v(" "), _c('td')])], 2)]), _vm._v(" "), _c('button', {
+    staticClass: "btn btn-raised btn-primary",
+    staticStyle: {
+      "float": "right"
+    },
+    attrs: {
+      "data-toggle": "modal"
+    },
+    on: {
+      "click": function($event) {
+        $event.preventDefault();
+        _vm.buyAll()
+      }
+    }
+  }, [_vm._v("İndi al")])]) : _c('p', {
+    staticClass: "text-center"
+  }, [_vm._v("Səbət boşdur")])])])]), _vm._v(" "), _c('buyitguest', {
+    attrs: {
+      "products": _vm.products
+    }
+  })], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("Məhsul")]), _vm._v(" "), _c('th', [_vm._v("Seçim")]), _vm._v(" "), _c('th', [_vm._v("Qiymət")]), _vm._v(" "), _c('th', [_vm._v("Miqdar")]), _vm._v(" "), _c('th', [_vm._v("Silmək")])])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -33513,8 +33582,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "product-description"
   }, [_vm._v("\n                                " + _vm._s(_vm.product.description) + "\n                            ")])])])])])]), _vm._v(" "), _c('buyitguest', {
     attrs: {
-      "productId": _vm.product.id,
-      "amount": _vm.amount
+      "products": _vm.products
     }
   })], 1)])
 },staticRenderFns: []}
