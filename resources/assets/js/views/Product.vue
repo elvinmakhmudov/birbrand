@@ -23,37 +23,39 @@
                                          :xoriginal="'/storage/'+product.thumbnail"/>
                                     <div class="xzoom-thumbs">
                                         <a v-for="image in product.images " :href="'/storage/'+image">
-
                                             <img class="xzoom-gallery" :src="'/storage/'+image">
                                         </a>
                                     </div>
                                 </div>
-                                <!--<div class="product-img">-->
-                                <!--<img :src="product.image_url" alt="Card image cap">-->
-                                <!--</div>-->
                             </div>
                             <div class="col-md-4 col-xs-6">
-                                <h2>{{ product.price }} AZN </h2><br>
-                                <div class="product-options">
-                                    <span>Sechimler </span><br>
-                                    <form @submit.prevent="buyIt()">
-                                        <div class="form-group">
-                                            <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
-                                            <div class="col-sm-10">
-                                                <label class="control-label text-danger" v-if="errors.has('amount')"
-                                                       v-text="errors.get('amount')"></label>
-                                                <input type="number" @keydown="errors.purge()" class="form-control"
-                                                       id="i5ps" value="1" min="1" max="100" v-model="amount">
-                                            </div>
-                                            <button class="btn btn-raised btn-primary" data-toggle="modal"
-                                            >İndi al
-                                            </button>
-                                            <button @click.prevent="addToCart()" class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#complete-dialog">Səbətə at
-                                            </button>
+                                <h2>{{ product.price }} AZN </h2>
+                                <form @submit.prevent="buyIt()">
+                                    <div v-show="product.options" class="form-group product-option"
+                                         v-for="(options, key) in JSON.parse(product.options || '[]')">
+                                        <label v-bind:for="key" class="product-option-name control-label col-sm-2 col-md-2 col-lg-2">{{ key }}</label>
+                                        <div class="col-sm-9 col-sm-offset-1">
+                                            <select class="form-control product-option-value" v-bind:id="key">
+                                                <option v-for="option in options">{{ option }}</option>
+                                            </select>
                                         </div>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
+                                        <div class="col-sm-9 col-sm-offset-1">
+                                            <label class="control-label text-danger" v-if="errors.has('amount')"
+                                                   v-text="errors.get('amount')"></label>
+                                            <input type="number" @keydown="errors.purge()" class="form-control"
+                                                   id="i5ps" value="1" min="1" max="100" v-model="amount">
+                                        </div>
+                                        <button class="btn btn-raised btn-primary" data-toggle="modal"
+                                        >İndi al
+                                        </button>
+                                        <button @click.prevent="addToCart()" class="btn btn-primary" data-toggle="modal"
+                                                data-target="#complete-dialog">Səbətə at
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                             <div class="col-md-4 col-xs-6">
                                 <shippingInfo></shippingInfo>
@@ -111,16 +113,30 @@
             console.log('product vue created')
         },
         methods: {
+            getSelectedProductOptions() {
+                var options = {};
+                $('.product-option').each(function () {
+                    var key = $(this).find(".product-option-name").text();
+                    console.log(key);
+                    var value = $(this).find(".product-option-value").val();
+                    console.log(value);
+                    options[key] = value;
+                });
+                console.log(options);
+                return JSON.stringify(options);
+            },
             addToCart() {
                 axios.post('cart', {
                     productId: this.product.id,
-                    options: this.product.options,
+                    options: this.getSelectedProductOptions(),
                     amount: this.amount
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
                     this.$store.commit('setCartTotal', response.data.cart.cartTotal);
-                    var items = Object.keys(response.data.cart.cartItems).map(function(k) { return response.data.cart.cartItems[k] });
+                    var items = Object.keys(response.data.cart.cartItems).map(function (k) {
+                        return response.data.cart.cartItems[k]
+                    });
                     this.$store.commit('setCartItems', items);
                     $('#flash-message').modal('toggle');
                 }.bind(this)).catch(error => {
@@ -129,10 +145,11 @@
 
             },
             buyIt() {
-                this.products = [{productId: this.product.id, 
-                        options: this.product.options, 
-                        amount: this.amount
-                        }];
+                this.products = [{
+                    productId: this.product.id,
+                    options: this.getSelectedProductOptions(),
+                    amount: this.amount
+                }];
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
                 if (isLoggedIn) {
                     axios.post('order', {

@@ -21,7 +21,7 @@
                                 <img
                                         :src="'/storage/'+product.options.thumbnail" width="20%"><span
                                     class="table-order-link">{{ product.name }}</span></a></td>
-                            <td> {{ product.options.details }}</td>
+                            <td> <p v-for="(option, name) in JSON.parse(product.options.details || '[]')"> {{ name }} - {{ option }} </p></td>
                             <td> {{ product.price }} AZN</td>
                             <td> {{ product.qty }} ədəd</td>
                             <td>
@@ -78,10 +78,9 @@
                     var amount = item.qty;
                     this.products.push({
                         productId: productId, 
-                        options: options, 
+                        options: options,
                         amount:amount
                     })
-
                     }
                 }
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
@@ -91,6 +90,7 @@
                     }).then(function (response) {
                         this.$store.state.errors.record(response.data.errors);
                         this.$store.state.messages.record(response.data.messages);
+                        this.$store.state.cartItems=[];
                         $('#flash-message').modal('toggle');
                     }.bind(this)).catch(error => {
                         this.errors.record(error.response.data);
@@ -102,7 +102,6 @@
             deleteItem(index, rowId) {
                 return new Promise((resolve, reject) => {
                     axios.delete('/cart', {params : { rowId: rowId}}).then(function (response) {
-//                        delete this.$store.state.cartItems[rowId];
                         this.$store.state.cartItems.splice(index, 1);
                         this.$store.commit('setCartTotal', response.data.cart.cartTotal);
                         resolve(response);

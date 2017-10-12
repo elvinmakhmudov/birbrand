@@ -25,10 +25,10 @@
                                                 class="table-order-link">{{ product.title }}</span></a></td>
                                         <td> {{ product.pivot.price }} AZN</td>
                                         <td> {{ product.pivot.amount }} ədəd</td>
+                                        <td> <p v-for="(option, name) in JSON.parse(product.pivot.options || '[]')"> {{ name }} - {{ option }} </p></td>
                                     </tr>
                                     </tbody>
                                 </table>
-
                             </td>
                             <td>{{ order.status }}</td>
 

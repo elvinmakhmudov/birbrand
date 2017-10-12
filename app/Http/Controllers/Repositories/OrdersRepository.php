@@ -40,7 +40,7 @@ class OrdersRepository
 
         $users = User::all();
 
-        return view('admin.orders.edit')->with(['order' => $order, 'products' => $products, 'users' => $users ]);
+        return view('admin.orders.edit')->with(['order' => $order, 'products' => $products, 'users' => $users]);
     }
 
     public function update($orderId, $request)
@@ -66,9 +66,9 @@ class OrdersRepository
         }
 
 
-        $order->name= $request->get('name');
-        $order->number= $request->get('number');
-        $order->status= $request->get('status');
+        $order->name = $request->get('name');
+        $order->number = $request->get('number');
+        $order->status = $request->get('status');
         $order->user_id = $request->get('user');
         $order->created_at = $request->get('created_at');
 
@@ -106,9 +106,9 @@ class OrdersRepository
         //update the order
         $order = Order::create([]);
 
-        $order->name= $request->get('name');
-        $order->number= $request->get('number');
-        $order->status= $request->get('status');
+        $order->name = $request->get('name');
+        $order->number = $request->get('number');
+        $order->status = $request->get('status');
         $order->user_id = $request->get('user');
 
         $products = Product::find($request->get('products'));
@@ -117,7 +117,7 @@ class OrdersRepository
         }
 
         $order->save();
-        return redirect()->route('admin.orders.index', ['id' => Auth::user()->id ]);
+        return redirect()->route('admin.orders.index', ['id' => Auth::user()->id]);
     }
 
     public function saveImages(Request $request, $path)
@@ -138,11 +138,12 @@ class OrdersRepository
         try {
             $products = $request->get('products');
             $order = Order::create([]);
-            foreach($products as $key => $product) {
-            $amount = $products[$key]['amount'];
-            $product = Product::where('id', $products[$key]['productId'])->first();
-            $price = $product->price;
-            $order->products()->attach($product, ['price' => $price, 'amount' => $amount]);
+            foreach ($products as $key => $product) {
+                $amount = $products[$key]['amount'];
+                $product = Product::where('id', $products[$key]['productId'])->first();
+                $price = $product->price;
+                $options = isset($products[$key]['options']) ? $products[$key]['options'] : null;
+                $order->products()->attach($product, ['price' => $price, 'amount' => $amount, 'options' => $options]);
             }
             $order->user()->associate(Auth::user())->save();
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
@@ -159,32 +160,18 @@ class OrdersRepository
                 'name' => $request->get('name'),
                 'number' => $request->get('number')
             ]);
-            foreach($products as $key => $product) {
-            $amount = $products[$key]['amount'];
-            $product = Product::where('id', $products[$key]['productId'])->first();
-            $price = $product->price;
-            $order->products()->attach($product, ['price' => $price, 'amount' => $amount]);
+            foreach ($products as $key => $product) {
+                $amount = $products[$key]['amount'];
+                $product = Product::where('id', $products[$key]['productId'])->first();
+                $price = $product->price;
+                $options = isset($products[$key]['options']) ? $products[$key]['options'] : null;
+                $order->products()->attach($product, ['price' => $price, 'amount' => $amount, 'options' => $options]);
             }
             $order->user()->associate(Auth::user())->save();
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } catch (Exception $e) {
             return ['errors' => ['Səf baş verdi.']];
         }
-
-        // try {
-        //     $productId = $request->get('productId');
-        //     $amount = $request->get('amount');
-        //     $product = Product::where('id', $productId)->first();
-        //     $price = $product->price;
-        //     $order = Order::create([
-        //         'name' => $request->get('name'),
-        //         'number' => $request->get('number')
-        //     ]);
-        //     $product->orders()->attach($order, ['price' => $price, 'amount' => $amount]);
-        //     return ['messages' => ['Sifaşiniz qeydə alındı.']];
-        // } catch (Exception $e) {
-        //     return ['errors' => ['Sef bash verdi.']];
-        // }
     }
 
 }
