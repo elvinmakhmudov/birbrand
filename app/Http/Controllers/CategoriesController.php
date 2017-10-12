@@ -31,7 +31,8 @@ class CategoriesController extends Controller
      */
     public function show($slug) {
         $category = Category::where('slug', $slug)->isShown()->with('products', 'children')->first();
+        $productsPage = $category->products()->paginate(16);
 
-        return $category;
+        return ['category'  => $category, 'productsPage' => $productsPage ];
     }
 }

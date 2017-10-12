@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <buyitguest :products="products"></buyitguest>
+            <buyitguest :products="products" fromCart="false"></buyitguest>
         </div>
     </div>
 
@@ -153,7 +153,8 @@
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
                 if (isLoggedIn) {
                     axios.post('order', {
-                        products: this.products
+                        products: this.products,
+                        fromCart: false
                     }).then(function (response) {
                         this.$store.state.errors.record(response.data.errors);
                         this.$store.state.messages.record(response.data.messages);

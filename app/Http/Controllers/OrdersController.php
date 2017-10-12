@@ -28,7 +28,8 @@ class OrdersController extends Controller
                 'products' => 'required|array',
                 'products.*.productId' => 'required|exists:products,id|integer',
                 'products.*.options' => 'nullable|json',
-                'products.*.amount' => 'required|integer|max:100'
+                'products.*.amount' => 'required|integer|max:100',
+                'fromCart' => 'boolean'
             ]);
             return $this->orders->createByAuthUser($request);
         } else {
@@ -39,13 +40,14 @@ class OrdersController extends Controller
                 'products.*.amount' => 'required|integer|max:100',
                 'name' => 'required|string|max:255',
                 'number' => 'required|string|max:255',
+                'fromCart' => 'boolean'
             ]);
             return $this->orders->createByRequest($request);
         }
     }
 
     public function index() {
-        $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->get();
+        $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(7);
         return $orders;
     }
 

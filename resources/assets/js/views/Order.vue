@@ -38,6 +38,13 @@
                     </table>
                 </div>
             </div>
+            <paginate v-show="this.ordersPage.last_page > 1"
+                      :page-count="this.ordersPage.last_page || 0"
+                      :click-handler="goToPage"
+                      :prev-text="'Əvvəl'"
+                      :next-text="'Sonra'"
+                      :container-class="'pagination'">
+            </paginate>
         </div>
     </div>
 </template>
@@ -48,7 +55,8 @@
     export default {
         data() {
             return {
-                orders: []
+                orders: [],
+                ordersPage: {}
             }
         },
         watch: {
@@ -59,13 +67,21 @@
             this.fetchData()
         },
         methods: {
+            goToPage(pageNum) {
+                var url = this.ordersPage.path +  "?page=" + pageNum;
+                axios.get(url).then(function (response) {
+                        this.orders = response.data.data;
+                    }.bind(this)
+                )
+            },
             fromNow(date) {
                 moment.locale('az');
                 return moment(date).calendar();
             },
             fetchData() {
                 axios.get('/order').then(function (response) {
-                    this.orders = response.data;
+                    this.orders = response.data.data;
+                    this.ordersPage = response.data;
                 }.bind(this));
             }
         }

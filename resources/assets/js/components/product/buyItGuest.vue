@@ -48,6 +48,7 @@
     export default {
         props: {
             products: {},
+            fromCart: false
         },
         data() {
             return {
@@ -62,6 +63,7 @@
                         products: this.products,
                         name: this.name,
                         number: this.number,
+                        fromCart: this.fromCart
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);

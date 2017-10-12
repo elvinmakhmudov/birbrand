@@ -42,8 +42,12 @@ class ShoppingCartController extends Controller
     public function destroy(Request $request)
     {
         $this->validate($request, [
-            'rowId' => 'required|string']);
-        Cart::remove($request->rowId);
+            'rowId' => 'string']);
+        if($request->get('rowId')){
+            Cart::remove($request->rowId);
+        } else {
+            return Cart::destroy();
+        }
 
         $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 

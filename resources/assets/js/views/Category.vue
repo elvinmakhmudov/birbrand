@@ -16,6 +16,13 @@
                         <product-card :product="product"></product-card>
                     </div>
                 </div>
+                <paginate v-show="this.productsPage.last_page > 1"
+                        :page-count="this.productsPage.last_page || 0"
+                        :click-handler="goToPage"
+                        :prev-text="'Əvvəl'"
+                        :next-text="'Sonra'"
+                        :container-class="'pagination'">
+                </paginate>
             </div>
         </div>
     </div>
@@ -24,12 +31,14 @@
 <script>
     import event from "../classes/Event"
 
+
     export default {
         data() {
             return {
                 category: {},
                 products: [],
-                subcategories: []
+                subcategories: [],
+                productsPage: {}
             }
         },
         watch: {
@@ -40,15 +49,23 @@
             this.fetchData();
         },
         methods: {
-            fetchData() {
-                axios.get(window.location.hash.substr(2)).then(function (response) {
-                        this.category = response.data;
-                        this.subcategories = response.data.children;
-                        this.products = response.data.products;
-                        console.log(this.subcategories);
+            goToPage(pageNum) {
+                var url = this.productsPage.path +  "?page=" + pageNum;
+                console.log(url);
+                axios.get(url).then(function (response) {
+                        this.products = response.data.productsPage.data;
                     }.bind(this)
                 )
-                console.log('Products fetched');
+            },
+            fetchData() {
+                axios.get(window.location.hash.substr(2)).then(function (response) {
+                    console.log(response.data);
+                        this.category = response.data.category;
+                        this.subcategories = response.data.category.children;
+                        this.products = response.data.productsPage.data;
+                        this.productsPage = response.data.productsPage;
+                    }.bind(this)
+                )
             },
             subcategoryExists() {
                 return category.children.size > 0;

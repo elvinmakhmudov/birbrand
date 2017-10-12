@@ -15,6 +15,7 @@ require('./xzoom');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueCookie from 'vue-cookie';
+import Paginate from 'vuejs-paginate'
 
 Vue.use(VueRouter);
 Vue.use(VueCookie);
@@ -32,6 +33,7 @@ Vue.component('product-card', require('./components/Product-card.vue'));
 Vue.component('category-card', require('./components/Category-card.vue'));
 Vue.component('container', require('./components/Container.vue'));
 Vue.component('flashmessage', require('./components/flash-message.vue'));
+Vue.component('paginate', Paginate);
 
 
 //register banners

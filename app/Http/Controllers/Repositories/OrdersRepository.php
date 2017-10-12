@@ -7,6 +7,7 @@ use BirBrand\Order;
 use BirBrand\Product;
 use BirBrand\User;
 use Exception;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -146,6 +147,10 @@ class OrdersRepository
                 $order->products()->attach($product, ['price' => $price, 'amount' => $amount, 'options' => $options]);
             }
             $order->user()->associate(Auth::user())->save();
+            //if bought from cart, destroy the old cart
+            if($request->get('fromCart')) {
+                Cart::destroy();
+            }
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } catch (Exception $e) {
             return ['errors' => ['Səf baş verdi.']];
@@ -168,6 +173,10 @@ class OrdersRepository
                 $order->products()->attach($product, ['price' => $price, 'amount' => $amount, 'options' => $options]);
             }
             $order->user()->associate(Auth::user())->save();
+            //if bought from cart, destroy the old cart
+            if($request->get('fromCart')) {
+                Cart::destroy();
+            }
             return ['messages' => ['Sifaşiniz qeydə alındı.']];
         } catch (Exception $e) {
             return ['errors' => ['Səf baş verdi.']];

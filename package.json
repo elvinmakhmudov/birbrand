@@ -25,6 +25,7 @@
     "moment": "^2.18.1",
     "node-sass": "^4.5.3",
     "vue-cookie": "^1.1.4",
+    "vuejs-paginate": "^1.4.0",
     "vuex": "^2.3.1"
   }
 }
