@@ -68,6 +68,7 @@ class ProductsRepository
         $product->old_price = $request->get('old_price');
         $product->sale_percent = $request->get('sale_percent');
         $product->price = $request->get('price');
+        $product->options = $request->get('options');
 
         //if image exists, update it
         if ($request->file('thumbnail')) {

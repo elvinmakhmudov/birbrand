@@ -38,6 +38,15 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="options" class="col-md-2 control-label">Seçimlər</label>
+
+                            <div class="col-md-8">
+                                <textarea name="options" id="options" cols="30"
+                                          class="form-control">{{ $product->options}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="old-price" class="col-md-2 control-label">Əvvəlki qiymət</label>
 
                             <div class="col-md-8">
