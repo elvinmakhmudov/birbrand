@@ -3,12 +3,12 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Qeydiyyat</div>
+                    <div class="panel-heading">{{ $t('signup.title') }}</div>
                     <div class="panel-body">
                         <form class="form-horizontal" v-on:submit.prevent="register" role="form" method="POST"
                               action="register" @keydown="errors.clear($event.target.name)">
                             <div class="form-group" v-bind:class="{'has-error': errors.get('name')}">
-                                <label for="name" class="col-md-4 control-label">Ad</label>
+                                <label for="name" class="col-md-4 control-label"> {{ $t('signup.name') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" autofocus
@@ -19,7 +19,7 @@
                             </div>
 
                             <div class="form-group" v-bind:class="{'has-error': errors.get('number')}">
-                                <label for="number" class="col-md-4 control-label">Nömrə</label>
+                                <label for="number" class="col-md-4 control-label">{{ $t('signup.number') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="number" type="number" class="form-control" name="number"
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="form-group" v-bind:class="{'has-error': errors.get('address')}">
-                                <label for="address" class="col-md-4 control-label">Ünvan (əlavə)</label>
+                                <label for="address" class="col-md-4 control-label">{{ $t('signup.address') }} </label>
 
                                 <div class="col-md-6">
                                     <input id="address" type="text" class="form-control" name="address"
@@ -41,7 +41,7 @@
                             </div>
 
                             <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
-                                <label for="password" class="col-md-4 control-label">Şifrə</label>
+                                <label for="password" class="col-md-4 control-label">{{ $t('signup.password') }} </label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control" name="password"
@@ -54,7 +54,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary" :disabled="errors.any()">
-                                        Qeyd et
+                                        {{ $t('signup.signUpButton') }}
                                     </button>
                                 </div>
                             </div>

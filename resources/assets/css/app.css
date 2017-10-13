@@ -234,7 +234,7 @@ h2 {
 .item-shipping-payment {
     float: right;
     padding: 10px;
-    width: 300px;
+    /*width: 300px;*/
     margin-bottom: 30px;
     background: #F6F9FA;
     border: 1px solid #DCECF5;

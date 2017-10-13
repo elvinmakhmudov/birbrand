@@ -41,6 +41,9 @@ export default new Vuex.Store({
         setCartItems(state,cartItems) {
             state.cartItems= cartItems;
         },
+        setLocale(state, locale) {
+            state.locale = locale;
+        }
     },
     actions: {
         getHomeData(context) {

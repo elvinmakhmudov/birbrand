@@ -19,7 +19,7 @@ class OrdersRepository
 
     public function home()
     {
-        $orders = Order::with('user')->get()->reverse();
+        $orders = Order::with('user', 'products')->orderBy('created_at', 'desc')->paginate(10);
 
         return view('admin.orders.home')->with('orders', $orders);
     }

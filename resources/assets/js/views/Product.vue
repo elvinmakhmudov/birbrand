@@ -17,7 +17,7 @@
                             <div class="col-md-12">
                                 <h2>{{ product.title }}</h2>
                             </div>
-                            <div class="col-md-4 col-xs-6">
+                            <div class="col-md-4 col-xs-12">
                                 <div class="product-img">
                                     <img class="xzoom" :src="'/storage/'+product.thumbnail"
                                          :xoriginal="'/storage/'+product.thumbnail"/>
@@ -28,12 +28,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-xs-6">
+                            <div class="col-md-4 col-xs-12">
                                 <h2>{{ product.price }} AZN </h2>
                                 <form @submit.prevent="buyIt()">
                                     <div v-show="product.options" class="form-group product-option"
                                          v-for="(options, key) in JSON.parse(product.options || '[]')">
-                                        <label v-bind:for="key" class="product-option-name control-label col-sm-2 col-md-2 col-lg-2">{{ key }}</label>
+                                        <label v-bind:for="key"
+                                               class="product-option-name control-label col-sm-2 col-md-2 col-lg-2">{{ key
+                                            }}</label>
                                         <div class="col-sm-9 col-sm-offset-1">
                                             <select class="form-control product-option-value" v-bind:id="key">
                                                 <option v-for="option in options">{{ option }}</option>
@@ -57,10 +59,12 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-4 col-xs-6">
+                            <div class="col-md-4 col-xs-12">
                                 <shippingInfo></shippingInfo>
                             </div>
-                            <div class="col-md-12">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-xs-12">
                                 <h4>Xususiyyetler</h4>
                                 <div class="product-description">
                                     {{ product.description }}
@@ -70,8 +74,9 @@
                     </div>
                 </div>
             </div>
-            <buyitguest :products="products" fromCart="false"></buyitguest>
         </div>
+        <buyitguest :products="products" :fromCart="false"></buyitguest>
+    </div>
     </div>
 
 </template>
@@ -79,6 +84,7 @@
 <script>
     import Errors from '../classes/Errors';
     import Vue from 'vue';
+
     import BuyItGuest from '../components/product/buyItGuest.vue';
     import ShippingInfo from '../components/product/shippingInfo.vue';
 

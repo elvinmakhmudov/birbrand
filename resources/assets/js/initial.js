@@ -14,11 +14,14 @@ require('./xzoom');
 // VueRouter = require('vue-router');
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import VueCookie from 'vue-cookie';
-import Paginate from 'vuejs-paginate'
+var VueCookie = require('vue-cookie');
+import Paginate from 'vuejs-paginate';
+import VueI18n from 'vue-i18n';
+
 
 Vue.use(VueRouter);
 Vue.use(VueCookie);
+Vue.use(VueI18n);
 
 import router from './routes';
 import store from './store';
@@ -41,10 +44,18 @@ Vue.component('top-banner', require('./components/banners/top-banner.vue'));
 Vue.component('left-banner', require('./components/banners/left-banner.vue'));
 Vue.component('right-banner', require('./components/banners/right-banner.vue'));
 
-import event from './classes/Event';
+import messages from './lang/messages';
+
+// Create VueI18n instance with options
+const i18n = new VueI18n({
+    locale: 'az', // set locale
+    messages, // set locale messages
+});
+
 
 
 const app = new Vue({
+    i18n,
     el: '#app',
     router,
     store,
@@ -53,7 +64,16 @@ const app = new Vue({
             return this.$store.state.categories
         },
     },
+    methods: {
+        setLocale(lang) {
+            this.$cookie.set('lang', lang, 7);
+            i18n.locale = lang;
+        }
+    },
     created: function () {
+
+       i18n.locale = this.$cookie.get('lang') || 'az';
+
         this.$store.dispatch('getHomeData').then(response => {
             Vue.nextTick(function () {
                 $.material.init();

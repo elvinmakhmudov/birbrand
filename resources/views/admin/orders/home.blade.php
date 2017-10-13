@@ -40,6 +40,9 @@
                                                 Qiymət
                                             </th>
                                             <th>
+                                                Seçim
+                                            </th>
+                                            <th>
                                                 Sayı
                                             </th>
                                         </tr>
@@ -48,11 +51,17 @@
                                         @foreach($order->products as $product)
                                             <tr>
                                                 <td>
-{{--                                                    <a href="{{ route('admin.products.edit', ['productId' => $product->id]) }}">{{ $product->title}}</a>--}}
                                                     <a href="/#/product/{{$product->id}}">{{ $product->title}}</a>
                                                 </td>
                                                 <td>
                                                     {{$product->pivot->price}}
+                                                </td>
+                                                <td>
+                                                    @if(json_decode($product->pivot->options, true))
+                                                        @foreach(json_decode($product->pivot->options, true) as $optionName => $option)
+                                                            <p> {{ $optionName }} - {{ $option }}</p>
+                                                        @endforeach
+                                                    @endif
                                                 </td>
                                                 <td>
                                                     {{$product->pivot->amount}}
@@ -74,6 +83,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    {{ $orders->links() }}
                 </div>
             </div>
         </div>

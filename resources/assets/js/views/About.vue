@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="layout">
-            Bizim haqqımızda
+            {{ $t('about.text') }}
         </div>
     </div>
 </template>
