@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class CategoriesRepository
@@ -17,7 +18,7 @@ class CategoriesRepository
 
     public function index()
     {
-        $categories = Category::with(['user', 'parent'])->get();
+        $categories = Category::with(['user', 'parent'])->paginate(15);
         return view('admin.categories.index')->with('categories', $categories);
     }
 
@@ -63,6 +64,8 @@ class CategoriesRepository
         $category->is_shown = $request->get('is_shown') ? true : false;
 
         $category->save();
+        //flush the cache because the item has been updated
+        Cache::flush();
         return redirect()->route('admin.categories.index');
     }
 
@@ -94,11 +97,16 @@ class CategoriesRepository
         $path = 'categories/' . $folder;
         Storage::makeDirectory($path);
         $category->folder = $path;
+        
+        //is category shown?
+        $category->is_shown = $request->get('is_shown') ? true : false;
 
         $category->image_url = $request->file('image') ? $request->file('image')->store($path) : '';
         $category->parent_id = $request->get('parent');
         $category->user()->associate(Auth::user());
         $category->save();
+        //flush the cache because the item has been updated
+        Cache::flush();
         return redirect()->route('admin.categories.index');
     }
 }

@@ -2,18 +2,11 @@
     <div class="nav-header">
         <div class="navbar navbar-inverse">
             <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse"
-                            data-target=".categories-navbar-responsive-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse categories-navbar-responsive-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="" v-for="category in categories">
-                            <a :href="'#/category/'+category.slug">@{{ category.title}}</a>
+                <div class="tabbable">
+                    <ul class="nav nav-pills nav-categories">
+                        <li class="nav-item" v-for="category in categories">
+                            <a class="nav-link" :href="'#/category/'+category.slug">@{{ $t('categories.' + category.title +
+                                '.main')}}</a>
                         </li>
                     </ul>
                 </div>

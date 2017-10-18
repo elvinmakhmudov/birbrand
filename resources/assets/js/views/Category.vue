@@ -4,7 +4,7 @@
             <div class="layout">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2>{{ category.title }}</h2>
+                        <h2 v-show='category.title'>{{ $t('categories.' + category.title + '.main') }}</h2>
                     </div>
                     <div v-for="subcategory in category.children">
                         <category-card :subcategory="subcategory"></category-card>
@@ -17,11 +17,12 @@
                     </div>
                 </div>
                 <paginate v-show="this.productsPage.last_page > 1"
-                        :page-count="this.productsPage.last_page || 0"
-                        :click-handler="goToPage"
-                        :prev-text="'Əvvəl'"
-                        :next-text="'Sonra'"
-                        :container-class="'pagination'">
+                          :page-count="this.productsPage.last_page || 0"
+                          :click-handler="goToPage"
+                          :prev-text="'Əvvəl'"
+                          ref="paginate"
+                          :next-text="'Sonra'"
+                          :container-class="'pagination'">
                 </paginate>
             </div>
         </div>
@@ -43,23 +44,33 @@
         },
         watch: {
             // call again the method if the route changes
-            '$route': 'fetchData'
+            '$route'(to,from) {
+                this.fetchData(to, from)
+                //if from route and to route path before local query differ, change the page num to 0
+                if(from.matched[0].path == to.matched[0].path) {
+                    if(from.path != to.path) {
+                        this.$refs.paginate.selected = 0;
+                    }
+                }
+                console.log(from.matched[0].path == to.matched[0].path);
+                console.log(to)
+                console.log(from)
+            }
         },
         created() {
             this.fetchData();
         },
         methods: {
             goToPage(pageNum) {
-                var url = this.productsPage.path +  "?page=" + pageNum;
-                console.log(url);
+                var url = this.productsPage.path + "?page=" + pageNum;
+                window.location.href = window.location.href.split('?')[0] + "?page=" + pageNum;
                 axios.get(url).then(function (response) {
                         this.products = response.data.productsPage.data;
                     }.bind(this)
                 )
             },
-            fetchData() {
+            fetchData(to, from) {
                 axios.get(window.location.hash.substr(2)).then(function (response) {
-                    console.log(response.data);
                         this.category = response.data.category;
                         this.subcategories = response.data.category.children;
                         this.products = response.data.productsPage.data;

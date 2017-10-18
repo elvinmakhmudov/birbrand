@@ -28,7 +28,7 @@
                                 <td>{{ $product->description }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>
-                                    <img width="100%" src="/storage/{{$product->thumbnail}}" alt="">
+                                    <img width="100%" src="/storage/{{$product->folder}}/thumbnail.jpg" alt="">
                                 </td>
                                 <td>{{$product->options}}</td>
                                 <td>{{ $product->created_at}}</td>
@@ -37,6 +37,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    {{ $products->links() }}
                 </div>
             </div>
         </div>

@@ -2,6 +2,7 @@
     <div class="container">
         <div class="content">
             <div class="layout">
+
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
@@ -13,15 +14,19 @@
                                 </ol>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <h2>{{ product.title }}</h2>
                             </div>
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-4 col-xs-12 col-sm-12">
                                 <div class="product-img">
-                                    <img class="xzoom" :src="'/storage/'+product.thumbnail"
-                                         :xoriginal="'/storage/'+product.thumbnail"/>
+                                    <img class="xzoom" :src="'/storage/'+product.cover_image"
+                                         :xoriginal="'/storage/'+product.cover_image"/>
                                     <div class="xzoom-thumbs">
+                                        <a :href="'/storage/' + product.cover_image">
+                                            <img :src="'/storage/' + product.cover_image" alt="" class="xzoom-gallery">
+                                        </a>
                                         <a v-for="image in product.images " :href="'/storage/'+image">
                                             <img class="xzoom-gallery" :src="'/storage/'+image">
                                         </a>
@@ -62,8 +67,6 @@
                             <div class="col-md-4 col-xs-12">
                                 <shippingInfo></shippingInfo>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-12 col-xs-12">
                                 <h4>Xususiyyetler</h4>
                                 <div class="product-description">
@@ -74,9 +77,8 @@
                     </div>
                 </div>
             </div>
+            <buyitguest :products="products"></buyitguest>
         </div>
-        <buyitguest :products="products" :fromCart="false"></buyitguest>
-    </div>
     </div>
 
 </template>
@@ -84,7 +86,6 @@
 <script>
     import Errors from '../classes/Errors';
     import Vue from 'vue';
-
     import BuyItGuest from '../components/product/buyItGuest.vue';
     import ShippingInfo from '../components/product/shippingInfo.vue';
 
@@ -159,8 +160,7 @@
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
                 if (isLoggedIn) {
                     axios.post('order', {
-                        products: this.products,
-                        fromCart: false
+                        products: this.products
                     }).then(function (response) {
                         this.$store.state.errors.record(response.data.errors);
                         this.$store.state.messages.record(response.data.messages);

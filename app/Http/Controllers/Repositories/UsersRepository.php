@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class UsersRepository
 {
@@ -49,6 +50,10 @@ class UsersRepository
         $user->address = $request->get('address');
         $user->is_admin= $request->get('is_admin') ? true : false;
         $user->save();
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.users.index');
     }
 
@@ -76,6 +81,10 @@ class UsersRepository
         $user->address = $request->get('address');
         $user->is_admin= $request->get('is_admin') ? true : false;
         $user->save();
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.users.index');
     }
 }

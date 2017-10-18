@@ -421,7 +421,7 @@ h2 {
 
 .product-card {
     position: relative;
-    min-height: 312px;
+    height: 267px;
 }
 
 .btn-buy {
@@ -434,11 +434,12 @@ h2 {
 
 .category-card {
     margin-top: 0;
-    min-height: 256px;
+    height: 256px;
 }
 
 .card-container {
     margin-bottom: 15px;
+    height: 277px;
 }
 
 .category-title {
@@ -656,6 +657,34 @@ xzoom-thumbs {
     /*margin: 20px 0;*/
     /*border-radius: 4px;*/
 /*}*/
+
+.nav-pills {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+}
+.nav-pills >li {
+    float: none;
+}
+.nav-categories {
+    background-color: #3e3e3e;
+    border: 0;
+    padding: 10px;
+}
+
+.nav-pills a{
+    color: white;
+}
+
+.nav-pills a:hover {
+    color: #3e3e3e;
+}
+
+.nav-pills .active {
+    color: #3e3e3e;
+}
+
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -1077,7 +1106,7 @@ h2 {
 
 .product-card {
     position: relative;
-    min-height: 312px;
+    height: 267px;
 }
 
 .btn-buy {
@@ -1090,11 +1119,12 @@ h2 {
 
 .category-card {
     margin-top: 0;
-    min-height: 256px;
+    height: 256px;
 }
 
 .card-container {
     margin-bottom: 15px;
+    height: 277px;
 }
 
 .category-title {
@@ -1312,6 +1342,34 @@ xzoom-thumbs {
     /*margin: 20px 0;*/
     /*border-radius: 4px;*/
 /*}*/
+
+.nav-pills {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+}
+.nav-pills >li {
+    float: none;
+}
+.nav-categories {
+    background-color: #3e3e3e;
+    border: 0;
+    padding: 10px;
+}
+
+.nav-pills a{
+    color: white;
+}
+
+.nav-pills a:hover {
+    color: #3e3e3e;
+}
+
+.nav-pills .active {
+    color: #3e3e3e;
+}
+
 
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -1733,7 +1791,7 @@ h2 {
 
 .product-card {
     position: relative;
-    min-height: 312px;
+    height: 267px;
 }
 
 .btn-buy {
@@ -1746,11 +1804,12 @@ h2 {
 
 .category-card {
     margin-top: 0;
-    min-height: 256px;
+    height: 256px;
 }
 
 .card-container {
     margin-bottom: 15px;
+    height: 277px;
 }
 
 .category-title {
@@ -1968,3 +2027,31 @@ xzoom-thumbs {
     /*margin: 20px 0;*/
     /*border-radius: 4px;*/
 /*}*/
+
+.nav-pills {
+    overflow-x: auto;
+    overflow-y: hidden;
+    display: -webkit-box;
+    display: -moz-box;
+}
+.nav-pills >li {
+    float: none;
+}
+.nav-categories {
+    background-color: #3e3e3e;
+    border: 0;
+    padding: 10px;
+}
+
+.nav-pills a{
+    color: white;
+}
+
+.nav-pills a:hover {
+    color: #3e3e3e;
+}
+
+.nav-pills .active {
+    color: #3e3e3e;
+}
+

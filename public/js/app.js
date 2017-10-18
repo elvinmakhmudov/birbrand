@@ -2121,6 +2121,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -2136,7 +2137,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         // call again the method if the route changes
-        '$route': 'fetchData'
+        '$route': function $route(to, from) {
+            this.fetchData(to, from);
+            //if from route and to route path before local query differ, change the page num to 0
+            if (from.matched[0].path == to.matched[0].path) {
+                if (from.path != to.path) {
+                    this.$refs.paginate.selected = 0;
+                }
+            }
+            console.log(from.matched[0].path == to.matched[0].path);
+            console.log(to);
+            console.log(from);
+        }
     },
     created: function created() {
         this.fetchData();
@@ -2145,14 +2157,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         goToPage: function goToPage(pageNum) {
             var url = this.productsPage.path + "?page=" + pageNum;
-            console.log(url);
+            window.location.href = window.location.href.split('?')[0] + "?page=" + pageNum;
             axios.get(url).then(function (response) {
                 this.products = response.data.productsPage.data;
             }.bind(this));
         },
-        fetchData: function fetchData() {
+        fetchData: function fetchData(to, from) {
             axios.get(window.location.hash.substr(2)).then(function (response) {
-                console.log(response.data);
                 this.category = response.data.category;
                 this.subcategories = response.data.category.children;
                 this.products = response.data.productsPage.data;
@@ -2508,7 +2519,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
 
 
 
@@ -2591,8 +2603,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var isLoggedIn = $("meta[name=login-status]").attr('content');
             if (isLoggedIn) {
                 axios.post('order', {
-                    products: this.products,
-                    fromCart: false
+                    products: this.products
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
@@ -3000,6 +3011,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3014,7 +3030,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         cartItems: function cartItems() {
-            console.log("Cart items are: " + this.$cookie.get('cartItems'));
             return this.$store.state.cartItems;
         },
         cartTotal: function cartTotal() {
@@ -3025,19 +3040,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         buyAll: function buyAll() {
             var _this = this;
 
-            for (var key in this.cartItems) {
-                if (this.cartItems.hasOwnProperty(key)) {
-                    var item = this.cartItems[key];
-                    var productId = item.id;
-                    var options = item.options.details;
-                    var amount = item.qty;
-                    this.products.push({
-                        productId: productId,
-                        options: options,
-                        amount: amount
-                    });
-                }
-            }
+            this.cartItems.forEach(function (item) {
+                var productId = item.id;
+                var options = item.options.details;
+                var amount = item.qty;
+                this.products.push({
+                    productId: productId,
+                    options: options,
+                    amount: amount
+                });
+            }.bind(this));
             var isLoggedIn = $("meta[name=login-status]").attr('content');
             if (isLoggedIn) {
                 axios.post('order', {
@@ -33998,13 +34010,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_vm._v("\n                        " + _vm._s(_vm.product.price) + " AZN\n                    ")])]), _vm._v(" "), _c('img', {
     staticClass: "card-img-top",
     attrs: {
-      "src": 'storage/' + _vm.product.thumbnail,
+      "src": 'storage/' + _vm.product.folder + '/thumbnail.jpg',
       "alt": "Card image cap"
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "card-block"
   }, [_c('h4', {
-    staticClass: "card-title"
+    staticClass: "card-title text-center"
   }, [_vm._v(_vm._s(_vm.product.title))])])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
@@ -34433,7 +34445,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           _vm.deleteItem(index, product.rowId)
         }
       }
-    }, [_vm._v("Sil\n                            ")])])])
+    }, [_vm._v("Sil\n                                ")])])])
   }), _vm._v(" "), _c('tr', [_c('td'), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('td', [_c('b', [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])]), _vm._v(" "), _c('td')])], 2)]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-raised btn-primary",
     staticStyle: {
@@ -34448,7 +34460,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.buyAll()
       }
     }
-  }, [_vm._v("İndi al")])]) : _c('p', {
+  }, [_vm._v("İndi al\n                    ")])]) : _c('p', {
     staticClass: "text-center"
   }, [_vm._v("Səbət boşdur")])])])]), _vm._v(" "), _c('buyitguest', {
     attrs: {
@@ -34485,7 +34497,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v(_vm._s(_vm.category.title))])]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
+  }, [_c('h2', {
+    directives: [{
+      name: "show",
+      rawName: "v-show",
+      value: (_vm.category.title),
+      expression: "category.title"
+    }]
+  }, [_vm._v(_vm._s(_vm.$t('categories.' + _vm.category.title + '.main')))])]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
     return _c('div', [_c('category-card', {
       attrs: {
         "subcategory": subcategory
@@ -34508,6 +34527,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (this.productsPage.last_page > 1),
       expression: "this.productsPage.last_page > 1"
     }],
+    ref: "paginate",
     attrs: {
       "page-count": this.productsPage.last_page || 0,
       "click-handler": _vm.goToPage,
@@ -34537,7 +34557,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "col-md-12"
   }, [_c('h2', {
     domProps: {
-      "textContent": _vm._s(_vm.category.title)
+      "textContent": _vm._s(_vm.$t('categories.' + _vm.category.title + '.main'))
     }
   })]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
     return _c('div', [_c('category-card', {
@@ -34754,7 +34774,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         }
       }, [_c('img', {
         attrs: {
-          "src": '/storage/' + product.thumbnail,
+          "src": '/storage/' + product.folder + '/thumbnail.jpg',
           "width": "20%"
         }
       }), _c('span', {
@@ -35054,18 +35074,28 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     staticClass: "col-md-12"
   }, [_c('h2', [_vm._v(_vm._s(_vm.product.title))])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4 col-xs-12"
+    staticClass: "col-md-4 col-xs-12 col-sm-12"
   }, [_c('div', {
     staticClass: "product-img"
   }, [_c('img', {
     staticClass: "xzoom",
     attrs: {
-      "src": '/storage/' + _vm.product.thumbnail,
-      "xoriginal": '/storage/' + _vm.product.thumbnail
+      "src": '/storage/' + _vm.product.cover_image,
+      "xoriginal": '/storage/' + _vm.product.cover_image
     }
   }), _vm._v(" "), _c('div', {
     staticClass: "xzoom-thumbs"
-  }, _vm._l((_vm.product.images), function(image) {
+  }, [_c('a', {
+    attrs: {
+      "href": '/storage/' + _vm.product.cover_image
+    }
+  }, [_c('img', {
+    staticClass: "xzoom-gallery",
+    attrs: {
+      "src": '/storage/' + _vm.product.cover_image,
+      "alt": ""
+    }
+  })]), _vm._v(" "), _vm._l((_vm.product.images), function(image) {
     return _c('a', {
       attrs: {
         "href": '/storage/' + image
@@ -35076,7 +35106,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "src": '/storage/' + image
       }
     })])
-  }))])]), _vm._v(" "), _c('div', {
+  })], 2)])]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4 col-xs-12"
   }, [_c('h2', [_vm._v(_vm._s(_vm.product.price) + " AZN ")]), _vm._v(" "), _c('form', {
     on: {
@@ -35169,18 +35199,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_vm._v("Səbətə at\n                                    ")])])], 2)]), _vm._v(" "), _c('div', {
     staticClass: "col-md-4 col-xs-12"
-  }, [_c('shippingInfo')], 1)]), _vm._v(" "), _c('div', {
-    staticClass: "row"
-  }, [_c('div', {
+  }, [_c('shippingInfo')], 1), _vm._v(" "), _c('div', {
     staticClass: "col-md-12 col-xs-12"
   }, [_c('h4', [_vm._v("Xususiyyetler")]), _vm._v(" "), _c('div', {
     staticClass: "product-description"
-  }, [_vm._v("\n                                " + _vm._s(_vm.product.description) + "\n                            ")])])])])])])]), _vm._v(" "), _c('buyitguest', {
+  }, [_vm._v("\n                                " + _vm._s(_vm.product.description) + "\n                            ")])])])])])]), _vm._v(" "), _c('buyitguest', {
     attrs: {
-      "products": _vm.products,
-      "fromCart": false
+      "products": _vm.products
     }
-  })], 1)
+  })], 1)])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -49351,6 +49378,11 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 $('.slider').slick({
                     arrows: false
                 });
+                var selector = '.nav-categories a';
+                $(selector).click(function (item) {
+                    $(selector).removeClass('active');
+                    $(this).addClass('active');
+                });
                 this.$store.state.carousel_shown = false;
 
                 //fix the banners on scroll and resize
@@ -49414,6 +49446,26 @@ var messages = {
             address: 'Address(optional)',
             password: 'Password',
             signUpButton: 'Sign Up'
+        },
+        categories: {
+            men: {
+                main: 'For Men'
+            },
+            women: {
+                main: 'For Women'
+            },
+            kids: {
+                main: 'For Kids'
+            },
+            appliances: {
+                main: 'Appliances'
+            },
+            auto: {
+                main: 'For Cars'
+            },
+            school: {
+                main: 'For School'
+            }
         }
     },
     az: {
@@ -49443,6 +49495,26 @@ var messages = {
             address: 'Ünvan(əlavə)',
             password: 'Şifrə',
             signUpButton: 'Qeyd et'
+        },
+        categories: {
+            men: {
+                main: 'Kişi üçün'
+            },
+            women: {
+                main: 'Qadın üçün'
+            },
+            kids: {
+                main: 'Uşaqlar üçün'
+            },
+            appliances: {
+                main: 'Məişət texnikası'
+            },
+            auto: {
+                main: 'Avtomobil üçün'
+            },
+            school: {
+                main: 'Məktəb üçün'
+            }
         }
     },
     ru: {
@@ -49472,6 +49544,26 @@ var messages = {
             address: 'Адрес(дополнительно)',
             password: 'Пароль',
             signUpButton: 'Зарегистрировать'
+        },
+        categories: {
+            men: {
+                main: 'Для мужчин'
+            },
+            women: {
+                main: 'Для женщин'
+            },
+            kids: {
+                main: 'Для детей'
+            },
+            appliances: {
+                main: 'Бытовая техника'
+            },
+            auto: {
+                main: 'Для авто'
+            },
+            school: {
+                main: 'Для школы'
+            }
         }
     }
 };

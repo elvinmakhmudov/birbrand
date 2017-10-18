@@ -26,6 +26,26 @@ const messages = {
             address: 'Address(optional)',
             password: 'Password',
             signUpButton: 'Sign Up'
+        },
+        categories: {
+            men: {
+                main: 'For Men',
+            },
+            women: {
+                main: 'For Women',
+            },
+            kids: {
+                main: 'For Kids',
+            },
+            appliances: {
+                main: 'Appliances',
+            },
+            auto: {
+                main: 'For Cars',
+            },
+            school: {
+                main: 'For School',
+            }
         }
     },
     az: {
@@ -55,6 +75,26 @@ const messages = {
             address: 'Ünvan(əlavə)',
             password: 'Şifrə',
             signUpButton: 'Qeyd et'
+        },
+        categories: {
+            men: {
+                main: 'Kişi üçün',
+            },
+            women: {
+                main: 'Qadın üçün',
+            },
+            kids: {
+                main: 'Uşaqlar üçün',
+            },
+            appliances: {
+                main: 'Məişət texnikası',
+            },
+            auto: {
+                main: 'Avtomobil üçün',
+            },
+            school: {
+                main: 'Məktəb üçün',
+            }
         }
     },
     ru: {
@@ -84,6 +124,26 @@ const messages = {
             address: 'Адрес(дополнительно)',
             password: 'Пароль',
             signUpButton: 'Зарегистрировать'
+        },
+        categories: {
+            men: {
+                main: 'Для мужчин',
+            },
+            women: {
+                main: 'Для женщин',
+            },
+            kids: {
+                main: 'Для детей',
+            },
+            appliances: {
+                main: 'Бытовая техника',
+            },
+            auto: {
+                main: 'Для авто',
+            },
+            school: {
+                main: 'Для школы',
+            }
         }
     }
 };

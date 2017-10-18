@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class CarouselsRepository
@@ -65,6 +66,10 @@ class CarouselsRepository
         $carousel->is_shown = $request->get('is_shown') ? true : false;
 
         $carousel->save();
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.carousels.index');
     }
 
@@ -98,6 +103,10 @@ class CarouselsRepository
         $carousel->is_shown = $request->get('is_shown') ? true : false;
 
         $carousel->save();
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.carousels.index');
     }
 }

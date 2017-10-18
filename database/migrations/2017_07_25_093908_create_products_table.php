@@ -20,14 +20,14 @@ class CreateProductsTable extends Migration
             $table->boolean('is_shown')->default(false);
             $table->integer('old_price')->nullable();
             $table->integer('price');
-            $table->string('folder')->unique();
+            $table->string('folder');
             $table->integer('sale_percent')->nullable();
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->json('images')->nullable();
-            $table->string('thumbnail');
+            $table->string('cover_image');
             $table->json('options')->nullable();
             $table->timestamps();
         });

@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class BannersRepository
@@ -70,6 +71,10 @@ class BannersRepository
         $banner->is_shown = $request->get('is_shown') ? true : false;
 
         $banner->save();
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.banners.index');
     }
 
@@ -104,6 +109,10 @@ class BannersRepository
         $banner->url = $request->get('url');
 
         $banner->save();
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.banners.index');
     }
 }

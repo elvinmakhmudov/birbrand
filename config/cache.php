@@ -88,4 +88,6 @@ return [
 
     'prefix' => 'laravel',
 
+    'lifetime' => 1440,
+
 ];

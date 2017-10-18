@@ -80,6 +80,11 @@ const app = new Vue({
                 $('.slider').slick({
                     arrows: false
                 });
+                var selector = '.nav-categories a';
+                $(selector).click(function (item) {
+                        $(selector).removeClass('active');
+                            $(this).addClass('active');
+                })
                 this.$store.state.carousel_shown = false;
 
                 //fix the banners on scroll and resize

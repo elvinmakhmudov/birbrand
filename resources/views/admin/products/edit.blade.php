@@ -79,10 +79,10 @@
 
                             <div class="col-md-3">
                                 <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="image" multiple="" name="thumbnail">
+                                <input type="file" id="image" multiple="" name="cover_image">
                             </div>
                             <div class="col-md-5">
-                                <img src="/storage/{{$product->thumbnail}}" alt="" width="100%">
+                                <img src="/storage/{{$product->folder . '/thumbnail.jpg'}}" alt="" width="100%">
                             </div>
                         </div>
 

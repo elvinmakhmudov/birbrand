@@ -52,11 +52,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="thumbnail" class="col-md-2 control-label">Şəkil</label>
+                            <label for="cover_image" class="col-md-2 control-label">Şəkil</label>
 
                             <div class="col-md-8">
                                 <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                                <input type="file" id="thumbnail" multiple="" name="thumbnail">
+                                <input type="file" id="cover_image" multiple="" name="cover_image">
                             </div>
                         </div>
 

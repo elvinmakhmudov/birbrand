@@ -6,6 +6,8 @@ use BirBrand\Banner;
 use BirBrand\Carousel;
 use BirBrand\Category;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
@@ -14,25 +16,37 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::isShown()->with('children')->get();
+        $categories = Cache::remember('categories', config('cache.lifetime'), function () {
+            return Category::isShown()->with('children')->get();
+        });
 
-        $carousels = Carousel::isShown()->get();
+        $carousels= Cache::remember('carousels', config('cache.lifetime'), function () {
+            return Carousel::isShown()->get();
+        });
 
-        $banners = Banner::isShown()->get();
+        $banners = Cache::remember('banners', config('cache.lifetime'), function () {
+            return Banner::isShown()->get();
+        });
 
         $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 
-        return ['categories' => $categories, 'carousels' => $carousels, 'banners' => $banners, 'cart' =>$cart ];
+        return ['categories' => $categories, 'carousels' => $carousels, 'banners' => $banners, 'cart' => $cart];
     }
 
 
     /**
      * Show products of the category
      */
-    public function show($slug) {
-        $category = Category::where('slug', $slug)->isShown()->with('products', 'children')->first();
-        $productsPage = $category->products()->paginate(16);
+    public function show($slug, Request $request)
+    {
+        $category = Cache::remember('category/'.$slug,  config('cache.lifetime'), function () use($slug) {
+            return Category::where('slug', $slug)->isShown()->with('products', 'children')->first();
+        });
 
-        return ['category'  => $category, 'productsPage' => $productsPage ];
+        $productsPage = Cache::remember('productsPage/'.$slug.'/'.$request->get('page'), config('cache.lifetime'), function () use($category) {
+            return $category->products()->paginate(16);
+        });
+
+        return ['category' => $category, 'productsPage' => $productsPage];
     }
 }

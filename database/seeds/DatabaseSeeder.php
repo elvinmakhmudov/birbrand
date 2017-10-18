@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductsTableSeeder::class);
         $this->call(CarouselsTableSeeder::class);
         $this->call(BannersTableSeeder::class);
-        // $this->call(UsersTableSeeder::class);
+        Cache::flush();
     }
 }

@@ -9,10 +9,10 @@
                         </div>
                     </div>
                     <img class="card-img-top"
-                         :src="'storage/'+product.thumbnail"
+                         :src="'storage/'+product.folder+'/thumbnail.jpg'"
                          alt="Card image cap">
                     <div class="card-block">
-                        <h4 class="card-title">{{ product.title }}</h4>
+                        <h4 class="card-title text-center">{{ product.title }}</h4>
                         <!--<a href="#" class="btn btn-raised btn-primary center-block btn-buy">Almaq</a>-->
                     </div>
                 </a>

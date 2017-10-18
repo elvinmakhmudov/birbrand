@@ -15,13 +15,14 @@
 
 use Illuminate\Support\Facades\Storage;
 
-$factory->define(BirBrand\Category::class, function (Faker\Generator $faker) {
+
+$factory->define(BirBrand\Category::class, function (Faker\Generator $faker)  {
     $title = $faker->sentence(2);
-    $folder= 'categories/'.str_random(20);
+    $folder = 'categories/' . str_random(20);
     Storage::makeDirectory($folder);
     return [
         'title' => $title,
-        'slug' => str_slug($title,'-'),
+        'slug' => str_slug($title, '-'),
         'description' => $faker->paragraph(),
         'is_shown' => true,
         'folder' => $folder,

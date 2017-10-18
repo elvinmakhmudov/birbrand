@@ -25,7 +25,7 @@ class ShoppingCartController extends Controller
             $price = $product->price;
 
             //add thumbnail field to the options
-            $options = ['thumbnail' => $product->thumbnail, 'details' => $request->get('options')];
+            $options = ['thumbnail' => $product->folder . '/thumbnail.jpg', 'details' => $request->get('options')];
 
             //add the product to the cart
             Cart::add($product->id, $product->title, $amount, $price, $options);

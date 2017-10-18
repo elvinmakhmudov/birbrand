@@ -9,7 +9,9 @@ use Exception;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class ProductsRepository
 {
@@ -19,7 +21,7 @@ class ProductsRepository
     {
         $category = Category::findOrFail($id);
 
-        $products = $category->products;
+        $products = $category->products()->with('user')->paginate(20);
 
         return view('admin.products.index')->with(['category' => $category, 'products' => $products]);
     }
@@ -28,7 +30,7 @@ class ProductsRepository
     {
         $product = Product::findOrFail($productId);
 
-        $categories = Category::all();
+        $categories = Category::select('id', 'title')->get();
 
         $category = $product->category;
 
@@ -41,7 +43,7 @@ class ProductsRepository
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'thumbnail' => 'nullable|file',
+            'cover_image' => 'nullable|file',
             'old_price' => 'nullable|integer',
             'sale_percent' => 'nullable|integer',
             'price' => 'required|integer',
@@ -71,9 +73,16 @@ class ProductsRepository
         $product->options = $request->get('options');
 
         //if image exists, update it
-        if ($request->file('thumbnail')) {
-            Storage::delete($product->thumbnail);
-            $product->thumbnail = $request->file('thumbnail') ? $request->file('thumbnail')->store($product->folder) : '';
+        if ($request->file('cover_image')) {
+            //remove the original image and thumbnail
+            Storage::delete($product->cover_image);
+            Storage::delete($product->folder.'/thumbnail.jpg');
+
+            //save the thumbnail
+            Image::make($request->file('cover_image'))->resize(300, 300)->save(storage_path('app/public/').$path.'/thumbnail.jpg');
+            //save original cover image
+            $product->cover_image = $request->file('cover_image') ? $request->file('cover_image')->store($product->folder) : '';
+
         }
 
         //delete images if required
@@ -92,6 +101,11 @@ class ProductsRepository
         $product->is_shown = $request->get('is_shown') ? true : false;
 
         $product->save();
+
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
         return redirect()->route('admin.products.index', ['id' => $categoryId]);
     }
 
@@ -108,7 +122,7 @@ class ProductsRepository
         $this->validate($request, [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'thumbnail' => 'nullable|file',
+            'cover_image' => 'nullable|file',
             'old_price' => 'nullable|integer',
             'sale_percent' => 'nullable|integer',
             'price' => 'required|integer',
@@ -131,11 +145,27 @@ class ProductsRepository
         //save additional images
         $product->images = $this->saveImages($request, $path);
 
-        $product->thumbnail = $request->file('thumbnail') ? $request->file('thumbnail')->store($path) : '';
+
+        //resize and save the cover image and cover_image
+        $image = $request->file('cover_image');
+        if($image){
+            Image::make($image)->resize(300, 300)->save(storage_path('app/public/').$path.'/thumbnail.jpg');
+
+            //original cover image
+            $product->cover_image = $image ? $image->store($path) : '';
+        }
+
+        //is product shown?
+        $product->is_shown = $request->get('is_shown') ? true : false;
+
         $product->category_id = $request->get('category');
         $product->user_id = Auth::user()->id;
         $product->save();
-        return redirect()->route('admin.products.index', ['id' => $categoryId]);
+
+        //flush the cache because the item has been updated
+        Cache::flush();
+
+        return redirect()->route('admin.products.index', ['id' => $categoryId, 'page' => $request->get('page')]);
     }
 
     public function saveImages(Request $request, $path)
