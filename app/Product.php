@@ -13,7 +13,7 @@ class Product extends Model implements Buyable
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'price', 'image_url', 'options','old_price', 'sale_percent','is_shown'
+        'title', 'description', 'price', 'image_url', 'options','old_price', 'sale_percent','is_shown','ordered'
     ];
     /**
      * The attributes that should be hidden for arrays.

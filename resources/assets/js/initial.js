@@ -5,9 +5,11 @@
  */
 
 require('./bootstrap');
-require('./material.min');
-require('./ripples.min');
-require('./slick.min');
+// require('./material.min');
+// require('./ripples.min');
+
+require('./materialize.min');
+// require('./slick.min');
 require('./xzoom');
 
 // window.Vue = require('vue');
@@ -76,10 +78,10 @@ const app = new Vue({
 
         this.$store.dispatch('getHomeData').then(response => {
             Vue.nextTick(function () {
-                $.material.init();
-                $('.slider').slick({
-                    arrows: false
-                });
+                // $.material.init();
+                // $('.slider').slick({
+                //     arrows: false
+                // });
                 var selector = '.nav-categories a';
                 $(selector).click(function (item) {
                         $(selector).removeClass('active');

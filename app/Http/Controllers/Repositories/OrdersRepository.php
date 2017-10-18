@@ -12,6 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Cache;
 
 class OrdersRepository
 {
@@ -145,6 +146,10 @@ class OrdersRepository
                 $price = $product->price;
                 $options = isset($products[$key]['options']) ? $products[$key]['options'] : null;
                 $order->products()->attach($product, ['price' => $price, 'amount' => $amount, 'options' => $options]);
+
+                //increment product orders by 1
+                $product->ordered = $product->ordered + 1;
+                $product->save();
             }
             $order->user()->associate(Auth::user())->save();
             //if bought from cart, destroy the old cart
@@ -171,6 +176,10 @@ class OrdersRepository
                 $price = $product->price;
                 $options = isset($products[$key]['options']) ? $products[$key]['options'] : null;
                 $order->products()->attach($product, ['price' => $price, 'amount' => $amount, 'options' => $options]);
+
+                //increment product orders by 1
+                $product->ordered = $product->ordered + 1;
+                $product->save();
             }
             $order->user()->associate(Auth::user())->save();
             //if bought from cart, destroy the old cart

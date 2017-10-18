@@ -11,20 +11,26 @@
 
     <title>{{ config('app.name', 'BirBrand') }}</title>
 
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
 </head>
 <body>
-<div id="app">
-    <top-banner></top-banner>
-    <flashmessage></flashmessage>
-    @include('layouts.nav.main')
-    @include('layouts.nav.categories')
-    @yield('content')
-</div>
-<!-- Scripts -->
-<script src="{{ mix('js/app.js') }}"></script>
-@include('layouts.footer')
+    <div id="app">
+        <top-banner></top-banner>
+        <flashmessage></flashmessage>
+        @include('layouts.nav.main')
+        @include('layouts.nav.categories')
+        @yield('content')
+    </div>
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}"></script>
+    @include('layouts.footer')
 </body>
 </html>

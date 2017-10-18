@@ -5,44 +5,57 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h2 v-show='category.title'>{{ $t('categories.' + category.title + '.main') }}</h2>
-                    </div>
-                    <div v-for="subcategory in category.children">
-                        <category-card :subcategory="subcategory"></category-card>
-                    </div>
-                    <div class="col-md-12" v-if="subcategories.length > 0">
-                        <h2>Dəbbdə</h2>
-                    </div>
-                    <div class="products" v-for="product in products">
-                        <product-card :product="product"></product-card>
+                        <!-- Example single danger button -->
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Action
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
                     </div>
                 </div>
-                <paginate v-show="this.productsPage.last_page > 1"
-                          :page-count="this.productsPage.last_page || 0"
-                          :click-handler="goToPage"
-                          :prev-text="'Əvvəl'"
-                          ref="paginate"
-                          :next-text="'Sonra'"
-                          :container-class="'pagination'">
-                </paginate>
+                <div v-for="subcategory in category.children">
+                    <category-card :subcategory="subcategory"></category-card>
+                </div>
+                <div class="col-md-12" v-if="subcategories.length > 0">
+                    <h2>Dəbbdə</h2>
+                </div>
+                <div class="products" v-for="product in products">
+                    <product-card :product="product"></product-card>
+                </div>
             </div>
-        </div>
-    </div>
+            <paginate v-show="this.productsPage.last_page > 1"
+              :page-count="this.productsPage.last_page || 0"
+              :click-handler="goToPage"
+              :prev-text="'Əvvəl'"
+              ref="paginate"
+              :next-text="'Sonra'"
+              :container-class="'pagination'">
+          </paginate>
+      </div>
+  </div>
+</div>
 </template>
 
 <script>
-    import event from "../classes/Event"
+import event from "../classes/Event"
 
 
-    export default {
-        data() {
-            return {
-                category: {},
-                products: [],
-                subcategories: [],
-                productsPage: {}
-            }
-        },
-        watch: {
+export default {
+    data() {
+        return {
+            category: {},
+            products: [],
+            subcategories: [],
+            productsPage: {}
+        }
+    },
+    watch: {
             // call again the method if the route changes
             '$route'(to,from) {
                 this.fetchData(to, from)
@@ -65,17 +78,17 @@
                 var url = this.productsPage.path + "?page=" + pageNum;
                 window.location.href = window.location.href.split('?')[0] + "?page=" + pageNum;
                 axios.get(url).then(function (response) {
-                        this.products = response.data.productsPage.data;
-                    }.bind(this)
+                    this.products = response.data.productsPage.data;
+                }.bind(this)
                 )
             },
             fetchData(to, from) {
                 axios.get(window.location.hash.substr(2)).then(function (response) {
-                        this.category = response.data.category;
-                        this.subcategories = response.data.category.children;
-                        this.products = response.data.productsPage.data;
-                        this.productsPage = response.data.productsPage;
-                    }.bind(this)
+                    this.category = response.data.category;
+                    this.subcategories = response.data.category.children;
+                    this.products = response.data.productsPage.data;
+                    this.productsPage = response.data.productsPage;
+                }.bind(this)
                 )
             },
             subcategoryExists() {
@@ -84,4 +97,4 @@
 
         }
     }
-</script>
+    </script>

@@ -117,19 +117,15 @@
         },
         created() {
             this.fetchData();
-            console.log('product vue created')
         },
         methods: {
             getSelectedProductOptions() {
                 var options = {};
                 $('.product-option').each(function () {
                     var key = $(this).find(".product-option-name").text();
-                    console.log(key);
                     var value = $(this).find(".product-option-value").val();
-                    console.log(value);
                     options[key] = value;
                 });
-                console.log(options);
                 return JSON.stringify(options);
             },
             addToCart() {
