@@ -1697,6 +1697,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -2145,23 +2166,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2224,6 +2228,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Event__ = __webpack_require__("./resources/assets/js/classes/Event.js");
+//
 //
 //
 //
@@ -2561,6 +2566,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2570,7 +2582,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
         'buyitguest': __WEBPACK_IMPORTED_MODULE_2__components_product_buyItGuest_vue___default.a,
-        'shippingInfo': __WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue___default.a
+        'shippinginfo': __WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue___default.a
     },
     props: {
         product_id: ''
@@ -2620,6 +2632,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.$store.state.messages.record(response.data.messages);
                 this.$store.commit('setCartTotal', response.data.cart.cartTotal);
                 var items = Object.keys(response.data.cart.cartItems).map(function (k) {
+
                     return response.data.cart.cartItems[k];
                 });
                 this.$store.commit('setCartItems', items);
@@ -2637,6 +2650,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 amount: this.amount
             }];
             var isLoggedIn = $("meta[name=login-status]").attr('content');
+
             if (isLoggedIn) {
                 axios.post('order', {
                     products: this.products
@@ -36681,9 +36695,9 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-md-3 col-xs-4"
+    staticClass: "col s6 m4 l3"
   }, [_c('div', {
-    staticClass: "card-container"
+    staticClass: "card-container hoverable"
   }, [_c('div', {
     staticClass: "card product-card"
   }, [_c('a', {
@@ -36691,20 +36705,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "href": '#/product/' + _vm.product.id
     }
   }, [_c('div', {
+    staticClass: "card-image"
+  }, [_c('div', {
     staticClass: "product-price-container"
   }, [_c('div', {
     staticClass: "product-price"
-  }, [_vm._v("\n                        " + _vm._s(_vm.product.price) + " AZN\n                    ")])]), _vm._v(" "), _c('img', {
+  }, [_vm._v("\n                               " + _vm._s(_vm.product.price) + " AZN\n                           ")])]), _vm._v(" "), _c('div', {
+    staticClass: "card-content"
+  }, [_c('p', [_vm._v("\n                               " + _vm._s(_vm.product.title) + "\n                           ")])]), _vm._v(" "), _c('img', {
     staticClass: "card-img-top",
     attrs: {
       "src": 'storage/' + _vm.product.folder + '/thumbnail.jpg',
       "alt": "Card image cap"
     }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "card-block"
-  }, [_c('h4', {
-    staticClass: "card-title text-center"
-  }, [_vm._v(_vm._s(_vm.product.title))])])])])])])
+  })])])])])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -36754,7 +36768,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('ul', {
-    staticClass: "myCategories"
+    staticClass: "nav-categories"
   }, _vm._l((_vm.navCategories), function(category) {
     return _c('li', {
       staticClass: "category-tab"
@@ -36814,7 +36828,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "col-md-3 col-xs-6"
+    staticClass: "col s4"
   }, [_c('div', {
     staticClass: "card-container"
   }, [_c('div', {
@@ -37202,31 +37216,27 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [_c('div', {
     staticClass: "layout"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('h2', {
+    staticClass: "col s12"
+  }, [_c('h5', {
     directives: [{
       name: "show",
       rawName: "v-show",
       value: (_vm.category.title),
       expression: "category.title"
     }]
-  }, [_vm._v(_vm._s(_vm.$t('categories.' + _vm.category.title + '.main')))]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
+  }, [_vm._v("\n                " + _vm._s(_vm.$t('categories.' + _vm.category.title + '.main')) + "\n            ")])]), _vm._v(" "), _vm._l((_vm.category.children), function(subcategory) {
     return _c('div', [_c('category-card', {
       attrs: {
         "subcategory": subcategory
       }
     })], 1)
   }), _vm._v(" "), (_vm.subcategories.length > 0) ? _c('div', {
-    staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v("Dəbbdə")])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.products), function(product) {
+    staticClass: "col s12"
+  }, [_c('h2', [_vm._v("\n                Dəbbdə\n            ")])]) : _vm._e(), _vm._v(" "), _vm._l((_vm.products), function(product) {
     return _c('div', {
       staticClass: "products"
     }, [_c('product-card', {
@@ -37243,50 +37253,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     ref: "paginate",
     attrs: {
-      "page-count": this.productsPage.last_page || 0,
       "click-handler": _vm.goToPage,
-      "prev-text": 'Əvvəl',
+      "container-class": 'pagination',
       "next-text": 'Sonra',
-      "container-class": 'pagination'
+      "page-count": this.productsPage.last_page || 0,
+      "prev-text": 'Əvvəl'
     }
-  })], 1)])])
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "btn-group"
-  }, [_c('button', {
-    staticClass: "btn btn-danger dropdown-toggle",
-    attrs: {
-      "type": "button",
-      "data-toggle": "dropdown",
-      "aria-haspopup": "true",
-      "aria-expanded": "false"
-    }
-  }, [_vm._v("\n                            Action\n                        ")]), _vm._v(" "), _c('div', {
-    staticClass: "dropdown-menu"
-  }, [_c('a', {
-    staticClass: "dropdown-item",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Action")]), _vm._v(" "), _c('a', {
-    staticClass: "dropdown-item",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Another action")]), _vm._v(" "), _c('a', {
-    staticClass: "dropdown-item",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Something else here")]), _vm._v(" "), _c('div', {
-    staticClass: "dropdown-divider"
-  }), _vm._v(" "), _c('a', {
-    staticClass: "dropdown-item",
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v("Separated link")])])])
-}]}
+  })], 1)
+},staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
@@ -37754,11 +37728,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [_c('div', {
+  return _c('div', [_c('div', {
     staticClass: "slideshow slider"
   }, _vm._l((_vm.carousels), function(slide) {
     return _c('div', [_c('img', {
@@ -37777,7 +37747,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "category": category
       }
     })], 1)
-  }))])])
+  }))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -37794,37 +37764,32 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "container"
-  }, [_c('div', {
-    staticClass: "content"
-  }, [_c('div', {
     staticClass: "layout"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-12"
+    staticClass: "col s12"
   }, [_c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('ol', {
-    staticClass: "breadcrumb"
+    staticClass: "nav-wrapper breadcrumbs valign-wrapper"
+  }, [_c('div', {
+    staticClass: "col s12"
   }, [_vm._l((_vm.ancestors), function(ancestor) {
-    return _c('li', [_c('a', {
+    return _c('a', {
+      staticClass: "breadcrumb",
       attrs: {
         "href": '#/category/' + ancestor.slug
       }
-    }, [_vm._v(_vm._s(ancestor.title))])])
-  }), _vm._v(" "), _c('li', [_c('a', {
-    attrs: {
-      "href": "#"
-    }
-  }, [_vm._v(_vm._s(_vm.product.title))])])], 2)])]), _vm._v(" "), _c('div', {
+    }, [_vm._v("\n                            " + _vm._s(_vm.$t('categories.' + ancestor.title + '.main')) + "\n                        ")])
+  }), _vm._v(" "), _c('a', {
+    staticClass: "breadcrumb"
+  }, [_vm._v("\n                            " + _vm._s(_vm.product.title) + "\n                        ")])], 2)])]), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
-    staticClass: "col-md-12"
-  }, [_c('h2', [_vm._v(_vm._s(_vm.product.title))])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4 col-xs-12 col-sm-12"
+    staticClass: "col s12"
+  }, [_c('h4', [_vm._v("\n                        " + _vm._s(_vm.product.title) + "\n                    ")])]), _vm._v(" "), _c('div', {
+    staticClass: "col m4 s12"
   }, [_c('div', {
     staticClass: "product-img"
   }, [_c('img', {
@@ -37857,8 +37822,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }
     })])
   })], 2)])]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4 col-xs-12"
-  }, [_c('h2', [_vm._v(_vm._s(_vm.product.price) + " AZN ")]), _vm._v(" "), _c('form', {
+    staticClass: "col m4 s12"
+  }, [_c('h4', {
+    staticClass: "center-align"
+  }, [_vm._v("\n                        " + _vm._s(_vm.product.price) + " AZN\n                    ")]), _vm._v(" "), _c('form', {
     on: {
       "submit": function($event) {
         $event.preventDefault();
@@ -37873,14 +37840,14 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         value: (_vm.product.options),
         expression: "product.options"
       }],
-      staticClass: "form-group product-option"
+      staticClass: "valign-wrapper product-option"
     }, [_c('label', {
-      staticClass: "product-option-name control-label col-sm-2 col-md-2 col-lg-2",
+      staticClass: "product-option-name col offset-s1 s3",
       attrs: {
         "for": key
       }
-    }, [_vm._v(_vm._s(key))]), _vm._v(" "), _c('div', {
-      staticClass: "col-sm-9 col-sm-offset-1"
+    }, [_vm._v("\n                                " + _vm._s(key) + "\n                            ")]), _vm._v(" "), _c('div', {
+      staticClass: "col s7 offset-s1"
     }, [_c('select', {
       staticClass: "form-control product-option-value",
       attrs: {
@@ -37890,14 +37857,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       return _c('option', [_vm._v(_vm._s(option))])
     }))])])
   }), _vm._v(" "), _c('div', {
-    staticClass: "form-group"
+    staticClass: "form-group valign-wrapper"
   }, [_c('label', {
-    staticClass: "control-label col-sm-2",
-    attrs: {
-      "for": "i5ps"
-    }
-  }, [_vm._v("Ədəd")]), _vm._v(" "), _c('div', {
-    staticClass: "col-sm-9 col-sm-offset-1"
+    staticClass: "col offset-s1 s3"
+  }, [_vm._v("\n                                Ədəd\n                            ")]), _vm._v(" "), _c('div', {
+    staticClass: "col s7 offset-s1"
   }, [(_vm.errors.has('amount')) ? _c('label', {
     staticClass: "control-label text-danger",
     domProps: {
@@ -37912,11 +37876,11 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }],
     staticClass: "form-control",
     attrs: {
-      "type": "number",
       "id": "i5ps",
-      "value": "1",
+      "max": "100",
       "min": "1",
-      "max": "100"
+      "type": "number",
+      "value": "1"
     },
     domProps: {
       "value": (_vm.amount)
@@ -37930,16 +37894,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.amount = $event.target.value
       }
     }
-  })]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-raised btn-primary",
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "submit-buttons center-align col s12"
+  }, [_c('button', {
+    staticClass: "btn waves-effect waves-light",
     attrs: {
-      "data-toggle": "modal"
+      "name": "action",
+      "type": "submit"
     }
-  }, [_vm._v("İndi al\n                                    ")]), _vm._v(" "), _c('button', {
-    staticClass: "btn btn-primary",
+  }, [_vm._v("\n                                    İndi al\n                                ")]), _vm._v(" "), _c('button', {
+    staticClass: "btn waves-effect waves-light",
     attrs: {
-      "data-toggle": "modal",
-      "data-target": "#complete-dialog"
+      "name": "action",
+      "type": "submit"
     },
     on: {
       "click": function($event) {
@@ -37947,17 +37914,19 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.addToCart()
       }
     }
-  }, [_vm._v("Səbətə at\n                                    ")])])], 2)]), _vm._v(" "), _c('div', {
-    staticClass: "col-md-4 col-xs-12"
-  }, [_c('shippingInfo')], 1), _vm._v(" "), _c('div', {
-    staticClass: "col-md-12 col-xs-12"
-  }, [_c('h4', [_vm._v("Xususiyyetler")]), _vm._v(" "), _c('div', {
+  }, [_c('i', {
+    staticClass: "material-icons left"
+  }, [_vm._v("add_shopping_cart")]), _vm._v("Səbətə at")])])], 2)]), _vm._v(" "), _c('div', {
+    staticClass: "col m4 s12"
+  }, [_c('shippinginfo')], 1), _vm._v(" "), _c('div', {
+    staticClass: "col s12"
+  }, [_c('h4', [_vm._v("\n                        Xususiyyetler\n                    ")]), _vm._v(" "), _c('div', {
     staticClass: "product-description"
-  }, [_vm._v("\n                                " + _vm._s(_vm.product.description) + "\n                            ")])])])])])]), _vm._v(" "), _c('buyitguest', {
+  }, [_vm._v("\n                        " + _vm._s(_vm.product.description) + "\n                    ")])])])])]), _vm._v(" "), _c('buyitguest', {
     attrs: {
       "products": _vm.products
     }
-  })], 1)])
+  })], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
@@ -52179,6 +52148,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         i18n.locale = this.$cookie.get('lang') || 'az';
         this.$store.dispatch('getHomeData').then(function (response) {
             __WEBPACK_IMPORTED_MODULE_0_vue___default.a.nextTick(function () {
+                $('select').material_select();
                 // $.material.init();
                 // $('.slider').slick({
                 //     arrows: false
@@ -52188,11 +52158,11 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 //     $(selector).removeClass('active');
                 //     $(this).addClass('active');
                 // })
-                // var selector = 'ul.tabs a';
-                // $(selector).click(function(item) {
-                //     $(selector).removeClass('active');
-                //     $(this).addClass('active');
-                // })
+                var selector = '.nav-categories li';
+                $(selector).click(function (item) {
+                    $(selector).removeClass('active');
+                    $(this).addClass('active');
+                });
                 this.$store.state.carousel_shown = false;
                 //fix the banners on scroll and resize
                 var elementPosition = $('.left-banner').offset();
@@ -52245,7 +52215,7 @@ var messages = {
             about: 'About Us',
             login: 'Log In',
             signUp: 'Sign Up',
-            language: 'Language',
+            language: 'en',
             profile: 'My profile',
             adminPanel: 'Admin Panel',
             orders: 'My orders',
@@ -52294,7 +52264,7 @@ var messages = {
             about: 'Haqqımızda',
             login: 'Giriş',
             signUp: 'Qeydiyyat',
-            language: 'Dil',
+            language: 'az',
             profile: 'Səhifəm',
             adminPanel: 'Admin Panel',
             orders: 'Sifarişlərim',
@@ -52343,14 +52313,14 @@ var messages = {
             about: 'О Нас',
             login: 'Вход',
             signUp: 'Регистрация',
-            language: 'Язык',
+            language: 'ru',
             profile: 'Мой профиль',
             adminPanel: 'Админ панель',
             orders: 'Мои заказы',
             logout: 'Выход'
         },
         about: {
-            text: 'Странница о Нас'
+            text: 'Ст   ранница о Нас'
         },
         login: {
             title: 'Вход',

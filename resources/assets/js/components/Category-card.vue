@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-3 col-xs-6">
+    <div class="col s4">
         <div class="card-container">
             <div class="card category-card">
                 <a :href="'#/category/' + subcategory.slug">

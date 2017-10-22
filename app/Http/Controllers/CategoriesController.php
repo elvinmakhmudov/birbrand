@@ -16,9 +16,9 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Cache::remember('categories', config('cache.lifetime'), function () {
-            return Category::isShown()->with('children')->get();
-        });
+        // $categories = Cache::remember('categories', config('cache.lifetime'), function () {
+        //     return Category::isShown()->with('children')->get();
+        // });
 
         $carousels= Cache::remember('carousels', config('cache.lifetime'), function () {
             return Carousel::isShown()->get();
@@ -30,7 +30,7 @@ class CategoriesController extends Controller
 
         $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 
-        return ['categories' => $categories, 'carousels' => $carousels, 'banners' => $banners, 'cart' => $cart];
+        return ['carousels' => $carousels, 'banners' => $banners, 'cart' => $cart];
     }
 
 

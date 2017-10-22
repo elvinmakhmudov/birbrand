@@ -1,5 +1,5 @@
 <template>
-    <ul class="myCategories">
+    <ul class="nav-categories">
         <li class="category-tab" v-for="category in navCategories">
             <a :href="'#/category/'+category.slug" class="waves-effect waves-light">
                 {{ $t('categories.' + category.title +'.main')}}

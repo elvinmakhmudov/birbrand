@@ -1,88 +1,95 @@
 <template>
-    <div class="container">
-        <div class="content">
-            <div class="layout">
-
+    <div class="layout">
+        <div class="row">
+            <div class="col s12">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <ol class="breadcrumb">
-                                    <li v-for="ancestor in ancestors"><a
-                                            :href="'#/category/' + ancestor.slug">{{ ancestor.title }}</a></li>
-                                    <li><a href="#">{{ product.title }}</a></li>
-                                </ol>
+                    <div class="nav-wrapper breadcrumbs valign-wrapper">
+                        <div class="col s12">
+                            <a :href="'#/category/'+ancestor.slug" class="breadcrumb" v-for="ancestor in ancestors">
+                                {{ $t('categories.' + ancestor.title + '.main')}}
+                            </a>
+                            <a class="breadcrumb">
+                                {{ product.title }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <h4>
+                            {{ product.title }}
+                        </h4>
+                    </div>
+                    <div class="col m4 s12">
+                        <div class="product-img">
+                            <img :src="'/storage/'+product.cover_image" :xoriginal="'/storage/'+product.cover_image" class="xzoom"/>
+                            <div class="xzoom-thumbs">
+                                <a :href="'/storage/' + product.cover_image">
+                                    <img :src="'/storage/' + product.cover_image" alt="" class="xzoom-gallery">
+                                    </img>
+                                </a>
+                                <a :href="'/storage/'+image" v-for="image in product.images ">
+                                    <img :src="'/storage/'+image" class="xzoom-gallery">
+                                    </img>
+                                </a>
                             </div>
                         </div>
+                    </div>
+                    <div class="col m4 s12">
+                        <h4 class="center-align">
+                            {{ product.price }} AZN
+                        </h4>
+                        <form @submit.prevent="buyIt()">
+                            <div class="valign-wrapper product-option" v-for="(options, key) in JSON.parse(product.options || '[]')" v-show="product.options">
+                                <label class="product-option-name col offset-s1 s3" v-bind:for="key">
+                                    {{ key }}
+                                </label>
+                                <div class="col s7 offset-s1">
+                                    <select class="form-control product-option-value" v-bind:id="key">
+                                        <option v-for="option in options">{{ option }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group valign-wrapper">
+                                <label class="col offset-s1 s3">
+                                    Ədəd
+                                </label>
+                                <div class="col s7 offset-s1">
+                                    <label class="control-label text-danger" v-if="errors.has('amount')" v-text="errors.get('amount')">
+                                    </label>
+                                    <input @keydown="errors.purge()" class="form-control" id="i5ps" max="100" min="1" type="number" v-model="amount" value="1">
+                                    </input>
+                                </div>
+                            </div>
+                            <div class="submit-buttons center-align col s12">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h2>{{ product.title }}</h2>
+
+                                    <button class="btn waves-effect waves-light" name="action" type="submit">
+                                        İndi al
+                                    </button>
+                                    <button @click.prevent="addToCart()" class="btn waves-effect waves-light" name="action" type="submit"><i class="material-icons left">add_shopping_cart</i>Səbətə at</button>
                             </div>
-                            <div class="col-md-4 col-xs-12 col-sm-12">
-                                <div class="product-img">
-                                    <img class="xzoom" :src="'/storage/'+product.cover_image"
-                                         :xoriginal="'/storage/'+product.cover_image"/>
-                                    <div class="xzoom-thumbs">
-                                        <a :href="'/storage/' + product.cover_image">
-                                            <img :src="'/storage/' + product.cover_image" alt="" class="xzoom-gallery">
-                                        </a>
-                                        <a v-for="image in product.images " :href="'/storage/'+image">
-                                            <img class="xzoom-gallery" :src="'/storage/'+image">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-xs-12">
-                                <h2>{{ product.price }} AZN </h2>
-                                <form @submit.prevent="buyIt()">
-                                    <div v-show="product.options" class="form-group product-option"
-                                         v-for="(options, key) in JSON.parse(product.options || '[]')">
-                                        <label v-bind:for="key"
-                                               class="product-option-name control-label col-sm-2 col-md-2 col-lg-2">{{ key
-                                            }}</label>
-                                        <div class="col-sm-9 col-sm-offset-1">
-                                            <select class="form-control product-option-value" v-bind:id="key">
-                                                <option v-for="option in options">{{ option }}</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="i5ps" class="control-label col-sm-2">Ədəd</label>
-                                        <div class="col-sm-9 col-sm-offset-1">
-                                            <label class="control-label text-danger" v-if="errors.has('amount')"
-                                                   v-text="errors.get('amount')"></label>
-                                            <input type="number" @keydown="errors.purge()" class="form-control"
-                                                   id="i5ps" value="1" min="1" max="100" v-model="amount">
-                                        </div>
-                                        <button class="btn btn-raised btn-primary" data-toggle="modal"
-                                        >İndi al
-                                        </button>
-                                        <button @click.prevent="addToCart()" class="btn btn-primary" data-toggle="modal"
-                                                data-target="#complete-dialog">Səbətə at
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-4 col-xs-12">
-                                <shippingInfo></shippingInfo>
-                            </div>
-                            <div class="col-md-12 col-xs-12">
-                                <h4>Xususiyyetler</h4>
-                                <div class="product-description">
-                                    {{ product.description }}
-                                </div>
-                            </div>
+                        </form>
+                    </div>
+                    <div class="col m4 s12">
+                        <shippinginfo>
+                        </shippinginfo>
+                    </div>
+                    <div class="col s12">
+                        <h4>
+                            Xususiyyetler
+                        </h4>
+                        <div class="product-description">
+                            {{ product.description }}
                         </div>
                     </div>
                 </div>
             </div>
-            <buyitguest :products="products"></buyitguest>
         </div>
+        <buyitguest :products="products">
+        </buyitguest>
     </div>
-
 </template>
-
 <script>
     import Errors from '../classes/Errors';
     import Vue from 'vue';
@@ -92,7 +99,7 @@
     export default {
         components: {
             'buyitguest': BuyItGuest,
-            'shippingInfo': ShippingInfo
+            'shippinginfo': ShippingInfo
         },
         props: {
             product_id: ''
@@ -138,6 +145,8 @@
                     this.$store.state.messages.record(response.data.messages);
                     this.$store.commit('setCartTotal', response.data.cart.cartTotal);
                     var items = Object.keys(response.data.cart.cartItems).map(function (k) {
+
+
                         return response.data.cart.cartItems[k]
                     });
                     this.$store.commit('setCartItems', items);
@@ -154,6 +163,7 @@
                     amount: this.amount
                 }];
                 var isLoggedIn = $("meta[name=login-status]").attr('content');
+
                 if (isLoggedIn) {
                     axios.post('order', {
                         products: this.products

@@ -1,18 +1,19 @@
 <template>
-    <div class="container">
-        <div class="content">
+        <div>
             <div class="slideshow slider">
                 <div v-for="slide in carousels">
                     <img alt="" :src="'/storage/'+slide.image_url">
                 </div>
             </div>
+
+            
             <div class="layout">
                 <div class="category" v-for="category in categories">
                     <container :category="category"></container>
                 </div>
+
             </div>
         </div>
-    </div>
 </template>
 
 <script>

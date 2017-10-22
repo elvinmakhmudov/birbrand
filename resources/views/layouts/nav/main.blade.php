@@ -94,7 +94,7 @@
                 </ul>
                 <ul class="right">
                     <li class="valign-wrapper">
-                        <a href="#/cart" class="waves-effect"><span class="material-icons ">shopping_cart</span><span class="shopping-cart-badge">@{{Object.keys($store.state.cartItems).length || 0 }}</span></a>
+                        <a href="#/cart" class="waves-effect"><i class="material-icons left">shopping_cart</i><span class="shopping-cart-badge">@{{Object.keys($store.state.cartItems).length || 0 }}</span></a>
                     </li>
                     <li><a href="#!" class="dropdown-button" data-activates="languageDropdown">@{{ $t("main.language") }}</a></li>
                 </ul>
@@ -104,7 +104,7 @@
                     </a></li>
                 </ul>
                 <ul class="hide-on-med-and-up right">
-                    <a href="tel:+994-51-855-01-05" class="waves-effect"><span class="material-icons">local_phone</span></a>
+                    <a href="tel:+994-51-855-01-05" class="waves-effect"><span class="material-icons left">local_phone</span></a>
                 </ul>
             </div>
         </div>

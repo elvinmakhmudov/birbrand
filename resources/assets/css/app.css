@@ -6,10 +6,12 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
-.content {
-    /*width: 960px;*/
+
+/*.content {
+    width: 960px;
     margin: 0 auto;
 }
+*/
 
 .navbar.navbar-default {
     background-color: #03a9f4;
@@ -150,7 +152,7 @@ h2 {
 .product-price-container {
     position: absolute;
     z-index: 1;
-    top: 0;
+    bottom: 0;
     right: 0;
 }
 
@@ -163,7 +165,7 @@ h2 {
 
 .product-price {
     padding: 7px 10px;
-    background-color: #03a9f4;
+    background-color: #009be6;
     color: #fff;
 }
 
@@ -184,7 +186,6 @@ h2 {
 
 .product-card {
     position: relative;
-    height: 267px;
 }
 
 .btn-buy {
@@ -197,12 +198,12 @@ h2 {
 
 .category-card {
     margin-top: 0;
-    height: 256px;
+    /*height: 256px;*/
 }
 
 .card-container {
     margin-bottom: 15px;
-    height: 277px;
+    /*height: 277px;*/
 }
 
 .category-title {
@@ -210,14 +211,9 @@ h2 {
 }
 
 .card-container:hover {
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+    /*box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);*/
 }
 
-.breadcrumb {
-    background-color: #fff;
-    padding-left: 0px;
-    margin-bottom: -10px;
-}
 
 .product-img {
     width: 100%;
@@ -287,10 +283,6 @@ xzoom-thumbs {
     z-index: -1;
 }
 
-.container {
-    position: relative;
-}
-
 .fixed {
     position: fixed;
 }
@@ -328,10 +320,11 @@ xzoom-thumbs {
         width: 960px;
         margin: 0 auto;
     }
-    .content {
+    /*    .content {
         width: 960px;
         margin: 0 auto;
     }
+*/
     .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
         padding-top: 0;
         padding-bottom: 0;
@@ -409,10 +402,8 @@ xzoom-thumbs {
     float: none;
 }
 
-.nav-categories {
-    background-color: #3e3e3e;
-    border: 0;
-    padding: 10px;
+.nav-categories li.active {
+    background-color: black;
 }
 
 .nav-pills a {
@@ -456,7 +447,7 @@ xzoom-thumbs {
     height: 22px;
     line-height: 22px;
     list-style-type: none;
-    margin-left: 4px;
+    margin-left: -10px;
     padding-bottom: 0px;
     padding-left: 6px;
     padding-right: 6px;
@@ -471,7 +462,6 @@ xzoom-thumbs {
     margin-left: 140px;
 }
 
-
 .categories-header-2 {
     background-color: #3e3e3e;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
@@ -483,6 +473,7 @@ xzoom-thumbs {
     margin-top: 0;
     overflow-x: auto;
     overflow-y: hidden;
+    width: 100%;
 }
 
 .categories-header-tabs li {
@@ -510,4 +501,56 @@ xzoom-thumbs {
 
 .category-tab a:hover {
     background-color: black;
+}
+
+.card-content {
+    height: 70px;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.breadcrumbs {
+    background-color: transparent;
+}
+
+.breadcrumb {
+    color: black
+}
+
+.breadcrumbs a:last-of-type {
+    color: gray;
+}
+
+.breadcrumb:before {
+    color: black;
+    margin-top: -5px;
+}
+
+.btn, .btn:hover {
+    background-color: #009be6;
+}
+
+.btn:hover {
+    background-color: #4fc3f7;
+}
+
+.btn:focus {
+    background-color: #009be6;
+}
+
+.submit-buttons {
+    margin: 10px
+}
+
+.submit-buttons button {
+    margin: 10px;
+    
 }

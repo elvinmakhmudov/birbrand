@@ -64,7 +64,8 @@ const app = new Vue({
     created: function() {
         i18n.locale = this.$cookie.get('lang') || 'az';
         this.$store.dispatch('getHomeData').then(response => {
-            Vue.nextTick(function() {
+            Vue.nextTick(function() { 
+                   $('select').material_select();
                 // $.material.init();
                 // $('.slider').slick({
                 //     arrows: false
@@ -74,11 +75,11 @@ const app = new Vue({
                 //     $(selector).removeClass('active');
                 //     $(this).addClass('active');
                 // })
-                // var selector = 'ul.tabs a';
-                // $(selector).click(function(item) {
-                //     $(selector).removeClass('active');
-                //     $(this).addClass('active');
-                // })
+                var selector = '.nav-categories li';
+                $(selector).click(function(item) {
+                    $(selector).removeClass('active');
+                    $(this).addClass('active');
+                })
                 this.$store.state.carousel_shown = false;
                 //fix the banners on scroll and resize
                 var elementPosition = $('.left-banner').offset();

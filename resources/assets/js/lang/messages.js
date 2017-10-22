@@ -4,7 +4,7 @@ const messages = {
             about: 'About Us',
             login: 'Log In',
             signUp: 'Sign Up',
-            language: 'Language',
+            language: 'en',
             profile: 'My profile',
             adminPanel: 'Admin Panel',
             orders: 'My orders',
@@ -53,7 +53,7 @@ const messages = {
             about: 'Haqqımızda',
             login: 'Giriş',
             signUp: 'Qeydiyyat',
-            language: 'Dil',
+            language: 'az',
             profile: 'Səhifəm',
             adminPanel: 'Admin Panel',
             orders: 'Sifarişlərim',
@@ -102,14 +102,14 @@ const messages = {
             about: 'О Нас',
             login: 'Вход',
             signUp: 'Регистрация',
-            language: 'Язык',
+            language: 'ru',
             profile: 'Мой профиль',
             adminPanel: 'Админ панель',
             orders: 'Мои заказы',
             logout: 'Выход'
         },
         about: {
-            text: 'Странница о Нас'
+            text: 'Ст   ранница о Нас'
         },
         login: {
             title: 'Вход',
