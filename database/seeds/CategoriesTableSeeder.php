@@ -14,7 +14,8 @@ class CategoriesTableSeeder extends Seeder
         $titles = ['men', 'women', 'kids', 'appliances', 'auto', 'school'];
         foreach ($titles as $title) {
             factory(\BirBrand\Category::class)->create([
-                'title' => $title
+                'title' => $title,
+                'slug' => $title
             ]);
         }
     }

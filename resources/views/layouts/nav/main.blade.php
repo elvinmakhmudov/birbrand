@@ -1,6 +1,6 @@
 <div class="header">
     <nav class="light-blue darken-1">
-        <div class="container"> 
+        <div class="container">
             <div class="nav-wrapper">
                 <a href="{{ route('main') }}" class="brand-logo left">{{ config('app.name') }}</a>
                 <a href="#" class="left nav-phone waves-effect hide-on-small-only">
@@ -29,6 +29,9 @@
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             @{{ $t("main.logout") }}</a>
                         </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                         <li class="divider"></li>
                         @if(\Illuminate\Support\Facades\Auth::user()->is_admin == true)
                         <li>
@@ -69,7 +72,7 @@
                     @endif
                     @endif
                 </ul>
-                <ul id="languageDropdown" class="dropdown-content">  
+                <ul id="languageDropdown" class="dropdown-content">
                     <li>
                         <a href="#" @click.prevent="setLocale('az')">
                             az
@@ -86,7 +89,7 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="right hide-on-large-only">  
+                <ul class="right hide-on-large-only">
                     <li><a href="#!" class="dropdown-button" data-activates="mobileDropdown"><i class="material-icons">more_vert</i></a></li>
                 </ul>
                 <ul class="right">
@@ -95,17 +98,15 @@
                     </li>
                     <li><a href="#!" class="dropdown-button" data-activates="languageDropdown">@{{ $t("main.language") }}</a></li>
                 </ul>
-                <ul class="hide-on-med-and-down right">   
-                    <li><a href="#/about">
+                <ul class="hide-on-med-and-down right">
+                    <li><a href="#/about" class="waves-effect">
                         @{{ $t("main.about") }}
                     </a></li>
                 </ul>
-                <ul class="hide-on-med-and-up right"> 
+                <ul class="hide-on-med-and-up right">
                     <a href="tel:+994-51-855-01-05" class="waves-effect"><span class="material-icons">local_phone</span></a>
                 </ul>
             </div>
         </div>
     </nav>
 </div>
-
-

@@ -49,7 +49,7 @@ export default new Vuex.Store({
         getHomeData(context) {
             return new Promise((resolve, reject) => {
                 axios.get('/category').then(function (response) {
-                    context.commit('setCategories', response.data.categories);
+                    // context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
                     context.commit('setBanners', response.data.banners);
                     context.commit('setCartTotal', response.data.cart.cartTotal);

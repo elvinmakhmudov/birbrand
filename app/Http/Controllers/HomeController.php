@@ -3,6 +3,7 @@
 namespace BirBrand\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categories = Cache::remember('categories', config('cache.lifetime'), function () {
+            return Category::isShown()->with('children')->get();
+        });
+
+        return view('home')->with('categories' , $categories);
     }
 }

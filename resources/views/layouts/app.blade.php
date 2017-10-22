@@ -26,7 +26,6 @@
         <top-banner></top-banner>
         <flashmessage></flashmessage>
         @include('layouts.nav.main')
-        @include('layouts.nav.categories')
         @yield('content')
     </div>
     <!-- Scripts -->

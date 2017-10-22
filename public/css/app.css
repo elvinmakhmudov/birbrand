@@ -590,3 +590,44 @@ xzoom-thumbs {
 .nav-phone {
     margin-left: 140px;
 }
+
+
+.categories-header-2 {
+    background-color: #3e3e3e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    height: 57px;
+}
+
+.categories-header-tabs {
+    background-color: #3e3e3e;
+    margin-top: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.categories-header-tabs li {
+    display: inline-block;
+}
+
+.categories-header-tabs ul {
+    white-space: nowrap;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    height: 56px;
+}
+
+.categories-header-2 a {
+    color: white;
+}
+
+.category-tab a {
+    display: block;
+    line-height: 35px;
+    white-space: nowrap;
+    padding: 10px;
+    margin-top: 0px;
+}
+
+.category-tab a:hover {
+    background-color: black;
+}
