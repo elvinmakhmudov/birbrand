@@ -1,65 +1,52 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ $t('signup.title') }}</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" v-on:submit.prevent="register" role="form" method="POST"
-                              action="register" @keydown="errors.clear($event.target.name)">
-                            <div class="form-group" v-bind:class="{'has-error': errors.get('name')}">
-                                <label for="name" class="col-md-4 control-label"> {{ $t('signup.name') }}</label>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="layout">
+                <div class="row">
+                    <h5 class="col s12">{{ $t('signup.title') }}</h5>
+                    <form v-on:submit.prevent="register" role="form" method="POST" action="register"
+                          @keydown="errors.clear($event.target.name)">
+                        <div class="input-field col s12 m6">
+                            <label class="active error" v-if="errors.has('name')"
+                                   v-text="errors.get('name')"></label>
+                            <input placeholder="Elvin" id="name" type="text" name="name" class="validate"
+                                   v-model="name">
+                            <label for="name" class="active" v-show="!errors.has('name')">{{ $t('signup.name')
+                                }}</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <label class="active error" v-if="errors.has('number')"
+                                   v-text="errors.get('number')"></label>
+                            <input placeholder="994518550105" id="number" type="text" name="number" class="validate"
+                                   v-model="number">
+                            <label for="number" class="active" v-show="!errors.has('number')">{{ $t('signup.number')
+                                }}</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <label class="active error" v-if="errors.has('address')"
+                                   v-text="errors.get('address')"></label>
+                            <input placeholder="U.Akbarov 86T" id="address" type="text" name="address" class="validate"
+                                   v-model="address">
+                            <label for="address" class="active" v-show="!errors.has('address')">{{ $t('signup.address')
+                                }}</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <label class="active error" v-if="errors.has('password')"
+                                   v-text="errors.get('password')"></label>
+                            <input placeholder="*****" id="password" type="password" class="validate"
+                                   v-model="password" name="password">
+                            <label for="password" class="active" v-show="!errors.has('password')">{{ $t('login.password')
+                                }}</label>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" autofocus
-                                           v-model="name">
-                                    <label class="control-label" v-if="errors.has('number')"
-                                           v-text="errors.get('name')"></label>
-                                </div>
+                        <div class="form-group">
+                            <div class="col s12">
+                                <button type="submit" class="btn btn-primary" :disabled="errors.any()">
+                                    {{ $t('signup.signUpButton') }}
+                                </button>
                             </div>
-
-                            <div class="form-group" v-bind:class="{'has-error': errors.get('number')}">
-                                <label for="number" class="col-md-4 control-label">{{ $t('signup.number') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="number" type="number" class="form-control" name="number"
-                                           v-model="number">
-                                    <label class="control-label" v-if="errors.has('number')"
-                                           v-text="errors.get('number')"></label>
-                                </div>
-                            </div>
-
-                            <div class="form-group" v-bind:class="{'has-error': errors.get('address')}">
-                                <label for="address" class="col-md-4 control-label">{{ $t('signup.address') }} </label>
-
-                                <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control" name="address"
-                                           v-model="address">
-                                    <label class="control-label" v-if="errors.has('address')"
-                                           v-text="errors.get('address')"></label>
-                                </div>
-                            </div>
-
-                            <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
-                                <label for="password" class="col-md-4 control-label">{{ $t('signup.password') }} </label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password"
-                                           v-model="password">
-                                    <label class="control-label" v-if="errors.has('number')"
-                                           v-text="errors.get('password')"></label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary" :disabled="errors.any()">
-                                        {{ $t('signup.signUpButton') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

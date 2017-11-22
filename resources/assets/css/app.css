@@ -554,3 +554,8 @@ main {
     margin: 10px;
     
 }
+
+.input-field label.error {
+    color: red;
+    font-size: 0.9em;
+}

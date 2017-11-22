@@ -1,40 +1,34 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ $t('login.title') }}</div>
-                    <div class="panel-body">
-                        <form class="form-horizontal" v-on:submit.prevent="login" role="form" method="POST"
-                              action="login" @keydown="errors.clear($event.target.name)">
-                            <div class="form-group" v-bind:class="{'has-error': errors.get('number')}">
-                                <label for="number" class="col-md-4 control-label">{{ $t('login.number') }}</label>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="layout">
+                <div class="row">
+                    <h5 class="col s12">{{ $t('login.title') }}</h5>
+                    <form v-on:submit.prevent="login" role="form" method="POST"
+                          action="login" @keydown="errors.clear($event.target.name)">
+                        <div class="input-field col s12 m6">
+                            <label class="active error" v-if="errors.has('number')"
+                                   v-text="errors.get('number')"></label>
+                            <input placeholder="994518550105" id="number" type="text" name="number" class="validate"
+                                   v-model="number">
+                            <label for="number" class="active" v-show="!errors.has('number')">{{ $t('login.number')
+                                }}</label>
+                        </div>
+                        <div class="input-field col s12 m6">
+                            <label class="active error" v-if="errors.has('password')"
+                                   v-text="errors.get('password')"></label>
+                            <input placeholder="*****" id="password" type="password" class="validate"
+                                   v-model="password" name="password">
+                            <label for="password" class="active" v-show="!errors.has('password')">{{ $t('login.password')
+                                }}</label>
+                        </div>
 
-                                <div class="col-md-6">
-                                    <input id="number" type="number" class="form-control" name="number" v-model="number" autofocus>
-                                    <label class="control-label" v-if="errors.has('number')" v-text="errors.get('number')"></label>
-                                </div>
-
-                            </div>
-
-                            <div class="form-group" v-bind:class="{'has-error': errors.get('password')}">
-                                <label for="password" class="col-md-4 control-label">{{ $t('login.password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="password" v-model="password">
-                                    <label class="control-label" v-if="errors.has('password')"  v-text="errors.get('password')"></label>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary" :disabled="errors.any()">
-                                        {{ $t('login.loginButton') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="col s12">
+                            <button type="submit" class="btn btn-primary" :disabled="errors.any()">
+                                {{ $t('login.loginButton') }}
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -53,7 +47,7 @@
             }
         },
         methods: {
-            login(){
+            login() {
                 axios.post('/login', {
                     number: this.number,
                     password: this.password,

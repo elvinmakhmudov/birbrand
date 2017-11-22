@@ -103,9 +103,6 @@
                         @{{ $t("main.about") }}
                     </a></li>
                 </ul>
-                <ul class="hide-on-med-and-up right">
-                    <a href="tel:+994-51-855-01-05" class="waves-effect"><span class="material-icons left">local_phone</span></a>
-                </ul>
             </div>
         </div>
     </nav>
