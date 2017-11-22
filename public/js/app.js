@@ -2417,7 +2417,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -2811,7 +2810,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -2965,7 +2963,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/register', {
-                name: this.number,
+                name: this.name,
                 number: this.number,
                 address: this.address,
                 password: this.password
@@ -37830,7 +37828,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content" }, [
     _c("div", { staticClass: "layout" }, [
-      _vm._v("\n        " + _vm._s(_vm.$t("about.text")) + "\n    ")
+      _c("h5", [_vm._v(_vm._s(_vm.$t("about.text")))])
     ])
   ])
 }
@@ -37853,138 +37851,131 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "content" },
-    [
-      _c("div", { staticClass: "layout" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("h2", [_vm._v("Mənim səbətim")]),
-            _vm._v(" "),
-            Object.keys(_vm.cartItems).length !== 0
-              ? _c("div", [
-                  _c("table", { staticClass: "table table-hover" }, [
-                    _vm._m(0, false, false),
-                    _vm._v(" "),
-                    _c(
-                      "tbody",
-                      [
-                        _vm._l(_vm.cartItems, function(product, index) {
-                          return _c("tr", [
-                            _c("td", [
-                              _c(
-                                "a",
-                                { attrs: { href: "#/product/" + product.id } },
-                                [
-                                  _c("img", {
-                                    attrs: {
-                                      src:
-                                        "/storage/" + product.options.thumbnail,
-                                      width: "20%"
-                                    }
-                                  }),
-                                  _c(
-                                    "span",
-                                    { staticClass: "table-order-link" },
-                                    [_vm._v(_vm._s(product.name))]
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              _vm._l(
-                                JSON.parse(product.options.details || "[]"),
-                                function(option, name) {
-                                  return _c("p", [
-                                    _vm._v(
-                                      " " +
-                                        _vm._s(name) +
-                                        " - " +
-                                        _vm._s(option) +
-                                        " "
-                                    )
-                                  ])
-                                }
-                              )
-                            ),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(" " + _vm._s(product.price) + " AZN")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(" " + _vm._s(product.qty) + " ədəd")
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      _vm.deleteItem(index, product.rowId)
-                                    }
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Sil\n                                "
-                                  )
-                                ]
-                              )
-                            ])
-                          ])
-                        }),
-                        _vm._v(" "),
-                        _c("tr", [
-                          _c("td"),
-                          _vm._v(" "),
-                          _vm._m(1, false, false),
-                          _vm._v(" "),
-                          _c("td", [
-                            _c("b", [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])
-                          ]),
-                          _vm._v(" "),
-                          _c("td")
-                        ])
-                      ],
-                      2
-                    )
-                  ]),
+  return _c("div", { staticClass: "layout cart" }, [
+    _c(
+      "div",
+      { staticClass: "row" },
+      [
+        _c("div", { staticClass: "col s12" }, [
+          _c("h5", [_vm._v("Mənim səbətim")]),
+          _vm._v(" "),
+          Object.keys(_vm.cartItems).length !== 0
+            ? _c("div", [
+                _c("table", { staticClass: "bordered" }, [
+                  _vm._m(0, false, false),
                   _vm._v(" "),
                   _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-raised btn-primary",
-                      staticStyle: { float: "right" },
-                      attrs: { "data-toggle": "modal" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.buyAll()
-                        }
-                      }
-                    },
-                    [_vm._v("İndi al\n                    ")]
+                    "tbody",
+                    [
+                      _vm._l(_vm.cartItems, function(product, index) {
+                        return _c("tr", [
+                          _c("td", [
+                            _c(
+                              "a",
+                              { attrs: { href: "#/product/" + product.id } },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src:
+                                      "/storage/" + product.options.thumbnail,
+                                    width: "20%"
+                                  }
+                                }),
+                                _c(
+                                  "span",
+                                  { staticClass: "table-order-link" },
+                                  [_vm._v(_vm._s(product.name))]
+                                )
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            _vm._l(
+                              JSON.parse(product.options.details || "[]"),
+                              function(option, name) {
+                                return _c("p", [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(name) +
+                                      " - " +
+                                      _vm._s(option) +
+                                      " "
+                                  )
+                                ])
+                              }
+                            )
+                          ),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(" " + _vm._s(product.price) + " AZN")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(" " + _vm._s(product.qty) + " ədəd")
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    _vm.deleteItem(index, product.rowId)
+                                  }
+                                }
+                              },
+                              [_vm._v("Sil\n                            ")]
+                            )
+                          ])
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c("td"),
+                        _vm._v(" "),
+                        _vm._m(1, false, false),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c("b", [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])
+                        ]),
+                        _vm._v(" "),
+                        _c("td"),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-raised btn-primary",
+                              attrs: { "data-toggle": "modal" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  _vm.buyAll()
+                                }
+                              }
+                            },
+                            [_vm._v("İndi al\n                            ")]
+                          )
+                        ])
+                      ])
+                    ],
+                    2
                   )
                 ])
-              : _c("p", { staticClass: "text-center" }, [
-                  _vm._v("Səbət boşdur")
-                ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("buyitguest", { attrs: { products: _vm.products, fromCart: true } })
-    ],
-    1
-  )
+              ])
+            : _c("p", { staticClass: "text-center" }, [_vm._v("Səbət boşdur")])
+        ]),
+        _vm._v(" "),
+        _c("buyitguest", { attrs: { products: _vm.products, fromCart: true } })
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -38030,422 +38021,481 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c("div", { staticClass: "layout" }, [
-      _c("div", { staticClass: "row" }, [
-        _vm._m(0, false, false),
-        _vm._v(" "),
-        _vm._m(1, false, false),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            attrs: { role: "form", method: "POST", action: "register" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.update($event)
-              },
-              keydown: function($event) {
-                _vm.form1.errors.clear($event.target.name)
-              }
+  return _c("div", { staticClass: "layout" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("h5", { staticClass: "col s12" }, [_vm._v("Mənim səhifəm")]),
+      _vm._v(" "),
+      _c("h6", { staticClass: "col s12" }, [_vm._v("Ümumi")]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          attrs: { role: "form", method: "POST", action: "register" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.update($event)
+            },
+            keydown: function($event) {
+              _vm.form1.errors.clear($event.target.name)
             }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                class: { "has-error": _vm.form1.errors.get("name") }
-              },
-              [
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "has-error": _vm.form1.errors.get("name") }
+            },
+            [
+              _c("div", { staticClass: "input-field col s12 m6" }, [
+                _vm.form1.errors.has("name")
+                  ? _c("label", {
+                      staticClass: "active error",
+                      domProps: {
+                        textContent: _vm._s(_vm.form1.errors.get("name"))
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.$store.state.user.name,
+                      expression: "$store.state.user.name"
+                    }
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    id: "name",
+                    placeholder: " ",
+                    type: "text",
+                    name: "name"
+                  },
+                  domProps: { value: _vm.$store.state.user.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$store.state.user,
+                        "name",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 control-label",
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.form1.errors.has("name"),
+                        expression: "!form1.errors.has('name')"
+                      }
+                    ],
+                    staticClass: "active",
                     attrs: { for: "name" }
                   },
-                  [_vm._v("Ad")]
-                ),
+                  [_vm._v(_vm._s(_vm.$t("profile.name")))]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "has-error": _vm.form1.errors.get("number") }
+            },
+            [
+              _c("div", { staticClass: "input-field col s12 m6" }, [
+                _vm.form1.errors.has("number")
+                  ? _c("label", {
+                      staticClass: "active error",
+                      domProps: {
+                        textContent: _vm._s(_vm.form1.errors.get("number"))
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.$store.state.user.name,
-                        expression: "$store.state.user.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "name",
-                      type: "text",
-                      name: "name",
-                      autofocus: ""
-                    },
-                    domProps: { value: _vm.$store.state.user.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.$store.state.user,
-                          "name",
-                          $event.target.value
-                        )
-                      }
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.$store.state.user.number,
+                      expression: "$store.state.user.number"
                     }
-                  }),
-                  _vm._v(" "),
-                  _vm.form1.errors.has("number")
-                    ? _c("label", {
-                        staticClass: "control-label",
-                        domProps: {
-                          textContent: _vm._s(_vm.form1.errors.get("name"))
-                        }
-                      })
-                    : _vm._e()
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                class: { "has-error": _vm.form1.errors.get("number") }
-              },
-              [
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    id: "number",
+                    type: "text",
+                    placeholder: " ",
+                    name: "number"
+                  },
+                  domProps: { value: _vm.$store.state.user.number },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$store.state.user,
+                        "number",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 control-label",
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.form1.errors.has("number"),
+                        expression: "!form1.errors.has('number')"
+                      }
+                    ],
+                    staticClass: "active",
                     attrs: { for: "number" }
                   },
-                  [_vm._v("Nömrə")]
-                ),
+                  [_vm._v(_vm._s(_vm.$t("profile.number")))]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "has-error": _vm.form1.errors.get("address") }
+            },
+            [
+              _c("div", { staticClass: "input-field col s12 m6" }, [
+                _vm.form1.errors.has("address")
+                  ? _c("label", {
+                      staticClass: "active error",
+                      domProps: {
+                        textContent: _vm._s(_vm.form1.errors.get("address"))
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.$store.state.user.number,
-                        expression: "$store.state.user.number"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "number", type: "number", name: "number" },
-                    domProps: { value: _vm.$store.state.user.number },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.$store.state.user,
-                          "number",
-                          $event.target.value
-                        )
-                      }
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.$store.state.user.address,
+                      expression: "$store.state.user.address"
                     }
-                  }),
-                  _vm._v(" "),
-                  _vm.form1.errors.has("number")
-                    ? _c("label", {
-                        staticClass: "control-label",
-                        domProps: {
-                          textContent: _vm._s(_vm.form1.errors.get("number"))
-                        }
-                      })
-                    : _vm._e()
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                class: { "has-error": _vm.form1.errors.get("address") }
-              },
-              [
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    id: "address",
+                    type: "text",
+                    placeholder: " ",
+                    name: "address"
+                  },
+                  domProps: { value: _vm.$store.state.user.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.$store.state.user,
+                        "address",
+                        $event.target.value
+                      )
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 control-label",
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.form1.errors.has("address"),
+                        expression: "!form1.errors.has('address')"
+                      }
+                    ],
+                    staticClass: "active",
                     attrs: { for: "address" }
                   },
-                  [_vm._v("Ünvan (əlavə)")]
-                ),
+                  [_vm._v(_vm._s(_vm.$t("profile.address")))]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "has-error": _vm.form1.errors.get("password") }
+            },
+            [
+              _c("div", { staticClass: "input-field col s12 m6" }, [
+                _vm.form1.errors.has("password")
+                  ? _c("label", {
+                      staticClass: "active error",
+                      domProps: {
+                        textContent: _vm._s(_vm.form1.errors.get("password"))
+                      }
+                    })
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form1.password,
+                      expression: "form1.password"
+                    }
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    placeholder: "*****",
+                    id: "password",
+                    type: "password",
+                    name: "password"
+                  },
+                  domProps: { value: _vm.form1.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form1, "password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
                     directives: [
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.$store.state.user.address,
-                        expression: "$store.state.user.address"
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.form1.errors.has("password"),
+                        expression: "!form1.errors.has('password')"
                       }
                     ],
-                    staticClass: "form-control",
-                    attrs: { id: "address", type: "text", name: "address" },
-                    domProps: { value: _vm.$store.state.user.address },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.$store.state.user,
-                          "address",
-                          $event.target.value
+                    staticClass: "active",
+                    attrs: { for: "password" }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("profile.password")))]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "col s12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit", disabled: _vm.form1.errors.any() }
+                },
+                [
+                  _vm._v(
+                    "\n                        Yadda saxla\n                    "
+                  )
+                ]
+              )
+            ])
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(0, false, false),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "form-horizontal",
+          attrs: { role: "form", method: "POST", action: "register" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              _vm.updatePassword($event)
+            },
+            keydown: function($event) {
+              _vm.form2.errors.clear($event.target.name)
+            }
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "has-error": _vm.form2.errors.get("password") }
+            },
+            [
+              _c("div", { staticClass: "input-field col s12 m6" }, [
+                _vm.form2.errors.has("password")
+                  ? _c("label", {
+                      staticClass: "active error",
+                      domProps: {
+                        textContent: _vm._s(_vm.form2.errors.get("password"))
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form2.password,
+                      expression: "form2.password"
+                    }
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    placeholder: "*****",
+                    id: "password",
+                    type: "password",
+                    name: "password"
+                  },
+                  domProps: { value: _vm.form2.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form2, "password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.form2.errors.has("password"),
+                        expression: "!form2.errors.has('password')"
+                      }
+                    ],
+                    staticClass: "active",
+                    attrs: { for: "password" }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("profile.password")))]
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "form-group",
+              class: { "has-error": _vm.form2.errors.get("new_password") }
+            },
+            [
+              _c("div", { staticClass: "input-field col s12 m6" }, [
+                _vm.form2.errors.has("new_password")
+                  ? _c("label", {
+                      staticClass: "active error",
+                      domProps: {
+                        textContent: _vm._s(
+                          _vm.form2.errors.get("new_password")
                         )
                       }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form2.new_password,
+                      expression: "form2.new_password"
                     }
-                  }),
-                  _vm._v(" "),
-                  _vm.form1.errors.has("address")
-                    ? _c("label", {
-                        staticClass: "control-label",
-                        domProps: {
-                          textContent: _vm._s(_vm.form1.errors.get("address"))
-                        }
-                      })
-                    : _vm._e()
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                class: { "has-error": _vm.form1.errors.get("password") }
-              },
-              [
+                  ],
+                  staticClass: "validate",
+                  attrs: {
+                    placeholder: "*****",
+                    id: "new_password",
+                    type: "password",
+                    name: "password"
+                  },
+                  domProps: { value: _vm.form2.new_password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form2, "new_password", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
                 _c(
                   "label",
                   {
-                    staticClass: "col-md-4 control-label",
-                    attrs: { for: "password" }
-                  },
-                  [_vm._v("Şifrə")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
                     directives: [
                       {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form1.password,
-                        expression: "form1.password"
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.form2.errors.has("new_password"),
+                        expression: "!form2.errors.has('new_password')"
                       }
                     ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "password",
-                      type: "password",
-                      name: "password"
-                    },
-                    domProps: { value: _vm.form1.password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form1, "password", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.form1.errors.has("password")
-                    ? _c("label", {
-                        staticClass: "control-label",
-                        domProps: {
-                          textContent: _vm._s(_vm.form1.errors.get("password"))
-                        }
-                      })
-                    : _vm._e()
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("div", { staticClass: "col-md-6 col-md-offset-4" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit", disabled: _vm.form1.errors.any() }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Yadda saxla\n                        "
-                    )
-                  ]
-                )
-              ])
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _vm._m(2, false, false),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "form-horizontal",
-            attrs: { role: "form", method: "POST", action: "register" },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                _vm.updatePassword($event)
-              },
-              keydown: function($event) {
-                _vm.form2.errors.clear($event.target.name)
-              }
-            }
-          },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                class: { "has-error": _vm.form2.errors.get("password") }
-              },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 control-label",
-                    attrs: { for: "password" }
-                  },
-                  [_vm._v("Köhnə Şifrə")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form2.password,
-                        expression: "form2.password"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "password",
-                      type: "password",
-                      name: "password"
-                    },
-                    domProps: { value: _vm.form2.password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form2, "password", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.form2.errors.has("password")
-                    ? _c("label", {
-                        staticClass: "control-label",
-                        domProps: {
-                          textContent: _vm._s(_vm.form2.errors.get("password"))
-                        }
-                      })
-                    : _vm._e()
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "form-group",
-                class: { "has-error": _vm.form2.errors.get("new_password") }
-              },
-              [
-                _c(
-                  "label",
-                  {
-                    staticClass: "col-md-4 control-label",
+                    staticClass: "active",
                     attrs: { for: "new_password" }
                   },
-                  [_vm._v("Yeni Şifrə")]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form2.new_password,
-                        expression: "form2.new_password"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "password_confirmation",
-                      type: "password",
-                      name: "new_password"
-                    },
-                    domProps: { value: _vm.form2.new_password },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form2, "new_password", $event.target.value)
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _vm.form2.errors.has("new_password")
-                    ? _c("label", {
-                        staticClass: "control-label",
-                        domProps: {
-                          textContent: _vm._s(
-                            _vm.form2.errors.get("new_password")
-                          )
-                        }
-                      })
-                    : _vm._e()
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("div", { staticClass: "col-md-6 col-md-offset-4" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "submit", disabled: _vm.form2.errors.any() }
-                  },
-                  [
-                    _vm._v(
-                      "\n                            Şifrəni dəyiş\n                        "
-                    )
-                  ]
+                  [_vm._v(_vm._s(_vm.$t("profile.passwordNew")))]
                 )
               ])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "col s12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "submit", disabled: _vm.form2.errors.any() }
+                },
+                [
+                  _vm._v(
+                    "\n                        Şifrəni dəyiş\n                    "
+                  )
+                ]
+              )
             ])
-          ]
-        )
-      ])
+          ])
+        ]
+      )
     ])
   ])
 }
@@ -38454,24 +38504,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("h2", [_vm._v("Mənim səhifəm")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("h3", [_vm._v("Ümumi")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-12" }, [
-      _c("h3", [_vm._v("Şifrəni dəyişmək")])
+    return _c("div", { staticClass: "col s12" }, [
+      _c("br"),
+      _vm._v(" "),
+      _c("h5", [_vm._v("Şifrəni dəyişmək")])
     ])
   }
 ]
@@ -38862,7 +38898,7 @@ var render = function() {
                     staticClass: "active",
                     attrs: { for: "password" }
                   },
-                  [_vm._v(_vm._s(_vm.$t("login.password")))]
+                  [_vm._v(_vm._s(_vm.$t("signup.password")))]
                 )
               ]),
               _vm._v(" "),
@@ -39287,125 +39323,121 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c(
-      "div",
-      { staticClass: "layout" },
-      [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-12" }, [
-            _c("h2", [_vm._v("Mənim sifarişlərim")]),
+  return _c(
+    "div",
+    { staticClass: "layout" },
+    [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col s12" }, [
+          _c("h5", [_vm._v("Mənim sifarişlərim")]),
+          _vm._v(" "),
+          _c("table", { staticClass: "bordered" }, [
+            _vm._m(0, false, false),
             _vm._v(" "),
-            _c("table", { staticClass: "table table-hover" }, [
-              _vm._m(0, false, false),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.orders, function(order) {
-                  return _c("tr", [
-                    _c("td", [_vm._v(_vm._s(order.id))]),
-                    _vm._v(" "),
-                    _c("td", [
-                      _c("table", { staticClass: "table table-hover" }, [
-                        _c(
-                          "tbody",
-                          _vm._l(order.products, function(product) {
-                            return _c("tr", [
-                              _c(
-                                "td",
-                                { staticClass: "col-md-6 col-xs-6 col-lg-6" },
-                                [
-                                  _c(
-                                    "a",
-                                    {
-                                      attrs: { href: "#/product/" + product.id }
-                                    },
-                                    [
-                                      _c("img", {
-                                        attrs: {
-                                          src:
-                                            "/storage/" +
-                                            product.folder +
-                                            "/thumbnail.jpg",
-                                          width: "20%"
-                                        }
-                                      }),
-                                      _c(
-                                        "span",
-                                        { staticClass: "table-order-link" },
-                                        [_vm._v(_vm._s(product.title))]
-                                      )
-                                    ]
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  " " + _vm._s(product.pivot.price) + " AZN"
+            _c(
+              "tbody",
+              _vm._l(_vm.orders, function(order) {
+                return _c("tr", [
+                  _c("td", [_vm._v(_vm._s(order.id))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("table", { staticClass: "table table-hover" }, [
+                      _c(
+                        "tbody",
+                        _vm._l(order.products, function(product) {
+                          return _c("tr", [
+                            _c(
+                              "td",
+                              { staticClass: "col-md-6 col-xs-6 col-lg-6" },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    attrs: { href: "#/product/" + product.id }
+                                  },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        src:
+                                          "/storage/" +
+                                          product.folder +
+                                          "/thumbnail.jpg",
+                                        width: "20%"
+                                      }
+                                    }),
+                                    _c(
+                                      "span",
+                                      { staticClass: "table-order-link" },
+                                      [_vm._v(_vm._s(product.title))]
+                                    )
+                                  ]
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _c("td", [
-                                _vm._v(
-                                  " " + _vm._s(product.pivot.amount) + " ədəd"
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "td",
-                                _vm._l(
-                                  JSON.parse(product.pivot.options || "[]"),
-                                  function(option, name) {
-                                    return _c("p", [
-                                      _vm._v(
-                                        " " +
-                                          _vm._s(name) +
-                                          " - " +
-                                          _vm._s(option) +
-                                          " "
-                                      )
-                                    ])
-                                  }
-                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(" " + _vm._s(product.pivot.price) + " AZN")
+                            ]),
+                            _vm._v(" "),
+                            _c("td", [
+                              _vm._v(
+                                " " + _vm._s(product.pivot.amount) + " ədəd"
                               )
-                            ])
-                          })
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(order.status))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.fromNow(order.created_at)))])
-                  ])
-                })
-              )
-            ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              _vm._l(
+                                JSON.parse(product.pivot.options || "[]"),
+                                function(option, name) {
+                                  return _c("p", [
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(name) +
+                                        " - " +
+                                        _vm._s(option) +
+                                        " "
+                                    )
+                                  ])
+                                }
+                              )
+                            )
+                          ])
+                        })
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(order.status))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(_vm.fromNow(order.created_at)))])
+                ])
+              })
+            )
           ])
-        ]),
-        _vm._v(" "),
-        _c("paginate", {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: this.ordersPage.last_page > 1,
-              expression: "this.ordersPage.last_page > 1"
-            }
-          ],
-          attrs: {
-            "page-count": this.ordersPage.last_page || 0,
-            "click-handler": _vm.goToPage,
-            "prev-text": "Əvvəl",
-            "next-text": "Sonra",
-            "container-class": "pagination"
+        ])
+      ]),
+      _vm._v(" "),
+      _c("paginate", {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: this.ordersPage.last_page > 1,
+            expression: "this.ordersPage.last_page > 1"
           }
-        })
-      ],
-      1
-    )
-  ])
+        ],
+        attrs: {
+          "page-count": this.ordersPage.last_page || 0,
+          "click-handler": _vm.goToPage,
+          "prev-text": "Əvvəl",
+          "next-text": "Sonra",
+          "container-class": "pagination"
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -54630,6 +54662,13 @@ var messages = {
             password: 'Password',
             signUpButton: 'Sign Up'
         },
+        profile: {
+            name: 'Name',
+            number: 'Phone number',
+            address: 'Address(optional)',
+            password: 'Password',
+            passwordNew: 'New password'
+        },
         categories: {
             men: {
                 main: 'For Men'
@@ -54670,6 +54709,13 @@ var messages = {
             number: 'Telefon nömrəsi',
             password: 'Şifrə',
             loginButton: 'Giriş'
+        },
+        profile: {
+            name: 'Ad',
+            number: 'Telefon nömrəsi',
+            address: 'Ünvan(əlavə)',
+            password: 'Şifrə',
+            passwordNew: 'Yeni Şifrə'
         },
         signup: {
             title: 'Qeydiyyat',
@@ -54719,6 +54765,13 @@ var messages = {
             number: 'Номер телефона',
             password: 'Пароль',
             loginButton: 'Войти'
+        },
+        profile: {
+            name: 'Имя',
+            number: 'Номер телефона',
+            address: 'Адрес(дополнительно)',
+            password: 'Пароль',
+            passwordNew: 'Новый пароль'
         },
         signup: {
             title: 'Регистрация',

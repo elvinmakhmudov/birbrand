@@ -35,7 +35,7 @@
                                    v-text="errors.get('password')"></label>
                             <input placeholder="*****" id="password" type="password" class="validate"
                                    v-model="password" name="password">
-                            <label for="password" class="active" v-show="!errors.has('password')">{{ $t('login.password')
+                            <label for="password" class="active" v-show="!errors.has('password')">{{ $t('signup.password')
                                 }}</label>
                         </div>
 
@@ -69,7 +69,7 @@
         methods: {
             register() {
                 axios.post('/register', {
-                    name: this.number,
+                    name: this.name,
                     number: this.number,
                     address: this.address,
                     password: this.password

@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div class="layout">
-            {{ $t('about.text') }}
+            <h5>{{ $t('about.text') }}</h5>
         </div>
     </div>
 </template>

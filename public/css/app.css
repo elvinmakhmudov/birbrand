@@ -679,3 +679,7 @@ main {
     color: red;
     font-size: 0.9em;
 }
+
+.cart table tr:last-child {
+    border-bottom: none;
+}

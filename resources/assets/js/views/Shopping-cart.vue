@@ -1,54 +1,54 @@
 <template>
-    <div class="content">
-        <div class="layout">
-            <div class="row">
+    <div class="layout cart">
+        <div class="row">
+            <div class="col s12">
+                <h5>Mənim səbətim</h5>
+                <div v-if="Object.keys(cartItems).length !== 0">
+                    <table class="bordered">
+                        <thead>
+                        <tr>
+                            <th>Məhsul</th>
+                            <th>Seçim</th>
+                            <th>Qiymət</th>
+                            <th>Miqdar</th>
+                            <th>Silmək</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(product,index) in cartItems">
+                            <td><a :href="'#/product/'+product.id">
+                                <img
+                                        :src="'/storage/'+product.options.thumbnail" width="20%"><span
+                                    class="table-order-link">{{ product.name }}</span></a></td>
+                            <td><p v-for="(option, name) in JSON.parse(product.options.details || '[]')"> {{ name
+                                }} - {{ option }} </p></td>
+                            <td> {{ product.price }} AZN</td>
+                            <td> {{ product.qty }} ədəd</td>
+                            <td>
+                                <button @click.prevent="deleteItem(index, product.rowId)" type="button"
+                                        class="btn btn-danger">Sil
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><b>Cəmi</b></td>
+                            <td><b>{{ cartTotal }} AZN</b></td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-raised btn-primary" data-toggle="modal"
 
-                <div class="col-md-12">
-                    <h2>Mənim səbətim</h2>
-                    <div v-if="Object.keys(cartItems).length !== 0">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>Məhsul</th>
-                                <th>Seçim</th>
-                                <th>Qiymət</th>
-                                <th>Miqdar</th>
-                                <th>Silmək</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="(product,index) in cartItems">
-                                <td><a :href="'#/product/'+product.id">
-                                    <img
-                                            :src="'/storage/'+product.options.thumbnail" width="20%"><span
-                                        class="table-order-link">{{ product.name }}</span></a></td>
-                                <td><p v-for="(option, name) in JSON.parse(product.options.details || '[]')"> {{ name
-                                    }} - {{ option }} </p></td>
-                                <td> {{ product.price }} AZN</td>
-                                <td> {{ product.qty }} ədəd</td>
-                                <td>
-                                    <button @click.prevent="deleteItem(index, product.rowId)" type="button"
-                                            class="btn btn-danger">Sil
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><b>Cəmi</b></td>
-                                <td><b>{{ cartTotal }} AZN</b></td>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <button class="btn btn-raised btn-primary" style="float: right" data-toggle="modal"
-                                @click.prevent="buyAll()">İndi al
-                        </button>
-                    </div>
-                    <p class="text-center" v-else>Səbət boşdur</p>
+                                        @click.prevent="buyAll()">İndi al
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <p class="text-center" v-else>Səbət boşdur</p>
             </div>
+            <buyitguest :products="products" :fromCart="true"></buyitguest>
         </div>
-        <buyitguest :products="products" :fromCart="true"></buyitguest>
     </div>
 </template>
 

@@ -27,6 +27,13 @@ const messages = {
             password: 'Password',
             signUpButton: 'Sign Up'
         },
+        profile: {
+            name: 'Name',
+            number: 'Phone number',
+            address: 'Address(optional)',
+            password: 'Password',
+            passwordNew: 'New password'
+        },
         categories: {
             men: {
                 main: 'For Men',
@@ -67,6 +74,13 @@ const messages = {
             number: 'Telefon nömrəsi',
             password: 'Şifrə',
             loginButton: 'Giriş'
+        },
+        profile: {
+            name: 'Ad',
+            number: 'Telefon nömrəsi',
+            address: 'Ünvan(əlavə)',
+            password: 'Şifrə',
+            passwordNew: 'Yeni Şifrə'
         },
         signup: {
             title: 'Qeydiyyat',
@@ -116,6 +130,13 @@ const messages = {
             number: 'Номер телефона',
             password: 'Пароль',
             loginButton: 'Войти'
+        },
+        profile: {
+            name: 'Имя',
+            number: 'Номер телефона',
+            address: 'Адрес(дополнительно)',
+            password: 'Пароль',
+            passwordNew: 'Новый пароль'
         },
         signup: {
             title: 'Регистрация',
