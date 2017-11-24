@@ -1,13 +1,12 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div class="content">
-        <div class="layout">
-            <div class="row">
-                <div class="col-md-12">
-                    <h2>Bannerlər</h2>
+    <div class="layout">
+        <div class="row">
+            <div class="col s12">
+                    <h5>Bannerlər</h5>
                     <a href="{{ route('admin.banners.create') }}" class="btn btn-raised btn-primary">Əlavə et</a>
-                    <table class="table table-striped table-hover ">
+                    <table class="bordered">
                         <thead>
                         <tr>
                             <th>Id</th>
@@ -29,6 +28,7 @@
                                                                         src="/storage/{{$banner->image_url}}" alt=""></a>
                                 </td>
                                 <td>{{ $banner->description}}</td>
+                                <td><a href="{{ $banner->url}}">link</a></td>
                                 <td>{{ $banner->type}}</td>
                                 <td>{{ $banner->user->name }}</td>
                                 <td>{{ $banner->created_at}}</td>

@@ -563,3 +563,11 @@ main {
 .cart table tr:last-child {
     border-bottom: none;
 }
+
+ul.pagination li.active {
+    background-color: #019be6;
+}
+
+.xzoom-preview {
+    z-index: 100;
+}
