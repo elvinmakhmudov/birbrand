@@ -593,3 +593,20 @@ ul.pagination li.active {
 [v-cloak] {
     display: none;
 }
+
+
+.shopping-card-remove-btn {
+    color: red;
+}
+
+.modal-content {
+    margin-top: 0px;
+}
+
+.modal .modal-footer {
+    background-color: #fff;
+}
+
+#buy-it-guest, #flash-message  {
+    max-width: 500px;
+}

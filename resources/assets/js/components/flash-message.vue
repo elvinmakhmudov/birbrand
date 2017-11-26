@@ -1,19 +1,14 @@
 <template>
-    <div id="flash-message" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"> Cavab </h4>
-                </div>
-                <div class="modal-body">
-                        <p class="text-info" v-for="message in messages" v-text="message"></p>
-                        <p class="text-info" v-for="error in errors" v-text="error"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Bağla</button>
-                </div>
+    <div id="flash-message" class="modal" tabindex="-1">
+        <div class="layout modal-content">
+            <div class="row">
+                <h5 class="col s12">Cavab</h5>
+                <p class="text-info col s12" v-if="messages" v-for="message in messages" v-text="message"></p>
+                <p class="text-info col s12" v-if="errors" v-for="error in errors" v-text="error"></p>
             </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Bagla</a>
         </div>
     </div>
 </template>
@@ -21,10 +16,10 @@
 <script>
     export default {
         computed: {
-            messages: function() {
+            messages: function () {
                 return this.$store.state.messages.all();
             },
-            errors: function() {
+            errors: function () {
                 return this.$store.state.errors.all();
             }
         },

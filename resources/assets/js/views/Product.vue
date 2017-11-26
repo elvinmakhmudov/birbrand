@@ -22,7 +22,8 @@
                     </div>
                     <div class="col m4 s12">
                         <div class="product-img" v-if="!isEmptyProduct">
-                            <img :src="'/storage/'+product.cover_image" :xoriginal="'/storage/'+product.cover_image" class="xzoom"/>
+                            <img :src="'/storage/'+product.cover_image" :xoriginal="'/storage/'+product.cover_image"
+                                 class="xzoom"/>
                             <div class="xzoom-thumbs">
                                 <a :href="'/storage/' + product.cover_image">
                                     <img :src="'/storage/' + product.cover_image" alt="" class="xzoom-gallery">
@@ -38,7 +39,8 @@
                             {{ product.price }} AZN
                         </h4>
                         <form @submit.prevent="buyIt()">
-                            <div class="valign-wrapper product-option" v-for="(options, key) in JSON.parse(product.options || '[]')" v-show="product.options">
+                            <div class="valign-wrapper product-option"
+                                 v-for="(options, key) in JSON.parse(product.options || '[]')" v-show="product.options">
                                 <label class="product-option-name col offset-s1 s3" v-bind:for="key">
                                     {{ key }}
                                 </label>
@@ -53,17 +55,21 @@
                                     Ədəd
                                 </label>
                                 <div class="col s7 offset-s1">
-                                    <label class="control-label text-danger" v-if="errors.has('amount')" v-text="errors.get('amount')">
+                                    <label class="control-label text-danger" v-if="errors.has('amount')"
+                                           v-text="errors.get('amount')">
                                     </label>
-                                    <input @keydown="errors.purge()" class="form-control" id="i5ps" max="100" min="1" type="number" v-model="amount" value="1">
+                                    <input @keydown="errors.purge()" class="form-control" id="i5ps" max="100" min="1"
+                                           type="number" v-model="amount" value="1">
                                     </input>
                                 </div>
                             </div>
                             <div class="submit-buttons center-align col s12">
-                                    <button class="btn waves-effect waves-light" name="action" type="submit">
-                                        İndi al
-                                    </button>
-                                    <button @click.prevent="addToCart()" class="btn waves-effect waves-light" name="action" type="submit"><i class="material-icons left">add_shopping_cart</i>Səbətə at</button>
+                                <button class="btn waves-effect waves-light" name="action" type="submit">
+                                    İndi al
+                                </button>
+                                <button @click.prevent="addToCart()" class="btn waves-effect waves-light" name="action"
+                                        type="submit"><i class="material-icons left">add_shopping_cart</i>Səbətə at
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -118,7 +124,7 @@
         mounted() {
         },
         computed: {
-            isEmptyProduct: function(){
+            isEmptyProduct: function () {
                 return jQuery.isEmptyObject(this.product);
             }
         },
@@ -146,7 +152,7 @@
                         return response.data.cart.cartItems[k]
                     });
                     this.$store.commit('setCartItems', items);
-                    $('#flash-message').modal('toggle');
+                    $('#flash-message').modal('open');
                 }.bind(this)).catch(error => {
                     this.errors.record(error.response.data.errors);
                 });
@@ -166,12 +172,12 @@
                     }).then(function (response) {
                         this.$store.state.errors.record(response.data.errors);
                         this.$store.state.messages.record(response.data.messages);
-                        $('#flash-message').modal('toggle');
+                        $('#flash-message').modal('open');
                     }.bind(this)).catch(error => {
                         this.errors.record(error.response.data);
                     });
                 } else {
-                    $('#buy-it-guest').modal('toggle');
+                    $('#buy-it-guest').modal('open');
                 }
             },
             fetchData() {
@@ -181,14 +187,16 @@
                     this.product = response.data;
                     this.ancestors = this.getAncestors(this.product);
                     Vue.nextTick(function () {
+                        $('.modal').modal();
+
                         $(".xzoom, .xzoom-gallery").xzoom({
                             scroll: false
                         });
                         this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
                         var selector = '.nav-categories li';
 //                        if($(selector).find('.active').children('a').data("slug") !== this.$store.state.activeCategorySlug){
-                            $(selector).removeClass('active');
-                            $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
+                        $(selector).removeClass('active');
+                        $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
 //                        }
                     }.bind(this));
                 }.bind(this));

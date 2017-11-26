@@ -4,11 +4,10 @@
             <div class="col s12">
                 <h5>Mənim səbətim</h5>
                 <div v-if="Object.keys(cartItems).length !== 0">
-                    <table class="bordered">
+                    <table class="bordered centered">
                         <thead>
                         <tr>
                             <th>Məhsul</th>
-                            <th>Seçim</th>
                             <th>Qiymət</th>
                             <th>Miqdar</th>
                             <th>Silmək</th>
@@ -16,28 +15,24 @@
                         </thead>
                         <tbody>
                         <tr v-for="(product,index) in cartItems">
-                            <td><a :href="'#/product/'+product.id">
-                                <img
-                                        :src="'/storage/'+product.options.thumbnail" width="20%"><span
-                                    class="table-order-link">{{ product.name }}</span></a></td>
-                            <td><p v-for="(option, name) in JSON.parse(product.options.details || '[]')"> {{ name
-                                }} - {{ option }} </p></td>
+                            <td class="left-align">
+                                <a  :href="'#/product/'+product.id" class="shopping-card-image"><img :src="'/storage/'+product.options.thumbnail" width="20%"><span
+                                        class="table-order-link">{{ product.name }}</span></a><span v-for="(option, name) in JSON.parse(product.options.details || '[]')">( {{ name
+
+                                }} - {{ option }} )</span></td>
                             <td> {{ product.price }} AZN</td>
                             <td> {{ product.qty }} ədəd</td>
                             <td>
-                                <button @click.prevent="deleteItem(index, product.rowId)" type="button"
-                                        class="btn btn-danger">Sil
-                                </button>
+                                <a class="waves-effect waves-light" @click.prevent="deleteItem(index, product.rowId)"><i class="material-icons shopping-card-remove-btn">remove_circle</i></a>
+
                             </td>
                         </tr>
                         <tr>
-                            <td></td>
                             <td><b>Cəmi</b></td>
                             <td><b>{{ cartTotal }} AZN</b></td>
                             <td></td>
                             <td>
                                 <button class="btn btn-raised btn-primary" data-toggle="modal"
-
                                         @click.prevent="buyAll()">İndi al
                                 </button>
                             </td>
@@ -93,12 +88,12 @@
                         this.$store.state.errors.record(response.data.errors);
                         this.$store.state.messages.record(response.data.messages);
                         this.$store.state.cartItems = [];
-                        $('#flash-message').modal('toggle');
+                        $('#flash-message').modal('open');
                     }.bind(this)).catch(error => {
                         this.errors.record(error.response.data);
                     });
                 } else {
-                    $('#buy-it-guest').modal('toggle');
+                    $('#buy-it-guest').modal('open');
                 }
             },
             deleteItem(index, rowId) {

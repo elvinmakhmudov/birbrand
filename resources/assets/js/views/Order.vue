@@ -21,11 +21,10 @@
                                 <tr v-for="product in order.products">
                                     <td class="col-md-6 col-xs-6 col-lg-6"><a :href="'#/product/'+product.id"><img
                                             :src="'/storage/'+product.folder + '/thumbnail.jpg'" width="20%"><span
-                                            class="table-order-link">{{ product.title }}</span></a></td>
+                                            class="table-order-link">{{ product.title }}</span></a><span v-for="(option, name) in JSON.parse(product.pivot.options || '[]')">({{ name
+                                        }} - {{ option }})</span></td>
                                     <td> {{ product.pivot.price }} AZN</td>
                                     <td> {{ product.pivot.amount }} ədəd</td>
-                                    <td><p v-for="(option, name) in JSON.parse(product.pivot.options || '[]')"> {{ name
-                                        }} - {{ option }} </p></td>
                                 </tr>
                                 </tbody>
                             </table>
