@@ -8,35 +8,35 @@
                         <thead>
                         <tr>
                             <th>{{ $t('shoppingCard.table.product') }}</th>
-                            <th>{{ $t('shoppingCard.table.price') }}</th>
-                            <th>{{ $t('shoppingCard.table.quantity') }}</th>
+                            <th class="hide-on-small-and-down">{{ $t('shoppingCard.table.price') }}</th>
+                            <th class="hide-on-small-and-down">{{ $t('shoppingCard.table.quantity') }}</th>
                             <th>{{ $t('shoppingCard.table.remove') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(product,index) in cartItems">
                             <td class="left-align">
-                                <a  :href="'#/product/'+product.id" class="shopping-card-image"><img :src="'/storage/'+product.options.thumbnail" width="20%"><span
-                                        class="table-order-link">{{ product.name }}</span></a><span>({{ getOptions(product.options.details)}})</span></td>
-                            <td> {{ product.price }} AZN</td>
-                            <td> {{ product.qty }}</td>
+                                <a :href="'#/product/'+product.id" class="shopping-card-image"><img
+                                        :src="'/storage/'+product.options.thumbnail" width="20%"><span
+                                        class="table-order-link valign-wrapper">{{ product.name
+                                    }}</span></a><span>({{ getOptions(product.options.details)}})</span><span
+                                    class="hide-on-med-and-up">, {{ product.qty }}, {{ product.price}} AZN</span></td>
+                            <td class="hide-on-small-and-down"> {{ product.price }} AZN</td>
+                            <td class="hide-on-small-and-down"> {{ product.qty }}</td>
                             <td>
-                                <a class="waves-effect waves-light" @click.prevent="deleteItem(index, product.rowId)"><i class="material-icons shopping-card-remove-btn">remove_circle</i></a>
+                                <a class="waves-effect waves-light" @click.prevent="deleteItem(index, product.rowId)"><i
+                                        class="material-icons shopping-card-remove-btn">remove_circle</i></a>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>{{ $t('shoppingCard.table.total') }}</b></td>
-                            <td><b>{{ cartTotal }} AZN</b></td>
-                            <td></td>
-                            <td>
-                                <button class="btn btn-raised btn-primary" data-toggle="modal"
-                                        @click.prevent="buyAll()">{{ $t('shoppingCard.buyNowButton') }}
-                                </button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
+                    <div class="order-panel right-align">
+                        <b>{{ $t('shoppingCard.table.total') }} {{ cartTotal }} AZN</b></td>
+                        <button class="btn btn-raised btn-primary" data-toggle="modal"
+                                @click.prevent="buyAll()">{{ $t('shoppingCard.buyNowButton') }}
+                        </button>
+                    </div>
                 </div>
                 <h5 class="center-align empty-text" v-else>{{ $t('shoppingCard.empty') }}</h5>
             </div>
@@ -66,9 +66,11 @@
             }
         },
         methods: {
-            getOptions(options){
+            getOptions(options) {
                 var options = JSON.parse(options || '[]');
-                return Object.keys(options).map(function(k){return  options[k]}).join(",");
+                return Object.keys(options).map(function (k) {
+                    return options[k]
+                }).join(",");
             },
             buyAll() {
                 this.cartItems.forEach(function (item) {

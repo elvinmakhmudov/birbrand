@@ -32,9 +32,9 @@ class ShoppingCartController extends Controller
 
             $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 
-            return ['cart' => $cart, 'messages' => ['Sifaşiniz səbətə əlavə olundu.']];
+            return ['cart' => $cart, 'messages' => ['flashMessage.messages.addToCart.success']];
         } catch (Exception $e) {
-            return ['errors' => ['Səf baş verdi.']];
+            return ['errors' => ['flashMessage.messages.error']];
         }
 
     }

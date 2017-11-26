@@ -2,13 +2,13 @@
     <div id="flash-message" class="modal" tabindex="-1">
         <div class="layout modal-content">
             <div class="row">
-                <h5 class="col s12">Cavab</h5>
-                <p class="text-info col s12" v-if="messages" v-for="message in messages" v-text="message"></p>
-                <p class="text-info col s12" v-if="errors" v-for="error in errors" v-text="error"></p>
+                <h5 class="col s12">{{ $t('flashMessage.title') }}</h5>
+                <p class="text-info col s12" v-if="messages" v-for="message in messages" >{{ $t(message) }}</p>
+                <p class="text-info col s12" v-if="errors" v-for="error in errors" >{{ $t(error) }}</p>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#" class="modal-action modal-close waves-effect waves-green btn-flat">Bagla</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">{{ $t('flashMessage.closeButton') }}</a>
         </div>
     </div>
 </template>

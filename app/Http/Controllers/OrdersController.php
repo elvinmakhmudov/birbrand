@@ -47,7 +47,7 @@ class OrdersController extends Controller
     }
 
     public function index() {
-        $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(7);
+        $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(5);
         return $orders;
     }
 

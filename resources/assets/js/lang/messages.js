@@ -113,6 +113,19 @@ const messages = {
                 deliveryStatus: 'Delivery status',
                 orderDate: 'Date of order'
             }
+        },
+        flashMessage: {
+            title: 'Notification',
+            messages: {
+                buy: {
+                    success: 'Thank you! Your order has been placed.',
+                },
+                addToCart: {
+                    success: 'Your order has been added to your shopping cart',
+                },
+                error: 'Ooopps! Something went wrong. Please try again.'
+            },
+            closeButton: 'Close'
         }
     },
     az: {
@@ -229,6 +242,19 @@ const messages = {
                 deliveryStatus: 'Çatdırılma statusu',
                 orderDate: 'Sifariş tarixi'
             }
+        },
+        flashMessage: {
+            title: 'Mesaj',
+            messages: {
+                buy: {
+                    success: 'Təşəkkürlər! Sifarişiniz qeydə alındı.',
+                },
+                addToCart: {
+                    success: 'Sifarişiniz səbətə əlavə olundu.',
+                },
+                error: 'Aaaa! Səf baş verdi. Zəhmət olmasa bir daha təkrar edin.'
+            },
+            closeButton: 'Bağla'
         }
     },
     ru: {
@@ -345,6 +371,19 @@ const messages = {
                 deliveryStatus: 'Статус доставки',
                 orderDate: 'Дата заказа'
             }
+        },
+        flashMessage: {
+            title: 'Уведомление',
+            messages: {
+                buy: {
+                    success: 'Благодарим! Ваш заказ принят.',
+                },
+                addToCart: {
+                    success: 'Ваш заказ добавлен в корзину.',
+                },
+                error: 'Оййййй! Произошла ошибка. Пожалуйтса повторите еще.'
+            },
+            closeButton: 'Закрыть'
         }
     }
 };

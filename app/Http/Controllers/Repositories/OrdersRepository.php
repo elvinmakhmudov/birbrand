@@ -156,9 +156,9 @@ class OrdersRepository
             if($request->get('fromCart')) {
                 Cart::destroy();
             }
-            return ['messages' => ['Sifaşiniz qeydə alındı.']];
+            return ['messages' => ['flashMessage.messages.buy.success']];
         } catch (Exception $e) {
-            return ['errors' => ['Səf baş verdi.']];
+            return ['errors' => ['flashMessage.messages.error']];
         }
     }
 
@@ -186,9 +186,9 @@ class OrdersRepository
             if($request->get('fromCart')) {
                 Cart::destroy();
             }
-            return ['messages' => ['Sifaşiniz qeydə alındı.']];
+            return ['messages' => ['flashMessage.messages.buy.success']];
         } catch (Exception $e) {
-            return ['errors' => ['Səf baş verdi.']];
+            return ['errors' => ['flashMessage.messages.error']];
         }
     }
 

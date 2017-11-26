@@ -614,3 +614,7 @@ ul.pagination li.active {
 .cart .empty-text {
     color: #bdbdbd;
 }
+
+.cart .order-panel button {
+    margin-left: 15px;
+}

@@ -16,14 +16,14 @@
                     <tr v-for="order in orders">
                         <td>{{ order.id }}</td>
                         <td>
-                            <table class="table table-hover">
+                            <table>
                                 <tbody>
                                 <tr v-for="product in order.products">
-                                    <td class="col-md-6 col-xs-6 col-lg-6"><a :href="'#/product/'+product.id"><img
+                                    <td><a :href="'#/product/'+product.id"><img
                                             :src="'/storage/'+product.folder + '/thumbnail.jpg'" width="20%"><span
-                                            class="table-order-link">{{ product.title }}</span></a><span>({{ getOptions(product)}})</span></td>
-                                    <td> {{ product.pivot.price }} AZN</td>
-                                    <td> {{ product.pivot.amount }}</td>
+                                            class="table-order-link">{{ product.title
+                                        }}</span></a><span>({{ getOptions(product)}}), {{ product.pivot.amount
+                                        }}, {{ product.pivot.price }} AZN </span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -63,9 +63,11 @@
             this.fetchData()
         },
         methods: {
-            getOptions(product){
+            getOptions(product) {
                 var options = JSON.parse(product.pivot.options || '[]');
-                return Object.keys(options).map(function(k){return  options[k]}).join(",");
+                return Object.keys(options).map(function (k) {
+                    return options[k]
+                }).join(",");
             },
             goToPage(pageNum) {
                 var url = this.ordersPage.path + "?page=" + pageNum;
