@@ -730,3 +730,7 @@ ul.pagination li.active {
 #buy-it-guest, #flash-message  {
     max-width: 500px;
 }
+
+.cart .empty-text {
+    color: #bdbdbd;
+}

@@ -28,11 +28,47 @@ const messages = {
             signUpButton: 'Sign Up'
         },
         profile: {
+            title: 'My page',
             name: 'Name',
+            general: 'General',
+            changePassword: 'Change Password',
             number: 'Phone number',
             address: 'Address(optional)',
             password: 'Password',
-            passwordNew: 'New password'
+            passwordNew: 'New password',
+            saveButton: 'Save',
+            changePasswordButton: 'Change password',
+        },
+        product: {
+            shippingInfo: "" +
+            "<div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title\">Çatdırılma</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
+            "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title\">Ödəniş</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>\n" +
+            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>Qaytarış yerində hər bir məhsula görə\n" +
+            "                    <br><b>2 AZN</b></p>\n" +
+            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" +
+            "                </p>\n" +
+            "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" +
+            "                </p>\n" +
+            "            </div>\n" +
+            "        </div>",
+            buyNowButton: "Buy Now",
+            addToCardButton: "Add to Card",
+            description: "Description"
         },
         categories: {
             men: {
@@ -52,6 +88,30 @@ const messages = {
             },
             school: {
                 main: 'For School',
+            }
+        },
+        shoppingCard: {
+            title: 'My Shopping Card',
+            table: {
+                product: 'Product',
+                price: 'Price',
+                quantity: 'Quantity',
+                remove: 'Remove',
+                total: 'Total',
+            },
+            buyNowButton: 'Buy Now',
+            empty: "Your shopping card is empty"
+        },
+        pagination: {
+            previousButton: 'Prev',
+            nextButton: 'Next'
+        },
+        order: {
+            title: 'My orders',
+            table: {
+                product: 'Product',
+                deliveryStatus: 'Delivery status',
+                orderDate: 'Date of order'
             }
         }
     },
@@ -76,11 +136,16 @@ const messages = {
             loginButton: 'Giriş'
         },
         profile: {
+            title: 'Mənim səhifəm',
+            general: 'Ümumi',
+            changePassword: 'Şifrəni dəyişmək',
             name: 'Ad',
             number: 'Telefon nömrəsi',
             address: 'Ünvan(əlavə)',
             password: 'Şifrə',
-            passwordNew: 'Yeni Şifrə'
+            passwordNew: 'Yeni Şifrə',
+            saveButton: 'Yadda saxla',
+            changePasswordButton: 'Şifrəni dəyiş'
         },
         signup: {
             title: 'Qeydiyyat',
@@ -109,6 +174,61 @@ const messages = {
             school: {
                 main: 'Məktəb üçün',
             }
+        },
+        product: {
+            shippingInfo: "" +
+            "<div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title\">Çatdırılma</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
+            "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title\">Ödəniş</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>\n" +
+            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>Qaytarış yerində hər bir məhsula görə\n" +
+            "                    <br><b>2 AZN</b></p>\n" +
+            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" +
+            "                </p>\n" +
+            "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" +
+            "                </p>\n" +
+            "            </div>\n" +
+            "        </div>",
+            buyNowButton: "İndi al",
+            addToCardButton: "Səbətə at",
+            description: "Ətraflı"
+        },
+        shoppingCard: {
+            title: 'Mənim səbətim',
+            table: {
+                product: 'Məhsul',
+                price: 'Qiymət',
+                quantity: 'Miqdar',
+                remove: 'Silmək',
+                total: 'Cəmi',
+            },
+            buyNowButton: 'İndi al',
+            empty: "Səbətiniz boşdur"
+        },
+        pagination: {
+            previousButton: 'Geri',
+            nextButton: 'İrəli'
+        },
+        order: {
+            title: 'Mənim sifarişlərim',
+            table: {
+                product: 'Məhsul',
+                deliveryStatus: 'Çatdırılma statusu',
+                orderDate: 'Sifariş tarixi'
+            }
         }
     },
     ru: {
@@ -132,11 +252,16 @@ const messages = {
             loginButton: 'Войти'
         },
         profile: {
+            title: 'Моя страница',
+            changePassword: 'Изменить пароль',
+            general: 'Общее',
             name: 'Имя',
             number: 'Номер телефона',
             address: 'Адрес(дополнительно)',
             password: 'Пароль',
-            passwordNew: 'Новый пароль'
+            passwordNew: 'Новый пароль',
+            saveButton: 'Сохранить',
+            changePasswordButton: 'Изменить пароль'
         },
         signup: {
             title: 'Регистрация',
@@ -164,6 +289,61 @@ const messages = {
             },
             school: {
                 main: 'Для школы',
+            }
+        },
+        product: {
+            shippingInfo: "" +
+            "<div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title\">Çatdırılma</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
+            "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title\">Ödəniş</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>\n" +
+            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "        <div class=\"item-shipping-payment-box\">\n" +
+            "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
+            "            <div class=\"text\">\n" +
+            "                <p>Qaytarış yerində hər bir məhsula görə\n" +
+            "                    <br><b>2 AZN</b></p>\n" +
+            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" +
+            "                </p>\n" +
+            "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" +
+            "                </p>\n" +
+            "            </div>\n" +
+            "        </div>",
+            buyNowButton: "Купить",
+            addToCardButton: "В корзину",
+            description: "Описание"
+        },
+        shoppingCard: {
+            title: 'Моя корзина',
+            table: {
+                product: 'Продукт',
+                price: 'Цена',
+                quantity: 'Количество',
+                remove: 'Удалить',
+                total: 'Сумма',
+            },
+            buyNowButton: 'Купить',
+            empty: "Ваша корзина пуста"
+        },
+        pagination: {
+            previousButton: 'Назад',
+            nextButton: 'Вперед'
+        },
+        order: {
+            title: 'Мои заказы',
+            table: {
+                product: 'Продукт',
+                deliveryStatus: 'Статус доставки',
+                orderDate: 'Дата заказа'
             }
         }
     }

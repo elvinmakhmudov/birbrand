@@ -1,8 +1,8 @@
 <template>
     <div class="layout">
         <div class="row">
-            <h5 class="col s12">Mənim səhifəm</h5>
-            <h6 class="col s12">Ümumi</h6>
+            <h5 class="col s12">{{ $t('profile.title') }} </h5>
+            <h6 class="col s12">{{ $t('profile.general') }} </h6>
             <form class="form-horizontal" v-on:submit.prevent="update" role="form" method="POST"
                   action="register" @keydown="form1.errors.clear($event.target.name)">
                 <div class="form-group" v-bind:class="{'has-error': form1.errors.get('name')}">
@@ -54,14 +54,14 @@
                 <div class="form-group">
                     <div class="col s12">
                         <button type="submit" class="btn btn-primary" :disabled="form1.errors.any()">
-                            Yadda saxla
+                            {{ $t('profile.saveButton') }}
                         </button>
                     </div>
                 </div>
             </form>
             <div class="col s12">
                 <br>
-                <h5>Şifrəni dəyişmək</h5>
+                <h6>{{ $t('profile.changePassword') }}</h6>
             </div>
             <form class="form-horizontal" v-on:submit.prevent="updatePassword" role="form" method="POST"
                   action="register" @keydown="form2.errors.clear($event.target.name)">
@@ -90,7 +90,7 @@
                 <div class="form-group">
                     <div class="col s12">
                         <button type="submit" class="btn btn-primary" :disabled="form2.errors.any()">
-                            Şifrəni dəyiş
+                            {{ $t('profile.changePasswordButton') }}
                         </button>
                     </div>
                 </div>

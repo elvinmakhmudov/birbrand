@@ -2,45 +2,43 @@
     <div class="layout cart">
         <div class="row">
             <div class="col s12">
-                <h5>Mənim səbətim</h5>
+                <h5>{{ $t('shoppingCard.title') }}</h5>
                 <div v-if="Object.keys(cartItems).length !== 0">
                     <table class="bordered centered">
                         <thead>
                         <tr>
-                            <th>Məhsul</th>
-                            <th>Qiymət</th>
-                            <th>Miqdar</th>
-                            <th>Silmək</th>
+                            <th>{{ $t('shoppingCard.table.product') }}</th>
+                            <th>{{ $t('shoppingCard.table.price') }}</th>
+                            <th>{{ $t('shoppingCard.table.quantity') }}</th>
+                            <th>{{ $t('shoppingCard.table.remove') }}</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(product,index) in cartItems">
                             <td class="left-align">
                                 <a  :href="'#/product/'+product.id" class="shopping-card-image"><img :src="'/storage/'+product.options.thumbnail" width="20%"><span
-                                        class="table-order-link">{{ product.name }}</span></a><span v-for="(option, name) in JSON.parse(product.options.details || '[]')">( {{ name
-
-                                }} - {{ option }} )</span></td>
+                                        class="table-order-link">{{ product.name }}</span></a><span>({{ getOptions(product.options.details)}})</span></td>
                             <td> {{ product.price }} AZN</td>
-                            <td> {{ product.qty }} ədəd</td>
+                            <td> {{ product.qty }}</td>
                             <td>
                                 <a class="waves-effect waves-light" @click.prevent="deleteItem(index, product.rowId)"><i class="material-icons shopping-card-remove-btn">remove_circle</i></a>
 
                             </td>
                         </tr>
                         <tr>
-                            <td><b>Cəmi</b></td>
+                            <td><b>{{ $t('shoppingCard.table.total') }}</b></td>
                             <td><b>{{ cartTotal }} AZN</b></td>
                             <td></td>
                             <td>
                                 <button class="btn btn-raised btn-primary" data-toggle="modal"
-                                        @click.prevent="buyAll()">İndi al
+                                        @click.prevent="buyAll()">{{ $t('shoppingCard.buyNowButton') }}
                                 </button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <p class="text-center" v-else>Səbət boşdur</p>
+                <h5 class="center-align empty-text" v-else>{{ $t('shoppingCard.empty') }}</h5>
             </div>
             <buyitguest :products="products" :fromCart="true"></buyitguest>
         </div>
@@ -68,6 +66,10 @@
             }
         },
         methods: {
+            getOptions(options){
+                var options = JSON.parse(options || '[]');
+                return Object.keys(options).map(function(k){return  options[k]}).join(",");
+            },
             buyAll() {
                 this.cartItems.forEach(function (item) {
                     var productId = item.id;

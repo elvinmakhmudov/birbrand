@@ -2,14 +2,14 @@
     <div class="layout">
         <div class="row">
             <div class="col s12">
-                <h5>Mənim sifarişlərim</h5>
+                <h5>{{ $t('order.title') }}</h5>
                 <table class="bordered">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Məhsul</th>
-                        <th>Status</th>
-                        <th>Sifariş tarixi</th>
+                        <th>{{ $t('order.table.product') }}</th>
+                        <th>{{ $t('order.table.deliveryStatus') }}</th>
+                        <th>{{ $t('order.table.orderDate') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -21,10 +21,9 @@
                                 <tr v-for="product in order.products">
                                     <td class="col-md-6 col-xs-6 col-lg-6"><a :href="'#/product/'+product.id"><img
                                             :src="'/storage/'+product.folder + '/thumbnail.jpg'" width="20%"><span
-                                            class="table-order-link">{{ product.title }}</span></a><span v-for="(option, name) in JSON.parse(product.pivot.options || '[]')">({{ name
-                                        }} - {{ option }})</span></td>
+                                            class="table-order-link">{{ product.title }}</span></a><span>({{ getOptions(product)}})</span></td>
                                     <td> {{ product.pivot.price }} AZN</td>
-                                    <td> {{ product.pivot.amount }} ədəd</td>
+                                    <td> {{ product.pivot.amount }}</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -40,8 +39,8 @@
         <paginate v-show="this.ordersPage.last_page > 1"
                   :page-count="this.ordersPage.last_page || 0"
                   :click-handler="goToPage"
-                  :prev-text="'Əvvəl'"
-                  :next-text="'Sonra'"
+                  :prev-text="$t('pagination.previousButton')"
+                  :next-text="$t('pagination.nextButton')"
                   :container-class="'pagination'">
         </paginate>
     </div>
@@ -59,12 +58,15 @@
         },
         watch: {
             // call again the method if the route changes
-            '$route': 'fetchData'
         },
-        mounted() {
+        created() {
             this.fetchData()
         },
         methods: {
+            getOptions(product){
+                var options = JSON.parse(product.pivot.options || '[]');
+                return Object.keys(options).map(function(k){return  options[k]}).join(",");
+            },
             goToPage(pageNum) {
                 var url = this.ordersPage.path + "?page=" + pageNum;
                 axios.get(url).then(function (response) {
@@ -73,7 +75,7 @@
                 )
             },
             fromNow(date) {
-                moment.locale('az');
+                moment.locale(this.$i18n.locale);
                 return moment(date).calendar();
             },
             fetchData() {

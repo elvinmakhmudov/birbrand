@@ -16,9 +16,9 @@
                 </div>
                 <div class="row">
                     <div class="col s12">
-                        <h4>
+                        <h5>
                             {{ product.title }}
-                        </h4>
+                        </h5>
                     </div>
                     <div class="col m4 s12">
                         <div class="product-img" v-if="!isEmptyProduct">
@@ -65,10 +65,11 @@
                             </div>
                             <div class="submit-buttons center-align col s12">
                                 <button class="btn waves-effect waves-light" name="action" type="submit">
-                                    İndi al
+                                    {{ $t('product.buyNowButton') }}
                                 </button>
                                 <button @click.prevent="addToCart()" class="btn waves-effect waves-light" name="action"
-                                        type="submit"><i class="material-icons left">add_shopping_cart</i>Səbətə at
+                                        type="submit"><i class="material-icons left">add_shopping_cart</i>
+                                    {{ $t('product.addToCardButton') }}
                                 </button>
                             </div>
                         </form>
@@ -78,9 +79,9 @@
                         </shippinginfo>
                     </div>
                     <div class="col s12">
-                        <h4>
-                            Xususiyyetler
-                        </h4>
+                        <h5>
+                            {{ $t('product.description') }}
+                        </h5>
                         <div class="product-description">
                             {{ product.description }}
                         </div>

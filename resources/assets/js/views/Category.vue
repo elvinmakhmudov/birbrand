@@ -21,8 +21,8 @@
             </div>
         </div>
 
-        <paginate :click-handler="goToPage" :container-class="'pagination'" :next-text="'Sonra'"
-                  :page-count="this.productsPage.last_page || 0" :prev-text="'Əvvəl'" ref="paginate"
+        <paginate :click-handler="goToPage" :container-class="'pagination'" :next-text="$t('pagination.nextButton')"
+                  :page-count="this.productsPage.last_page || 0" :prev-text="$t('pagination.previousButton')" ref="paginate"
                   v-show="this.productsPage.last_page > 1">
         </paginate>
     </div>

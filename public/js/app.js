@@ -2360,7 +2360,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -2374,13 +2373,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         // call again the method if the route changes
-        '$route': 'fetchData'
     },
-    mounted: function mounted() {
+    created: function created() {
         this.fetchData();
     },
 
     methods: {
+        getOptions: function getOptions(product) {
+            var options = JSON.parse(product.pivot.options || '[]');
+            return Object.keys(options).map(function (k) {
+                return options[k];
+            }).join(",");
+        },
         goToPage: function goToPage(pageNum) {
             var url = this.ordersPage.path + "?page=" + pageNum;
             axios.get(url).then(function (response) {
@@ -2388,7 +2392,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }.bind(this));
         },
         fromNow: function fromNow(date) {
-            __WEBPACK_IMPORTED_MODULE_0_moment___default.a.locale('az');
+            __WEBPACK_IMPORTED_MODULE_0_moment___default.a.locale(this.$i18n.locale);
             return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).calendar();
         },
         fetchData: function fetchData() {
@@ -2414,6 +2418,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_product_buyItGuest_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_product_buyItGuest_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue__ = __webpack_require__("./resources/assets/js/components/product/shippingInfo.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue__);
+//
 //
 //
 //
@@ -2984,8 +2989,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -3008,6 +3011,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
+        getOptions: function getOptions(options) {
+            var options = JSON.parse(options || '[]');
+            return Object.keys(options).map(function (k) {
+                return options[k];
+            }).join(",");
+        },
         buyAll: function buyAll() {
             var _this = this;
 
@@ -37005,7 +37014,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col s12" }, [
-              _c("h4", [
+              _c("h5", [
                 _vm._v(
                   "\n                        " +
                     _vm._s(_vm.product.title) +
@@ -37197,7 +37206,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                                İndi al\n                            "
+                            "\n                                " +
+                              _vm._s(_vm.$t("product.buyNowButton")) +
+                              "\n                            "
                           )
                         ]
                       ),
@@ -37218,7 +37229,11 @@ var render = function() {
                           _c("i", { staticClass: "material-icons left" }, [
                             _vm._v("add_shopping_cart")
                           ]),
-                          _vm._v("Səbətə at\n                            ")
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.$t("product.addToCardButton")) +
+                              "\n                            "
+                          )
                         ]
                       )
                     ]
@@ -37231,9 +37246,11 @@ var render = function() {
             _c("div", { staticClass: "col m4 s12" }, [_c("shippinginfo")], 1),
             _vm._v(" "),
             _c("div", { staticClass: "col s12" }, [
-              _c("h4", [
+              _c("h5", [
                 _vm._v(
-                  "\n                        Xususiyyetler\n                    "
+                  "\n                        " +
+                    _vm._s(_vm.$t("product.description")) +
+                    "\n                    "
                 )
               ]),
               _vm._v(" "),
@@ -37492,9 +37509,9 @@ var render = function() {
         attrs: {
           "click-handler": _vm.goToPage,
           "container-class": "pagination",
-          "next-text": "Sonra",
+          "next-text": _vm.$t("pagination.nextButton"),
           "page-count": this.productsPage.last_page || 0,
-          "prev-text": "Əvvəl"
+          "prev-text": _vm.$t("pagination.previousButton")
         }
       })
     ],
@@ -37810,68 +37827,74 @@ var render = function() {
       { staticClass: "row" },
       [
         _c("div", { staticClass: "col s12" }, [
-          _c("h5", [_vm._v("Mənim səbətim")]),
+          _c("h5", [_vm._v(_vm._s(_vm.$t("shoppingCard.title")))]),
           _vm._v(" "),
           Object.keys(_vm.cartItems).length !== 0
             ? _c("div", [
                 _c("table", { staticClass: "bordered centered" }, [
-                  _vm._m(0, false, false),
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", [
+                        _vm._v(_vm._s(_vm.$t("shoppingCard.table.product")))
+                      ]),
+                      _vm._v(" "),
+                      _c("th", [
+                        _vm._v(_vm._s(_vm.$t("shoppingCard.table.price")))
+                      ]),
+                      _vm._v(" "),
+                      _c("th", [
+                        _vm._v(_vm._s(_vm.$t("shoppingCard.table.quantity")))
+                      ]),
+                      _vm._v(" "),
+                      _c("th", [
+                        _vm._v(_vm._s(_vm.$t("shoppingCard.table.remove")))
+                      ])
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c(
                     "tbody",
                     [
                       _vm._l(_vm.cartItems, function(product, index) {
                         return _c("tr", [
-                          _c(
-                            "td",
-                            { staticClass: "left-align" },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "shopping-card-image",
-                                  attrs: { href: "#/product/" + product.id }
-                                },
-                                [
-                                  _c("img", {
-                                    attrs: {
-                                      src:
-                                        "/storage/" + product.options.thumbnail,
-                                      width: "20%"
-                                    }
-                                  }),
-                                  _c(
-                                    "span",
-                                    { staticClass: "table-order-link" },
-                                    [_vm._v(_vm._s(product.name))]
-                                  )
-                                ]
-                              ),
-                              _vm._l(
-                                JSON.parse(product.options.details || "[]"),
-                                function(option, name) {
-                                  return _c("span", [
-                                    _vm._v(
-                                      "( " +
-                                        _vm._s(name) +
-                                        " - " +
-                                        _vm._s(option) +
-                                        " )"
-                                    )
-                                  ])
-                                }
+                          _c("td", { staticClass: "left-align" }, [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "shopping-card-image",
+                                attrs: { href: "#/product/" + product.id }
+                              },
+                              [
+                                _c("img", {
+                                  attrs: {
+                                    src:
+                                      "/storage/" + product.options.thumbnail,
+                                    width: "20%"
+                                  }
+                                }),
+                                _c(
+                                  "span",
+                                  { staticClass: "table-order-link" },
+                                  [_vm._v(_vm._s(product.name))]
+                                )
+                              ]
+                            ),
+                            _c("span", [
+                              _vm._v(
+                                "(" +
+                                  _vm._s(
+                                    _vm.getOptions(product.options.details)
+                                  ) +
+                                  ")"
                               )
-                            ],
-                            2
-                          ),
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c("td", [
                             _vm._v(" " + _vm._s(product.price) + " AZN")
                           ]),
                           _vm._v(" "),
-                          _c("td", [
-                            _vm._v(" " + _vm._s(product.qty) + " ədəd")
-                          ]),
+                          _c("td", [_vm._v(" " + _vm._s(product.qty))]),
                           _vm._v(" "),
                           _c("td", [
                             _c(
@@ -37901,7 +37924,11 @@ var render = function() {
                       }),
                       _vm._v(" "),
                       _c("tr", [
-                        _vm._m(1, false, false),
+                        _c("td", [
+                          _c("b", [
+                            _vm._v(_vm._s(_vm.$t("shoppingCard.table.total")))
+                          ])
+                        ]),
                         _vm._v(" "),
                         _c("td", [
                           _c("b", [_vm._v(_vm._s(_vm.cartTotal) + " AZN")])
@@ -37922,7 +37949,12 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("İndi al\n                            ")]
+                            [
+                              _vm._v(
+                                _vm._s(_vm.$t("shoppingCard.buyNowButton")) +
+                                  "\n                            "
+                              )
+                            ]
                           )
                         ])
                       ])
@@ -37931,7 +37963,9 @@ var render = function() {
                   )
                 ])
               ])
-            : _c("p", { staticClass: "text-center" }, [_vm._v("Səbət boşdur")])
+            : _c("h5", { staticClass: "center-align empty-text" }, [
+                _vm._v(_vm._s(_vm.$t("shoppingCard.empty")))
+              ])
         ]),
         _vm._v(" "),
         _c("buyitguest", { attrs: { products: _vm.products, fromCart: true } })
@@ -37940,30 +37974,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Məhsul")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Qiymət")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Miqdar")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Silmək")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("b", [_vm._v("Cəmi")])])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -37984,9 +37995,13 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "layout" }, [
     _c("div", { staticClass: "row" }, [
-      _c("h5", { staticClass: "col s12" }, [_vm._v("Mənim səhifəm")]),
+      _c("h5", { staticClass: "col s12" }, [
+        _vm._v(_vm._s(_vm.$t("profile.title")) + " ")
+      ]),
       _vm._v(" "),
-      _c("h6", { staticClass: "col s12" }, [_vm._v("Ümumi")]),
+      _c("h6", { staticClass: "col s12" }, [
+        _vm._v(_vm._s(_vm.$t("profile.general")) + " ")
+      ]),
       _vm._v(" "),
       _c(
         "form",
@@ -38282,7 +38297,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                        Yadda saxla\n                    "
+                    "\n                        " +
+                      _vm._s(_vm.$t("profile.saveButton")) +
+                      "\n                    "
                   )
                 ]
               )
@@ -38291,7 +38308,11 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0, false, false),
+      _c("div", { staticClass: "col s12" }, [
+        _c("br"),
+        _vm._v(" "),
+        _c("h6", [_vm._v(_vm._s(_vm.$t("profile.changePassword")))])
+      ]),
       _vm._v(" "),
       _c(
         "form",
@@ -38449,7 +38470,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                        Şifrəni dəyiş\n                    "
+                    "\n                        " +
+                      _vm._s(_vm.$t("profile.changePasswordButton")) +
+                      "\n                    "
                   )
                 ]
               )
@@ -38460,18 +38483,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col s12" }, [
-      _c("br"),
-      _vm._v(" "),
-      _c("h5", [_vm._v("Şifrəni dəyişmək")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -38886,68 +38898,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0, false, false)
+  return _c("div", {
+    staticClass: "item-shipping-payment",
+    domProps: { innerHTML: _vm._s(_vm.$t("product.shippingInfo")) }
+  })
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "item-shipping-payment" }, [
-      _c("div", { staticClass: "item-shipping-payment-box" }, [
-        _c("p", { staticClass: "text-title" }, [_vm._v("Çatdırılma")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "text" }, [
-          _c("p", [
-            _vm._v(
-              "Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq."
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v("Növbəti gün məhsul sizə pulsuz çatdırılacaq.")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item-shipping-payment-box" }, [
-        _c("p", { staticClass: "text-title" }, [_vm._v("Ödəniş")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "text" }, [
-          _c("p", [
-            _vm._v(
-              "\n                Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir."
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "item-shipping-payment-box" }, [
-        _c("p", { staticClass: "text-title " }, [
-          _vm._v("Müştəri məmnuniyyəti")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "text" }, [
-          _c("p", [
-            _vm._v("Qaytarış yerində hər bir məhsula görə\n                "),
-            _c("br"),
-            _c("b", [_vm._v("2 AZN")])
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v("Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə"),
-            _c("b", [_vm._v(" ödənişsiz")]),
-            _vm._v("qaytarla bilər.\n            ")
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n            "
-            )
-          ])
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -39213,10 +39169,22 @@ var render = function() {
     [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col s12" }, [
-          _c("h5", [_vm._v("Mənim sifarişlərim")]),
+          _c("h5", [_vm._v(_vm._s(_vm.$t("order.title")))]),
           _vm._v(" "),
           _c("table", { staticClass: "bordered" }, [
-            _vm._m(0, false, false),
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v("#")]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.$t("order.table.product")))]),
+                _vm._v(" "),
+                _c("th", [
+                  _vm._v(_vm._s(_vm.$t("order.table.deliveryStatus")))
+                ]),
+                _vm._v(" "),
+                _c("th", [_vm._v(_vm._s(_vm.$t("order.table.orderDate")))])
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "tbody",
@@ -39256,22 +39224,12 @@ var render = function() {
                                     )
                                   ]
                                 ),
-                                _vm._l(
-                                  JSON.parse(product.pivot.options || "[]"),
-                                  function(option, name) {
-                                    return _c("span", [
-                                      _vm._v(
-                                        "(" +
-                                          _vm._s(name) +
-                                          " - " +
-                                          _vm._s(option) +
-                                          ")"
-                                      )
-                                    ])
-                                  }
-                                )
-                              ],
-                              2
+                                _c("span", [
+                                  _vm._v(
+                                    "(" + _vm._s(_vm.getOptions(product)) + ")"
+                                  )
+                                ])
+                              ]
                             ),
                             _vm._v(" "),
                             _c("td", [
@@ -39279,9 +39237,7 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("td", [
-                              _vm._v(
-                                " " + _vm._s(product.pivot.amount) + " ədəd"
-                              )
+                              _vm._v(" " + _vm._s(product.pivot.amount))
                             ])
                           ])
                         })
@@ -39311,8 +39267,8 @@ var render = function() {
         attrs: {
           "page-count": this.ordersPage.last_page || 0,
           "click-handler": _vm.goToPage,
-          "prev-text": "Əvvəl",
-          "next-text": "Sonra",
+          "prev-text": _vm.$t("pagination.previousButton"),
+          "next-text": _vm.$t("pagination.nextButton"),
           "container-class": "pagination"
         }
       })
@@ -39320,24 +39276,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("#")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Məhsul")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Sifariş tarixi")])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -54559,11 +54498,22 @@ var messages = {
             signUpButton: 'Sign Up'
         },
         profile: {
+            title: 'My page',
             name: 'Name',
+            general: 'General',
+            changePassword: 'Change Password',
             number: 'Phone number',
             address: 'Address(optional)',
             password: 'Password',
-            passwordNew: 'New password'
+            passwordNew: 'New password',
+            saveButton: 'Save',
+            changePasswordButton: 'Change password'
+        },
+        product: {
+            shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
+            buyNowButton: "Buy Now",
+            addToCardButton: "Add to Card",
+            description: "Description"
         },
         categories: {
             men: {
@@ -54583,6 +54533,30 @@ var messages = {
             },
             school: {
                 main: 'For School'
+            }
+        },
+        shoppingCard: {
+            title: 'My Shopping Card',
+            table: {
+                product: 'Product',
+                price: 'Price',
+                quantity: 'Quantity',
+                remove: 'Remove',
+                total: 'Total'
+            },
+            buyNowButton: 'Buy Now',
+            empty: "Your shopping card is empty"
+        },
+        pagination: {
+            previousButton: 'Prev',
+            nextButton: 'Next'
+        },
+        order: {
+            title: 'My orders',
+            table: {
+                product: 'Product',
+                deliveryStatus: 'Delivery status',
+                orderDate: 'Date of order'
             }
         }
     },
@@ -54607,11 +54581,16 @@ var messages = {
             loginButton: 'Giriş'
         },
         profile: {
+            title: 'Mənim səhifəm',
+            general: 'Ümumi',
+            changePassword: 'Şifrəni dəyişmək',
             name: 'Ad',
             number: 'Telefon nömrəsi',
             address: 'Ünvan(əlavə)',
             password: 'Şifrə',
-            passwordNew: 'Yeni Şifrə'
+            passwordNew: 'Yeni Şifrə',
+            saveButton: 'Yadda saxla',
+            changePasswordButton: 'Şifrəni dəyiş'
         },
         signup: {
             title: 'Qeydiyyat',
@@ -54640,6 +54619,36 @@ var messages = {
             school: {
                 main: 'Məktəb üçün'
             }
+        },
+        product: {
+            shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
+            buyNowButton: "İndi al",
+            addToCardButton: "Səbətə at",
+            description: "Ətraflı"
+        },
+        shoppingCard: {
+            title: 'Mənim səbətim',
+            table: {
+                product: 'Məhsul',
+                price: 'Qiymət',
+                quantity: 'Miqdar',
+                remove: 'Silmək',
+                total: 'Cəmi'
+            },
+            buyNowButton: 'İndi al',
+            empty: "Səbətiniz boşdur"
+        },
+        pagination: {
+            previousButton: 'Geri',
+            nextButton: 'İrəli'
+        },
+        order: {
+            title: 'Mənim sifarişlərim',
+            table: {
+                product: 'Məhsul',
+                deliveryStatus: 'Çatdırılma statusu',
+                orderDate: 'Sifariş tarixi'
+            }
         }
     },
     ru: {
@@ -54663,11 +54672,16 @@ var messages = {
             loginButton: 'Войти'
         },
         profile: {
+            title: 'Моя страница',
+            changePassword: 'Изменить пароль',
+            general: 'Общее',
             name: 'Имя',
             number: 'Номер телефона',
             address: 'Адрес(дополнительно)',
             password: 'Пароль',
-            passwordNew: 'Новый пароль'
+            passwordNew: 'Новый пароль',
+            saveButton: 'Сохранить',
+            changePasswordButton: 'Изменить пароль'
         },
         signup: {
             title: 'Регистрация',
@@ -54695,6 +54709,36 @@ var messages = {
             },
             school: {
                 main: 'Для школы'
+            }
+        },
+        product: {
+            shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
+            buyNowButton: "Купить",
+            addToCardButton: "В корзину",
+            description: "Описание"
+        },
+        shoppingCard: {
+            title: 'Моя корзина',
+            table: {
+                product: 'Продукт',
+                price: 'Цена',
+                quantity: 'Количество',
+                remove: 'Удалить',
+                total: 'Сумма'
+            },
+            buyNowButton: 'Купить',
+            empty: "Ваша корзина пуста"
+        },
+        pagination: {
+            previousButton: 'Назад',
+            nextButton: 'Вперед'
+        },
+        order: {
+            title: 'Мои заказы',
+            table: {
+                product: 'Продукт',
+                deliveryStatus: 'Статус доставки',
+                orderDate: 'Дата заказа'
             }
         }
     }
