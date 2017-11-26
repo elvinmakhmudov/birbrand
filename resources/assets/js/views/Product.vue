@@ -111,7 +111,6 @@
         },
         watch: {
             // call again the method if the route changes
-            '$route': 'fetchData'
         },
         created() {
             this.fetchData();
@@ -186,12 +185,11 @@
                             scroll: false
                         });
                         this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
-                        var activeSlug = this.$store.state.activeCategorySlug;
                         var selector = '.nav-categories li';
-                        if($(selector).find('.active').children('a').data("slug") !== activeSlug){
+//                        if($(selector).find('.active').children('a').data("slug") !== this.$store.state.activeCategorySlug){
                             $(selector).removeClass('active');
-                            $($(selector).find(`[data-slug='${activeSlug}']`)).parent('li').addClass('active');
-                        }
+                            $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
+//                        }
                     }.bind(this));
                 }.bind(this));
                 console.log('Product fetched');

@@ -43,7 +43,6 @@
         watch: {
             // call again the method if the route changes
             '$route'(to, from) {
-                this.fetchData(to, from);
                 //if from route and to route path before local query differ, change the page num to 0
                 if (from.matched[0].path == to.matched[0].path) {
                     if (from.path != to.path) {
@@ -54,6 +53,8 @@
         },
         created() {
             this.fetchData();
+        },
+        activated() {
         },
         mounted() {
             this.$store.state.activeCategorySlug = this.$route.params.slug;
@@ -71,6 +72,7 @@
                 )
             },
             fetchData(to, from) {
+                console.log(window.location.hash.substr(2));
                 axios.get(window.location.hash.substr(2)).then(function (response) {
                         this.category = response.data.category;
                         this.subcategories = response.data.category.children;

@@ -92,7 +92,7 @@
                 <ul class="right hide-on-large-only">
                     <li><a href="#!" class="dropdown-button" data-activates="mobileDropdown"><i class="material-icons">more_vert</i></a></li>
                 </ul>
-                <ul class="right">
+                <ul class="right" v-cloak>
                     <li class="valign-wrapper">
                         <a href="#/cart" class="waves-effect"><i class="material-icons left">shopping_cart</i><span class="shopping-cart-badge">@{{Object.keys($store.state.cartItems).length || 0 }}</span></a>
                     </li>
