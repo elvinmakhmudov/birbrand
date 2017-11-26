@@ -1,5 +1,5 @@
 <template>
-    <div class="left-banner" v-show="imageUrl">
+    <div class="left-banner" v-if="imageUrl">
         <a :href="url"><img :src="'storage/'+currentBanner.image_url" alt=""></a>
     </div>
 </template>

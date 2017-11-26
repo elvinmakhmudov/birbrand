@@ -43,16 +43,13 @@
         watch: {
             // call again the method if the route changes
             '$route'(to, from) {
-                this.fetchData(to, from)
+                this.fetchData(to, from);
                 //if from route and to route path before local query differ, change the page num to 0
                 if (from.matched[0].path == to.matched[0].path) {
                     if (from.path != to.path) {
                         this.$refs.paginate.selected = 0;
                     }
                 }
-                console.log(from.matched[0].path == to.matched[0].path);
-                console.log(to)
-                console.log(from)
             }
         },
         created() {
@@ -79,6 +76,7 @@
                         this.subcategories = response.data.category.children;
                         this.products = response.data.productsPage.data;
                         this.productsPage = response.data.productsPage;
+                        this.$refs.paginate.selected = this.productsPage.current_page-1;
                     }.bind(this)
                 )
             },

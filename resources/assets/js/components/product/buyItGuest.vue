@@ -7,13 +7,15 @@
                     <h4 class="modal-title">Indi al</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" v-on:submit.prevent="buy" role="form" method="POST" action="register" @keydown="errors.clear($event.target.name)">
+                    <form class="form-horizontal" v-on:submit.prevent="buy" role="form" method="POST" action="register"
+                          @keydown="errors.clear($event.target.name)">
                         <div class="form-group" v-bind:class="{'has-error': errors.get('name')}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="name" autofocus v-model="name">
-                                <label class="control-label" v-if="errors.has('number')"  v-text="errors.get('name')"></label>
+                                <label class="control-label" v-if="errors.has('number')"
+                                       v-text="errors.get('name')"></label>
                             </div>
                         </div>
 
@@ -22,7 +24,8 @@
 
                             <div class="col-md-6">
                                 <input id="number" type="number" class="form-control" name="number" v-model="number">
-                                <label class="control-label" v-if="errors.has('number')" v-text="errors.get('number')"></label>
+                                <label class="control-label" v-if="errors.has('number')"
+                                       v-text="errors.get('number')"></label>
                             </div>
                         </div>
 
@@ -45,6 +48,7 @@
 
 <script>
     import Errors from '../../classes/Errors';
+
     export default {
         props: {
             products: {},
@@ -60,14 +64,14 @@
         methods: {
             buy() {
                 axios.post('order', {
-                        products: this.products,
-                        name: this.name,
-                        number: this.number,
-                        fromCart: this.fromCart
+                    products: this.products,
+                    name: this.name,
+                    number: this.number,
+                    fromCart: this.fromCart
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
-                        this.$store.state.cartItems=[];
+                    this.$store.state.cartItems = [];
                     $('#buy-it-guest').modal('toggle');
                     $('#flash-message').modal('toggle');
                 }.bind(this)).catch(error => {

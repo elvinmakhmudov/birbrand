@@ -21,16 +21,14 @@
                         </h4>
                     </div>
                     <div class="col m4 s12">
-                        <div class="product-img">
+                        <div class="product-img" v-if="!isEmptyProduct">
                             <img :src="'/storage/'+product.cover_image" :xoriginal="'/storage/'+product.cover_image" class="xzoom"/>
                             <div class="xzoom-thumbs">
                                 <a :href="'/storage/' + product.cover_image">
                                     <img :src="'/storage/' + product.cover_image" alt="" class="xzoom-gallery">
-                                    </img>
                                 </a>
                                 <a :href="'/storage/'+image" v-for="image in product.images ">
                                     <img :src="'/storage/'+image" class="xzoom-gallery">
-                                    </img>
                                 </a>
                             </div>
                         </div>
@@ -62,8 +60,6 @@
                                 </div>
                             </div>
                             <div class="submit-buttons center-align col s12">
-
-
                                     <button class="btn waves-effect waves-light" name="action" type="submit">
                                         İndi al
                                     </button>
@@ -108,12 +104,7 @@
             return {
                 errors: new Errors(),
                 amount: 1,
-                product: {
-                    images: '',
-                    category: {
-                        title: ''
-                    }
-                },
+                product: {},
                 ancestors: [],
                 products: []
             }
@@ -126,10 +117,11 @@
             this.fetchData();
         },
         mounted() {
-            this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
-            var selector = '.nav-categories li';
-            $(selector).removeClass('active');
-            $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
+        },
+        computed: {
+            isEmptyProduct: function(){
+                return jQuery.isEmptyObject(this.product);
+            }
         },
         methods: {
             getSelectedProductOptions() {
@@ -137,6 +129,7 @@
                 $('.product-option').each(function () {
                     var key = $(this).find(".product-option-name").text();
                     var value = $(this).find(".product-option-value").val();
+
                     options[key] = value;
                 });
                 return JSON.stringify(options);
@@ -182,11 +175,6 @@
                     $('#buy-it-guest').modal('toggle');
                 }
             },
-            getAncestors() {
-                console.log(this.product.category);
-                var ancestors = this.getValuesByKey(this.product.category, 'title');
-                return ancestors.reverse();
-            },
             fetchData() {
                 console.log(this.product_id);
                 var productUrl = 'product/' + this.product_id;
@@ -198,9 +186,12 @@
                             scroll: false
                         });
                         this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
+                        var activeSlug = this.$store.state.activeCategorySlug;
                         var selector = '.nav-categories li';
-                        $(selector).removeClass('active');
-                        $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
+                        if($(selector).find('.active').children('a').data("slug") !== activeSlug){
+                            $(selector).removeClass('active');
+                            $($(selector).find(`[data-slug='${activeSlug}']`)).parent('li').addClass('active');
+                        }
                     }.bind(this));
                 }.bind(this));
                 console.log('Product fetched');

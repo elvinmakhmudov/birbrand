@@ -15,6 +15,8 @@ Auth::routes();
 
 Route::get('/','HomeController@index')->name('main');
 
+//Cache::flush();
+
 //
 Route::get('/home', 'HomeController@index')->name('home');
 //

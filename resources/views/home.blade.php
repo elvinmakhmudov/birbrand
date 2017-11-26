@@ -4,10 +4,12 @@
     <div class="container main-container">
         <left-banner>
         </left-banner>
-        <keep-alive>
-            <router-view>
-            </router-view>
-        </keep-alive>
+        <transition name="fade">
+            <keep-alive>
+                <router-view :key="$route.fullPath">
+                </router-view>
+            </keep-alive>
+        </transition>
         <right-banner>
         </right-banner>
     </div>

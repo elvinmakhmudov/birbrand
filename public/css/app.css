@@ -124,6 +124,7 @@ body {
 
 .header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    width: 100%;
 }
 
 
@@ -690,4 +691,21 @@ ul.pagination li.active {
 
 .xzoom-preview {
     z-index: 100;
+}
+
+.slider {
+    height: auto;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition-property: opacity;
+    transition-duration: .25s;
+}
+
+.fade-enter-active {
+    transition-delay: .25s;
+}
+
+.fade-enter, .fade-leave-active {
+    opacity: 0
 }

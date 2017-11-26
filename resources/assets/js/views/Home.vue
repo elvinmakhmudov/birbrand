@@ -6,12 +6,11 @@
                 </div>
             </div>
 
-            
+
             <div class="layout">
-                <div class="category" v-for="category in categories">
+                <div class="category" v-if="categories" v-for="category in categories">
                     <container :category="category"></container>
                 </div>
-
             </div>
         </div>
 </template>
@@ -43,9 +42,9 @@
                 }
             },
             mountCarousel: function () {
-                $('.slider').slick({
-                    arrows: false
-                });
+//                $('.slider').slick({
+//                    arrows: false
+//                });
             }
         }
     }

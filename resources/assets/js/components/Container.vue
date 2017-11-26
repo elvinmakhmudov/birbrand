@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-        <div class="col-md-12">
-            <h2 v-text="$t('categories.'+category.title + '.main')"></h2>
+        <div class="col s12">
+            <h5 v-text="$t('categories.'+category.title + '.main')"></h5>
         </div>
         <div v-for="subcategory in category.children">
             <category-card :subcategory="subcategory"></category-card>

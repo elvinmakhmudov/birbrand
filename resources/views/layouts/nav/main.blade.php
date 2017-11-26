@@ -2,7 +2,7 @@
     <nav class="light-blue darken-1">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="{{ route('main') }}" class="brand-logo left">{{ config('app.name') }}</a>
+                <a href="#/" class="brand-logo left">{{ config('app.name') }}</a>
                 <a href="#" class="left nav-phone waves-effect hide-on-small-only">
                     <li class="valign-wrapper">
                         <span class="material-icons">local_phone</span><span> +994 (51) 855 01 05 </span>
