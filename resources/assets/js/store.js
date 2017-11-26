@@ -16,7 +16,8 @@ export default new Vuex.Store({
         banners: [],
         cartTotal: 0,
         cartItems: {},
-        topBannerHeight: 0
+        topBannerHeight: 0,
+        activeCategorySlug: {}
     },
     mutations: {
         setBanners(state, banners) {

@@ -2166,6 +2166,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -2196,6 +2198,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     created: function created() {
         this.fetchData();
+    },
+    mounted: function mounted() {
+        this.$store.state.activeCategorySlug = this.$route.params.slug;
+        var selector = '.nav-categories li';
+        $(selector).removeClass('active');
+        $($(selector).find('[data-slug=\'' + this.$store.state.activeCategorySlug + '\']')).parent('li').addClass('active');
     },
 
     methods: {
@@ -2602,6 +2610,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     created: function created() {
         this.fetchData();
     },
+    mounted: function mounted() {
+        this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
+        var selector = '.nav-categories li';
+        $(selector).removeClass('active');
+        $($(selector).find('[data-slug=\'' + this.$store.state.activeCategorySlug + '\']')).parent('li').addClass('active');
+    },
 
     methods: (_methods = {
         getSelectedProductOptions: function getSelectedProductOptions() {
@@ -2625,7 +2639,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 this.$store.state.messages.record(response.data.messages);
                 this.$store.commit('setCartTotal', response.data.cart.cartTotal);
                 var items = Object.keys(response.data.cart.cartItems).map(function (k) {
-
                     return response.data.cart.cartItems[k];
                 });
                 this.$store.commit('setCartItems', items);
@@ -2673,7 +2686,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                     $(".xzoom, .xzoom-gallery").xzoom({
                         scroll: false
                     });
-                });
+                    this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
+                    var selector = '.nav-categories li';
+                    $(selector).removeClass('active');
+                    $($(selector).find('[data-slug=\'' + this.$store.state.activeCategorySlug + '\']')).parent('li').addClass('active');
+                }.bind(this));
             }.bind(this));
             console.log('Product fetched');
         }
@@ -37752,7 +37769,10 @@ var render = function() {
           "a",
           {
             staticClass: "waves-effect waves-light",
-            attrs: { href: "#/category/" + category.slug }
+            attrs: {
+              href: "#/category/" + category.slug,
+              "data-slug": category.slug
+            }
           },
           [
             _vm._v(
@@ -54577,11 +54597,6 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
                 // $('.slider').slick({
                 //     arrows: false
                 // });
-                // var selector = '.nav-categories a';
-                // $(selector).click(function(item) {
-                //     $(selector).removeClass('active');
-                //     $(this).addClass('active');
-                // })
                 var selector = '.nav-categories li';
                 $(selector).click(function (item) {
                     $(selector).removeClass('active');
@@ -57887,7 +57902,8 @@ __WEBPACK_IMPORTED_MODULE_2_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_0_vuex
         banners: [],
         cartTotal: 0,
         cartItems: {},
-        topBannerHeight: 0
+        topBannerHeight: 0,
+        activeCategorySlug: {}
     },
     mutations: {
         setBanners: function setBanners(state, banners) {

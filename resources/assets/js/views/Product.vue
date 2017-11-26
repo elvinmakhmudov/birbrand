@@ -125,6 +125,12 @@
         created() {
             this.fetchData();
         },
+        mounted() {
+            this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
+            var selector = '.nav-categories li';
+            $(selector).removeClass('active');
+            $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
+        },
         methods: {
             getSelectedProductOptions() {
                 var options = {};
@@ -145,8 +151,6 @@
                     this.$store.state.messages.record(response.data.messages);
                     this.$store.commit('setCartTotal', response.data.cart.cartTotal);
                     var items = Object.keys(response.data.cart.cartItems).map(function (k) {
-
-
                         return response.data.cart.cartItems[k]
                     });
                     this.$store.commit('setCartItems', items);
@@ -193,7 +197,11 @@
                         $(".xzoom, .xzoom-gallery").xzoom({
                             scroll: false
                         });
-                    });
+                        this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
+                        var selector = '.nav-categories li';
+                        $(selector).removeClass('active');
+                        $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
+                    }.bind(this));
                 }.bind(this));
                 console.log('Product fetched');
             },

@@ -1,7 +1,7 @@
 <template>
     <ul class="nav-categories">
         <li class="category-tab" v-for="category in navCategories">
-            <a :href="'#/category/'+category.slug" class="waves-effect waves-light">
+            <a :href="'#/category/'+category.slug" :data-slug="category.slug" class="waves-effect waves-light">
                 {{ $t('categories.' + category.title +'.main')}}
             </a>
         </li>
