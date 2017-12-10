@@ -23,6 +23,7 @@ $factory->define(BirBrand\Product::class, function (Faker\Generator $faker) {
         'category_id' => $faker->numberBetween(1, 6),
         'folder' => $folder,
         'user_id' => 1,
+        'rating' => $faker->randomFloat(3,0,5),
         'options' => json_encode(['color' => ['green', 'black', 'yellow'], 'size' => ['s', 'm', 'xl']]),
         'is_shown' => true,
         'cover_image' => 'products/9vn6IsDHkgXIfudQ2X59/nJqxiYG2EIxA0tc8mSNoMwbNceidTsQ8Io1GxgI0.jpeg',

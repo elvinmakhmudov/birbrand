@@ -17,7 +17,7 @@ class CategoriesController extends Controller
     public function index()
     {
         // $categories = Cache::remember('categories', config('cache.lifetime'), function () {
-        //     return Category::isShown()->with('children')->get();
+            // return Category::isShown()->with('children')->get();
         // });
 
         $carousels= Cache::remember('carousels', config('cache.lifetime'), function () {
@@ -39,12 +39,23 @@ class CategoriesController extends Controller
      */
     public function show($slug, Request $request)
     {
+        $this->validate($request, [
+            'sortBy'=>'in:rating,created_at',
+            'inOrder' => 'in:asc,desc'
+        ]);
+
         $category = Cache::remember('category/'.$slug,  config('cache.lifetime'), function () use($slug) {
             return Category::where('slug', $slug)->isShown()->with('products', 'children')->first();
         });
 
-        $productsPage = Cache::remember('productsPage/'.$slug.'/'.$request->get('page'), config('cache.lifetime'), function () use($category) {
-            return $category->products()->paginate(16);
+        $sortBy= $request->get('sortBy');
+
+        $productsPage = Cache::remember('productsPage/'.$slug.'/'.$request->get('page').'/'.$sortBy, config('cache.lifetime'), function () use($category, $request, $sortBy) {
+            if ($sortBy) {
+                return $category->products()->orderBy($request->get('sortBy'), $request->get('inOrder'))->paginate(16);
+            } else {
+                return $category->products()->paginate(16);
+            }
         });
 
         return ['category' => $category, 'productsPage' => $productsPage];

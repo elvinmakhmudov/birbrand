@@ -39,29 +39,25 @@
                             {{ product.price }} AZN
                         </h4>
                         <form @submit.prevent="buyIt()">
-                            <div class="valign-wrapper product-option"
+                            <div class="valign-wrapper input-field product-option col s6"
                                  v-for="(options, key) in JSON.parse(product.options || '[]')" v-show="product.options">
-                                <label class="product-option-name col offset-s1 s3" v-bind:for="key">
+                                <label :for="key" class="active product-option-key">
                                     {{ key }}
                                 </label>
-                                <div class="col s7 offset-s1">
-                                    <select class="form-control product-option-value" v-bind:id="key">
-                                        <option v-for="option in options">{{ option }}</option>
-                                    </select>
-                                </div>
+                                <select class="product-option-value" v-bind:id="key">
+                                    <option :value="option" v-for="option in options">{{ option }}</option>
+                                </select>
                             </div>
-                            <div class="form-group valign-wrapper">
-                                <label class="col offset-s1 s3">
+                            <div class="input-field col s12 valign-wrapper">
+                                <label class="active">
                                     Ədəd
                                 </label>
-                                <div class="col s7 offset-s1">
-                                    <label class="control-label text-danger" v-if="errors.has('amount')"
-                                           v-text="errors.get('amount')">
-                                    </label>
-                                    <input @keydown="errors.purge()" class="form-control" id="i5ps" max="100" min="1"
-                                           type="number" v-model="amount" value="1">
-                                    </input>
-                                </div>
+                                <label class="control-label text-danger" v-if="errors.has('amount')"
+                                       v-text="errors.get('amount')">
+                                </label>
+                                <input @keydown="errors.purge()" class="form-control" id="i5ps" max="100" min="1"
+                                       type="number" v-model="amount" value="1">
+                                </input>
                             </div>
                             <div class="submit-buttons center-align col s12">
                                 <button class="btn waves-effect waves-light" name="action" type="submit">
@@ -133,11 +129,11 @@
             getSelectedProductOptions() {
                 var options = {};
                 $('.product-option').each(function () {
-                    var key = $(this).find(".product-option-name").text();
-                    var value = $(this).find(".product-option-value").val();
-
+                    var key = $(this).find(".product-option-key").text().replace(/\s/g, '');
+                    var value = $(this).find("select.product-option-value").val();
                     options[key] = value;
                 });
+                console.log(options);
                 return JSON.stringify(options);
             },
             addToCart() {
@@ -199,6 +195,7 @@
                         $(selector).removeClass('active');
                         $($(selector).find(`[data-slug='${this.$store.state.activeCategorySlug}']`)).parent('li').addClass('active');
 //                        }
+                        $('select').material_select();
                     }.bind(this));
                 }.bind(this));
                 console.log('Product fetched');

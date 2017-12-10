@@ -15,10 +15,10 @@
                         </thead>
                         <tbody>
                         <tr v-for="(product,index) in cartItems">
-                            <td class="left-align">
+                            <td style="text-align: left">
                                 <a :href="'#/product/'+product.id" class="shopping-card-image"><img
                                         :src="'/storage/'+product.options.thumbnail" width="20%"><span
-                                        class="table-order-link valign-wrapper">{{ product.name
+                                        class="table-order-link">{{ product.name
                                     }}</span></a><span>({{ getOptions(product.options.details)}})</span><span
                                     class="hide-on-med-and-up">, {{ product.qty }}, {{ product.price}} AZN</span></td>
                             <td class="hide-on-small-and-down"> {{ product.price }} AZN</td>

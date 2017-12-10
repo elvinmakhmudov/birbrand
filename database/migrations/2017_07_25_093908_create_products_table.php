@@ -21,6 +21,9 @@ class CreateProductsTable extends Migration
             $table->integer('old_price')->nullable();
             $table->integer('price');
             $table->string('folder');
+            $table->unsignedInteger('likes')->nullable();
+            $table->unsignedInteger('dislikes')->nullable();
+            $table->float('rating')->nullable();
             $table->integer('sale_percent')->nullable();
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories');

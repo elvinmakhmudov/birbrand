@@ -2078,6 +2078,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__classes_Event__ = __webpack_require__("./resources/assets/js/classes/Event.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue__ = __webpack_require__("./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue__);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 //
 //
 //
@@ -2107,10 +2111,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    computed: {
+        //            sortBy: function (column) {
+        //                function compare(a, b) {
+        //                    if (a[column] < b[column])
+        //                        return -1;
+        //                    if (a[column]> b[column])
+        //                        return 1;
+        //                    return 0;
+        //                }
+        //
+        //                console.log("sorted");
+        //
+        //                this.products = this.products.sort(compare);
+        //            }
+    },
     data: function data() {
         return {
             category: {},
@@ -2129,35 +2168,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     this.$refs.paginate.selected = 0;
                 }
             }
+            $('.dropdown-button').dropdown();
         }
     },
     created: function created() {
         this.fetchData();
     },
-    activated: function activated() {},
     mounted: function mounted() {
         this.$store.state.activeCategorySlug = this.$route.params.slug;
         var selector = '.nav-categories li';
         $(selector).removeClass('active');
         $($(selector).find('[data-slug=\'' + this.$store.state.activeCategorySlug + '\']')).parent('li').addClass('active');
+        $('.dropdown-button').dropdown();
     },
 
     methods: {
+        sortBy: function sortBy(column, order) {
+            var path = window.location.href.split('?')[0];
+            if ((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === undefined) {
+                var url = window.location.href;
+            } else {
+                var url = window.location.href.split('?')[0];
+            }
+            window.location.href = url + "?page=" + 1 + '&sortBy=' + column + '&inOrder=' + order;
+        },
         goToPage: function goToPage(pageNum) {
-            var url = this.productsPage.path + "?page=" + pageNum;
-            window.location.href = window.location.href.split('?')[0] + "?page=" + pageNum;
-            axios.get(url).then(function (response) {
-                this.products = response.data.productsPage.data;
-            }.bind(this));
+            //                var url = this.productsPage.path + "?page=" + pageNum;
+            //                var url = this.productsPage.path;
+            this.$refs.paginate.selected = this.productsPage.current_page - 1;
+            window.location.href = window.location.href.split('?')[0] + "?page=" + pageNum + '&sortBy=' + 'sortByValue';
+            //                axios.get(url, {
+            //                    params: {
+            //                        page: pageNum,
+            //                        sortBy: 'sortByvalue'
+            //                    }
+            //                }).then(function (response) {
+            //                        this.products = response.data.productsPage.data;
+            //                    }.bind(this)
+            //                )
         },
         fetchData: function fetchData(to, from) {
-            console.log(window.location.hash.substr(2));
             axios.get(window.location.hash.substr(2)).then(function (response) {
                 this.category = response.data.category;
                 this.subcategories = response.data.category.children;
                 this.products = response.data.productsPage.data;
                 this.productsPage = response.data.productsPage;
                 this.$refs.paginate.selected = this.productsPage.current_page - 1;
+                __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
+                    $('select').material_select();
+                });
             }.bind(this));
         },
         subcategoryExists: function subcategoryExists() {
@@ -2509,10 +2568,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -2554,11 +2609,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         getSelectedProductOptions: function getSelectedProductOptions() {
             var options = {};
             $('.product-option').each(function () {
-                var key = $(this).find(".product-option-name").text();
-                var value = $(this).find(".product-option-value").val();
-
+                var key = $(this).find(".product-option-key").text().replace(/\s/g, '');
+                var value = $(this).find("select.product-option-value").val();
                 options[key] = value;
             });
+            console.log(options);
             return JSON.stringify(options);
         },
         addToCart: function addToCart() {
@@ -2623,6 +2678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     $(selector).removeClass('active');
                     $($(selector).find('[data-slug=\'' + this.$store.state.activeCategorySlug + '\']')).parent('li').addClass('active');
                     //                        }
+                    $('select').material_select();
                 }.bind(this));
             }.bind(this));
             console.log('Product fetched');
@@ -37110,13 +37166,14 @@ var render = function() {
                             expression: "product.options"
                           }
                         ],
-                        staticClass: "valign-wrapper product-option"
+                        staticClass:
+                          "valign-wrapper input-field product-option col s6"
                       },
                       [
                         _c(
                           "label",
                           {
-                            staticClass: "product-option-name col offset-s1 s3",
+                            staticClass: "active product-option-key",
                             attrs: { for: key }
                           },
                           [
@@ -37128,30 +37185,34 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col s7 offset-s1" }, [
-                          _c(
-                            "select",
-                            {
-                              staticClass: "form-control product-option-value",
-                              attrs: { id: key }
-                            },
-                            _vm._l(options, function(option) {
-                              return _c("option", [_vm._v(_vm._s(option))])
-                            })
-                          )
-                        ])
+                        _c(
+                          "select",
+                          {
+                            staticClass: "product-option-value",
+                            attrs: { id: key }
+                          },
+                          _vm._l(options, function(option) {
+                            return _c(
+                              "option",
+                              { domProps: { value: option } },
+                              [_vm._v(_vm._s(option))]
+                            )
+                          })
+                        )
                       ]
                     )
                   }),
                   _vm._v(" "),
-                  _c("div", { staticClass: "form-group valign-wrapper" }, [
-                    _c("label", { staticClass: "col offset-s1 s3" }, [
-                      _vm._v(
-                        "\n                                Ədəd\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col s7 offset-s1" }, [
+                  _c(
+                    "div",
+                    { staticClass: "input-field col s12 valign-wrapper" },
+                    [
+                      _c("label", { staticClass: "active" }, [
+                        _vm._v(
+                          "\n                                Ədəd\n                            "
+                        )
+                      ]),
+                      _vm._v(" "),
                       _vm.errors.has("amount")
                         ? _c("label", {
                             staticClass: "control-label text-danger",
@@ -37191,8 +37252,8 @@ var render = function() {
                           }
                         }
                       })
-                    ])
-                  ]),
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -37441,35 +37502,90 @@ var render = function() {
     "div",
     { staticClass: "layout" },
     [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col s12 m9" }, [
+          _c(
+            "h5",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.category.title,
+                  expression: "category.title"
+                }
+              ]
+            },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.$t("categories." + _vm.category.title + ".main")) +
+                  "\n            "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col s12 m3" }, [
+          _c(
+            "a",
+            {
+              staticClass: "dropdown-button btn",
+              attrs: { href: "#", "data-activates": "dropdown1" }
+            },
+            [_vm._v("Sort by")]
+          ),
+          _vm._v(" "),
+          _c(
+            "ul",
+            { staticClass: "dropdown-content", attrs: { id: "dropdown1" } },
+            [
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.sortBy("rating", "desc")
+                      }
+                    }
+                  },
+                  [_vm._v("Rating")]
+                )
+              ]),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    on: {
+                      click: function($event) {
+                        _vm.sortBy("created_at", "desc")
+                      }
+                    }
+                  },
+                  [_vm._v("Date")]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(0, false, false),
+              _vm._v(" "),
+              _c("li", { staticClass: "divider" }),
+              _vm._v(" "),
+              _vm._m(1, false, false),
+              _vm._v(" "),
+              _vm._m(2, false, false),
+              _vm._v(" "),
+              _vm._m(3, false, false)
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "row" },
         [
-          _c("div", { staticClass: "col s12" }, [
-            _c(
-              "h5",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.category.title,
-                    expression: "category.title"
-                  }
-                ]
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(
-                      _vm.$t("categories." + _vm.category.title + ".main")
-                    ) +
-                    "\n            "
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
           _vm._l(_vm.category.children, function(subcategory) {
             return _c(
               "div",
@@ -37518,7 +37634,42 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#!" } }, [_vm._v("two")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [_c("a", { attrs: { href: "#!" } }, [_vm._v("three")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#!" } }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("view_module")]),
+        _vm._v("four")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c("a", { attrs: { href: "#!" } }, [
+        _c("i", { staticClass: "material-icons" }, [_vm._v("cloud")]),
+        _vm._v("five")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -37856,7 +38007,7 @@ var render = function() {
                     "tbody",
                     _vm._l(_vm.cartItems, function(product, index) {
                       return _c("tr", [
-                        _c("td", { staticClass: "left-align" }, [
+                        _c("td", { staticStyle: { "text-align": "left" } }, [
                           _c(
                             "a",
                             {
@@ -37870,13 +38021,9 @@ var render = function() {
                                   width: "20%"
                                 }
                               }),
-                              _c(
-                                "span",
-                                {
-                                  staticClass: "table-order-link valign-wrapper"
-                                },
-                                [_vm._v(_vm._s(product.name))]
-                              )
+                              _c("span", { staticClass: "table-order-link" }, [
+                                _vm._v(_vm._s(product.name))
+                              ])
                             ]
                           ),
                           _c("span", [
