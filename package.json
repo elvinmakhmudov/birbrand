@@ -16,15 +16,15 @@
     "jquery": "^3.2.1",
     "laravel-mix": "^1.0.0",
     "lodash": "^4.17.4",
-    "vue": "^2.3.4",
+    "vue": "^2.5.13",
     "vue-router": "^2.7.0",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
     "hammerjs": "^2.0.8",
     "moment": "^2.18.1",
-    "node-sass": "^4.5.3",
+    "node-sass": "^4.7.2",
     "vue-cookie": "^1.1.4",
     "vue-i18n": "^7.3.2",
     "vuejs-paginate": "^1.4.0",

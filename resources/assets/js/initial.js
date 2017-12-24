@@ -9,6 +9,7 @@ require('./bootstrap');
 require('./materialize.min');
 // require('./slick.min');
 require('./xzoom');
+require('./jquery.rateyo.min');
 // window.Vue = require('vue');
 // VueRouter = require('vue-router');
 import Vue from 'vue';

@@ -88,6 +88,17 @@ const messages = {
             },
             school: {
                 main: 'For School',
+            },
+            main: {
+                sortBy: {
+                    main: 'Sort By',
+                    rating: 'Rating',
+                    date: 'New',
+                    priceLow: 'Price (low first)',
+                    priceHigh: 'Price (high first)',
+                    bestseller: 'Bestsellers',
+                    trending: 'Trending'
+                }
             }
         },
         shoppingCard: {
@@ -186,6 +197,18 @@ const messages = {
             },
             school: {
                 main: 'Məktəb üçün',
+
+            },
+            main: {
+                sortBy: {
+                    main: 'Çeşidləmə',
+                    rating: 'Reyting',
+                    date: 'Yeni',
+                    priceLow: 'Əvvəlcə ucuz',
+                    priceHigh: 'Əvvəlcə bahalı',
+                    bestseller: 'Ən çox satılan',
+                    trending: 'Tövsiyə'
+                }
             }
         },
         product: {
@@ -315,6 +338,18 @@ const messages = {
             },
             school: {
                 main: 'Для школы',
+
+            },
+            main: {
+                sortBy: {
+                    main: 'Сортировка по',
+                    rating: 'Рейтингу',
+                    date: 'Новые',
+                    priceLow: 'По возрастанию цены',
+                    priceHigh: 'По убыванию цены',
+                    bestseller: 'Бестселлеры',
+                    trending: 'Рекомендации'
+                }
             }
         },
         product: {

@@ -23,19 +23,18 @@
     </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-                id: '',
-                title: '',
-                price: '',
-                thumbnail: ''
-            }
-        },
-        props: {
-            product: {},
-        },
-        created() {
-        },
-    }
+export default {
+  data() {
+    return {
+      id: "",
+      title: "",
+      price: "",
+      thumbnail: ""
+    };
+  },
+  props: {
+    product: {}
+  },
+  created() {}
+};
 </script>

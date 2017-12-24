@@ -24,4 +24,4 @@ let mix = require('laravel-mix');
 //         'public/css/app.css').version();
 
 mix.js('resources/assets/js/initial.js', 'public/js/app.js').version();
-mix.styles(['resources/assets/css/materialize.min.css','resources/assets/css/xzoom.css','resources/assets/css/app.css'], 'public/css/app.css').version();
+mix.styles(['resources/assets/css/materialize.min.css','resources/assets/css/xzoom.css','resources/assets/css/jquery.rateyo.min.css','resources/assets/css/app.css'], 'public/css/app.css').version();

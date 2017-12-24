@@ -618,3 +618,16 @@ ul.pagination li.active {
 .cart .order-panel button {
     margin-left: 15px;
 }
+
+
+.sort-by-button {
+    margin-top: 10px;
+}
+
+.rating-container {
+    float: left;
+}
+
+.additional-container {
+    margin: 10px;
+}
