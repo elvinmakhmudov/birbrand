@@ -38,10 +38,15 @@
             <h4 class="center-align">
               {{ product.price }} AZN
             </h4>
-            <div class="col s12 center-align additional-container">
-              <div id="rateYo" class="rating-container"></div>
-
-              <span>{{ product.ordered}} orders</span>
+            <div class="container additional-container">
+              <div class="row center-align">
+                <div class="col s6">
+                  <div id="rateYo" class="rating-container center-align"></div>
+                </div>
+                <div class="col s6">
+                  <span class="center-align">{{ $tc('product.orders', product.ordered, {count: product.ordered }) }}</span>
+                </div>
+              </div>
             </div>
 
             <form @submit.prevent="buyIt()">
@@ -50,7 +55,7 @@
                   {{ key }}
                 </label>
                 <select class="product-option-value" v-bind:id="key">
-                  <option :value="option" v-for="option in options">{{ option }}</option>
+                  <option :value="option" v-for="option in options" class="center-align">{{ option }}</option>
                 </select>
               </div>
               <div class="input-field col s12 valign-wrapper">
@@ -118,10 +123,9 @@ export default {
   watch: {
     // call again the method if the route changes
   },
-  created() {
+  mounted() {
     this.fetchData();
   },
-  mounted() {},
   computed: {
     isEmptyProduct: function() {
       return jQuery.isEmptyObject(this.product);
@@ -196,7 +200,6 @@ export default {
       } else {
         $("#buy-it-guest").modal("open");
       }
-      
     },
     fetchData() {
       console.log(this.product_id);
@@ -207,8 +210,6 @@ export default {
           this.ancestors = this.getAncestors(this.product);
           Vue.nextTick(
             function() {
-              $(".modal").modal();
-
               $(".xzoom, .xzoom-gallery").xzoom({
                 scroll: false
               });
@@ -228,8 +229,9 @@ export default {
               //                        }
               $("select").material_select();
               $("#rateYo").rateYo({
-                rating: 3.6,
-                starWidth: "15px"
+                rating: this.product.rating,
+                starWidth: "15px",
+                readOnly: true
               });
             }.bind(this)
           );

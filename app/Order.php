@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['options', 'price', 'amount', 'name','number','user_id'];
+    protected $fillable = ['options', 'price', 'amount', 'name','number','user_id', 'reviwable'];
     /*
      * Order belongs to a user
      */
@@ -18,6 +18,6 @@ class Order extends Model
      * Order belongs to products
      */
     public function products() {
-        return $this->belongsToMany(Product::class)->withPivot('options', 'price', 'amount');
+        return $this->belongsToMany(Product::class)->withPivot('options', 'price', 'amount', 'reviewable');
     }
 }

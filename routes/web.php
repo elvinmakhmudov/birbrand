@@ -21,6 +21,7 @@ Route::get('/','HomeController@index')->name('main');
 Route::get('/home', 'HomeController@index')->name('home');
 //
 Route::resource('category', 'CategoriesController');
+Route::post('product/{id}/rate', 'ProductsController@rate');
 Route::resource('product', 'ProductsController');
 Route::resource('order', 'OrdersController');
 Route::put('/user/password', 'UsersController@updatePassword');

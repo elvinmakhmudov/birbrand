@@ -17,6 +17,7 @@
                         <th>Status</th>
                         <th>Produktlar</th>
                         <th>Istifadəçi</th>
+                        <th>Rey vere biler</th>
                         <th>Yaranma tarixi</th>
                     </tr>
                     </thead>
@@ -78,6 +79,7 @@
                             @else
                                 <td></td>
                             @endif
+                            <td>{{ $order->reviewable }}</td>
                             <td>{{ $order->created_at}}</td>
                         </tr>
                     @endforeach

@@ -4,10 +4,8 @@
     <div class="layout">
         <div class="row">
             <div class="col s12">
-                <h5>Sifarişi dəyişmək</h5>
-                <form class="form-horizontal" role="form" method="POST"
-                      action="{{ route('admin.orders.update', ['id' => $order->id]) }}"
-                      enctype="multipart/form-data">
+                <h5>Sifarişi dəyişmək</h5> <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.orders.update', ['id' => $order->id]) }}"
+                                           enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -60,18 +58,42 @@
                         <div class="col-md-8">
                             <select id="select" class="form-control" name="user">
                                 <option value> Yoxdu</option>
-                                @foreach($users as $oneUser)
-                                    @if($oneUser->id == $order->user->id)
-                                        <option value="{{ $order->user->id }}"
-                                                selected> {{ $order->user->number}} ({{$order->user->name }})
-                                        </option>
-                                    @else
-                                        <option value="{{ $oneUser->id }}"> {{ $oneUser->number}}
-                                            ({{$oneUser->name}})
-                                        </option>
-                                    @endif
-                                @endforeach
+                                    @foreach($users as $oneUser)
+                                        @if($order->user && $oneUser->id == $order->user->id)
+                                            <option value="{{ $order->user->id }}"
+                                                    selected> {{ $order->user->number}} ({{$order->user->name }})
+                                            </option>
+                                        @else
+                                            <option value="{{ $oneUser->id }}"> {{ $oneUser->number}}
+                                                ({{$oneUser->name}})
+                                            </option>
+                                        @endif
+                                    @endforeach
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="select" class="col s12 control-label">Reviwable</label>
+                        <div class="switch">
+                            <label>
+                            Off
+                            <input type="checkbox" id="switch" name="reviewable">
+                            <span class="lever"></span>
+                            On
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="select" class="col s12 control-label">Detach old products</label>
+                        <div class="switch">
+                            <label>
+                            Off
+                            <input type="checkbox" id="switch" name="detach">
+                            <span class="lever"></span>
+                            On
+                            </label>
                         </div>
                     </div>
 
@@ -92,8 +114,11 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
+
+
+
+                    <div class="col s12">
+                        <div class="col s6 m4">
                             <button type="submit" class="btn btn-raised btn-primary">
                                 Yadda saxla
                             </button>

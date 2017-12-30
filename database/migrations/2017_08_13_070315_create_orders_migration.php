@@ -18,6 +18,7 @@ class CreateOrdersMigration extends Migration
             $table->string('name')->nullable();
             $table->string('number')->nullable();
             $table->string('status')->nullable();
+            $table->boolean('reviewable')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->timestamps();
         });

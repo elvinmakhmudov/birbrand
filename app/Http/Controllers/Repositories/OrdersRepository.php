@@ -45,6 +45,7 @@ class OrdersRepository
         return view('admin.orders.edit')->with(['order' => $order, 'products' => $products, 'users' => $users]);
     }
 
+
     public function update($orderId, $request)
     {
         //Validate the request
@@ -54,6 +55,7 @@ class OrdersRepository
             'status' => 'nullable|string|max:255',
             'user' => 'nullable|integer',
             'products' => 'required',
+            'reviewable' => 'string',
             'created_at' => 'nullable|date',
         ]);
 
@@ -64,7 +66,7 @@ class OrdersRepository
         if (!empty($request->get('delete'))) {
             $order->products()->detach();
             $order->delete();
-            return redirect()->route('admin.users.index');
+            return redirect()->route('admin.orders.home');
         }
 
 
@@ -72,17 +74,29 @@ class OrdersRepository
         $order->number = $request->get('number');
         $order->status = $request->get('status');
         $order->user_id = $request->get('user');
+        $order->reviewable= $request->get('reviewable') ? true : false;
+        //make all products reviewable
+
+
+        foreach($order->products as $orderProduct){
+            $orderProduct->pivot->reviewable= $request->get('reviewable') ? true : false;
+            $orderProduct->pivot->save();
+        }
+
         $order->created_at = $request->get('created_at');
 
-        //detach all existing products and attach new ones
-        $order->products()->detach();
-        $products = Product::find($request->get('products'));
-        foreach ($products as $product) {
-            $order->products()->attach($product, ['price' => $product->price, 'amount' => 1]);
+        $detachProducts = $request->get('detach') ? true : false;
+        if($detachProducts) {
+            //detach all existing products and attach new ones
+            $order->products()->detach();
+            $products = Product::find($request->get('products'));
+            foreach ($products as $product) {
+                $order->products()->attach($product, ['price' => $product->price, 'amount' => 1]);
+            }
         }
 
         $order->save();
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.orders.home');
     }
 
     public function create($userId)

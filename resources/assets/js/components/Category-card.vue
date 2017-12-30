@@ -1,12 +1,15 @@
 <template>
-    <div class="col s4">
-        <div class="card-container">
-            <div class="card category-card">
+    <div class="col s6 m4 l3">
+        <div class="card-container hoverable">
+            <div class="card product-card">
                 <a :href="'#/category/' + subcategory.slug">
-                    <img class="card-img-top"
-                         :src="'storage/'+subcategory.image_url">
-                    <div class="card-block">
-                        <h4 class="card-title category-title"> {{ subcategory.title }}</h4>
+                    <div class="card-image">
+                        <div class="card-content">
+                            <p>
+                                {{ $t('categories.' + subcategory.title +'.main')}}
+                            </p>
+                        </div>
+                        <img :src="'storage/'+subcategory.image_url" class="card-img-top">
                     </div>
                 </a>
             </div>

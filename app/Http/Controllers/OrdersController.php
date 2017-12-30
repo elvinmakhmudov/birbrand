@@ -21,6 +21,7 @@ class OrdersController extends Controller
         $this->orders= $repository;
         $this->middleware('auth')->except('store');
     }
+
     public function store(Request $request)
     {
         if (Auth::check()) {
@@ -50,5 +51,4 @@ class OrdersController extends Controller
         $orders = Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(5);
         return $orders;
     }
-
 }

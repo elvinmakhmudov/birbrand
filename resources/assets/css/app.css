@@ -247,7 +247,7 @@ a, a:focus, a:hover {
 }
 
 .table-order-link {
-    padding: 10px;
+    padding: 5px;
     vertical-align: text-top;
 }
 
@@ -334,6 +334,11 @@ xzoom-thumbs {
     }
 }
 
+@media (max-width: 386px) {
+    td, th {
+        padding: 2px;
+    }
+}
 @media (max-width: 1199px) {
     .navbar .navbar-form {
         /*margin-top: 16px;*/
@@ -625,7 +630,8 @@ ul.pagination li.active {
 }
 
 .rating-container {
-    float: left;
+    /* float: left; */
+    margin: 0 auto;
 }
 
 .additional-container {

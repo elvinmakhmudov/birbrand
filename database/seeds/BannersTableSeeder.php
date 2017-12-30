@@ -14,6 +14,6 @@ class BannersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Banner::class, 6)->create();
+        // factory(Banner::class, 6)->create();
     }
 }

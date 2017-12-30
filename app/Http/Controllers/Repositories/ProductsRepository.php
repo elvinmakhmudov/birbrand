@@ -26,6 +26,32 @@ class ProductsRepository
         return view('admin.products.index')->with(['category' => $category, 'products' => $products]);
     }
 
+    public function rate(Request $request) {
+        $orderId = $request->get('orderId');
+        $productId = $request->get('productId');
+
+        $order = Order::findOrFail($orderId);
+        $product = Product::findOrFail($productId);
+        $orderProduct = $order->products()->where('product_id', $productId)->first();
+
+        if($order->reviewable && $orderProduct->pivot->reviewable) {
+            switch($request->get('rate')){
+                case 'like':
+                    $product->likes++;
+                    break;
+                case 'dislike':
+                    $product->dislikes++;
+                    break;
+            }
+            $orderProduct->pivot->reviewable = false;
+            $orderProduct->pivot->save();
+            $product->updateRating();
+            $product->save();
+            return ['messages' => ['flashMessage.messages.rate.success']];
+        }
+        return ['errors' => ['flashMessage.messages.error']];
+    }
+
     public function edit($productId)
     {
         $product = Product::findOrFail($productId);

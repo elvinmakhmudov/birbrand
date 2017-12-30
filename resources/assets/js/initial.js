@@ -66,7 +66,8 @@ const app = new Vue({
         i18n.locale = this.$cookie.get('lang') || 'az';
         this.$store.dispatch('getHomeData').then(response => {
             Vue.nextTick(function() { 
-                   $('select').material_select();
+              $('select').material_select();
+              $(".modal").modal();
                 // $.material.init();
                 // $('.slider').slick({
                 //     arrows: false

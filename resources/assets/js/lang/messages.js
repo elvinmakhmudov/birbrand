@@ -68,9 +68,13 @@ const messages = {
             "        </div>",
             buyNowButton: "Buy Now",
             addToCardButton: "Add to Card",
-            description: "Description"
+            description: "Description",
+            orders: "order | {count} orders"
         },
         categories: {
+            belts: {
+                main: 'Belts',
+            },
             men: {
                 main: 'For Men',
             },
@@ -122,7 +126,8 @@ const messages = {
             table: {
                 product: 'Product',
                 deliveryStatus: 'Delivery status',
-                orderDate: 'Date of order'
+                orderDate: 'Date of order',
+                rate: 'Please rate your order'
             }
         },
         flashMessage: {
@@ -130,6 +135,9 @@ const messages = {
             messages: {
                 buy: {
                     success: 'Thank you! Your order has been placed.',
+                },
+                rate: {
+                    success: 'Thank you! Your rate has been stored.',
                 },
                 addToCart: {
                     success: 'Your order has been added to your shopping cart',
@@ -240,7 +248,8 @@ const messages = {
             "        </div>",
             buyNowButton: "İndi al",
             addToCardButton: "Səbətə at",
-            description: "Ətraflı"
+            description: "Ətraflı",
+            orders: "{count}  sifariş"
         },
         shoppingCard: {
             title: 'Mənim səbətim',
@@ -263,7 +272,8 @@ const messages = {
             table: {
                 product: 'Məhsul',
                 deliveryStatus: 'Çatdırılma statusu',
-                orderDate: 'Sifariş tarixi'
+                orderDate: 'Sifariş tarixi',
+                rate: 'Zəhmət olmasa rəy bildirin.'
             }
         },
         flashMessage: {
@@ -271,6 +281,9 @@ const messages = {
             messages: {
                 buy: {
                     success: 'Təşəkkürlər! Sifarişiniz qeydə alındı.',
+                },
+                rate: {
+                    success: 'Təşəkkürlər! Rəyiniz qeydə alındı.',
                 },
                 addToCart: {
                     success: 'Sifarişiniz səbətə əlavə olundu.',
@@ -381,7 +394,8 @@ const messages = {
             "        </div>",
             buyNowButton: "Купить",
             addToCardButton: "В корзину",
-            description: "Описание"
+            description: "Описание",
+            orders: "{count} заказов"
         },
         shoppingCard: {
             title: 'Моя корзина',
@@ -404,7 +418,8 @@ const messages = {
             table: {
                 product: 'Продукт',
                 deliveryStatus: 'Статус доставки',
-                orderDate: 'Дата заказа'
+                orderDate: 'Дата заказа',
+                rate: 'Оцените ваш заказ.'
             }
         },
         flashMessage: {
@@ -412,6 +427,9 @@ const messages = {
             messages: {
                 buy: {
                     success: 'Благодарим! Ваш заказ принят.',
+                },
+                rate: {
+                    success: 'Благодарим! Ваш отзыв учтен.',
                 },
                 addToCart: {
                     success: 'Ваш заказ добавлен в корзину.',

@@ -13,6 +13,6 @@ class CarouselsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Carousel::class, 6)->create();
+        // factory(Carousel::class, 6)->create();
     }
 }

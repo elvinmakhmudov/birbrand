@@ -20,6 +20,7 @@ class CreateOrderProductMigration extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
             $table->json('options')->nullable();
+            $table->boolean('reviewable')->nullable();
             $table->integer('price');
             $table->integer('amount');
         });

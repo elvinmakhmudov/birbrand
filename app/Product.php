@@ -57,7 +57,7 @@ class Product extends Model implements Buyable
      * Product belongs to orders
      */
     public function orders() {
-        return $this->belongsToMany(Order::class)->withPivot('options', 'price', 'amount');
+        return $this->belongsToMany(Order::class)->withPivot('options', 'price', 'amount', 'reviewable');
     }
 
     /**
@@ -102,5 +102,12 @@ class Product extends Model implements Buyable
     {
         return $this->price;
         // TODO: Implement getBuyablePrice() method.
+    }
+
+    /**
+     * Update the rating of product
+     */
+    public function updateRating() {
+        return $this->rating = 5 * $this->likes / ($this->likes + $this->dislikes);
     }
 }

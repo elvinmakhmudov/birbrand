@@ -1623,6 +1623,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -2426,6 +2429,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2443,13 +2462,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         this.fetchData();
     },
+    mounted: function mounted() {
+        $(".modal").modal();
+    },
 
     methods: {
+        rateProduct: function rateProduct(orderId, product, rate) {
+            var url = "product/" + product.id + "/rate";
+            axios.post(url, {
+                orderId: orderId,
+                productId: product.id,
+                rate: rate
+            }).then(function (response) {
+                this.$store.state.errors.record(response.data.errors);
+                this.$store.state.messages.record(response.data.messages);
+                product.pivot.reviewable = false;
+                $("#flash-message").modal("open");
+            }.bind(this));
+        },
         getOptions: function getOptions(product) {
             var options = JSON.parse(product.pivot.options || '[]');
-            return Object.keys(options).map(function (k) {
+            var concatonated = Object.keys(options).map(function (k) {
                 return options[k];
             }).join(",");
+            return concatonated ? "(" + concatonated + "), " : null;
         },
         goToPage: function goToPage(pageNum) {
             var url = this.ordersPage.path + "?page=" + pageNum;
@@ -2578,6 +2614,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2605,10 +2646,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   watch: {
     // call again the method if the route changes
   },
-  created: function created() {
+  mounted: function mounted() {
     this.fetchData();
   },
-  mounted: function mounted() {},
 
   computed: {
     isEmptyProduct: function isEmptyProduct() {
@@ -2677,8 +2717,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.product = response.data;
         this.ancestors = this.getAncestors(this.product);
         __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
-          $(".modal").modal();
-
           $(".xzoom, .xzoom-gallery").xzoom({
             scroll: false
           });
@@ -2690,8 +2728,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           //                        }
           $("select").material_select();
           $("#rateYo").rateYo({
-            rating: 3.6,
-            starWidth: "15px"
+            rating: this.product.rating,
+            starWidth: "15px",
+            readOnly: true
           });
         }.bind(this));
       }.bind(this));
@@ -37455,18 +37494,23 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col s12 center-align additional-container" },
-                [
-                  _c("div", {
-                    staticClass: "rating-container",
-                    attrs: { id: "rateYo" }
-                  }),
+              _c("div", { staticClass: "container additional-container" }, [
+                _c("div", { staticClass: "row center-align" }, [
+                  _vm._m(0),
                   _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.product.ordered) + " orders")])
-                ]
-              ),
+                  _c("div", { staticClass: "col s6" }, [
+                    _c("span", { staticClass: "center-align" }, [
+                      _vm._v(
+                        _vm._s(
+                          _vm.$tc("product.orders", _vm.product.ordered, {
+                            count: _vm.product.ordered
+                          })
+                        )
+                      )
+                    ])
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c(
                 "form",
@@ -37522,7 +37566,10 @@ var render = function() {
                           _vm._l(options, function(option) {
                             return _c(
                               "option",
-                              { domProps: { value: option } },
+                              {
+                                staticClass: "center-align",
+                                domProps: { value: option }
+                              },
                               [_vm._v(_vm._s(option))]
                             )
                           })
@@ -37658,7 +37705,19 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col s6" }, [
+      _c("div", {
+        staticClass: "rating-container center-align",
+        attrs: { id: "rateYo" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -37968,7 +38027,7 @@ var render = function() {
           _vm._v(" "),
           _vm.subcategories.length > 0
             ? _c("div", { staticClass: "col s12" }, [
-                _c("h2", [_vm._v("\n                Dəbbdə\n            ")])
+                _c("h5", [_vm._v("\n                Dəbbdə\n            ")])
               ])
             : _vm._e(),
           _vm._v(" "),
@@ -38990,19 +39049,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col s4" }, [
-    _c("div", { staticClass: "card-container" }, [
-      _c("div", { staticClass: "card category-card" }, [
+  return _c("div", { staticClass: "col s6 m4 l3" }, [
+    _c("div", { staticClass: "card-container hoverable" }, [
+      _c("div", { staticClass: "card product-card" }, [
         _c("a", { attrs: { href: "#/category/" + _vm.subcategory.slug } }, [
-          _c("img", {
-            staticClass: "card-img-top",
-            attrs: { src: "storage/" + _vm.subcategory.image_url }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-block" }, [
-            _c("h4", { staticClass: "card-title category-title" }, [
-              _vm._v(" " + _vm._s(_vm.subcategory.title))
-            ])
+          _c("div", { staticClass: "card-image" }, [
+            _c("div", { staticClass: "card-content" }, [
+              _c("p", [
+                _vm._v(
+                  "\n                            " +
+                    _vm._s(
+                      _vm.$t("categories." + _vm.subcategory.title + ".main")
+                    ) +
+                    "\n                        "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("img", {
+              staticClass: "card-img-top",
+              attrs: { src: "storage/" + _vm.subcategory.image_url }
+            })
           ])
         ])
       ])
@@ -39654,15 +39721,19 @@ var render = function() {
           _c("table", { staticClass: "bordered" }, [
             _c("thead", [
               _c("tr", [
-                _c("th", [_vm._v("#")]),
+                _c("th", { staticStyle: { width: "3%" } }, [_vm._v("#")]),
                 _vm._v(" "),
-                _c("th", [_vm._v(_vm._s(_vm.$t("order.table.product")))]),
+                _c("th", { staticStyle: { width: "60%" } }, [
+                  _vm._v(_vm._s(_vm.$t("order.table.product")) + " ")
+                ]),
                 _vm._v(" "),
-                _c("th", [
+                _c("th", { staticStyle: { width: "25%" } }, [
                   _vm._v(_vm._s(_vm.$t("order.table.deliveryStatus")))
                 ]),
                 _vm._v(" "),
-                _c("th", [_vm._v(_vm._s(_vm.$t("order.table.orderDate")))])
+                _c("th", { staticStyle: { width: "12%" } }, [
+                  _vm._v(_vm._s(_vm.$t("order.table.orderDate")))
+                ])
               ])
             ]),
             _vm._v(" "),
@@ -39678,7 +39749,7 @@ var render = function() {
                         "tbody",
                         _vm._l(order.products, function(product) {
                           return _c("tr", [
-                            _c("td", [
+                            _c("td", { staticStyle: { width: "25%" } }, [
                               _c(
                                 "a",
                                 { attrs: { href: "#/product/" + product.id } },
@@ -39689,35 +39760,112 @@ var render = function() {
                                         "/storage/" +
                                         product.folder +
                                         "/thumbnail.jpg",
-                                      width: "20%"
+                                      width: "100%"
                                     }
-                                  }),
-                                  _c(
-                                    "span",
-                                    { staticClass: "table-order-link" },
-                                    [_vm._v(_vm._s(product.title))]
-                                  )
+                                  })
                                 ]
-                              ),
-                              _c("span", [
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("td", { staticStyle: { width: "70%" } }, [
+                              _c("span", { staticClass: "table-order-link" }, [
                                 _vm._v(
-                                  "(" +
+                                  _vm._s(product.title) +
+                                    "\n                                        " +
                                     _vm._s(_vm.getOptions(product)) +
-                                    "), " +
                                     _vm._s(product.pivot.amount) +
                                     ", " +
                                     _vm._s(product.pivot.price) +
-                                    " AZN "
+                                    " AZN\n                                    "
                                 )
                               ])
-                            ])
+                            ]),
+                            _vm._v(" "),
+                            product.pivot.reviewable
+                              ? _c("td", { staticStyle: { width: "30%" } }, [
+                                  _c("span", [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href:
+                                            "product/" +
+                                            product.id +
+                                            "/rate?like=true"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.rateProduct(
+                                              order.id,
+                                              product,
+                                              "like"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("thumb_up")]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href:
+                                            "product/" +
+                                            product.id +
+                                            "/rate?dislike=true"
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            _vm.rateProduct(
+                                              order.id,
+                                              product,
+                                              "dislike"
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "i",
+                                          { staticClass: "material-icons" },
+                                          [_vm._v("thumb_down")]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e()
                           ])
                         })
                       )
                     ])
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(order.status))]),
+                  _c("td", [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(order.status) +
+                        "\n                        "
+                    ),
+                    order.reviewable
+                      ? _c("div", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(_vm.$t("order.table.rate")) +
+                              "\n                        "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.fromNow(order.created_at)))])
                 ])
@@ -54994,6 +55142,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
         this.$store.dispatch('getHomeData').then(function (response) {
             __WEBPACK_IMPORTED_MODULE_0_vue___default.a.nextTick(function () {
                 $('select').material_select();
+                $(".modal").modal();
                 // $.material.init();
                 // $('.slider').slick({
                 //     arrows: false
@@ -55283,9 +55432,13 @@ var messages = {
             shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
             buyNowButton: "Buy Now",
             addToCardButton: "Add to Card",
-            description: "Description"
+            description: "Description",
+            orders: "order | {count} orders"
         },
         categories: {
+            belts: {
+                main: 'Belts'
+            },
             men: {
                 main: 'For Men'
             },
@@ -55337,7 +55490,8 @@ var messages = {
             table: {
                 product: 'Product',
                 deliveryStatus: 'Delivery status',
-                orderDate: 'Date of order'
+                orderDate: 'Date of order',
+                rate: 'Please rate your order'
             }
         },
         flashMessage: {
@@ -55345,6 +55499,9 @@ var messages = {
             messages: {
                 buy: {
                     success: 'Thank you! Your order has been placed.'
+                },
+                rate: {
+                    success: 'Thank you! Your rate has been stored.'
                 },
                 addToCart: {
                     success: 'Your order has been added to your shopping cart'
@@ -55430,7 +55587,8 @@ var messages = {
             shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
             buyNowButton: "İndi al",
             addToCardButton: "Səbətə at",
-            description: "Ətraflı"
+            description: "Ətraflı",
+            orders: "{count}  sifariş"
         },
         shoppingCard: {
             title: 'Mənim səbətim',
@@ -55453,7 +55611,8 @@ var messages = {
             table: {
                 product: 'Məhsul',
                 deliveryStatus: 'Çatdırılma statusu',
-                orderDate: 'Sifariş tarixi'
+                orderDate: 'Sifariş tarixi',
+                rate: 'Zəhmət olmasa rəy bildirin.'
             }
         },
         flashMessage: {
@@ -55461,6 +55620,9 @@ var messages = {
             messages: {
                 buy: {
                     success: 'Təşəkkürlər! Sifarişiniz qeydə alındı.'
+                },
+                rate: {
+                    success: 'Təşəkkürlər! Rəyiniz qeydə alındı.'
                 },
                 addToCart: {
                     success: 'Sifarişiniz səbətə əlavə olundu.'
@@ -55546,7 +55708,8 @@ var messages = {
             shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
             buyNowButton: "Купить",
             addToCardButton: "В корзину",
-            description: "Описание"
+            description: "Описание",
+            orders: "{count} заказов"
         },
         shoppingCard: {
             title: 'Моя корзина',
@@ -55569,7 +55732,8 @@ var messages = {
             table: {
                 product: 'Продукт',
                 deliveryStatus: 'Статус доставки',
-                orderDate: 'Дата заказа'
+                orderDate: 'Дата заказа',
+                rate: 'Оцените ваш заказ.'
             }
         },
         flashMessage: {
@@ -55577,6 +55741,9 @@ var messages = {
             messages: {
                 buy: {
                     success: 'Благодарим! Ваш заказ принят.'
+                },
+                rate: {
+                    success: 'Благодарим! Ваш отзыв учтен.'
                 },
                 addToCart: {
                     success: 'Ваш заказ добавлен в корзину.'

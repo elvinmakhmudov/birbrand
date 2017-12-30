@@ -27,9 +27,9 @@
                 </category-card>
             </div>
             <div class="col s12" v-if="subcategories.length > 0">
-                <h2>
+                <h5>
                     Dəbbdə
-                </h2>
+                </h5>
             </div>
             <div class="products" v-for="product in products">
                 <product-card :product="product">
