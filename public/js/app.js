@@ -2476,8 +2476,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 this.$store.state.errors.record(response.data.errors);
                 this.$store.state.messages.record(response.data.messages);
-                product.pivot.reviewable = false;
                 $("#flash-message").modal("open");
+                product.pivot.reviewable = false;
             }.bind(this));
         },
         getOptions: function getOptions(product) {
@@ -2718,7 +2718,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.ancestors = this.getAncestors(this.product);
         __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
           $(".xzoom, .xzoom-gallery").xzoom({
-            scroll: false
+            scroll: false,
+            mposition: "fullscreen"
           });
           this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
           var selector = ".nav-categories li";
@@ -39787,12 +39788,7 @@ var render = function() {
                                     _c(
                                       "a",
                                       {
-                                        attrs: {
-                                          href:
-                                            "product/" +
-                                            product.id +
-                                            "/rate?like=true"
-                                        },
+                                        attrs: { href: "" },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()
@@ -39816,12 +39812,7 @@ var render = function() {
                                     _c(
                                       "a",
                                       {
-                                        attrs: {
-                                          href:
-                                            "product/" +
-                                            product.id +
-                                            "/rate?dislike=true"
-                                        },
+                                        attrs: { href: "" },
                                         on: {
                                           click: function($event) {
                                             $event.preventDefault()

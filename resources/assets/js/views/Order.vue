@@ -31,8 +31,8 @@
                                     </td>
                                     <td style="width: 30%" v-if="product.pivot.reviewable">
                                         <span>
-                                            <a @click.prevent="rateProduct(order.id, product, 'like')" :href="'product/'+product.id+'/rate?like=true'"><i class="material-icons">thumb_up</i></a>
-                                            <a @click.prevent="rateProduct(order.id, product, 'dislike')" :href="'product/'+product.id+'/rate?dislike=true'"><i class="material-icons">thumb_down</i></a>
+                                            <a @click.prevent="rateProduct(order.id, product, 'like')" href=""><i class="material-icons">thumb_up</i></a>
+                                            <a @click.prevent="rateProduct(order.id, product, 'dislike')" href=""><i class="material-icons">thumb_down</i></a>
                                         </span>
                                     </td>
                                 </tr>
@@ -91,8 +91,8 @@
                 }).then(function(response){
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
-                    product.pivot.reviewable=false;
                     $("#flash-message").modal("open");
+                    product.pivot.reviewable=false;
                 }.bind(this));
             },
             getOptions(product) {

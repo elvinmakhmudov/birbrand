@@ -5,6 +5,7 @@ namespace BirBrand\Http\Controllers;
 use BirBrand\Banner;
 use BirBrand\Carousel;
 use BirBrand\Category;
+use BirBrand\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -52,11 +53,17 @@ class CategoriesController extends Controller
         $inOrder = $request->get('inOrder') ?: 'desc';
         $page = $request->get('page') ?: 1;
 
+
         $productsPage = Cache::remember('productsPage/' . $slug . '/' . $page . '/' . $sortBy . '/' . $inOrder, config('cache.lifetime'), function () use ($category, $request, $sortBy, $inOrder) {
+            // Get ids of descendants
+            $categories = $category->descendants()->pluck('id');
+
+            // Include the id of category itself
+            $categories[] = $category->getKey();
             if ($sortBy) {
-                return $category->products()->orderBy($sortBy, $inOrder)->paginate(16);
+                return Product::whereIn('category_id', $categories)->orderBy($sortBy, $inOrder)->paginate(16);
             } else {
-                return $category->products()->paginate(16);
+                return Product::whereIn('category_id', $categories)->paginate(16);
             }
         });
 

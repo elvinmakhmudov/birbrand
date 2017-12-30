@@ -211,7 +211,8 @@ export default {
           Vue.nextTick(
             function() {
               $(".xzoom, .xzoom-gallery").xzoom({
-                scroll: false
+                scroll: false,
+                mposition: "fullscreen"
               });
               this.$store.state.activeCategorySlug = this.getAncestors(
                 this.product

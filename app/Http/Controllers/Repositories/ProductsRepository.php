@@ -47,6 +47,7 @@ class ProductsRepository
             $orderProduct->pivot->save();
             $product->updateRating();
             $product->save();
+            $order->reviewable= false;
             return ['messages' => ['flashMessage.messages.rate.success']];
         }
         return ['errors' => ['flashMessage.messages.error']];
