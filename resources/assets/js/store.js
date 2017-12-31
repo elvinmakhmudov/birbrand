@@ -17,7 +17,9 @@ export default new Vuex.Store({
         cartTotal: 0,
         cartItems: {},
         topBannerHeight: 0,
-        activeCategorySlug: {}
+        activeCategorySlug: {},
+        sortByColumn: 'created_at',
+        orderBy: 'desc'
     },
     mutations: {
         setBanners(state, banners) {

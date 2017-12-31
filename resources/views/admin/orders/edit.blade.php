@@ -4,8 +4,9 @@
     <div class="layout">
         <div class="row">
             <div class="col s12">
-                <h5>Sifarişi dəyişmək</h5> <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.orders.update', ['id' => $order->id]) }}"
-                                           enctype="multipart/form-data">
+                <h5>Sifarişi dəyişmək</h5>
+                <form role="form" method="POST" action="{{ route('admin.orders.update', ['id' => $order->id]) }}"
+                      enctype="multipart/form-data">
 
                     @if (count($errors) > 0)
                         <ul>
@@ -16,113 +17,115 @@
                     @endif
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label for="name" class="col-md-2 control-label">Ad</label>
 
-                        <div class="col-md-8">
-                            <input id="name" type="text" class="form-control" name="name" autofocus
-                                   value="{{ $order->name}}">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="name" name="name" type="text" class="validate" autofocus
+                                           value="{{ $order->name}}">
+                                    <label for="name">Ad</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="number" class="col-md-2 control-label">Nömrə</label>
-
-                        <div class="col-md-8">
-                            <input id="number" type="text" class="form-control" name="number" autofocus
-                                   value="{{ $order->number}}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="number" name="number" type="text" class="validate" autofocus
+                                           value="{{ $order->number}}">
+                                    <label for="number">Nömrə</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="status" class="col-md-2 control-label">Status</label>
 
-                        <div class="col-md-8">
-                            <input id="status" type="text" class="form-control" name="status" autofocus
-                                   value="{{ $order->status}}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="status" name="status" type="text" class="validate" autofocus
+                                           value="{{ $order->status}}">
+                                    <label for="status">Status</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="created_at" class="col-md-2 control-label">Yaranma tarixi</label>
-
-                        <div class="col-md-8">
-                            <input id="created_at" type="text" class="form-control" name="created_at" autofocus
-                                   value="{{ $order->created_at}}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="status" name="status" type="text" class="validate" autofocus
+                                           value="{{ $order->created_at}}">
+                                    <label for="status">Yaranma tarixi</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="select" class="col-md-2 control-label">İstifadəçi</label>
 
-                        <div class="col-md-8">
-                            <select id="select" class="form-control" name="user">
-                                <option value> Yoxdu</option>
-                                    @foreach($users as $oneUser)
-                                        @if($order->user && $oneUser->id == $order->user->id)
-                                            <option value="{{ $order->user->id }}"
-                                                    selected> {{ $order->user->number}} ({{$order->user->name }})
-                                            </option>
-                                        @else
-                                            <option value="{{ $oneUser->id }}"> {{ $oneUser->number}}
-                                                ({{$oneUser->name}})
-                                            </option>
-                                        @endif
-                                    @endforeach
-                            </select>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label class="active">İstifadəçi</label>
+                                    <select id="select" class="form-control" name="user">
+                                        <option value> Yoxdu</option>
+                                        @foreach($users as $oneUser)
+                                            @if($order->user && $oneUser->id == $order->user->id)
+                                                <option value="{{ $order->user->id }}"
+                                                        selected> {{ $order->user->number}} ({{$order->user->name }})
+                                                </option>
+                                            @else
+                                                <option value="{{ $oneUser->id }}"> {{ $oneUser->number}}
+                                                    ({{$oneUser->name}})
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="select" class="col s12 control-label">Reviwable</label>
-                        <div class="switch">
-                            <label>
-                            Off
-                            <input type="checkbox" id="switch" name="reviewable">
-                            <span class="lever"></span>
-                            On
-                            </label>
+                        <div class="col s12">
+                            <div class="row ">
+                                <div class="col s12">
+                                    <input type="checkbox" id="reviewable" name="reviewable" {{ $order->reviewable? 'checked': ''}}/>
+                                    <label for="detach">Rey bildirmek olar?</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="select" class="col s12 control-label">Detach old products</label>
-                        <div class="switch">
-                            <label>
-                            Off
-                            <input type="checkbox" id="switch" name="detach">
-                            <span class="lever"></span>
-                            On
-                            </label>
+                        <div class="col s12">
+                            <div class="row ">
+                                <div class="col s12">
+                                    <input type="checkbox" id="detach" name="detach"/>
+                                    <label for="detach">Evvelki produktlari silmek</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="select" class="col-md-2 control-label">Produkt</label>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label class="active">Produkt</label>
 
-                        <div class="col-md-8">
-                            <select id="select" class="form-control" name="products[]" multiple>
-                                <option value> Yoxdu</option>
-                                @foreach($products->intersect($order->products) as $selectedProduct)
-                                    <option value="{{ $selectedProduct->id }}"
-                                            selected> {{ $selectedProduct->title }}</option>
-                                @endforeach
-                                @foreach($products->diff($order->products) as $notSelectedProduct)
-                                    <option value="{{ $notSelectedProduct->id }}"> {{ $notSelectedProduct->title }}</option>
-                                @endforeach
-                            </select>
+                                    <select id="select" class="form-control" name="products[]" multiple>
+                                        <option value> Yoxdu</option>
+                                        @foreach($products->intersect($order->products) as $selectedProduct)
+                                            <option value="{{ $selectedProduct->id }}"
+                                                    selected> {{ $selectedProduct->title }}</option>
+                                        @endforeach
+                                        @foreach($products->diff($order->products) as $notSelectedProduct)
+                                            <option value="{{ $notSelectedProduct->id }}"> {{ $notSelectedProduct->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
 
-
-
-                    <div class="col s12">
-                        <div class="col s6 m4">
-                            <button type="submit" class="btn btn-raised btn-primary">
+                        <div class="col s12">
+                            <button type="submit" class="btn waves-effect waves-light">
                                 Yadda saxla
                             </button>
-                            <button type="submit" class="btn btn-danger" name="delete" value="delete">
+                            <button type="submit" class="btn waves-effect waves-light red" name="delete" value="delete">
                                 Sil
                             </button>
                         </div>

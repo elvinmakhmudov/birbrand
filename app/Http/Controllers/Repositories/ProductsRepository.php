@@ -21,7 +21,7 @@ class ProductsRepository
     {
         $category = Category::findOrFail($id);
 
-        $products = $category->products()->with('user')->paginate(20);
+        $products = $category->products()->with('user')->paginate(10);
 
         return view('admin.products.index')->with(['category' => $category, 'products' => $products]);
     }
@@ -162,6 +162,7 @@ class ProductsRepository
         $product->title = $request->get('title');
         $product->description = $request->get('description');
         $product->price = $request->get('price');
+        $product->options = $request->get('options');
 
         //create a folder for images
         $folder = str_random(20);

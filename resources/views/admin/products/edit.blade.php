@@ -18,131 +18,144 @@
                     @endif
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label for="title" class="col-md-2 control-label">Ad</label>
-
-                        <div class="col-md-8">
-                            <input id="title" type="text" class="form-control" name="title" autofocus
-                                   value="{{ $product->title }}">
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="title" name="title" type="text" class="validate" autofocus
+                                           value="{{ $product->title }}">
+                                    <label for="title">Ad</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="description" class="col-md-2 control-label">Təsviri</label>
-
-                        <div class="col-md-8">
-                                <textarea name="description" id="description" cols="30" rows="10"
-                                          class="form-control">{{ $product->description }}</textarea>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea name="description" id="description"
+                                              class="materialize-textarea">{{ $product->description }}</textarea>
+                                    <label for="description">Təsviri</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="options" class="col-md-2 control-label">Seçimlər</label>
-
-                        <div class="col-md-8">
-                                <textarea name="options" id="options" cols="30"
-                                          class="form-control">{{ $product->options}}</textarea>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea name="options" id="options"
+                                              class="materialize-textarea">{{ $product->options}}</textarea>
+                                    <label for="options">Seçimlər</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="old-price" class="col-md-2 control-label">Əvvəlki qiymət</label>
-
-                        <div class="col-md-8">
-                            <input id="old-price" type="number" class="form-control" name="old_price" autofocus
-                                   value="{{ $product->old_price }}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="old_price" name="old_price" type="number" class="validate" autofocus
+                                           value="{{ $product->old_price }}">
+                                    <label for="old_price">Əvvəlki qiymət</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sale-percent" class="col-md-2 control-label">Endirim faizi</label>
-
-                        <div class="col-md-8">
-                            <input id="sale-percent" type="number" class="form-control" name="sale_percent"
-                                   autofocus value="{{ $product->sale_percent }}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="sale_percent" name="sale_percent" type="number" class="validate"
+                                           autofocus value="{{ $product->sale_percent }}">
+                                    <label for="sale_percent">Endirim faizi</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="price" class="col-md-2 control-label">Qiymət</label>
-
-                        <div class="col-md-8">
-                            <input id="price" type="number" class="form-control" name="price" autofocus
-                                   value="{{ $product->price }}">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="price" name="price" type="number" class="validate" autofocus
+                                           value="{{ $product->price }}">
+                                    <label for="price">Qiymət</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="image" class="col-md-2 control-label">Əsas Şəkil</label>
-
-                        <div class="col-md-3">
-                            <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                            <input type="file" id="image" multiple="" name="cover_image">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="file-field input-field col s12">
+                                    <div class="btn">
+                                        <span>Şəkil</span>
+                                        <input type="file" name="cover_image">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                                <div class="col s12">
+                                    <img src="/storage/{{$product->folder . '/thumbnail.jpg'}}" alt="" width="100%">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                            <img src="/storage/{{$product->folder . '/thumbnail.jpg'}}" alt="" width="100%">
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="image" class="col-md-2 control-label">Əlavə Şəkil poz</label>
-                        <div class="col-md-5">
-                            <div class="checkbox">
+                        <div class="col s12">
+                            <div class="row">
+                                <p for="is_shown">Əlavə Şəkil poz</p>
                                 @foreach($product->images as $image)
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" name="imagesToDelete[]" value="{{ $image }}">
-                                        <img src="/storage/{{$image}}" alt="" width="50%">
-                                    </label>
+                                    <div class="checkbox-inline">
+                                        <input type="checkbox" name="imagesToDelete[]" value="{{ $image }}"
+                                               id="{{ $image }}">
+                                        <label for="{{ $image }}"><img src="/storage/{{$image}}" alt=""
+                                                                       width="30%"></label>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="images" class="col-md-2 control-label">Əlavə şəkillər</label>
 
-                        <div class="col-md-8">
-                            <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                            <input type="file" id="images" multiple name="images[]">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="select" class="col-md-2 control-label">Kateqoriya</label>
-
-                        <div class="col-md-8">
-                            <select id="select" class="form-control" name="category">
-                                <option value> Yoxdu</option>
-                                @foreach($categories as $oneCategory)
-                                    @if($oneCategory->id == $product->category_id)
-                                        <option value="{{ $oneCategory->id }}"
-                                                selected> {{ $oneCategory->title }}</option>
-                                    @else
-                                        <option value="{{ $oneCategory->id }}"> {{ $oneCategory->title }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="is_shown" class="col-md-2 control-label">Produktu göstərmək</label>
-                        <div class="col-md-5">
-                            <div class="checkbox">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="is_shown" {{ $product->is_shown? 'checked':'' }}>
-                                </label>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="file-field input-field col s12">
+                                    <div class="btn">
+                                        <span>Əlavə şəkillər</span>
+                                        <input type="file" multiple="" name="images[]">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label class="active">Kategoriya</label>
+                                    <select id="select" class="form-control" name="category">
+                                        <option value> Yoxdu</option>
+                                        @foreach($categories as $oneCategory)
+                                            @if($oneCategory->id == $product->category_id)
+                                                <option value="{{ $oneCategory->id }}"
+                                                        selected> {{ $oneCategory->title }}</option>
+                                            @else
+                                                <option value="{{ $oneCategory->id }}"> {{ $oneCategory->title }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-raised btn-primary">
+                        <div class="col s12">
+                            <div class="row ">
+                                <div class="col s12">
+                                    <input type="checkbox" id="is_shown"
+                                           name="is_shown" {{ $product->is_shown? 'checked':'' }}/>
+                                    <label for="is_shown">Produktu göstərmək</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col s12">
+                            <button type="submit" class="btn waves-effect waves-light">
                                 Yadda saxla
                             </button>
-                            <button type="submit" class="btn btn-danger" name="delete" value="delete">
+                            <button type="submit" class="btn waves-effect waves-light red" name="delete" value="delete">
                                 Sil
                             </button>
                         </div>

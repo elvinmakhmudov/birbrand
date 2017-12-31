@@ -40,8 +40,16 @@ class UsersRepository
             'is_admin' => 'nullable',
         ]);
 
+
         //update the user
         $user= User::findOrFail($id);
+
+        //if delete was clicked, delete user
+        if (!empty($request->get('delete'))){
+            $user->delete();
+            return redirect()->route('admin.users.index');
+        }
+
         $user->name = $request->get('name');
         $user->number= $request->get('number');
         if($request->get('password')){

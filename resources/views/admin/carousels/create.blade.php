@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col s12">
                 <h5>Yeni karusel əlavə etmək</h5>
-                <form class="form-horizontal" role="form" method="POST"
+                <form role="form" method="POST"
                       action="{{ route('admin.carousels.store') }}"
                       enctype="multipart/form-data">
 
@@ -17,54 +17,60 @@
                         </ul>
                     @endif
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <div class="form-group">
-                        <label for="title" class="col-md-2 control-label">Ad</label>
-
-                        <div class="col-md-8">
-                            <input id="title" type="text" class="form-control" name="title" autofocus>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description" class="col-md-2 control-label">Təsviri</label>
-
-                        <div class="col-md-8">
-                                <textarea name="description" id="description" cols="30" rows="10"
-                                          class="form-control"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="url" class="col-md-2 control-label">Link</label>
-
-                        <div class="col-md-8">
-                            <input id="url" type="text" class="form-control" name="url" autofocus>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="image" class="col-md-2 control-label">Şəkil</label>
-
-                        <div class="col-md-8">
-                            <input type="text" readonly="" class="form-control" placeholder="Browse...">
-                            <input type="file" id="image" multiple="" name="image">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="is_shown" class="col-md-2 control-label">Karuseli göstərmək</label>
-                        <div class="col-md-5">
-                            <div class="checkbox">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="is_shown">
-                                </label>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="title" name="title" type="text" class="validate" autofocus>
+                                    <label for="title">Ad</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea name="description" id="description"
+                                              class="materialize-textarea"></textarea>
+                                    <label for="description">Təsviri</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="url" name="url" type="text" class="validate">
+                                    <label for="url">Link</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="file-field input-field col s12">
+                                    <div class="btn">
+                                        <span>Şəkil</span>
+                                        <input type="file" name="image">
+                                    </div>
+                                    <div class="file-path-wrapper">
+                                        <input class="file-path validate" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row ">
+                                <div class="col s12">
+                                    <input type="checkbox" id="is_shown" name="is_shown"/>
+                                    <label for="is_shown">Karuseli göstərmək</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <button type="submit" class="btn waves-effect waves-light">
                                 Yadda saxla
                             </button>
                         </div>

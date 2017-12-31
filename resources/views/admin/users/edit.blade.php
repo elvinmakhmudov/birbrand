@@ -14,55 +14,63 @@
                             <div>{{ $error }}</div>
                         @endforeach
                     @endif
-                    <div class="form-group">
-                        <label for="name" class="col-md-2 control-label">Ad</label>
-
-                        <div class="col-md-8">
-                            <input id="name" type="text" class="form-control" name="name" autofocus
-                                   value="{{ $user->name }}">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="number" class="col-md-2 control-label">Nömrə</label>
-
-                        <div class="col-md-8">
-                            <input type="number" id="number" class="form-control" name="number"
-                                   value="{{ $user->number }}">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="address" class="col-md-2 control-label">Ünvan</label>
-
-                        <div class="col-md-8">
-                            <input id="address" type="text" class="form-control" name="address" autofocus
-                                   value="{{ $user->address }}">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="col-md-2 control-label">Şifrə</label>
-
-                        <div class="col-md-8">
-                            <input id="password" type="password" class="form-control" name="password" autofocus>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="is_admin" class="col-md-2 control-label">Admin etmək</label>
-                        <div class="col-md-5">
-                            <div class="checkbox">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="is_admin" {{ $user->is_admin ? 'checked' : '' }}>
-                                </label>
+                    <div class="row">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="name" name="name" type="text" class="validate" autofocus
+                                           value="{{ $user->name }}">
+                                    <label for="name">Ad</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="number" name="number" type="text" class="validate" autofocus
+                                           value="{{ $user->number }}">
+                                    <label for="number">Nömrə</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="address" name="address" type="text" class="validate" autofocus
+                                           value="{{ $user->address }}">
+                                    <label for="address">Ünvan</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="password" name="password" type="password" class="validate" autofocus>
+                                    <label for="password">Şifrə</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row ">
+                                <div class="col s12">
+                                    <input type="checkbox" id="is_admin"
+                                           name="is_admin" {{ $user->is_admin ? 'checked' : '' }}>
+                                    <label for="is_admin">Admin etmək</label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col s12">
+                            <button type="submit" class="btn waves-effect waves-light">
                                 Yadda saxla
+                            </button>
+                            <button type="submit" class="btn waves-effect waves-light red" name="delete" value="delete">
+                                Sil
                             </button>
                         </div>
                     </div>
