@@ -8,7 +8,15 @@
                 <form role="form" method="POST"
                       action="{{ route('admin.products.store', ['id' => $categoryId]) }}"
                       enctype="multipart/form-data">
+                    @if (count($errors) > 0)
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                     <div class="row">
                         <div class="col s12">
                             <div class="row">
@@ -42,7 +50,7 @@
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="old_price" name="title" type="number" class="validate" autofocus>
+                                    <input id="old_price" name="old_price" type="number" class="validate" autofocus>
                                     <label for="old_price">Əvvəlki qiymət</label>
                                 </div>
                             </div>

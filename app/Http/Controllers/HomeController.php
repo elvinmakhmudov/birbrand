@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Cache::remember('categories', config('cache.lifetime'), function () {
-            return Category::isShown()->with('children')->get();
+            return Category::isShown()->isRoot()->with('children')->get();
         });
 
         return view('home')->with('categories' , $categories);

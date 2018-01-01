@@ -30,6 +30,8 @@ var routes = [
     },
     {
         path: '/order',
+        name: 'myorder',
+        meta: { keepAlive: false },
         component: require('./views/Order'),
     },
     {

@@ -1,5 +1,5 @@
 <template>
-    <div class="col s6 m4 l3">
+    <div class="col s6 m6 l2">
         <div class="card-container hoverable">
             <div class="card product-card">
                 <a :href="'#/category/' + subcategory.slug">

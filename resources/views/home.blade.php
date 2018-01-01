@@ -5,7 +5,7 @@
         <left-banner>
         </left-banner>
         <transition name="fade">
-            <keep-alive>
+            <keep-alive :exclude="/myorder/">
                 <router-view :key="$route.fullPath">
                 </router-view>
             </keep-alive>

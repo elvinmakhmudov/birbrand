@@ -61,6 +61,7 @@ const app = new Vue({
             this.$cookie.set('lang', lang, 7);
             i18n.locale = lang;
         }
+
     },
     created: function() {
         i18n.locale = this.$cookie.get('lang') || 'az';

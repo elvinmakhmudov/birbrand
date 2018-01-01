@@ -32,9 +32,9 @@ class ShoppingCartController extends Controller
 
             $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 
-            return ['cart' => $cart, 'messages' => ['flashMessage.messages.addToCart.success']];
+            return response()->json(['cart' => $cart, 'messages' => ['flashMessage.messages.addToCart.success']], 200);
         } catch (Exception $e) {
-            return ['errors' => ['flashMessage.messages.error']];
+            return response()->json(['errors' => ['flashMessage.messages.error']], 400);
         }
 
     }
@@ -51,6 +51,6 @@ class ShoppingCartController extends Controller
 
         $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 
-        return ['cart' => $cart, 'messages' => ['Sifaşiniz səbətə əlavə olundu.']];
+        return response()->json(['cart' => $cart, 'messages' => ['Sifaşiniz səbətə əlavə olundu.']], 200);
     }
 }

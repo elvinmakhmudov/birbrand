@@ -48,9 +48,9 @@ class ProductsRepository
             $product->updateRating();
             $product->save();
             $order->reviewable= false;
-            return ['messages' => ['flashMessage.messages.rate.success']];
+            return response()->json(['messages' => ['flashMessage.messages.rate.success']], 200);
         }
-        return ['errors' => ['flashMessage.messages.error']];
+        return response()->json(['errors' => ['flashMessage.messages.error']], 400);
     }
 
     public function edit($productId)

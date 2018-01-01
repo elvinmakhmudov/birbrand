@@ -758,3 +758,15 @@ ul.pagination li.active {
 .additional-container {
     margin: 10px;
 }
+
+.card .card-content p {
+    word-wrap: break-word;
+}
+
+.divider {
+    margin-bottom: 10px;
+}
+
+.row {
+    margin-bottom: 10px;
+}

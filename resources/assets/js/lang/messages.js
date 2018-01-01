@@ -69,7 +69,18 @@ const messages = {
             buyNowButton: "Buy Now",
             addToCardButton: "Add to Card",
             description: "Description",
-            orders: "order | {count} orders"
+            orders: "order | {count} orders",
+            options: {
+                size: {
+                    main: "Size"
+                },
+                color: {
+                    main: "Color",
+                    black: "Black",
+                    white: "White"
+                },
+                quantity: 'Quantitjy'
+            }
         },
         categories: {
             belts: {
@@ -128,6 +139,15 @@ const messages = {
                 deliveryStatus: 'Delivery status',
                 orderDate: 'Date of order',
                 rate: 'Please rate your order'
+            },
+            status: {
+                payment: 'Awaiting payment.',
+                processing: 'Processing.',
+                delivered: 'Delivered.',
+                shipped: 'On the way.',
+                cancelled: 'Cancelled.',
+                dispute: 'Dispute in progress.',
+                finished: 'Finished.',
             }
         },
         flashMessage: {
@@ -249,7 +269,18 @@ const messages = {
             buyNowButton: "İndi al",
             addToCardButton: "Səbətə at",
             description: "Ətraflı",
-            orders: "{count}  sifariş"
+            orders: "{count}  sifariş",
+            options: {
+                size: {
+                    main: "Ölçü"
+                },
+                color: {
+                    main: "Rəng",
+                    black: "Qara",
+                    white: "Ağ"
+                },
+                quantity: 'Ədəd'
+            }
         },
         shoppingCard: {
             title: 'Mənim səbətim',
@@ -274,6 +305,15 @@ const messages = {
                 deliveryStatus: 'Çatdırılma statusu',
                 orderDate: 'Sifariş tarixi',
                 rate: 'Zəhmət olmasa rəy bildirin.'
+            },
+            status: {
+                payment: 'Ödəniş gözlənilir.',
+                processing: 'İşlənilir.',
+                delivered: 'Çatdırılıb.',
+                shipped: 'Göndərilib.',
+                cancelled: 'İmtina olunub.',
+                dispute: 'Mübahisə davam edir.',
+                finished: 'Bitib.',
             }
         },
         flashMessage: {
@@ -395,7 +435,18 @@ const messages = {
             buyNowButton: "Купить",
             addToCardButton: "В корзину",
             description: "Описание",
-            orders: "{count} заказов"
+            orders: "{count} заказов",
+            options: {
+                size: {
+                    main: "Размер"
+                },
+                color: {
+                    main: "Цвет",
+                    black: "Черный",
+                    white: "Белый"
+                },
+                quantity: 'Количество'
+            }
         },
         shoppingCard: {
             title: 'Моя корзина',
@@ -420,6 +471,15 @@ const messages = {
                 deliveryStatus: 'Статус доставки',
                 orderDate: 'Дата заказа',
                 rate: 'Оцените ваш заказ.'
+            },
+            status: {
+                payment: 'Ожидается платеж.',
+                processing: 'В обработке.',
+                delivered: 'Доставлено.',
+                shipped: 'В пути.',
+                cancelled: 'Отменен.',
+                dispute: 'Ведется спор.',
+                finished: 'Завершен.',
             }
         },
         flashMessage: {

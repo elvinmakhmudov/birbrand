@@ -40,7 +40,7 @@
                             </table>
                         </td>
                         <td>
-                            {{ order.status }}
+                            {{ $t(order.status) }}
                             <div v-if="order.reviewable">
                                 {{ $t('order.table.rate')}}
                             </div>
@@ -66,6 +66,7 @@
     import moment from 'moment';
 
     export default {
+        name: 'myorder',
         data() {
             return {
                 orders: [],

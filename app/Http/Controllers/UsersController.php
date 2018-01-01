@@ -50,10 +50,10 @@ class UsersController extends Controller
             $user->number = $request->get('number');
             $user->address = $request->get('address');
             $user->save();
-            return ['messages' => ['Sehifeniz yenilendi.']];
+            return response()->json(['messages' => ['Sehifeniz yenilendi.']], 200);
         }
 
-        return response()->json(['password' => ['Şifrə yalnışdır']], 422);
+        return response()->json(['password' => ['Şifrə yalnışdır']],400);
     }
 
     public function updatePassword(Request $request)
@@ -66,8 +66,8 @@ class UsersController extends Controller
         if (Hash::check($request->get('password'), $user->getAuthPassword())) {
             $user->password= bcrypt($request->get('new_password'));
             $user->save();
-            return ['messages' => ['Shifreniz yenilendi.']];
+            return response()->json(['messages' => ['Shifreniz yenilendi.']]);
         }
-        return response()->json(['password' => ['Şifrə yalnışdır']], 422);
+        return response()->json(['password' => ['Şifrə yalnışdır']], 400);
     }
 }

@@ -2130,8 +2130,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 //
 //
 //
-//
-//
 
 
 
@@ -2428,6 +2426,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'myorder',
     data: function data() {
         return {
             orders: [],
@@ -2598,6 +2597,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2605,140 +2612,140 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  components: {
-    buyitguest: __WEBPACK_IMPORTED_MODULE_2__components_product_buyItGuest_vue___default.a,
-    shippinginfo: __WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue___default.a
-  },
-  props: {
-    product_id: ""
-  },
-  data: function data() {
-    return {
-      errors: new __WEBPACK_IMPORTED_MODULE_0__classes_Errors__["a" /* default */](),
-      amount: 1,
-      product: {},
-      ancestors: [],
-      products: []
-    };
-  },
-
-  watch: {
-    // call again the method if the route changes
-  },
-  mounted: function mounted() {
-    this.fetchData();
-  },
-
-  computed: {
-    isEmptyProduct: function isEmptyProduct() {
-      return jQuery.isEmptyObject(this.product);
-    }
-  },
-  methods: {
-    getSelectedProductOptions: function getSelectedProductOptions() {
-      var options = {};
-      $(".product-option").each(function () {
-        var key = $(this).find(".product-option-key").text().replace(/\s/g, "");
-        var value = $(this).find("select.product-option-value").val();
-        options[key] = value;
-      });
-      console.log(options);
-      return JSON.stringify(options);
+    components: {
+        buyitguest: __WEBPACK_IMPORTED_MODULE_2__components_product_buyItGuest_vue___default.a,
+        shippinginfo: __WEBPACK_IMPORTED_MODULE_3__components_product_shippingInfo_vue___default.a
     },
-    addToCart: function addToCart() {
-      var _this = this;
-
-      axios.post("cart", {
-        productId: this.product.id,
-        options: this.getSelectedProductOptions(),
-        amount: this.amount
-      }).then(function (response) {
-        this.$store.state.errors.record(response.data.errors);
-        this.$store.state.messages.record(response.data.messages);
-        this.$store.commit("setCartTotal", response.data.cart.cartTotal);
-        var items = Object.keys(response.data.cart.cartItems).map(function (k) {
-          return response.data.cart.cartItems[k];
-        });
-        this.$store.commit("setCartItems", items);
-        $("#flash-message").modal("open");
-      }.bind(this)).catch(function (error) {
-        _this.errors.record(error.response.data.errors);
-      });
+    props: {
+        product_id: ""
     },
-    buyIt: function buyIt() {
-      var _this2 = this;
-
-      this.products = [{
-        productId: this.product.id,
-        options: this.getSelectedProductOptions(),
-        amount: this.amount
-      }];
-      var isLoggedIn = $("meta[name=login-status]").attr("content");
-
-      if (isLoggedIn) {
-        axios.post("order", {
-          products: this.products
-        }).then(function (response) {
-          this.$store.state.errors.record(response.data.errors);
-          this.$store.state.messages.record(response.data.messages);
-          $("#flash-message").modal("open");
-        }.bind(this)).catch(function (error) {
-          _this2.errors.record(error.response.data);
-        });
-      } else {
-        $("#buy-it-guest").modal("open");
-      }
+    data: function data() {
+        return {
+            errors: new __WEBPACK_IMPORTED_MODULE_0__classes_Errors__["a" /* default */](),
+            amount: 1,
+            product: {},
+            ancestors: [],
+            products: []
+        };
     },
-    fetchData: function fetchData() {
-      console.log(this.product_id);
-      var productUrl = "product/" + this.product_id;
-      axios.get(productUrl).then(function (response) {
-        this.product = response.data;
-        this.ancestors = this.getAncestors(this.product);
-        __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
-          $(".xzoom, .xzoom-gallery").xzoom({
-            scroll: false,
-            mposition: "fullscreen"
-          });
-          this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
-          var selector = ".nav-categories li";
-          //                        if($(selector).find('.active').children('a').data("slug") !== this.$store.state.activeCategorySlug){
-          $(selector).removeClass("active");
-          $($(selector).find("[data-slug='" + this.$store.state.activeCategorySlug + "']")).parent("li").addClass("active");
-          //                        }
-          $("select").material_select();
-          $("#rateYo").rateYo({
-            rating: this.product.rating,
-            starWidth: "15px",
-            readOnly: true
-          });
-        }.bind(this));
-      }.bind(this));
-      console.log("Product fetched");
+
+    watch: {
+        // call again the method if the route changes
     },
-    getAncestors: function getAncestors(product) {
-      var ancestors = [];
-      var categoryAncestors = this.getValuesByKey(product.category, "ancestors");
-      if (Array.isArray(categoryAncestors) && categoryAncestors.length !== 0) {
-        for (var i = 0; i < categoryAncestors.length; i++) {
-          ancestors = ancestors.concat(categoryAncestors[i]);
+    mounted: function mounted() {
+        this.fetchData();
+    },
+
+    computed: {
+        isEmptyProduct: function isEmptyProduct() {
+            return jQuery.isEmptyObject(this.product);
         }
-      }
-      ancestors.push(product.category);
-      return ancestors;
     },
-    getValuesByKey: function getValuesByKey(object, key) {
-      var values = [];
-      JSON.stringify(object, function (k, v) {
-        if (k === key && v.length > 0) {
-          console.log(v);
-          values.push(v);
+    methods: {
+        getSelectedProductOptions: function getSelectedProductOptions() {
+            var options = {};
+            $(".product-option").each(function () {
+                var key = $(this).find(".product-option-key").text().replace(/\s/g, "");
+                var value = $(this).find("select.product-option-value").val();
+                options[key] = value;
+            });
+            console.log(options);
+            return JSON.stringify(options);
+        },
+        addToCart: function addToCart() {
+            var _this = this;
+
+            axios.post("cart", {
+                productId: this.product.id,
+                options: this.getSelectedProductOptions(),
+                amount: this.amount
+            }).then(function (response) {
+                this.$store.state.errors.record(response.data.errors);
+                this.$store.state.messages.record(response.data.messages);
+                this.$store.commit("setCartTotal", response.data.cart.cartTotal);
+                var items = Object.keys(response.data.cart.cartItems).map(function (k) {
+                    return response.data.cart.cartItems[k];
+                });
+                this.$store.commit("setCartItems", items);
+                $("#flash-message").modal("open");
+            }.bind(this)).catch(function (error) {
+                _this.errors.record(error.response.data.errors);
+            });
+        },
+        buyIt: function buyIt() {
+            var _this2 = this;
+
+            this.products = [{
+                productId: this.product.id,
+                options: this.getSelectedProductOptions(),
+                amount: this.amount
+            }];
+            var isLoggedIn = $("meta[name=login-status]").attr("content");
+
+            if (isLoggedIn) {
+                axios.post("order", {
+                    products: this.products
+                }).then(function (response) {
+                    this.$store.state.errors.record(response.data.errors);
+                    this.$store.state.messages.record(response.data.messages);
+                    $("#flash-message").modal("open");
+                }.bind(this)).catch(function (error) {
+                    _this2.errors.record(error.response.data);
+                });
+            } else {
+                $("#buy-it-guest").modal("open");
+            }
+        },
+        fetchData: function fetchData() {
+            console.log(this.product_id);
+            var productUrl = "product/" + this.product_id;
+            axios.get(productUrl).then(function (response) {
+                this.product = response.data;
+                this.ancestors = this.getAncestors(this.product);
+                __WEBPACK_IMPORTED_MODULE_1_vue___default.a.nextTick(function () {
+                    $(".xzoom, .xzoom-gallery").xzoom({
+                        scroll: false,
+                        mposition: "fullscreen"
+                    });
+                    this.$store.state.activeCategorySlug = this.getAncestors(this.product)[0].slug;
+                    var selector = ".nav-categories li";
+                    //                        if($(selector).find('.active').children('a').data("slug") !== this.$store.state.activeCategorySlug){
+                    $(selector).removeClass("active");
+                    $($(selector).find("[data-slug='" + this.$store.state.activeCategorySlug + "']")).parent("li").addClass("active");
+                    //                        }
+                    $("select").material_select();
+                    $("#rateYo").rateYo({
+                        rating: this.product.rating,
+                        starWidth: "15px",
+                        readOnly: true
+                    });
+                }.bind(this));
+            }.bind(this));
+            console.log("Product fetched");
+        },
+        getAncestors: function getAncestors(product) {
+            var ancestors = [];
+            var categoryAncestors = this.getValuesByKey(product.category, "ancestors");
+            if (Array.isArray(categoryAncestors) && categoryAncestors.length !== 0) {
+                for (var i = 0; i < categoryAncestors.length; i++) {
+                    ancestors = ancestors.concat(categoryAncestors[i]);
+                }
+            }
+            ancestors.push(product.category);
+            return ancestors;
+        },
+        getValuesByKey: function getValuesByKey(object, key) {
+            var values = [];
+            JSON.stringify(object, function (k, v) {
+                if (k === key && v.length > 0) {
+                    console.log(v);
+                    values.push(v);
+                }
+                return v;
+            });
+            return values[0];
         }
-        return v;
-      });
-      return values[0];
     }
-  }
 });
 
 /***/ }),
@@ -37380,11 +37387,11 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n              " +
+                            "\n                            " +
                               _vm._s(
                                 _vm.$t("categories." + ancestor.title + ".main")
                               ) +
-                              "\n            "
+                              "\n                        "
                           )
                         ]
                       )
@@ -37392,9 +37399,9 @@ var render = function() {
                     _vm._v(" "),
                     _c("a", { staticClass: "breadcrumb" }, [
                       _vm._v(
-                        "\n              " +
+                        "\n                            " +
                           _vm._s(_vm.product.title) +
-                          "\n            "
+                          "\n                        "
                       )
                     ])
                   ],
@@ -37408,7 +37415,9 @@ var render = function() {
             _c("div", { staticClass: "col s12" }, [
               _c("h5", [
                 _vm._v(
-                  "\n            " + _vm._s(_vm.product.title) + "\n          "
+                  "\n                        " +
+                    _vm._s(_vm.product.title) +
+                    "\n                    "
                 )
               ])
             ]),
@@ -37468,9 +37477,9 @@ var render = function() {
             _c("div", { staticClass: "col m4 s12" }, [
               _c("h4", { staticClass: "center-align" }, [
                 _vm._v(
-                  "\n            " +
+                  "\n                        " +
                     _vm._s(_vm.product.price) +
-                    " AZN\n          "
+                    " AZN\n                    "
                 )
               ]),
               _vm._v(" "),
@@ -37530,9 +37539,11 @@ var render = function() {
                           },
                           [
                             _vm._v(
-                              "\n                " +
-                                _vm._s(key) +
-                                "\n              "
+                              "\n                                " +
+                                _vm._s(
+                                  _vm.$t("product.options." + key + ".main")
+                                ) +
+                                "\n                            "
                             )
                           ]
                         ),
@@ -37550,7 +37561,17 @@ var render = function() {
                                 staticClass: "center-align",
                                 domProps: { value: option }
                               },
-                              [_vm._v(_vm._s(option))]
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(
+                                      _vm.$t(
+                                        "product.options." + key + "." + option
+                                      )
+                                    ) +
+                                    "\n                                "
+                                )
+                              ]
                             )
                           })
                         )
@@ -37563,7 +37584,11 @@ var render = function() {
                     { staticClass: "input-field col s12 valign-wrapper" },
                     [
                       _c("label", { staticClass: "active" }, [
-                        _vm._v("\n                Ədəd\n              ")
+                        _vm._v(
+                          "\n                                " +
+                            _vm._s(_vm.$t("product.options.quantity")) +
+                            "\n                            "
+                        )
                       ]),
                       _vm._v(" "),
                       _vm.errors.has("amount")
@@ -37620,9 +37645,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                " +
+                            "\n                                " +
                               _vm._s(_vm.$t("product.buyNowButton")) +
-                              "\n              "
+                              "\n                            "
                           )
                         ]
                       ),
@@ -37644,9 +37669,9 @@ var render = function() {
                             _vm._v("add_shopping_cart")
                           ]),
                           _vm._v(
-                            "\n                " +
+                            "\n                                " +
                               _vm._s(_vm.$t("product.addToCardButton")) +
-                              "\n              "
+                              "\n                            "
                           )
                         ]
                       )
@@ -37662,17 +37687,17 @@ var render = function() {
             _c("div", { staticClass: "col s12" }, [
               _c("h5", [
                 _vm._v(
-                  "\n            " +
+                  "\n                        " +
                     _vm._s(_vm.$t("product.description")) +
-                    "\n          "
+                    "\n                    "
                 )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "product-description" }, [
                 _vm._v(
-                  "\n            " +
+                  "\n                        " +
                     _vm._s(_vm.product.description) +
-                    "\n          "
+                    "\n                    "
                 )
               ])
             ])
@@ -37996,31 +38021,27 @@ var render = function() {
       _c(
         "div",
         { staticClass: "row" },
-        [
-          _vm._l(_vm.category.children, function(subcategory) {
-            return _c(
-              "div",
-              [_c("category-card", { attrs: { subcategory: subcategory } })],
-              1
-            )
-          }),
-          _vm._v(" "),
-          _vm.subcategories.length > 0
-            ? _c("div", { staticClass: "col s12" }, [
-                _c("h5", [_vm._v("\n                Dəbbdə\n            ")])
-              ])
-            : _vm._e(),
-          _vm._v(" "),
-          _vm._l(_vm.products, function(product) {
-            return _c(
-              "div",
-              { staticClass: "products" },
-              [_c("product-card", { attrs: { product: product } })],
-              1
-            )
-          })
-        ],
-        2
+        _vm._l(_vm.category.children, function(subcategory) {
+          return _c(
+            "div",
+            [_c("category-card", { attrs: { subcategory: subcategory } })],
+            1
+          )
+        })
+      ),
+      _vm._v(" "),
+      _vm.category.children ? _c("div", { staticClass: "divider" }) : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row products" },
+        _vm._l(_vm.products, function(product) {
+          return _c(
+            "div",
+            [_c("product-card", { attrs: { product: product } })],
+            1
+          )
+        })
       ),
       _vm._v(" "),
       _c("paginate", {
@@ -39029,7 +39050,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col s6 m4 l3" }, [
+  return _c("div", { staticClass: "col s6 m6 l2" }, [
     _c("div", { staticClass: "card-container hoverable" }, [
       _c("div", { staticClass: "card product-card" }, [
         _c("a", { attrs: { href: "#/category/" + _vm.subcategory.slug } }, [
@@ -39823,7 +39844,7 @@ var render = function() {
                   _c("td", [
                     _vm._v(
                       "\n                        " +
-                        _vm._s(order.status) +
+                        _vm._s(_vm.$t(order.status)) +
                         "\n                        "
                     ),
                     order.reviewable
@@ -55403,7 +55424,18 @@ var messages = {
             buyNowButton: "Buy Now",
             addToCardButton: "Add to Card",
             description: "Description",
-            orders: "order | {count} orders"
+            orders: "order | {count} orders",
+            options: {
+                size: {
+                    main: "Size"
+                },
+                color: {
+                    main: "Color",
+                    black: "Black",
+                    white: "White"
+                },
+                quantity: 'Quantitjy'
+            }
         },
         categories: {
             belts: {
@@ -55462,6 +55494,15 @@ var messages = {
                 deliveryStatus: 'Delivery status',
                 orderDate: 'Date of order',
                 rate: 'Please rate your order'
+            },
+            status: {
+                payment: 'Awaiting payment.',
+                processing: 'Processing.',
+                delivered: 'Delivered.',
+                shipped: 'On the way.',
+                cancelled: 'Cancelled.',
+                dispute: 'Dispute in progress.',
+                finished: 'Finished.'
             }
         },
         flashMessage: {
@@ -55558,7 +55599,18 @@ var messages = {
             buyNowButton: "İndi al",
             addToCardButton: "Səbətə at",
             description: "Ətraflı",
-            orders: "{count}  sifariş"
+            orders: "{count}  sifariş",
+            options: {
+                size: {
+                    main: "Ölçü"
+                },
+                color: {
+                    main: "Rəng",
+                    black: "Qara",
+                    white: "Ağ"
+                },
+                quantity: 'Ədəd'
+            }
         },
         shoppingCard: {
             title: 'Mənim səbətim',
@@ -55583,6 +55635,15 @@ var messages = {
                 deliveryStatus: 'Çatdırılma statusu',
                 orderDate: 'Sifariş tarixi',
                 rate: 'Zəhmət olmasa rəy bildirin.'
+            },
+            status: {
+                payment: 'Ödəniş gözlənilir.',
+                processing: 'İşlənilir.',
+                delivered: 'Çatdırılıb.',
+                shipped: 'Göndərilib.',
+                cancelled: 'İmtina olunub.',
+                dispute: 'Mübahisə davam edir.',
+                finished: 'Bitib.'
             }
         },
         flashMessage: {
@@ -55679,7 +55740,18 @@ var messages = {
             buyNowButton: "Купить",
             addToCardButton: "В корзину",
             description: "Описание",
-            orders: "{count} заказов"
+            orders: "{count} заказов",
+            options: {
+                size: {
+                    main: "Размер"
+                },
+                color: {
+                    main: "Цвет",
+                    black: "Черный",
+                    white: "Белый"
+                },
+                quantity: 'Количество'
+            }
         },
         shoppingCard: {
             title: 'Моя корзина',
@@ -55704,6 +55776,15 @@ var messages = {
                 deliveryStatus: 'Статус доставки',
                 orderDate: 'Дата заказа',
                 rate: 'Оцените ваш заказ.'
+            },
+            status: {
+                payment: 'Ожидается платеж.',
+                processing: 'В обработке.',
+                delivered: 'Доставлено.',
+                shipped: 'В пути.',
+                cancelled: 'Отменен.',
+                dispute: 'Ведется спор.',
+                finished: 'Завершен.'
             }
         },
         flashMessage: {
@@ -58764,6 +58845,8 @@ var routes = [{
     component: __webpack_require__("./resources/assets/js/views/Profile.vue")
 }, {
     path: '/order',
+    name: 'myorder',
+    meta: { keepAlive: false },
     component: __webpack_require__("./resources/assets/js/views/Order.vue")
 }, {
     path: '/about',

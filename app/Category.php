@@ -78,4 +78,15 @@ class Category extends Model
     {
         return $query->where('is_shown', true);
     }
+
+    /**
+     * Is root scope
+     *
+     * @param $query
+     * @return mixedkk
+     */
+    public function scopeIsRoot($query)
+    {
+        return $query->where('parent_id', null);
+    }
 }

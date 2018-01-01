@@ -27,12 +27,10 @@
                 <category-card :subcategory="subcategory">
                 </category-card>
             </div>
-            <div class="col s12" v-if="subcategories.length > 0">
-                <h5>
-                    Dəbbdə
-                </h5>
-            </div>
-            <div class="products" v-for="product in products">
+        </div>
+        <div v-if="category.children" class="divider"></div>
+        <div class="row products">
+            <div v-for="product in products">
                 <product-card :product="product">
                 </product-card>
             </div>

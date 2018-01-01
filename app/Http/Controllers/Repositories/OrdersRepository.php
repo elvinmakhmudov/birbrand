@@ -166,13 +166,15 @@ class OrdersRepository
                 $product->save();
             }
             $order->user()->associate(Auth::user())->save();
+            $order->status = 'order.status.processing';
+            $order->save();
             //if bought from cart, destroy the old cart
             if($request->get('fromCart')) {
                 Cart::destroy();
             }
-            return ['messages' => ['flashMessage.messages.buy.success']];
+            return response()->json(['messages' => ['flashMessage.messages.buy.success']], 200);
         } catch (Exception $e) {
-            return ['errors' => ['flashMessage.messages.error']];
+            return response()->json(['errors' => ['flashMessage.messages.error']],400);
         }
     }
 
@@ -200,9 +202,9 @@ class OrdersRepository
             if($request->get('fromCart')) {
                 Cart::destroy();
             }
-            return ['messages' => ['flashMessage.messages.buy.success']];
+            return response()->json(['messages' => ['flashMessage.messages.buy.success']], 200);
         } catch (Exception $e) {
-            return ['errors' => ['flashMessage.messages.error']];
+            return response()->json(['errors' => ['flashMessage.messages.error']], 400);
         }
     }
 
