@@ -42,7 +42,7 @@
                 <div class="form-group" v-bind:class="{'has-error': form1.errors.get('password')}">
                     <div class="input-field col s12 m6">
                         <label class="active error" v-if="form1.errors.has('password')"
-                               v-text="form1.errors.get('password')"></label>
+                               v-text="$t(form1.errors.get('password'))"  ></label>
                         <input placeholder="*****" id="password" type="password" class="validate"
                                v-model="form1.password" name="password">
                         <label for="password" class="active"
@@ -68,7 +68,7 @@
                 <div class="form-group" v-bind:class="{'has-error': form2.errors.get('password')}">
                     <div class="input-field col s12 m6">
                         <label class="active error" v-if="form2.errors.has('password')"
-                               v-text="form2.errors.get('password')"></label>
+                               v-text="$t(form2.errors.get('password'))"></label>
                         <input placeholder="*****" id="password" type="password" class="validate"
                                v-model="form2.password" name="password">
                         <label for="password" class="active"
@@ -141,12 +141,10 @@
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
-                    $('#flash-message').modal('toggle');
-                    console.log(response.data);
+                    $("#flash-message").modal("open");
                 }.bind(this)).catch(error => {
                     this.form1.errors.record(error.response.data);
                 });
-                console.log('Products fetched');
             },
             updatePassword() {
                 axios.put('user/password', {
@@ -155,12 +153,10 @@
                 }).then(function (response) {
                     this.$store.state.errors.record(response.data.errors);
                     this.$store.state.messages.record(response.data.messages);
-                    $('#flash-message').modal('toggle');
-                    console.log(response.data);
+                    $('#flash-message').modal('open');
                 }.bind(this)).catch(error => {
                     this.form2.errors.record(error.response.data);
                 });
-                console.log('Products fetched');
             }
         }
     }

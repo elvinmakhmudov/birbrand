@@ -38,6 +38,13 @@ const messages = {
             passwordNew: 'New password',
             saveButton: 'Save',
             changePasswordButton: 'Change password',
+            update: {
+                success: "Your profile has been updated.",
+                error: "Password is wrong."
+            },
+            passwordUpdate: {
+                success: "Your password has been changed."
+            }
         },
         product: {
             shippingInfo: "" +
@@ -197,7 +204,14 @@ const messages = {
             password: 'Şifrə',
             passwordNew: 'Yeni Şifrə',
             saveButton: 'Yadda saxla',
-            changePasswordButton: 'Şifrəni dəyiş'
+            changePasswordButton: 'Şifrəni dəyiş',
+            update: {
+                success: "Səhifəniz yeniləndi.",
+                error: "Daxil etdiyiniz şifrə yanlışdır."
+            },
+            passwordUpdate: {
+                success: "Şifrəniz dəyişildi."
+            }
         },
         signup: {
             title: 'Qeydiyyat',
@@ -345,7 +359,7 @@ const messages = {
             logout: 'Выход'
         },
         about: {
-            text: 'Ст   ранница о Нас'
+            text: 'Страница о Нас'
         },
         login: {
             title: 'Вход',
@@ -363,7 +377,14 @@ const messages = {
             password: 'Пароль',
             passwordNew: 'Новый пароль',
             saveButton: 'Сохранить',
-            changePasswordButton: 'Изменить пароль'
+            changePasswordButton: 'Изменить пароль',
+            update: {
+                success: "Страница обновлена.",
+                error: "Пароль не верный."
+            },
+            passwordUpdate: {
+                success: "Пароль изменен."
+            }
         },
         signup: {
             title: 'Регистрация',
@@ -395,7 +416,7 @@ const messages = {
             },
             main: {
                 sortBy: {
-                    main: 'Сортировка по',
+                    main: 'Сортировка',
                     rating: 'Рейтингу',
                     date: 'Новые',
                     priceLow: 'По возрастанию цены',

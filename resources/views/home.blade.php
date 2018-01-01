@@ -13,4 +13,5 @@
         <right-banner>
         </right-banner>
     </div>
+    @include('layouts.footer')
 @endsection

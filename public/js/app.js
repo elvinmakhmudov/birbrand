@@ -2902,12 +2902,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 this.$store.state.errors.record(response.data.errors);
                 this.$store.state.messages.record(response.data.messages);
-                $('#flash-message').modal('toggle');
-                console.log(response.data);
+                $("#flash-message").modal("open");
             }.bind(this)).catch(function (error) {
                 _this.form1.errors.record(error.response.data);
             });
-            console.log('Products fetched');
         },
         updatePassword: function updatePassword() {
             var _this2 = this;
@@ -2918,12 +2916,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
                 this.$store.state.errors.record(response.data.errors);
                 this.$store.state.messages.record(response.data.messages);
-                $('#flash-message').modal('toggle');
-                console.log(response.data);
+                $('#flash-message').modal('open');
             }.bind(this)).catch(function (error) {
                 _this2.form2.errors.record(error.response.data);
             });
-            console.log('Products fetched');
         }
     }
 });
@@ -38783,7 +38779,9 @@ var render = function() {
                   ? _c("label", {
                       staticClass: "active error",
                       domProps: {
-                        textContent: _vm._s(_vm.form1.errors.get("password"))
+                        textContent: _vm._s(
+                          _vm.$t(_vm.form1.errors.get("password"))
+                        )
                       }
                     })
                   : _vm._e(),
@@ -38890,7 +38888,9 @@ var render = function() {
                   ? _c("label", {
                       staticClass: "active error",
                       domProps: {
-                        textContent: _vm._s(_vm.form2.errors.get("password"))
+                        textContent: _vm._s(
+                          _vm.$t(_vm.form2.errors.get("password"))
+                        )
                       }
                     })
                   : _vm._e(),
@@ -55417,7 +55417,14 @@ var messages = {
             password: 'Password',
             passwordNew: 'New password',
             saveButton: 'Save',
-            changePasswordButton: 'Change password'
+            changePasswordButton: 'Change password',
+            update: {
+                success: "Your profile has been updated.",
+                error: "Password is wrong."
+            },
+            passwordUpdate: {
+                success: "Your password has been changed."
+            }
         },
         product: {
             shippingInfo: "" + "<div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Çatdırılma</p>\n" + "            <div class=\"text\">\n" + "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" + "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title\">Ödəniş</p>\n" + "            <div class=\"text\">\n" + "                <p>\n" + "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" + "            </div>\n" + "        </div>\n" + "        <div class=\"item-shipping-payment-box\">\n" + "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" + "            <div class=\"text\">\n" + "                <p>Qaytarış yerində hər bir məhsula görə\n" + "                    <br><b>2 AZN</b></p>\n" + "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" + "                </p>\n" + "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" + "                </p>\n" + "            </div>\n" + "        </div>",
@@ -55552,7 +55559,14 @@ var messages = {
             password: 'Şifrə',
             passwordNew: 'Yeni Şifrə',
             saveButton: 'Yadda saxla',
-            changePasswordButton: 'Şifrəni dəyiş'
+            changePasswordButton: 'Şifrəni dəyiş',
+            update: {
+                success: "Səhifəniz yeniləndi.",
+                error: "Daxil etdiyiniz şifrə yanlışdır."
+            },
+            passwordUpdate: {
+                success: "Şifrəniz dəyişildi."
+            }
         },
         signup: {
             title: 'Qeydiyyat',
@@ -55675,7 +55689,7 @@ var messages = {
             logout: 'Выход'
         },
         about: {
-            text: 'Ст   ранница о Нас'
+            text: 'Страница о Нас'
         },
         login: {
             title: 'Вход',
@@ -55693,7 +55707,14 @@ var messages = {
             password: 'Пароль',
             passwordNew: 'Новый пароль',
             saveButton: 'Сохранить',
-            changePasswordButton: 'Изменить пароль'
+            changePasswordButton: 'Изменить пароль',
+            update: {
+                success: "Страница обновлена.",
+                error: "Пароль не верный."
+            },
+            passwordUpdate: {
+                success: "Пароль изменен."
+            }
         },
         signup: {
             title: 'Регистрация',
@@ -55725,7 +55746,7 @@ var messages = {
             },
             main: {
                 sortBy: {
-                    main: 'Сортировка по',
+                    main: 'Сортировка',
                     rating: 'Рейтингу',
                     date: 'Новые',
                     priceLow: 'По возрастанию цены',
