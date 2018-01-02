@@ -49,28 +49,24 @@ const messages = {
         product: {
             shippingInfo: "" +
             "<div class=\"item-shipping-payment-box\">\n" +
-            "            <p class=\"text-title\">Çatdırılma</p>\n" +
+            "            <p class=\"text-title\">Delivery</p>\n" +
             "            <div class=\"text\">\n" +
-            "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
-            "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+            "                <p>After completing your order our operator will contact you.</p>\n" +
+            "                <p>In the next 2-3 days the product will be delivered to you free of charge.</p>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class=\"item-shipping-payment-box\">\n" +
-            "            <p class=\"text-title\">Ödəniş</p>\n" +
+            "            <p class=\"text-title\">Payment</p>\n" +
             "            <div class=\"text\">\n" +
             "                <p>\n" +
-            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" +
+            "                    Once purchased, you will be charged with cash.</p>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class=\"item-shipping-payment-box\">\n" +
-            "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
+            "            <p class=\"text-title \">Customer satisfaction</p>\n" +
             "            <div class=\"text\">\n" +
-            "                <p>Qaytarış yerində hər bir məhsula görə\n" +
-            "                    <br><b>2 AZN</b></p>\n" +
-            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" +
-            "                </p>\n" +
-            "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" +
-            "                </p>\n" +
+            "                <p>For each product at the point of return 2 AZN.\n" +
+            "                <p>If the product does not meet the description or images, it may be returned.\n" +
             "            </div>\n" +
             "        </div>",
             buyNowButton: "Buy Now",
@@ -262,25 +258,21 @@ const messages = {
             "            <p class=\"text-title\">Çatdırılma</p>\n" +
             "            <div class=\"text\">\n" +
             "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
-            "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+            "                <p>Növbəti 2-3 gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class=\"item-shipping-payment-box\">\n" +
             "            <p class=\"text-title\">Ödəniş</p>\n" +
             "            <div class=\"text\">\n" +
             "                <p>\n" +
-            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" +
+            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd həyata keçirilir.</p>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class=\"item-shipping-payment-box\">\n" +
             "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
             "            <div class=\"text\">\n" +
-            "                <p>Qaytarış yerində hər bir məhsula görə\n" +
-            "                    <br><b>2 AZN</b></p>\n" +
-            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" +
-            "                </p>\n" +
-            "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" +
-            "                </p>\n" +
+            "                <p>Qaytarış yerində hər bir məhsula görə 2 AZN.\n" +
+            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə ödənişsiz qaytarla bilər.\n" +
             "            </div>\n" +
             "        </div>",
             buyNowButton: "İndi al",
@@ -435,28 +427,24 @@ const messages = {
         product: {
             shippingInfo: "" +
             "<div class=\"item-shipping-payment-box\">\n" +
-            "            <p class=\"text-title\">Çatdırılma</p>\n" +
+            "            <p class=\"text-title\">Доставка</p>\n" +
             "            <div class=\"text\">\n" +
-            "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
-            "                <p>Növbəti gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+            "                <p>После завершения вашего заказа наш оператор свяжется с вами.</p>\n" +
+            "                <p>В течение следующих 2 дней продукт будет доставлен бесплатно.</p>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class=\"item-shipping-payment-box\">\n" +
-            "            <p class=\"text-title\">Ödəniş</p>\n" +
+            "            <p class=\"text-title\">Оплата</p>\n" +
             "            <div class=\"text\">\n" +
             "                <p>\n" +
-            "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd yaxud taksit kartla FAİZSİZ (Albalı+, BolKart, WordCard, SmileCard, BirKart) həyata keçirilir.</p>\n" +
+            "                    Покупка осуществляется только наличными.</p>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "        <div class=\"item-shipping-payment-box\">\n" +
-            "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
+            "            <p class=\"text-title \">Удовлетворенность клиентов</p>\n" +
             "            <div class=\"text\">\n" +
-            "                <p>Qaytarış yerində hər bir məhsula görə\n" +
-            "                    <br><b>2 AZN</b></p>\n" +
-            "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə<b> ödənişsiz</b>qaytarla bilər.\n" +
-            "                </p>\n" +
-            "                <p>Saat 18:00-dək EXPRESS (2 saat ərzində) çatdırılma 5 AZN.\n" +
-            "                </p>\n" +
+            "                <p>Возврат на каждый продукт 2 AZN.\n" +
+            "                <p>Если продукт не соответствует описанию или изображениям, он может быть возмещен.\n" +
             "            </div>\n" +
             "        </div>",
             buyNowButton: "Купить",

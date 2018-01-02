@@ -13,6 +13,11 @@
             </div>
             <div class="col l4 offset-l2 s12">
                 <ul>
+                    <li>
+                        <a href="#/about" class="grey-text text-lighten-3">
+                            @{{ $t("main.about") }}
+                        </a>
+                    </li>
                     @if (Auth::guest())
                         <li><a class="grey-text text-lighten-3" href="#/login">@{{ $t("main.login") }}</a></li>
                         <li><a class="grey-text text-lighten-3" href="#/register">@{{ $t("main.signUp") }}</a></li>
@@ -25,11 +30,6 @@
                         <li>
                             <a class="grey-text text-lighten-3" href="#/order">
                                 @{{ $t("main.orders") }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#/about" class="grey-text text-lighten-3">
-                                @{{ $t("main.about") }}
                             </a>
                         </li>
                         <li>
