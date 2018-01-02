@@ -6,7 +6,8 @@
 require('./bootstrap');
 // require('./material.min');
 // require('./ripples.min');
-require('./materialize.min');
+// require('./materialize.min');
+require('materialize-css');
 // require('./slick.min');
 require('./xzoom');
 require('./jquery.rateyo.min');
@@ -32,6 +33,7 @@ Vue.component('category-card', require('./components/Category-card.vue'));
 Vue.component('navcategories', require('./components/nav/categories.vue'));
 Vue.component('container', require('./components/Container.vue'));
 Vue.component('flashmessage', require('./components/flash-message.vue'));
+Vue.component('buyitguest', require('./components/product/buyItGuest.vue'));
 Vue.component('paginate', Paginate);
 //register banners
 Vue.component('top-banner', require('./components/banners/top-banner.vue'));

@@ -57,6 +57,9 @@
                 products: []
             }
         },
+        mounted() {
+            $(".modal").modal();
+        },
         computed: {
             cartItems() {
                 return this.$store.state.cartItems;

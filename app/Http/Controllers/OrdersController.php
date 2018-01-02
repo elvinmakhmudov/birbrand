@@ -40,7 +40,7 @@ class OrdersController extends Controller
                 'products.*.options' => 'nullable|json',
                 'products.*.amount' => 'required|integer|max:100',
                 'name' => 'required|string|max:255',
-                'number' => 'required|string|max:255',
+                'number' => 'required|numeric',
                 'fromCart' => 'boolean'
             ]);
             return $this->orders->createByRequest($request);

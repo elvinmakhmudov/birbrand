@@ -58,9 +58,7 @@
                                     {{ $t('product.options.' + key + '.main') }}
                                 </label>
                                 <select class="product-option-value" v-bind:id="key">
-                                    <option :value="option" v-for="option in options" class="center-align">
-                                        {{ $t('product.options.' + key + '.' + option) }}
-                                    </option>
+                                    <option :value="option" v-for="option in options" class="center-align">{{ $t('product.options.' + key + '.' + option) }}</option>
                                 </select>
                             </div>
                             <div class="input-field col s12 valign-wrapper">
@@ -218,13 +216,14 @@
                             function () {
                                 $(".xzoom, .xzoom-gallery").xzoom({
                                     scroll: false,
-                                    mposition: "fullscreen"
+                                });
+                                $(".xzoom").on('hover', function (e) {
+                                    e.preventDefault();
                                 });
                                 this.$store.state.activeCategorySlug = this.getAncestors(
                                     this.product
                                 )[0].slug;
                                 var selector = ".nav-categories li";
-                                //                        if($(selector).find('.active').children('a').data("slug") !== this.$store.state.activeCategorySlug){
                                 $(selector).removeClass("active");
                                 $(
                                     $(selector).find(
@@ -235,6 +234,7 @@
                                     .addClass("active");
                                 //                        }
                                 $("select").material_select();
+                                $(".modal").modal();
                                 $("#rateYo").rateYo({
                                     rating: this.product.rating,
                                     starWidth: "15px",

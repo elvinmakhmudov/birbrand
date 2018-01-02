@@ -76,10 +76,13 @@ const messages = {
             buyNowButton: "Buy Now",
             addToCardButton: "Add to Card",
             description: "Description",
-            orders: "order | {count} orders",
+            orders: "No orders |order | {count} orders",
             options: {
                 size: {
-                    main: "Size"
+                    main: "Size",
+                    s: "S",
+                    m: "M",
+                    l: "L"
                 },
                 color: {
                     main: "Color",
@@ -283,10 +286,13 @@ const messages = {
             buyNowButton: "İndi al",
             addToCardButton: "Səbətə at",
             description: "Ətraflı",
-            orders: "{count}  sifariş",
+            orders: "Sifariş olunmayıb | 1 sifariş |{count}  sifariş",
             options: {
                 size: {
-                    main: "Ölçü"
+                    main: "Ölçü",
+                    s: "S",
+                    m: "M",
+                    l: "L"
                 },
                 color: {
                     main: "Rəng",
@@ -456,10 +462,13 @@ const messages = {
             buyNowButton: "Купить",
             addToCardButton: "В корзину",
             description: "Описание",
-            orders: "{count} заказов",
+            orders: "Нет заказов | 1 заказ | {count} заказов",
             options: {
                 size: {
-                    main: "Размер"
+                    main: "Размер",
+                    s: "S",
+                    m: "M",
+                    l: "L"
                 },
                 color: {
                     main: "Цвет",
