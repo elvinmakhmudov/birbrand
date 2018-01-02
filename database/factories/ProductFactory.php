@@ -31,7 +31,7 @@ $factory->define(BirBrand\Product::class, function (Faker\Generator $faker) {
         'rating' => $rating,
         'trending' => $faker->numberBetween(1,100),
         'ordered' => $faker->numberBetween(1,100),
-        'options' => json_encode(['color' => ['green', 'black', 'yellow'], 'size' => ['s', 'm', 'xl']]),
+        'options' => json_encode(['color' => ['green', 'black', 'yellow'], 'size' => ['s', 'm', 'l']]),
         'is_shown' => true,
         'cover_image' => 'products/sample/1.jpeg',
         'images' => ["products/sample/2.jpeg"]];

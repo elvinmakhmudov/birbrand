@@ -1,6 +1,6 @@
 <template>
         <div>
-            <div class="slideshow slider">
+            <div class="slideshow slider" v-if="carousels.length">
                 <div v-for="slide in carousels">
                     <img alt="" :src="'/storage/'+slide.image_url">
                 </div>

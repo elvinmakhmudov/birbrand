@@ -218,7 +218,6 @@ h2 {
 
 .product-img {
     width: 100%;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
     margin-top: 10px;
 }
 
@@ -649,3 +648,8 @@ ul.pagination li.active {
 .row {
     margin-bottom: 10px;
 }
+
+.dropdown-content li>a, .dropdown-content li>span {
+    color: #039be5;
+}
+

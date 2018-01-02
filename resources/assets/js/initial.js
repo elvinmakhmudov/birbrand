@@ -8,10 +8,13 @@ require('./bootstrap');
 // require('./ripples.min');
 // require('./materialize.min');
 require('materialize-css');
+// require('rateyo');
 // require('./slick.min');
-require('./xzoom');
+// require('./xzoom');
+require('xzoom');
 require('./jquery.rateyo.min');
 // window.Vue = require('vue');
+
 // VueRouter = require('vue-router');
 import Vue from 'vue';
 import VueRouter from 'vue-router';

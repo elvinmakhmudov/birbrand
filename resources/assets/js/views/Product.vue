@@ -8,7 +8,7 @@
                             <a :href="'#/category/'+ancestor.slug" class="breadcrumb" v-for="ancestor in ancestors">
                                 {{ $t('categories.' + ancestor.title + '.main')}}
                             </a>
-                            <a class="breadcrumb">
+                            <a class="breadcrumb hide-on-small-and-down">
                                 {{ product.title }}
                             </a>
                         </div>
@@ -214,11 +214,10 @@
                         this.ancestors = this.getAncestors(this.product);
                         Vue.nextTick(
                             function () {
+                                var isMobile = window.matchMedia("only screen and (max-width: 760px)");
                                 $(".xzoom, .xzoom-gallery").xzoom({
                                     scroll: false,
-                                });
-                                $(".xzoom").on('hover', function (e) {
-                                    e.preventDefault();
+                                    defaultScale: isMobile.matches ? 1 : 0
                                 });
                                 this.$store.state.activeCategorySlug = this.getAncestors(
                                     this.product

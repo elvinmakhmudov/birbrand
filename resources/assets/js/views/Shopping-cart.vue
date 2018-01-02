@@ -4,10 +4,12 @@
             <div class="col s12">
                 <h5>{{ $t('shoppingCard.title') }}</h5>
                 <div v-if="Object.keys(cartItems).length !== 0">
-                    <table class="bordered centered">
+                    <table class="bordered">
                         <thead>
                         <tr>
+                            <th>№</th>
                             <th>{{ $t('shoppingCard.table.product') }}</th>
+                            <th></th>
                             <th class="hide-on-small-and-down">{{ $t('shoppingCard.table.price') }}</th>
                             <th class="hide-on-small-and-down">{{ $t('shoppingCard.table.quantity') }}</th>
                             <th>{{ $t('shoppingCard.table.remove') }}</th>
@@ -15,12 +17,22 @@
                         </thead>
                         <tbody>
                         <tr v-for="(product,index) in cartItems">
-                            <td style="text-align: left">
+                            <td style="width:3%" v-text="index+1"></td>
+                            <td style="width: 20%">
                                 <a :href="'#/product/'+product.id" class="shopping-card-image"><img
-                                        :src="'/storage/'+product.options.thumbnail" width="20%"><span
-                                        class="table-order-link">{{ product.name
-                                    }}</span></a><span>({{ getOptions(product.options.details)}})</span><span
-                                    class="hide-on-med-and-up">, {{ product.qty }}, {{ product.price}} AZN</span></td>
+                                        :src="'/storage/'+product.options.thumbnail" width="100%"></a>
+                            </td>
+                            <td style="width: 70%">
+                                <span
+                                        class="table-order-link"><a :href="'#/product/'+product.id"> {{ product.name }}
+                                </a>
+                                </span>
+                                <span class="table-order-link"><span class="" v-for="option, name in JSON.parse(product.options.details || '[]')">
+                                    {{ $t('product.options.'+name.toLowerCase()+'.'+option) }},</span>
+                                    <!--{{ '('+ getOptions(product.options.details) + ')'}}</span><span-->
+                                    <span class="hide-on-med-and-up">, {{ product.qty }}, {{ product.price}} AZN</span>
+                                </span>
+                            </td>
                             <td class="hide-on-small-and-down"> {{ product.price }} AZN</td>
                             <td class="hide-on-small-and-down"> {{ product.qty }}</td>
                             <td>
@@ -72,7 +84,7 @@
             getOptions(options) {
                 var options = JSON.parse(options || '[]');
                 return Object.keys(options).map(function (k) {
-                    return options[k]
+                    return 'product.options.' + k + '.' + options[k];
                 }).join(",");
             },
             buyAll() {
