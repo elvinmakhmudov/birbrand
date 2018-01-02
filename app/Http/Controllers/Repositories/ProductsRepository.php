@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class ProductsRepository
@@ -177,10 +178,13 @@ class ProductsRepository
         //resize and save the cover image and cover_image
         $image = $request->file('cover_image');
         if($image){
-            Image::make($image)->resize(300, 300)->save(storage_path('app/public/').$path.'/thumbnail.jpg');
+            Image::make($image)->fit(200)->save(storage_path('app/public/').$path.'/thumbnail.jpg');
 
             //original cover image
-            $product->cover_image = $image ? $image->store($path) : '';
+            $storage_path = $path.'/'.Str::random(40).'.jpg';
+            Image::make($image)->fit(600)->save(storage_path('app/public/').$storage_path);
+            $product->cover_image = $storage_path;
+//            $product->cover_image = $image ? $image->store($path) : '';
         }
 
         //is product shown?
@@ -202,8 +206,10 @@ class ProductsRepository
         $requestImages = $request->file('images');
         if ($requestImages) {
             foreach ($requestImages as $image) {
-                $imageUrl = $image->store($path);
-                array_push($images, $imageUrl);
+                $storage_path = $path.'/'.Str::random(40).'.jpg';
+                Image::make($image)->fit(600)->save(storage_path('app/public/').$storage_path);
+//                $imageUrl = $image->store($path);
+                array_push($images, $storage_path);
             }
         }
         return $images;
