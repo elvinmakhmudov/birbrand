@@ -47,6 +47,7 @@ class UsersRepository
         //if delete was clicked, delete user
         if (!empty($request->get('delete'))){
             $user->delete();
+            Cache::flush();
             return redirect()->route('admin.users.index');
         }
 

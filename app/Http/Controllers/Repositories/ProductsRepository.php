@@ -89,6 +89,7 @@ class ProductsRepository
         if (!empty($request->get('delete'))){
             Storage::deleteDirectory($product->folder);
             $product->delete();
+            Cache::flush();
             return redirect()->route('admin.products.index', ['id' => $categoryId]);
         }
 

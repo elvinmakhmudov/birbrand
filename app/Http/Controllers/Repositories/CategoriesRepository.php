@@ -47,6 +47,7 @@ class CategoriesRepository
         if (!empty($request->get('delete'))){
             Storage::deleteDirectory($category->folder);
             $category->delete();
+            Cache::flush();
             return redirect()->route('admin.categories.index');
         }
 

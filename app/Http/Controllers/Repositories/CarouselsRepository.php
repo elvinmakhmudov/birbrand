@@ -47,6 +47,7 @@ class CarouselsRepository
         if (!empty($request->get('delete'))) {
             Storage::delete($carousel->image_url);
             $carousel->delete();
+            Cache::flush();
             return redirect()->route('admin.carousels.index');
         }
 

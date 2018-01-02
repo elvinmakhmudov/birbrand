@@ -48,6 +48,7 @@ class BannersRepository
         if (!empty($request->get('delete'))) {
             Storage::delete($banner->image_url);
             $banner->delete();
+            Cache::flush();
             return redirect()->route('admin.banners.index');
         }
 
