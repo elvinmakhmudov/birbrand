@@ -465,7 +465,7 @@ xzoom-thumbs {
 }
 
 .nav-phone {
-    margin-left: 140px;
+    margin-left: 160px;
 }
 
 .categories-header-2 {
@@ -667,4 +667,8 @@ ul.pagination li.active {
 
 .clear-margin-bottom {
     margin-bottom: 0px;
+}
+
+.center-justified {
+    text-align: justify;
 }

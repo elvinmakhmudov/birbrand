@@ -108,9 +108,11 @@ class CategoriesRepository
         //is category shown?
         $category->is_shown = $request->get('is_shown') ? true : false;
 
-        $storage_path = $path . '/' . Str::random(40) . '.jpg';
-        Image::make($request->file('image'))->fit(200)->save(storage_path('app/public/') . $storage_path);
-        $category->image_url = $storage_path;
+        if($request->file('image')){
+            $storage_path = $path . '/' . Str::random(40) . '.jpg';
+            Image::make($request->file('image'))->fit(200)->save(storage_path('app/public/') . $storage_path);
+            $category->image_url = $storage_path;
+        }
         $category->parent_id = $request->get('parent');
         $parentCategory = Category::findOrFail($request->get('parent'));
         //remove string general to make more user friendly url

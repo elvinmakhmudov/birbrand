@@ -8,7 +8,7 @@
                           action="login" @keydown="errors.clear($event.target.name)">
                         <div class="input-field col s12 m6">
                             <label class="active error" v-if="errors.has('number')"
-                                   v-text="errors.get('number')"></label>
+                                   v-text="$t(errors.get('number'))"></label>
                             <input placeholder="994518550105" id="number" type="text" name="number" class="validate"
                                    v-model="number">
                             <label for="number" class="active" v-show="!errors.has('number')">{{ $t('login.number')

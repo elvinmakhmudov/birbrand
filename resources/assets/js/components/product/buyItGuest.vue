@@ -2,7 +2,7 @@
     <div id="buy-it-guest" class="modal" tabindex="-1">
         <div class="layout modal-content">
             <div class="row">
-                <h5 class="col s12">Indi al</h5>
+                <h5 class="col s12">{{ $t('buyItGuest.title') }}</h5>
                 <form v-on:submit.prevent="buy" role="form" method="POST" action="register"
                       @keydown="errors.clear($event.target.name)">
                     <div class="input-field col s12">
@@ -24,7 +24,7 @@
                     </div>
 
                     <div class="col s12">
-                        <a @click.prevent="buy" :disabled="errors.any()" class="modal-action waves-effect waves-green btn">Indi al</a>
+                        <a @click.prevent="buy" :disabled="errors.any()" class="modal-action waves-effect waves-green btn">{{ $t('buyItGuest.buyButton') }}</a>
                     </div>
                 </form>
             </div>
