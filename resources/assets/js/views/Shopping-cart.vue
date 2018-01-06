@@ -7,12 +7,12 @@
                     <table class="bordered">
                         <thead>
                         <tr>
-                            <th>№</th>
-                            <th>{{ $t('shoppingCard.table.product') }}</th>
-                            <th></th>
+                            <th style="width: 3%">№</th>
+                            <th style="width: 20%">{{ $t('shoppingCard.table.product') }}</th>
+                            <th style="width: 70%"></th>
                             <th class="hide-on-small-and-down">{{ $t('shoppingCard.table.price') }}</th>
                             <th class="hide-on-small-and-down">{{ $t('shoppingCard.table.quantity') }}</th>
-                            <th>{{ $t('shoppingCard.table.remove') }}</th>
+                            <th style="width: 5%" class="hide-on-small-and-down">{{ $t('shoppingCard.table.remove') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,7 +35,7 @@
                             </td>
                             <td class="hide-on-small-and-down"> {{ product.price }} AZN</td>
                             <td class="hide-on-small-and-down"> {{ product.qty }}</td>
-                            <td>
+                            <td style="width: 5%">
                                 <a class="waves-effect waves-light" @click.prevent="deleteItem(index, product.rowId)"><i
                                         class="material-icons shopping-card-remove-btn">remove_circle</i></a>
 

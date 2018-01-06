@@ -1,11 +1,12 @@
 <template>
     <div class="layout">
-        <div class="row">
+        <div class="row clear-margin-bottom">
             <div class="col s6 left-align">
                 <p v-show="category.title" class="category-title">
                     {{ $t('categories.' + category.title + '.main') }}
                 </p>
             </div>
+
             <div class="col s6 right-align sort-by-button">
                 <!-- Dropdown Trigger -->
                 <a class='dropdown-button btn-flat' href='#'
@@ -22,7 +23,7 @@
                 </ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row clear-margin-bottom">
             <div v-for="subcategory in category.children">
                 <category-card :subcategory="subcategory">
                 </category-card>
@@ -39,6 +40,8 @@
         <paginate :click-handler="goToPage" :container-class="'pagination'" :next-text="$t('pagination.nextButton')"
                   :page-count="this.productsPage.last_page || 0" :prev-text="$t('pagination.previousButton')"
                   ref="paginate"
+                  :page-range="1"
+                  :margin-pages="0"
                   v-show="this.productsPage.last_page > 1">
         </paginate>
     </div>
@@ -64,7 +67,10 @@
                         {
                             scrollTop: 100 // Scroll to top of body
                         },
-                        500
+                        {
+                            duration: 500,
+                            queue: false
+                        }
                     );
                 }
                 //if from route and to route path before local query differ, change the page num to 0

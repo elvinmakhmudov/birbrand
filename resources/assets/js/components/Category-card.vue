@@ -4,13 +4,14 @@
             <div class="card product-card">
                 <a :href="'#/category/' + subcategory.slug">
                     <div class="card-image">
-                        <div class="card-content">
+                        <div class="card-content category-card">
                             <p>
                                 {{ $t('categories.' + subcategory.title +'.main')}}
                             </p>
                         </div>
                         <img :src="'storage/'+subcategory.image_url" class="card-img-top">
                     </div>
+
                 </a>
             </div>
         </div>

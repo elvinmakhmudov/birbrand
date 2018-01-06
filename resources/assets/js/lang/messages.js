@@ -89,26 +89,91 @@ const messages = {
             }
         },
         categories: {
-            belts: {
-                main: 'Belts',
+            general: {
+                glasses: {
+                    main: 'Glasses'
+                },
+                watches: {
+                    main: 'Watches'
+                },
+                dresses: {
+                    main: 'Dresses'
+                },
+                pants: {
+                    main: 'Pants'
+                },
+                jackets: {
+                    main: 'Jackets'
+                },
+                shirts: {
+                    main: 'Shirts'
+                },
+                skirts: {
+                    main: 'Skirts'
+                },
+                shoes: {
+                    main: 'Shoes'
+                },
+                bags: {
+                    main: 'Bags'
+                },
+                scarfs: {
+                    main: 'Scarves'
+                },
+                wallets: {
+                    main: 'Wallets'
+                },
+                accessories: {
+                    main: 'Accessories',
+                    bracelets: {
+                        main: 'Bracelets'
+                    },
+                    rings: {
+                        main: 'Rings'
+                    },
+                    earring: {
+                        main: 'Earrings'
+                    },
+                    gloves: {
+                        main: 'Gloves'
+                    },
+                    necklaces: {
+                        main: 'Necklaces'
+                    },
+                    hats: {
+                        main: 'Hats & Caps'
+                    }
+                },
+                hoodies: {
+                    main: 'Hoodies'
+                },
+                sport: {
+                    main: 'Sport Clothes'
+                }
+            },
+            mobile: {
+                main: 'Mobile',
+                cases: {
+                    main: 'Cases'
+                }
             },
             men: {
-                main: 'For Men',
+                main: 'Men',
             },
             women: {
-                main: 'For Women',
+                main: 'Women',
             },
             kids: {
-                main: 'For Kids',
+                main: 'Kids',
             },
             appliances: {
                 main: 'Appliances',
             },
             auto: {
-                main: 'For Cars',
+                main: 'Cars',
             },
             school: {
-                main: 'For School',
+                main: 'School',
             },
             main: {
                 sortBy: {
@@ -221,23 +286,91 @@ const messages = {
             signUpButton: 'Qeyd et'
         },
         categories: {
+            general: {
+                glasses: {
+                    main: 'Eynək'
+                },
+                watches: {
+                    main: 'Saat'
+                },
+                dresses: {
+                    main: 'Don'
+                },
+                pants: {
+                    main: 'Şalvar'
+                },
+                jackets: {
+                    main: 'Gödəkçə'
+                },
+                shirts: {
+                    main: 'Köynək'
+                },
+                skirts: {
+                    main: 'Ətək'
+                },
+                shoes: {
+                    main: 'Ayaqqabı'
+                },
+                bags: {
+                    main: 'Çanta'
+                },
+                scarfs: {
+                    main: 'Şərf'
+                },
+                wallets: {
+                    main: 'Cüzdan'
+                },
+                accessories: {
+                    main: 'Aksessuar',
+                    bracelets: {
+                        main: 'Qolbağ'
+                    },
+                    rings: {
+                        main: 'Üzük'
+                    },
+                    earring: {
+                        main: 'Sırqa'
+                    },
+                    gloves: {
+                        main: 'Əlcək'
+                    },
+                    necklaces: {
+                        main: 'Boyunbağı'
+                    },
+                    hats: {
+                        main: 'Papaq'
+                    }
+                },
+                hoodies: {
+                    main: 'Jaket'
+                },
+                sport: {
+                    main: 'Idman'
+                }
+            },
+            mobile: {
+                main: 'Telefon',
+                cases: {
+                    main: 'Kabura'
+                }
+            },
             men: {
-                main: 'Kişi üçün',
+                main: 'Kişi',
             },
             women: {
-                main: 'Qadın üçün',
+                main: 'Qadın',
             },
             kids: {
-                main: 'Uşaqlar üçün',
+                main: 'Uşaq',
             },
             appliances: {
                 main: 'Məişət texnikası',
             },
             auto: {
-                main: 'Avtomobil üçün',
+                main: 'Avtomobil',
             },
             school: {
-                main: 'Məktəb üçün',
+                main: 'Məktəb',
 
             },
             main: {
@@ -393,23 +526,91 @@ const messages = {
             signUpButton: 'Зарегистрировать'
         },
         categories: {
+            general: {
+                glasses: {
+                    main: 'Очки'
+                },
+                watches: {
+                    main: 'Часы'
+                },
+                dresses: {
+                    main: 'Платье'
+                },
+                pants: {
+                    main: 'Брюки'
+                },
+                jackets: {
+                    main: 'Куртки'
+                },
+                shirts: {
+                    main: 'Рубашки'
+                },
+                skirts: {
+                    main: 'Юбки'
+                },
+                shoes: {
+                    main: 'Обувь'
+                },
+                bags: {
+                    main: 'Сумки'
+                },
+                scarfs: {
+                    main: 'Шарфы'
+                },
+                wallets: {
+                    main: 'Бумажники'
+                },
+                accessories: {
+                    main: 'Аксессуары',
+                    bracelets: {
+                        main: 'Браслеты'
+                    },
+                    rings: {
+                        main: 'Кольца'
+                    },
+                    earring: {
+                        main: 'Серьги'
+                    },
+                    gloves: {
+                        main: 'Перчатки'
+                    },
+                    necklaces: {
+                        main: 'Ожерелья'
+                    },
+                    hats: {
+                        main: 'Шапки'
+                    }
+                },
+                hoodies: {
+                    main: 'Толстовки'
+                },
+                sport: {
+                    main: 'Спорт'
+                }
+            },
+            mobile: {
+                main: 'Мобильный',
+                cases: {
+                    main: 'Чехлы'
+                }
+            },
             men: {
-                main: 'Для мужчин',
+                main: 'Мужчины',
             },
             women: {
-                main: 'Для женщин',
+                main: 'Женщины',
             },
             kids: {
-                main: 'Для детей',
+                main: 'Дети',
             },
             appliances: {
                 main: 'Бытовая техника',
             },
             auto: {
-                main: 'Для авто',
+                main: 'Авто',
             },
             school: {
-                main: 'Для школы',
+                main: 'Школа',
 
             },
             main: {

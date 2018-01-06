@@ -4,6 +4,7 @@
             <div class="col s12">
                 <div class="row">
                     <div class="nav-wrapper breadcrumbs valign-wrapper">
+
                         <div class="col s12">
                             <a :href="'#/category/'+ancestor.slug" class="breadcrumb" v-for="ancestor in ancestors">
                                 {{ $t('categories.' + ancestor.title + '.main')}}

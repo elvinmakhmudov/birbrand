@@ -1,3 +1,6 @@
+html {
+    line-height: normal;
+}
 body {
     background-color: #edeef0 !important;
 }
@@ -197,10 +200,6 @@ h2 {
     width: 90%;
 }
 
-.category-card {
-    margin-top: 0;
-    /*height: 256px;*/
-}
 
 .card-container {
     margin-bottom: 15px;
@@ -515,6 +514,10 @@ xzoom-thumbs {
     padding: 10px;
 }
 
+.card .category-card {
+    height: 40px;
+}
+
 .card .card-content p {
     color: black;
     font-weight: bold;
@@ -662,3 +665,6 @@ ul.pagination li.active {
     color: #039be5;
 }
 
+.clear-margin-bottom {
+    margin-bottom: 0px;
+}

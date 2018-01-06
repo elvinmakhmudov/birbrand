@@ -33,7 +33,7 @@ class CreateProductsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('images')->nullable();
             $table->string('cover_image');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->string('options')->nullable();
             $table->timestamps();
         });

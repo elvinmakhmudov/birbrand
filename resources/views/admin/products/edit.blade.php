@@ -130,9 +130,9 @@
                                         @foreach($categories as $oneCategory)
                                             @if($oneCategory->id == $product->category_id)
                                                 <option value="{{ $oneCategory->id }}"
-                                                        selected> {{ $oneCategory->title }}</option>
+                                                        selected> {{ $oneCategory->slug }}</option>
                                             @else
-                                                <option value="{{ $oneCategory->id }}"> {{ $oneCategory->title }}</option>
+                                                <option value="{{ $oneCategory->id }}"> {{ $oneCategory->slug }}</option>
                                             @endif
                                         @endforeach
                                     </select>
