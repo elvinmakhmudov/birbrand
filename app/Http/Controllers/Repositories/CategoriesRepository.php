@@ -53,11 +53,11 @@ class CategoriesRepository
             return redirect()->route('admin.categories.index');
         }
 
-        $parentCategory = Category::findOrFail($request->get('parent'));
+        $parentCategorySlug = Category::find($request->get('parent')) ?Category::find($request->get('parent'))->slug : "";
         $category->title = $request->get('title');
         $tmpCategorySlug = str_replace("general", "", $request->get('title'));
 
-        $category->slug = str_slug($parentCategory->slug . $tmpCategorySlug, '.');
+        $category->slug = str_slug($parentCategorySlug . $tmpCategorySlug, '.');
         $category->description = $request->get('description');
         //if image exists, update it
         if ($request->file('image')) {
@@ -114,10 +114,10 @@ class CategoriesRepository
             $category->image_url = $storage_path;
         }
         $category->parent_id = $request->get('parent');
-        $parentCategory = Category::findOrFail($request->get('parent'));
+        $parentCategorySlug = Category::find($request->get('parent')) ?Category::find($request->get('parent'))->slug : "";
         //remove string general to make more user friendly url
         $tmpCategorySlug = str_replace("general", "", $request->get('title'));
-        $category->slug = str_slug($parentCategory->slug . $tmpCategorySlug, '.');
+        $category->slug = str_slug($parentCategorySlug . $tmpCategorySlug, '.');
         $category->user()->associate(Auth::user());
         $category->save();
         //flush the cache because the item has been updated
