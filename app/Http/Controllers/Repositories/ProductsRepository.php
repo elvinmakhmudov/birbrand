@@ -78,6 +78,7 @@ class ProductsRepository
             'imagesToDelete' => 'nullable',
             'images' => 'nullable|array',
             'options' => 'nullable|json',
+            'note' => 'nullable|string',
             'category' => 'nullable|exists:categories,id'
         ]);
 
@@ -100,6 +101,7 @@ class ProductsRepository
         $product->sale_percent = $request->get('sale_percent');
         $product->price = $request->get('price');
         $product->options = $request->get('options');
+        $product->note = $request->get('note');
 
         //if image exists, update it
         if ($request->file('cover_image')) {
@@ -157,6 +159,7 @@ class ProductsRepository
             'price' => 'required|integer',
             'images' => 'nullable|array',
             'options' => 'nullable|json',
+            'note' => 'nullable|string',
             'category' => 'nullable|exists:categories,id'
         ]);
 
@@ -165,6 +168,7 @@ class ProductsRepository
         $product->description = $request->get('description');
         $product->price = $request->get('price');
         $product->options = $request->get('options');
+        $product->note = $request->get('note');
 
         //create a folder for images
         $folder = str_random(20);

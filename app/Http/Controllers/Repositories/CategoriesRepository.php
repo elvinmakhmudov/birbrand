@@ -102,6 +102,8 @@ class CategoriesRepository
         //is category shown?
         $category->is_shown = $request->get('is_shown') ? true : false;
 
+            $storage_path = $path.'/'.Str::random(40).'.jpg';
+            Image::make($image)->fit(200)->save(storage_path('app/public/').$storage_path);
         $category->image_url = $request->file('image') ? $request->file('image')->store($path) : '';
         $category->parent_id = $request->get('parent');
         $category->user()->associate(Auth::user());

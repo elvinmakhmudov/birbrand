@@ -84,7 +84,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col m4 s12">
+                    <div class="col m4 s12 hide-on-small-only">
                         <shippinginfo>
                         </shippinginfo>
                     </div>
@@ -95,6 +95,10 @@
                         <div class="product-description">
                             {{ product.description }}
                         </div>
+                    </div>
+                    <div class="col s12 hide-on-med-and-up">
+                        <shippinginfo>
+                        </shippinginfo>
                     </div>
                 </div>
             </div>

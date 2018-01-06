@@ -1,12 +1,12 @@
 <template>
     <div class="layout">
         <div class="row">
-            <div class="col s7">
-                <h5 v-show="category.title">
+            <div class="col s6 left-align">
+                <p v-show="category.title" class="category-title">
                     {{ $t('categories.' + category.title + '.main') }}
-                </h5>
+                </p>
             </div>
-            <div class="col s5 right-align sort-by-button">
+            <div class="col s6 right-align sort-by-button">
                 <!-- Dropdown Trigger -->
                 <a class='dropdown-button btn-flat' href='#'
                    data-activates='dropdown1'>{{ $t('categories.main.sortBy.main')}}</a>
@@ -91,6 +91,21 @@
             $(".dropdown-button").dropdown();
         },
         methods: {
+            sortByButtonText() {
+                switch(this.$store.state.sortByColumn) {
+                    case 'rating':
+                        return 'rating';
+                    case 'created_at':
+                        return 'date';
+                    case 'price':
+                        return  this.$store.state.orderBy === 'desc' ? 'priceHigh':'priceLow';
+                    case 'ordered':
+                        return 'bestseller';
+                    case 'trending':
+                        return 'trending';
+                };
+
+            },
             sortBy(column, order) {
                 var path = window.location.href.split("?")[0];
                 let sortBy = this.$store.state.sortByColumn = (column === undefined) ? this.$store.state.sortByColumn : column;
@@ -100,6 +115,7 @@
                 } else {
                     var url = window.location.href.split("?")[0];
                 }
+
                 window.location.href =
                     url + "?page=" + 1 + "&sortBy=" + sortBy + "&inOrder=" + orderBy;
             },
@@ -109,6 +125,7 @@
                 this.$refs.paginate.selected = this.productsPage.current_page - 1;
                 console.log(this.$store.state.sortByColumn);
                 console.log(this.$store.state.orderBy);
+
                 window.location.href =
                     window.location.href.split("?")[0] +
                     "?page=" +

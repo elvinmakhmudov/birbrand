@@ -31,9 +31,10 @@ class CreateProductsTable extends Migration
             $table->integer('ordered')->unsigned()->nullable();
             $table->integer('trending')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->json('images')->nullable();
+            $table->string('images')->nullable();
             $table->string('cover_image');
-            $table->json('options')->nullable();
+            $table->string('note');
+            $table->string('options')->nullable();
             $table->timestamps();
         });
     }

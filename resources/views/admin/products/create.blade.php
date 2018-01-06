@@ -125,6 +125,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="note" name="note" type="text" class="validate" autofocus>
+                                    <label for="note">Qeyd</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col s12">
                             <button type="submit" class="btn waves-effect waves-light">

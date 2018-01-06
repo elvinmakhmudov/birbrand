@@ -209,6 +209,8 @@ h2 {
 
 .category-title {
     text-align: center;
+    font-size: 16px;
+    float: left;
 }
 
 .card-container:hover {
@@ -508,8 +510,14 @@ xzoom-thumbs {
     background-color: black;
 }
 
-.card-content {
-    height: 70px;
+.card .card-content {
+    height: 59px;
+    padding: 10px;
+}
+
+.card .card-content p {
+    color: black;
+    font-weight: bold;
 }
 
 body {
@@ -527,7 +535,8 @@ main {
 }
 
 .breadcrumb {
-    color: black
+    color: black;
+    font-size: 14px;
 }
 
 .breadcrumbs a:last-of-type {

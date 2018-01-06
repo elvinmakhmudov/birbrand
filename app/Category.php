@@ -25,7 +25,7 @@ class Category extends Model
      * @var array
      */
     protected $hidden = [
-        'user_id', 'created_at', 'updated_at'
+        'user_id', 'created_at', 'updated_at','is_shown','parent_id','_lft','_rgt','id','folder'
     ];
     
     /**
