@@ -89,6 +89,7 @@ const messages = {
                     xl: "XL",
                     xxl: "2XL",
                     xxxl: "3XL",
+                    xxxxl: "4XL",
                 },
                 color: {
                     main: "Color",
@@ -451,7 +452,11 @@ const messages = {
                     main: "Ölçü",
                     s: "S",
                     m: "M",
-                    l: "L"
+                    l: "L",
+                    xl: "XL",
+                    xxl: "2XL",
+                    xxxl: "3XL",
+                    xxxxl: "4XL",
                 },
                 color: {
                     main: "Rəng",
@@ -706,7 +711,11 @@ const messages = {
                     main: "Размер",
                     s: "S",
                     m: "M",
-                    l: "L"
+                    l: "L",
+                    xl: "XL",
+                    xxl: "2XL",
+                    xxxl: "3XL",
+                    xxxxl: "4XL",
                 },
                 color: {
                     main: "Цвет",

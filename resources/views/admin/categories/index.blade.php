@@ -13,7 +13,7 @@
                         <th>Ad</th>
                         <th>Təsviri</th>
                         <th>Valideyin</th>
-                        <th>Shekil</th>
+                        <th>Shekil</thwi>
                         <th>Yaranma tarixi</th>
                         <th>Kim yaradib</th>
                     </tr>
@@ -25,7 +25,7 @@
                                 <a href="{{ route('admin.categories.edit', ['id' => $category->id]) }}">{{ $category->id }}</a>
                             </td>
                             <td>
-                                <a href="{{route('admin.products.index', ['id' =>$category->id])}}">{{ $category->title  }}</a>
+                                <a href="{{route('admin.products.index', ['id' =>$category->id])}}">{{ $category->slug }}</a>
                             </td>
                             <td>{{ $category->description}}</td>
                             @if(count($category->parent))
@@ -33,7 +33,7 @@
                             @else
                                 <td></td>
                             @endif
-                            <td><img style="display:block" width="100%" src="/storage/{{$category->image_url}}" alt="">
+                            <td ><img style="display:block;width: 50%" src="/storage/{{$category->image_url}}" alt="">
                             </td>
                             <td>{{ $category->created_at}}</td>
                             <td>{{ $category->user->name }}</td>
