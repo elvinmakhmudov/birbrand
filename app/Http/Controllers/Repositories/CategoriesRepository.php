@@ -55,7 +55,8 @@ class CategoriesRepository
 
         $parentCategorySlug = Category::find($request->get('parent')) ?Category::find($request->get('parent'))->slug : "";
         $category->title = $request->get('title');
-        $tmpCategorySlug = str_replace("general", "", $request->get('title'));
+        $tmp=explode('.', $request->get('title'));
+        $tmpCategorySlug = '.'.array_pop($tmp);
 
         $category->slug = str_slug($parentCategorySlug . $tmpCategorySlug, '.');
         $category->description = $request->get('description');
@@ -120,7 +121,8 @@ class CategoriesRepository
         $category->parent_id = $request->get('parent');
         $parentCategorySlug = Category::find($request->get('parent')) ?Category::find($request->get('parent'))->slug : "";
         //remove string general to make more user friendly url
-        $tmpCategorySlug = str_replace("general", "", $request->get('title'));
+        $tmp=explode('.', $request->get('title'));
+        $tmpCategorySlug = '.'.array_pop($tmp);
         $category->slug = str_slug($parentCategorySlug . $tmpCategorySlug, '.');
         $category->user()->associate(Auth::user());
         $category->save();

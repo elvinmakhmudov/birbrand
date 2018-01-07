@@ -29,7 +29,7 @@
                             </td>
                             <td>{{ $category->description}}</td>
                             @if(count($category->parent))
-                                <td>{{ $category->parent->title }}</tdjl>
+                                <td>{{ $category->parent->slug }}</tdjl>
                             @else
                                 <td></td>
                             @endif
