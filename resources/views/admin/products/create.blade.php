@@ -110,7 +110,12 @@
                                     <select id="select" class="form-control" name="category">
                                         <option value selected> Yoxdu</option>
                                         @foreach($categories as $oneCategory)
-                                            <option value="{{ $oneCategory->id }}"> {{ $oneCategory->slug }}</option>
+                                            @if($oneCategory->id == $categoryId)
+                                                <option value="{{ $oneCategory->id }}"
+                                                        selected> {{ $oneCategory->slug }}</option>
+                                            @else
+                                                <option value="{{ $oneCategory->id }}"> {{ $oneCategory->slug }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>

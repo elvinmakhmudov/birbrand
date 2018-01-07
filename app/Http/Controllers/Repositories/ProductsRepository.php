@@ -58,7 +58,7 @@ class ProductsRepository
     {
         $product = Product::findOrFail($productId);
 
-        $categories = Category::select('id', 'title')->get();
+        $categories = Category::select('id', 'title','slug')->get();
 
         $category = $product->category;
 

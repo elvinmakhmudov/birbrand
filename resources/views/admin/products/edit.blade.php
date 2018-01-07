@@ -128,7 +128,7 @@
                                     <select id="select" class="form-control" name="category">
                                         <option value> Yoxdu</option>
                                         @foreach($categories as $oneCategory)
-                                            @if($oneCategory->id == $product->category_id)
+                                            @if($oneCategory->id == $product->category->id)
                                                 <option value="{{ $oneCategory->id }}"
                                                         selected> {{ $oneCategory->slug }}</option>
                                             @else
