@@ -85,7 +85,10 @@ const messages = {
                     main: "Size",
                     s: "S",
                     m: "M",
-                    l: "L"
+                    l: "L",
+                    xl: "XL",
+                    xxl: "2XL",
+                    xxxl: "3XL",
                 },
                 color: {
                     main: "Color",
@@ -97,6 +100,12 @@ const messages = {
         },
         categories: {
             general: {
+                order: {
+                    main: 'On order'
+                },
+                home: {
+                    main: 'Home clothes'
+                },
                 glasses: {
                     main: 'Glasses'
                 },
@@ -306,6 +315,12 @@ const messages = {
         },
         categories: {
             general: {
+                order: {
+                    main: 'Sifarişlə'
+                },
+                home: {
+                    main: 'Ev geyimləri'
+                },
                 glasses: {
                     main: 'Eynək'
                 },
@@ -555,6 +570,12 @@ const messages = {
         },
         categories: {
             general: {
+                order: {
+                    main: 'Под заказ'
+                },
+                home: {
+                    main: 'Домашняя одежда'
+                },
                 glasses: {
                     main: 'Очки'
                 },

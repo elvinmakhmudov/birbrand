@@ -63,7 +63,9 @@ class CategoriesRepository
         if ($request->file('image')) {
             Storage::delete($category->image_url);
             $storage_path = $category->folder. '/' . Str::random(40) . '.jpg';
-            Image::make($request->file('image'))->fit(200)->save(storage_path('app/public/') . $storage_path);
+            Image::make($request->file('image'))->fit(200,200, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/') . $storage_path);
             $category->image_url = $storage_path;
         }
         $category->parent_id = $request->get('parent');
@@ -110,7 +112,9 @@ class CategoriesRepository
 
         if($request->file('image')){
             $storage_path = $path . '/' . Str::random(40) . '.jpg';
-            Image::make($request->file('image'))->fit(200)->save(storage_path('app/public/') . $storage_path);
+            Image::make($request->file('image'))->fit(200,200, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/') . $storage_path);
             $category->image_url = $storage_path;
         }
         $category->parent_id = $request->get('parent');

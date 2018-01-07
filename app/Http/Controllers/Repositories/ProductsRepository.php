@@ -183,11 +183,15 @@ class ProductsRepository
         //resize and save the cover image and cover_image
         $image = $request->file('cover_image');
         if($image){
-            Image::make($image)->fit(200)->save(storage_path('app/public/').$path.'/thumbnail.jpg');
+            Image::make($image)->fit(200,200, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/').$path.'/thumbnail.jpg');
 
             //original cover image
             $storage_path = $path.'/'.Str::random(40).'.jpg';
-            Image::make($image)->fit(600)->save(storage_path('app/public/').$storage_path);
+            Image::make($image)->fit(600,600, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/').$storage_path);
             $product->cover_image = $storage_path;
 //            $product->cover_image = $image ? $image->store($path) : '';
         }
@@ -212,7 +216,9 @@ class ProductsRepository
         if ($requestImages) {
             foreach ($requestImages as $image) {
                 $storage_path = $path.'/'.Str::random(40).'.jpg';
-                Image::make($image)->fit(600)->save(storage_path('app/public/').$storage_path);
+                Image::make($image)->fit(600,600, function ($constraint) {
+                    $constraint->upsize();
+                })->save(storage_path('app/public/').$storage_path);
 //                $imageUrl = $image->store($path);
                 array_push($images, $storage_path);
             }
