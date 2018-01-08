@@ -1,10 +1,10 @@
 <template>
-    <div class="col s6 m6 l2">
+    <div class="col s4 m2 l2 products">
         <div class="card-container hoverable">
-            <div class="card product-card">
+            <div class="card category-card">
                 <a :href="'#/category/' + subcategory.slug">
                     <div class="card-image">
-                        <div class="card-content category-card">
+                        <div class="card-content">
                             <p>
                                 {{ $t('categories.' + subcategory.title +'.main')}}
                             </p>

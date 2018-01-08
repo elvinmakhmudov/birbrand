@@ -510,7 +510,7 @@ xzoom-thumbs {
 }
 
 .card .card-content {
-    height: 59px;
+    height: 36px;
     padding: 10px;
 }
 
@@ -672,3 +672,41 @@ ul.pagination li.active {
 .center-justified {
     text-align: justify;
 }
+
+.product-description {
+    padding-bottom: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    .layout {
+        padding: 13px;
+    }
+    .product-price {
+        padding: 2px 4px;
+    }
+    .row .products {
+        padding: 2px;
+    }
+    .card-container {
+        margin-bottom: -25px;
+    }
+    .card {
+        box-shadow: none;
+    }
+    .card .card-content {
+        padding: 2px;
+    }
+    .card .card-content {
+        height: 22px;
+    }
+    .card .card-content p {
+        text-align: center;
+    }
+    .divider {
+        margin-bottom: 0px;
+    }
+    .category-card {
+        margin-bottom: 27px;
+    }
+}
+

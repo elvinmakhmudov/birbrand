@@ -89,11 +89,11 @@
                         <shippinginfo>
                         </shippinginfo>
                     </div>
-                    <div class="col s12" v-if="product.description">
+                    <div class="col s12 product-description" v-if="product.description">
                         <h5>
                             {{ $t('product.description') }}
                         </h5>
-                        <div class="product-description">
+                        <div class="product-description center-justified">
                             {{ product.description }}
                         </div>
                     </div>

@@ -23,27 +23,33 @@
                 </ul>
             </div>
         </div>
-        <div class="row clear-margin-bottom">
+        <div class="row">
             <div v-for="subcategory in category.children">
                 <category-card :subcategory="subcategory">
                 </category-card>
             </div>
         </div>
+
+
         <div v-if="category.children" class="divider"></div>
-        <div class="row products">
+        <div class="row">
             <div v-for="product in products">
                 <product-card :product="product">
                 </product-card>
             </div>
         </div>
-
-        <paginate :click-handler="goToPage" :container-class="'pagination'" :next-text="$t('pagination.nextButton')"
-                  :page-count="this.productsPage.last_page || 0" :prev-text="$t('pagination.previousButton')"
-                  ref="paginate"
-                  :page-range="1"
-                  :margin-pages="0"
-                  v-show="this.productsPage.last_page > 1">
-        </paginate>
+        <div class="row">
+            <div class="col s12">
+                <paginate :click-handler="goToPage" :container-class="'pagination'"
+                          :next-text="$t('pagination.nextButton')"
+                          :page-count="this.productsPage.last_page || 0" :prev-text="$t('pagination.previousButton')"
+                          ref="paginate"
+                          :page-range="1"
+                          :margin-pages="0"
+                          v-show="this.productsPage.last_page > 1">
+                </paginate>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -98,18 +104,19 @@
         },
         methods: {
             sortByButtonText() {
-                switch(this.$store.state.sortByColumn) {
+                switch (this.$store.state.sortByColumn) {
                     case 'rating':
                         return 'rating';
                     case 'created_at':
                         return 'date';
                     case 'price':
-                        return  this.$store.state.orderBy === 'desc' ? 'priceHigh':'priceLow';
+                        return this.$store.state.orderBy === 'desc' ? 'priceHigh' : 'priceLow';
                     case 'ordered':
                         return 'bestseller';
                     case 'trending':
                         return 'trending';
-                };
+                }
+                ;
 
             },
             sortBy(column, order) {

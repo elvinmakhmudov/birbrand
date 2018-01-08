@@ -104,6 +104,9 @@ const messages = {
                 order: {
                     main: 'On order'
                 },
+                clothes: {
+                    main: 'Clothes'
+                },
                 home: {
                     main: 'Home clothes'
                 },
@@ -318,6 +321,9 @@ const messages = {
             general: {
                 order: {
                     main: 'Sifarişlə'
+                },
+                clothes: {
+                    main: 'Geyim'
                 },
                 home: {
                     main: 'Ev geyimləri'
@@ -578,6 +584,9 @@ const messages = {
                 order: {
                     main: 'Под заказ'
                 },
+                clothes: {
+                    main: 'Одежда'
+                },
                 home: {
                     main: 'Домашняя одежда'
                 },
@@ -672,8 +681,8 @@ const messages = {
                     main: 'Сортировка',
                     rating: 'Рейтингу',
                     date: 'Новые',
-                    priceLow: 'По возрастанию цены',
-                    priceHigh: 'По убыванию цены',
+                    priceLow: 'Цена вверх',
+                    priceHigh: 'Цена вниз',
                     bestseller: 'Бестселлеры',
                     trending: 'Рекомендации'
                 }

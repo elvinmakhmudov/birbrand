@@ -61,9 +61,9 @@ class CategoriesController extends Controller
             // Include the id of category itself
             $categories[] = $category->getKey();
             if ($sortBy) {
-                return Product::whereIn('category_id', $categories)->orderBy($sortBy, $inOrder)->paginate(16);
+                return Product::whereIn('category_id', $categories)->orderBy($sortBy, $inOrder)->paginate(24);
             } else {
-                return Product::whereIn('category_id', $categories)->paginate(16);
+                return Product::whereIn('category_id', $categories)->paginate(24);
             }
         });
 
