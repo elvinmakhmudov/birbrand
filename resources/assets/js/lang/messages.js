@@ -12,9 +12,9 @@ const messages = {
         },
         about: {
             title: 'About Us',
-            text: '<p>GoShop is an online shop of fashionable clothes, shoes, accessories. Our goal is to stay in the customer with the coolest impressions of the shopping. For this reason, we offer more than 5,000 products, fast shipping, easy return policy. That is why we are choosen by thousands of people.</p>\n' +
-            '<p>Priority of GoShop - own infrastructure: a modern IT-platform, warehouse complex, delivery service, call-center and photo studio.</p>\n' +
-            '<p>In GoShop, we are assured: people who are pashionate about their work are doing it the best. \n' +
+            text: '<p class="indent">GoShop is an online shopping network platform of fashionable clothes, shoes, accessories. We cooperate with a huge number of manufacturers as well as sellers. Our goal is to leave the customer with the most pleasant shopping experience. For this reason, we offer more than 5,000 products, fast shipping, easy return policy. That is why we are choosen by thousands of people.</p>\n' +
+            '<p class="indent">Priority of GoShop - own infrastructure: a modern IT-platform, warehouse complex, delivery service, call-center and photo studio.</p>\n' +
+            '<p class="indent">In GoShop, we are assured: people who are pashionate about their work are doing it the best. \n' +
             'We are talking about new ideas and encouraging professional development. \n' +
             'GoShop is appreciated by colleagues in the collective. We not only work, but also rest together: we play football, celebrate holidays and have fun at our parties.</p>'
         },
@@ -275,9 +275,9 @@ const messages = {
         },
         about: {
             title: 'Bizim haqqımızda',
-            text: '<p>GoShop - dəbli qeyim, ayaqqabı və aksessuar internet-mağazasıdır. Bizim məqsədimiz müştərilərdə alış verişdən ən xoş təəssürat yaratmaqdır.  Buna görə biz 5000 məhsul, sürətli çatdırılma və sərfəli geriqaytarma təklif edirik. Məs buna görə bizi minlərlə müştəri seçir.</p>\n' +
-            '<p>GoShop-un üstünlükləri  - özəl infrastruktur: möhtəşəm IT-platform, anbar kompleksi, çatdırılma xidməti, call-center və fotostudiadır. </p>\n' +
-            '<p>GoShop-da biz əminik, öz işinə maraq göstərən insanlar işini daha yaxşı görür.\n' +
+            text: '<p class="indent">GoShop - dəbli qeyim, ayaqqabı və aksessuarların onlayn alış-veriş şəbəkəsi platformasıdır. Biz çox sayda istehsalçı ilə, eləcə də satıcılar ilə əməkdaşlıq edirik. Bizim məqsədimiz müştərilərdə alış verişdən ən xoş təəssürat yaratmaqdır.  Buna görə biz 5000 məhsul, sürətli çatdırılma və sərfəli geriqaytarma təklif edirik. Məs buna görə bizi minlərlə müştəri seçir.</p>\n' +
+            '<p class="indent">GoShop-un üstünlükləri  - özəl infrastruktur: möhtəşəm IT-platform, anbar kompleksi, çatdırılma xidməti, call-center və fotostudiadır. </p>\n' +
+            '<p class="indent">GoShop-da biz əminik, öz işinə maraq göstərən insanlar işini daha yaxşı görür.\n' +
             'Ona görə biz yeni ideaları sərbəst müzakirə və peşəkar inkişafı təşviq edirik. \n' +
             'GoShop kollektivdə dostluq münasibətlərini qiymətləndirir. \n' +
             'Biz yalnız işləmirik, həm də birlikdə istirahət edirik: biz futbol oynayır, bayramlar keçirir və partylərdə əylənirik.</p>'
@@ -540,9 +540,9 @@ const messages = {
         },
         about: {
             title: 'О нас',
-            text: '<p>GoShop – это интернет-магазин модной одежды, обуви, аксессуаров. Наша цель – оставить у клиента самые приятные впечатления от шопинга. Для этого мы предлагаем более 5 000 товаров, быструю доставку, услугу предварительной примерки и удобные условия возврата. Именно поэтому нас выбирают тысячи покупателей.</p>\n' +
-            '<p>Преимущества GoShop – собственная инфраструктура: мощная IT-платформа, складской комплекс, служба доставки, call-центры и фотостудия.</p>\n' +
-            '<p>В GoShop мы уверены: люди, увлеченные своей работой, делают ее лучше. Поэтому мы с готовностью обсуждаем новые идеи и поощряем профессиональное развитие. В GoShop ценятся дружеские отношения в коллективе. Мы не только работаем, но и отдыхаем вместе: играем в футбол, отмечаем праздники и веселимся на наших вечеринках.</p>'
+            text: '<p class="indent"> GoShop – это интернет-торговая сеть модной одежды, обуви, аксессуаров. Мы сотрудничаем с огромным количеством производителей, а также продавцов. Наша цель – оставить у клиента самые приятные впечатления от шопинга. Для этого мы предлагаем более 5 000 товаров, быструю доставку, услугу предварительной примерки и удобные условия возврата. Именно поэтому нас выбирают тысячи покупателей.</p>\n' +
+            '<p class="indent">Преимущества GoShop – собственная инфраструктура: мощная IT-платформа, складской комплекс, служба доставки, call-центры и фотостудия.</p>\n' +
+            '<p class="indent">В GoShop мы уверены: люди, увлеченные своей работой, делают ее лучше. Поэтому мы с готовностью обсуждаем новые идеи и поощряем профессиональное развитие. В GoShop ценятся дружеские отношения в коллективе. Мы не только работаем, но и отдыхаем вместе: играем в футбол, отмечаем праздники и веселимся на наших вечеринках.</p>'
         },
         login: {
             title: 'Вход',
