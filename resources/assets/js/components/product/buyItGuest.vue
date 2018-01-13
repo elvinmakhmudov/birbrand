@@ -8,7 +8,7 @@
                     <div class="input-field col s12">
                         <label class="active error" v-if="errors.has('name')"
                                v-text="errors.get('name')"></label>
-                        <input placeholder="Elvin" id="name" type="text" name="name" class="validate"
+                        <input :placeholder="namePlaceholder" id="name" type="text" name="name" class="validate"
                                v-model="name">
                         <label for="name" class="active" v-show="!errors.has('name')">{{ $t('signup.name')
                             }}</label>
@@ -16,7 +16,7 @@
                     <div class="input-field col s12">
                         <label class="active error" v-if="errors.has('number')"
                                v-text="errors.get('number')"></label>
-                        <input placeholder="994518550105" id="number" type="text" name="number" class="validate"
+                        <input :placeholder="numberPlaceholder" id="number" type="text" name="number" class="validate"
                                v-model="number">
 
                         <label for="number" class="active" v-show="!errors.has('number')">{{ $t('signup.number')
@@ -44,10 +44,15 @@
             return {
                 name: '',
                 number: '',
-                errors: new Errors()
+                errors: new Errors(),
+                numberPlaceholder: this.getRandom(['994552002020','994518888888','994707070707']),
+                namePlaceholder: this.getRandom(['Ilon Mask', 'Mark Zuckerberg', 'Stiv Jobs'])
             }
         },
         methods: {
+            getRandom(array) {
+                return array[Math.floor(Math.random()*array.length)];
+            },
             buy() {
                 axios.post('order', {
                     products: this.products,

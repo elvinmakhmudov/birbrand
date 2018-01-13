@@ -2,6 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="theme-color" content="#039be5" />
     <meta charset="utf-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     {{--<meta content="width=device-width, initial-scale=1" name="viewport">--}}

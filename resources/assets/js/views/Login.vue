@@ -9,7 +9,7 @@
                         <div class="input-field col s12 m6">
                             <label class="active error" v-if="errors.has('number')"
                                    v-text="$t(errors.get('number'))"></label>
-                            <input placeholder="994518550105" id="number" type="text" name="number" class="validate"
+                            <input :placeholder="numberPlaceholder" id="number" type="text" name="number" class="validate"
                                    v-model="number">
                             <label for="number" class="active" v-show="!errors.has('number')">{{ $t('login.number')
                                 }}</label>
@@ -43,10 +43,14 @@
             return {
                 number: '',
                 password: '',
-                errors: new Errors()
+                errors: new Errors(),
+                numberPlaceholder: this.getRandom(['994552002020','994518888888','994707070707'])
             }
         },
         methods: {
+            getRandom(array) {
+                return array[Math.floor(Math.random()*array.length)];
+            },
             login() {
                 axios.post('/login', {
                     number: this.number,
