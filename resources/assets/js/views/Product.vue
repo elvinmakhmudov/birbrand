@@ -184,12 +184,11 @@
                                     Materialize.toast(this.$t(value), 4000);
                                 }.bind(this)); 
                             }
-                            // $("#flash-message").modal("open");
                         }.bind(this)
                     )
-                    // .catch(error => {
-                    //     this.errors.record(error.response.data.errors);
-                    // });
+                    .catch(error => {
+                        this.errors.record(error.response.data.errors);
+                    });
             },
             buyIt() {
                 this.products = [

@@ -13,6 +13,7 @@
     <title>
         {{ config('app.name', 'GoShop') }} 
     </title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Styles -->
