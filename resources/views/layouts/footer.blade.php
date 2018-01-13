@@ -11,7 +11,7 @@
                     Whatsapp: +994 (51) 855 01 05
                 </p>
             </div>
-            <div class="col l4 offset-l2 s12">
+            <div class="col l4 offset-l2 s12" v-show="$t('main')" style="display: none">
                 <ul>
                     <li>
                         <a href="#/about" class="grey-text text-lighten-3">

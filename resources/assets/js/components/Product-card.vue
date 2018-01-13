@@ -4,17 +4,19 @@
             <div class="card product-card">
                 <a :href="'#/product/'+product.id">
                     <div class="card-image">
-                        <div class="product-price-container">
-                            <div class="product-price">
-                                {{ product.price }} ₼
-                            </div>
-                        </div>
                         <div class="card-content hide-on-med-and-down">
                             <p>
                                 {{product.title}}
                             </p>
                         </div>
-                        <img :src="'storage/'+product.folder+'/thumbnail.jpg'" alt="Card image cap" class="card-img-top">
+                    </div>
+                    <div>
+                        <progressive-img :src="'storage/'+product.folder+'/thumbnail.jpg'" :placeholder="'storage/'+product.folder+'/placeholder.jpg'" />
+                    </div>
+                    <div class="product-price-container">
+                        <div class="product-price">
+                            {{ product.price }} ₼
+                        </div>
                     </div>
                 </a>
             </div>

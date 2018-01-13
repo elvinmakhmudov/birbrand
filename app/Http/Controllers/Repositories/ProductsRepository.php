@@ -108,11 +108,24 @@ class ProductsRepository
             //remove the original image and thumbnail
             Storage::delete($product->cover_image);
             Storage::delete($product->folder.'/thumbnail.jpg');
+            Storage::delete($product->folder.'/placeholder.jpg');
 
             //save the thumbnail
-            Image::make($request->file('cover_image'))->resize(300, 300)->save(storage_path('app/public/').$path.'/thumbnail.jpg');
+            Image::make($request->file('cover_image'))->fit(200,200, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/').$product->folder.'/thumbnail.jpg');
+            //save the placeholder
+            Image::make($request->file('cover_image'))->fit(50,50, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/').$product->folder.'/placeholder.jpg');
             //save original cover image
-            $product->cover_image = $request->file('cover_image') ? $request->file('cover_image')->store($product->folder) : '';
+            //original cover image
+            $storage_path = $product->folder.'/'.Str::random(40).'.jpg';
+            Image::make($request->file('cover_image'))->fit(600,600, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/').$storage_path);
+            $product->cover_image = $storage_path;
+            // $product->cover_image = $request->file('cover_image') ? $request->file('cover_image')->store($product->folder) : '';
 
         }
 
@@ -183,9 +196,14 @@ class ProductsRepository
         //resize and save the cover image and cover_image
         $image = $request->file('cover_image');
         if($image){
+            //save the thumbnail
             Image::make($image)->fit(200,200, function ($constraint) {
                 $constraint->upsize();
             })->save(storage_path('app/public/').$path.'/thumbnail.jpg');
+            //save the placeholder
+            Image::make($image)->fit(50,50, function ($constraint) {
+                $constraint->upsize();
+            })->save(storage_path('app/public/').$path.'/placeholder.jpg');
 
             //original cover image
             $storage_path = $path.'/'.Str::random(40).'.jpg';

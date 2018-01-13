@@ -716,3 +716,6 @@ ul.pagination li.active {
 }
 
 .indent { text-indent: 25px; }
+.progressive-image-wrapper .progressive-image-main {
+    z-index: auto;
+}

@@ -8,8 +8,9 @@
     <meta content="{{ Auth::check() }}" name="login-status">
     <!-- CSRF Token -->
     <meta content="{{ csrf_token() }}" name="csrf-token">
+    <meta name="description" content="GoShop - dəbli qeyim, ayaqqabı və aksessuarların onlayn alış-veriş platformasıdır.">
     <title>
-        {{ config('app.name', 'BirBrand') }}
+        {{ config('app.name', 'GoShop') }} 
     </title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

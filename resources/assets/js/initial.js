@@ -21,6 +21,10 @@ import VueRouter from 'vue-router';
 var VueCookie = require('vue-cookie');
 import Paginate from 'vuejs-paginate';
 import VueI18n from 'vue-i18n';
+//import progressive images
+import VueProgressiveImage from 'vue-progressive-image';
+
+Vue.use(VueProgressiveImage);
 Vue.use(VueRouter);
 Vue.use(VueCookie);
 Vue.use(VueI18n);
