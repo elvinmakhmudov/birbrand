@@ -174,12 +174,22 @@
                                 return response.data.cart.cartItems[k];
                             });
                             this.$store.commit("setCartItems", items);
-                            $("#flash-message").modal("open");
+                            var errors = this.$store.state.errors;
+                            if(errors.any()){
+                                $.each(response.data.errors, function(index, value) {
+                                    Materialize.toast(this.$t(value), 4000);
+                                }.bind(this)); 
+                            } else {
+                                $.each(response.data.messages, function(index, value) {
+                                    Materialize.toast(this.$t(value), 4000);
+                                }.bind(this)); 
+                            }
+                            // $("#flash-message").modal("open");
                         }.bind(this)
                     )
-                    .catch(error => {
-                        this.errors.record(error.response.data.errors);
-                    });
+                    // .catch(error => {
+                    //     this.errors.record(error.response.data.errors);
+                    // });
             },
             buyIt() {
                 this.products = [

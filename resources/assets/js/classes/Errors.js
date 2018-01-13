@@ -18,6 +18,9 @@ class Errors {
         return this.errors.hasOwnProperty(field);
     }
     any(){
+        if(this.errors == undefined) {
+            return 0;
+        }
         return Object.keys(this.errors).length > 0;
     }
     purge() {
