@@ -180,6 +180,8 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+
+	Orangehill\Iseed\IseedServiceProvider::class
     ],
 
     /*

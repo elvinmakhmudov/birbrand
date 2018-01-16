@@ -1,0 +1,20 @@
+[03-Jan-2018 12:54:53 Europe/London] PHP Fatal error:  Uncaught Error: Class 'Phar' not found in /usr/local/bin/composer:23
+Stack trace:
+#0 {main}
+  thrown in /usr/local/bin/composer on line 23
+[03-Jan-2018 12:58:44 Europe/London] PHP Fatal error:  Uncaught Error: Class 'Phar' not found in /usr/local/bin/composer:23
+Stack trace:
+#0 {main}
+  thrown in /usr/local/bin/composer on line 23
+[03-Jan-2018 13:00:38 Europe/London] PHP Fatal error:  Uncaught Error: Class 'Phar' not found in /usr/local/bin/composer:23
+Stack trace:
+#0 {main}
+  thrown in /usr/local/bin/composer on line 23
+[03-Jan-2018 13:00:41 Europe/London] PHP Fatal error:  Uncaught Error: Class 'Phar' not found in /usr/local/bin/composer:23
+Stack trace:
+#0 {main}
+  thrown in /usr/local/bin/composer on line 23
+[03-Jan-2018 13:00:52 Europe/London] PHP Fatal error:  Uncaught Error: Class 'Phar' not found in /usr/local/bin/composer:23
+Stack trace:
+#0 {main}
+  thrown in /usr/local/bin/composer on line 23

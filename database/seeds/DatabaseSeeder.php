@@ -18,5 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CarouselsTableSeeder::class);
         $this->call(BannersTableSeeder::class);
         Cache::flush();
+        $this->call(OrdersTableSeeder::class);
+        $this->call(OrderProductTableSeeder::class);
     }
 }
