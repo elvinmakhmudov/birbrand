@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         categories: [],
+        products: [],
         carousels: [],
         user: {},
         carousel_shown: true,
@@ -41,6 +42,9 @@ export default new Vuex.Store({
         setCartTotal(state,cartTotal) {
             state.cartTotal= cartTotal;
         },
+        setProducts(state,products) {
+            state.products=products;
+        },
         setCartItems(state,cartItems) {
             state.cartItems= cartItems;
         },
@@ -54,6 +58,7 @@ export default new Vuex.Store({
                 axios.get('/category').then(function (response) {
                     // context.commit('setCategories', response.data.categories);
                     context.commit('setCarousels', response.data.carousels);
+                    context.commit('setProducts', response.data.products);
                     context.commit('setBanners', response.data.banners);
                     context.commit('setCartTotal', response.data.cart.cartTotal);
                     var items = Object.keys(response.data.cart.cartItems).map(function(k) { return response.data.cart.cartItems[k] });

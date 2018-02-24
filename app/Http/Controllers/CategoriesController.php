@@ -25,13 +25,17 @@ class CategoriesController extends Controller
             return Carousel::isShown()->get();
         });
 
+        $products = Cache::remember('products', config('cache.lifetime'), function () {
+            return Product::isShown()->limit(24)->get();
+        });
+
         $banners = Cache::remember('banners', config('cache.lifetime'), function () {
             return Banner::isShown()->get();
         });
 
         $cart = ['cartItems' => Cart::content(), 'cartTotal' => Cart::total()];
 
-        return ['carousels' => $carousels, 'banners' => $banners, 'cart' => $cart];
+        return ['carousels' => $carousels, 'banners' => $banners, 'cart' => $cart, 'products' => $products];
     }
 
     /**

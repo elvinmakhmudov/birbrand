@@ -136,8 +136,6 @@
                 //                var url = this.productsPage.path + "?page=" + pageNum;
                 //                var url = this.productsPage.path;
                 this.$refs.paginate.selected = this.productsPage.current_page - 1;
-                console.log(this.$store.state.sortByColumn);
-                console.log(this.$store.state.orderBy);
 
                 window.location.href =
                     window.location.href.split("?")[0] +

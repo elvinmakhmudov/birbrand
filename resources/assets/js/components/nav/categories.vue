@@ -14,7 +14,6 @@
         },
 		mounted() {
             this.$store.state.categories = this.navCategories;
-            console.log('myCategories created.');
         },
         computed: {
             areEmptyCategories: function(){

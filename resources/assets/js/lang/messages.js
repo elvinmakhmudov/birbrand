@@ -58,25 +58,26 @@ const messages = {
                 "<div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title\">Delivery</p>\n" +
                 "            <div class=\"text\">\n" +
-                "                <p>After completing your order our operator will contact you.</p>\n" +
-                "                <p>In the next 2-3 days the product will be delivered to you free of charge.</p>\n" +
+                "                <p>After completing your order our operator will contact You.</p>\n" +
+                "                <p>Generally, orders are delivered within 14 - 60 days. However, in certain cases (bad weather, holidays, etc.), delivery time may be delayed.</p>\n" +
+                "                <p>After product arrives, it will be delivered to buyer free of charge.</p>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "        <div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title\">Payment</p>\n" +
                 "            <div class=\"text\">\n" +
+                "                <p>Prepayment is 50 percent of the order price. It can be made with cash or via \"Milli Ön\" terminals.</p>\n" +
                 "                <p>\n" +
-                "                    Once purchased, you will be charged with cash.</p>\n" +
+                "                    Once purchased, buyer will be charged with cash.</p>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "        <div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title \">Customer satisfaction</p>\n" +
                 "            <div class=\"text\">\n" +
-                "                <p>For each product at the point of return 2 AZN.\n" +
-                "                <p>If the product does not meet the description or images, it may be returned.\n" +
+                "                <p>If the buyer did not receive the goods within 90 days he will get full refund.</p>\n" +
                 "            </div>\n" +
                 "        </div>",
-            buyNowButton: "Buy Now",
+            buyNowButton: "Order Now",
             addToCardButton: "Add to Card",
             description: "Description",
             orders: "No orders |order | {count} orders",
@@ -231,7 +232,7 @@ const messages = {
                 remove: 'Remove',
                 total: 'Total',
             },
-            buyNowButton: 'Buy Now',
+            buyNowButton: 'Order Now',
             empty: "Your shopping card is empty"
         },
         pagination: {
@@ -273,8 +274,8 @@ const messages = {
             closeButton: 'Close'
         },
         buyItGuest: {
-            title: 'Buy now',
-            buyButton: 'Buy'
+            title: 'Order now',
+            buyButton: 'Order now'
         }
     },
     az: {
@@ -461,13 +462,15 @@ const messages = {
                 "<div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title\">Çatdırılma</p>\n" +
                 "            <div class=\"text\">\n" +
-                "                <p>Sifarişi etdikdən sonra operatorumuz sizinlə əlaqə saxlayacaq.</p>\n" +
-                "                <p>Növbəti 2-3 gün məhsul sizə pulsuz çatdırılacaq.</p>\n" +
+                "                <p>Sifarişi etdikdən sonra operatorumuz Sizinlə əlaqə saxlayacaq.</p>\n" +
+                "                <p>Adətən, sifarişlər 14 - 60 günü ərzində çatdırılır, lakin müəyyən hallarda  (pis hava, bayram və s.), çatdırılma vaxtı gecikdirilə bilər.</p>\n" +
+                "                <p>Məhsul gəldikdən sonra alıcıya pulsuz çatdırılacaq.</p>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "        <div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title\">Ödəniş</p>\n" +
                 "            <div class=\"text\">\n" +
+                 "<p>İlkin ödəniş sifariş məbləğinin 50 faizini təşkil edir.  İlkin ödəniş nağd pul və ya \"Milli Ön\" terminalı ilə edilə bilər. </p>\n" +
                 "                <p>\n" +
                 "                    Ödəniş məhsulu əldə etdikdən sonra yerindəcə nağd həyata keçirilir.</p>\n" +
                 "            </div>\n" +
@@ -475,11 +478,10 @@ const messages = {
                 "        <div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title \">Müştəri məmnuniyyəti</p>\n" +
                 "            <div class=\"text\">\n" +
-                "                <p>Qaytarış yerində hər bir məhsula görə 2 AZN.\n" +
-                "                <p>Məhsul təsvirə yaxud şəkillərə uyğun gəlmədikdə ödənişsiz qaytarla bilər.\n" +
+                "                <p>Əgər məhsul alıcıya 90 gün ərzində çatdırılmasa, ödənilən məbləğ tam geri qaytarılacaq.\n" +
                 "            </div>\n" +
                 "        </div>",
-            buyNowButton: "İndi al",
+            buyNowButton: "Sifariş et",
             addToCardButton: "Səbətə at",
             description: "Ətraflı",
             orders: "Sifariş olunmayıb | 1 sifariş |{count}  sifariş",
@@ -511,7 +513,7 @@ const messages = {
                 remove: 'Silmək',
                 total: 'Cəmi',
             },
-            buyNowButton: 'İndi al',
+            buyNowButton: 'Sifariş et',
             empty: "Səbətiniz boşdur"
         },
         pagination: {
@@ -553,8 +555,8 @@ const messages = {
             closeButton: 'Bağla'
         },
         buyItGuest: {
-            title: 'Indi al',
-            buyButton: 'Indi al'
+            title: 'Sifariş et',
+            buyButton: 'Sifariş et'
         }
     },
     ru: {
@@ -738,13 +740,16 @@ const messages = {
                 "<div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title\">Доставка</p>\n" +
                 "            <div class=\"text\">\n" +
-                "                <p>После завершения вашего заказа наш оператор свяжется с вами.</p>\n" +
-                "                <p>В течение следующих 2 дней продукт будет доставлен бесплатно.</p>\n" +
+                "                <p>После завершения вашего заказа наш оператор свяжется с Вами.</p>\n" +
+                "                <p>Как правило, заказы доставляются в течение 14 - 60 дней. Однако в некоторых случаях (плохая погода, праздничные дни и т.д.) время доставки может быть отложено.</p>\n" +
+                "                <p>После поступления товара в склад, он будет доставлен покупателю бесплатно.</p>\n" +
                 "            </div>\n" +
                 "        </div>\n" +
                 "        <div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title\">Оплата</p>\n" +
                 "            <div class=\"text\">\n" +
+                "                <p>Предоплата составляет 50 процентов от стоимости заказа. Предоплату можно сделать наличными или через терминалы «Milli Ön».</p>\n" +
+                "                <p>\n" +
                 "                <p>\n" +
                 "                    Покупка осуществляется только наличными.</p>\n" +
                 "            </div>\n" +
@@ -752,11 +757,10 @@ const messages = {
                 "        <div class=\"item-shipping-payment-box\">\n" +
                 "            <p class=\"text-title \">Удовлетворенность клиентов</p>\n" +
                 "            <div class=\"text\">\n" +
-                "                <p>Возврат на каждый продукт 2 AZN.\n" +
-                "                <p>Если продукт не соответствует описанию или изображениям, он может быть возмещен.\n" +
+                "                <p>Если покупатель не получил товар в течение 90 дней, он получит полный возврат средств.\n" +
                 "            </div>\n" +
                 "        </div>",
-            buyNowButton: "Купить",
+            buyNowButton: "Заказать",
             addToCardButton: "В корзину",
             description: "Описание",
             orders: "Нет заказов | 1 заказ | {count} заказов",
@@ -788,7 +792,7 @@ const messages = {
                 remove: 'Удалить',
                 total: 'Сумма',
             },
-            buyNowButton: 'Купить',
+            buyNowButton: 'Заказать',
             empty: "Ваша корзина пуста"
         },
         pagination: {
@@ -830,8 +834,8 @@ const messages = {
             closeButton: 'Закрыть'
         },
         buyItGuest: {
-            title: 'Купить сейчас',
-            buyButton: 'Купить'
+            title: 'Заказать сейчас',
+            buyButton: 'Заказать'
         }
     }
 };

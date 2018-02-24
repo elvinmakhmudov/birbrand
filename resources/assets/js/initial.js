@@ -90,7 +90,6 @@ const app = new Vue({
                 this.$store.state.carousel_shown = false;
                 //fix the banners on scroll and resize
                 var elementPosition = $('.left-banner').offset();
-                console.log('banner postion ' + this.$store.state.topBannerHeight);
                 // var categoriesPosition = $('.categories-header').offset();
                 var p = $('.main-container').offset();
                 $(window).resize(function() {

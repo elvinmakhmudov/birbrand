@@ -155,7 +155,6 @@
                         .val();
                     options[key] = value;
                 });
-                console.log(options);
                 return JSON.stringify(options);
             },
             addToCart() {
@@ -220,7 +219,6 @@
                 }
             },
             fetchData() {
-                console.log(this.product_id);
                 var productUrl = "product/" + this.product_id;
                 axios.get(productUrl).then(
                     function (response) {
@@ -249,7 +247,7 @@
                                 $("select").material_select();
                                 $(".modal").modal();
                                 $("#rateYo").rateYo({
-                                    rating: this.product.rating,
+                                    rating: this.product.rating || 0,
                                     starWidth: "15px",
                                     readOnly: true
                                 });
@@ -257,7 +255,6 @@
                         );
                     }.bind(this)
                 );
-                console.log("Product fetched");
             },
             getAncestors(product) {
                 var ancestors = [];
@@ -277,7 +274,6 @@
                 var values = [];
                 JSON.stringify(object, function (k, v) {
                     if (k === key && v.length > 0) {
-                        console.log(v);
                         values.push(v);
                     }
                     return v;

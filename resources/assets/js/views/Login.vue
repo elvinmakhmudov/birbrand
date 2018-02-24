@@ -62,9 +62,6 @@
                     this.errors.record(error.response.data);
                 });
             }
-        },
-        created() {
-            console.log('login vue created');
         }
     }
 </script>

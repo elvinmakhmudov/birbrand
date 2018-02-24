@@ -82,7 +82,6 @@
                 }).then(function (response) {
                     window.location.href = "/";
                     this.$emit('registered');
-                    console.log("registered");
                 }.bind(this)).catch(error => {
                     this.errors.record(error.response.data);
                 });

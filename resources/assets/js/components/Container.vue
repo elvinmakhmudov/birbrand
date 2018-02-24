@@ -15,9 +15,6 @@
             title: '',
             subcategories: {},
             category: {}
-        },
-        created() {
-            console.log('Container created.');
-        },
+        }
     }
 </script>

@@ -26,9 +26,6 @@
                 slug: '',
                 image_url: '',
             }
-        },
-        created() {
-            console.log('Category card created.');
         }
     }
 </script>
