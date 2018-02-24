@@ -21,7 +21,7 @@
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="title" name="title" type="text" class="validate" autofocus>
+                                    <input id="title" name="title" type="text" class="validate" autofocus required>
                                     <label for="title">Ad</label>
                                 </div>
                             </div>
@@ -69,7 +69,7 @@
                         <div class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input id="price" name="price" type="number" class="validate" autofocus>
+                                    <input id="price" name="price" type="number" class="validate" autofocus required>
                                     <label for="price">Qiymət</label>
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                                 <div class="file-field input-field col s12">
                                     <div class="btn">
                                         <span>Əsas Şəkil</span>
-                                        <input type="file" name="cover_image">
+                                        <input type="file" name="cover_image" required>
                                     </div>
                                     <div class="file-path-wrapper">
                                         <input class="file-path validate" type="text">
@@ -88,6 +88,8 @@
                                 </div>
                             </div>
                         </div>
+
+             
 
                         <div class="col s12">
                             <div class="row">
@@ -125,7 +127,7 @@
                         <div class="col s12">
                             <div class="row ">
                                 <div class="col s12">
-                                    <input type="checkbox" id="is_shown" name="is_shown"/>
+                                    <input type="checkbox" id="is_shown" name="is_shown" checked/>
                                     <label for="is_shown">Produktu göstərmək</label>
                                 </div>
                             </div>
@@ -135,6 +137,15 @@
                                 <div class="input-field col s12">
                                     <input id="note" name="note" type="text" class="validate" autofocus>
                                     <label for="note">Qeyd</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="url" name="url" type="text" class="validate" autofocus required>
+                                    <label for="url">URL</label>
                                 </div>
                             </div>
                         </div>

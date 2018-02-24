@@ -93,6 +93,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="col s12">
                             <div class="row">
                                 <p for="is_shown">Əlavə Şəkil poz</p>
@@ -150,6 +152,24 @@
                             </div>
                         </div>
 
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="old_price" name="note" type="text" class="validate" autofocus
+                                           value="{{ $product->note }}">
+                                    <label for="note">Qeyd</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="url" name="url" type="text" class="validate" autofocus value="{{ $product->url }}">
+                                    <label for="url">URL</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col s12">
                             <button type="submit" class="btn waves-effect waves-light">

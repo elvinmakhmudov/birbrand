@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->boolean('is_shown')->default(false);
             $table->integer('old_price')->nullable();
             $table->integer('price');
@@ -31,10 +31,11 @@ class CreateProductsTable extends Migration
             $table->integer('ordered')->unsigned()->nullable();
             $table->integer('trending')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('images')->nullable();
+            $table->longText('images')->nullable();
             $table->string('cover_image');
-            $table->string('note')->nullable();
-            $table->string('options')->nullable();
+            $table->longText('note')->nullable();
+            $table->longText('url')->nullable();
+            $table->longText('options')->nullable();
             $table->timestamps();
         });
     }

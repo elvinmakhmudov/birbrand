@@ -54,6 +54,7 @@ class OrdersRepository
             'number' => 'nullable|integer',
             'status' => 'nullable|string|max:255',
             'user' => 'nullable|integer',
+            'note' => 'nullable|string',
             'products' => 'required',
             'reviewable' => 'string',
             'created_at' => 'nullable|date',
@@ -74,6 +75,7 @@ class OrdersRepository
         $order->number = $request->get('number');
         $order->status = $request->get('status');
         $order->user_id = $request->get('user');
+        $order->note= $request->get('note');
         $order->reviewable= $request->get('reviewable') ? true : false;
         //make all products reviewable
 
@@ -115,6 +117,7 @@ class OrdersRepository
             'name' => 'nullable|string|max:255',
             'number' => 'nullable|integer',
             'status' => 'nullable|string|max:255',
+            'note' => 'nullable|string',
             'user' => 'nullable|integer',
             'products' => 'required',
         ]);
@@ -126,6 +129,7 @@ class OrdersRepository
         $order->number = $request->get('number');
         $order->status = $request->get('status');
         $order->user_id = $request->get('user');
+        $order->note= $request->get('note');
 
         $products = Product::find($request->get('products'));
         foreach ($products as $product) {

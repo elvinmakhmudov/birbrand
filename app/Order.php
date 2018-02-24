@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = ['options', 'price', 'amount', 'name','number','user_id','status', 'reviwable'];
+    protected $hidden = ['note'];
     /*
      * Order belongs to a user
      */

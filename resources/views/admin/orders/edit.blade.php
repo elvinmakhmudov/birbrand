@@ -39,6 +39,16 @@
                             </div>
                         </div>
 
+                        <div class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input id="note" name="note" type="text" class="validate" autofocus
+                                           value="{{ $order->note}}">
+                                    <label for="note">Qeyd</label>
+                                </div>
+                            </div>
+                        </div>
+
 
                         <div class="col s12">
                             <div class="row">

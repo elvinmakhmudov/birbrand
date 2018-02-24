@@ -79,6 +79,7 @@ class ProductsRepository
             'images' => 'nullable|array',
             'options' => 'nullable|json',
             'note' => 'nullable|string',
+            'url' => 'nullable|string',
             'category' => 'nullable|exists:categories,id'
         ]);
 
@@ -102,6 +103,8 @@ class ProductsRepository
         $product->price = $request->get('price');
         $product->options = $request->get('options');
         $product->note = $request->get('note');
+        $product->url = $request->get('url');
+
 
         //if image exists, update it
         if ($request->file('cover_image')) {
@@ -121,7 +124,8 @@ class ProductsRepository
             //save original cover image
             //original cover image
             $storage_path = $product->folder.'/'.Str::random(40).'.jpg';
-            Image::make($request->file('cover_image'))->fit(600,600, function ($constraint) {
+            Image::make($request->file('cover_image'))->resize(600,null, function ($constraint) {
+                $constraint->aspectRatio();
                 $constraint->upsize();
             })->save(storage_path('app/public/').$storage_path);
             $product->cover_image = $storage_path;
@@ -173,6 +177,7 @@ class ProductsRepository
             'images' => 'nullable|array',
             'options' => 'nullable|json',
             'note' => 'nullable|string',
+            'url' => 'nullable|string',
             'category' => 'nullable|exists:categories,id'
         ]);
 
@@ -182,6 +187,7 @@ class ProductsRepository
         $product->price = $request->get('price');
         $product->options = $request->get('options');
         $product->note = $request->get('note');
+        $product->url= $request->get('url');
 
         //create a folder for images
         $folder = str_random(20);
@@ -207,7 +213,8 @@ class ProductsRepository
 
             //original cover image
             $storage_path = $path.'/'.Str::random(40).'.jpg';
-            Image::make($image)->fit(600,600, function ($constraint) {
+            Image::make($image)->resize(600,null, function ($constraint) {
+                $constraint->aspectRatio();
                 $constraint->upsize();
             })->save(storage_path('app/public/').$storage_path);
             $product->cover_image = $storage_path;
@@ -234,7 +241,8 @@ class ProductsRepository
         if ($requestImages) {
             foreach ($requestImages as $image) {
                 $storage_path = $path.'/'.Str::random(40).'.jpg';
-                Image::make($image)->fit(600,600, function ($constraint) {
+                Image::make($image)->resize(600,null, function ($constraint) {
+                    $constraint->aspectRatio();
                     $constraint->upsize();
                 })->save(storage_path('app/public/').$storage_path);
 //                $imageUrl = $image->store($path);

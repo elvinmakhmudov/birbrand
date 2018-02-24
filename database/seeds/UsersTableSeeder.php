@@ -17,6 +17,6 @@ class UsersTableSeeder extends Seeder
             'number' => '123456789',
             'is_admin' => true
         ]);
-        factory(User::class, 50)->create();
+        // factory(User::class, 50)->create();
     }
 }
