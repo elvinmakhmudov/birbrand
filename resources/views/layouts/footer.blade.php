@@ -4,7 +4,7 @@
             <div class="col l6 s12">
                 <a href="#/">
                     <h5 class="white-text">
-                        GoShop.az
+                        Modno.az
                     </h5>
                 </a>
                 <p class="grey-text text-lighten-4">
@@ -44,7 +44,7 @@
     </div>
     <div class="footer-copyright">
         <div class="container">
-            © 2018 GoShop.az Bütün Hüquqlar Qorunur
+            © 2018 Modno.az Bütün Hüquqlar Qorunur
         </div>
     </div>
 </footer>

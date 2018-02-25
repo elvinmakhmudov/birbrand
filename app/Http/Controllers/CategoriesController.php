@@ -26,7 +26,7 @@ class CategoriesController extends Controller
         });
 
         $products = Cache::remember('products', config('cache.lifetime'), function () {
-            return Product::isShown()->limit(24)->get();
+            return Product::isShown()->orderBy('trending','desc')->limit(24)->get();
         });
 
         $banners = Cache::remember('banners', config('cache.lifetime'), function () {
