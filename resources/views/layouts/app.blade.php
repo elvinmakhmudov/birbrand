@@ -9,9 +9,9 @@
     <meta content="{{ Auth::check() }}" name="login-status">
     <!-- CSRF Token -->
     <meta content="{{ csrf_token() }}" name="csrf-token">
-    <meta name="description" content="GoShop - Dəbli qeyim, ayaqqabı və aksessuarların onlayn alış-veriş platformasıdır.">
+    <meta name="description" content="Modno.az - Dəbli qeyim, ayaqqabı və aksessuarların onlayn alış-veriş platformasıdır.">
     <title>
-        GoShop.az - Dəbli qeyim, ayaqqabı və aksessuarların onlayn alış-veriş platformasıdır.
+        Modno.az - Dəbli qeyim, ayaqqabı və aksessuarların onlayn alış-veriş platformasıdır.
     </title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" >
     <!--Import Google Icon Font-->
