@@ -7,7 +7,9 @@
     "watch-poll": "npm run watch -- --watch-poll",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "axios": "^0.15.3",
@@ -36,6 +38,8 @@
     "vue-progressive-image": "^2.4.2",
     "vuejs-paginate": "^1.4.0",
     "vuex": "^2.3.1",
-    "xzoom": "^1.0.9"
-  }
+    "xzoom": "^1.0.9",
+    "snyk": "^1.83.0"
+  },
+  "snyk": true
 }
