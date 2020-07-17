@@ -22,7 +22,7 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
-    "ajv": "^5.5.2",
+    "ajv": "^6.12.3",
     "ajv-keywords": "^2.1.1",
     "babel-loader": "^7.1.2",
     "hammerjs": "^2.0.8",
