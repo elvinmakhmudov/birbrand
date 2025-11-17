@@ -32,7 +32,7 @@
     "rateyo": "^2.3.3",
     "vue-cookie": "^1.1.4",
     "vue-i18n": "^7.3.2",
-    "vue-loader": "^13.6.2",
+    "vue-loader": "^15.0.0",
     "vue-progressive-image": "^2.4.2",
     "vuejs-paginate": "^1.4.0",
     "vuex": "^2.3.1",
